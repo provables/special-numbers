@@ -13,13 +13,13 @@ theorem eulerian_of_n_zero (n:ℕ) : eulerian n 0 = 1 := by
 theorem eulerian_of_0 : eulerian 0 0 = 1 := eulerian_of_n_zero 0
 
 theorem eulerian_of_0_k (k:ℕ) (h:k>0): eulerian 0 k = 0 := by
-  by_cases k = 0
+  by_cases c : k = 0
   linarith
   simp [eulerian]
 
 theorem eulerian_of_n_succ_n (n:ℕ) (h:n>0) : ∀ k, k>=n -> eulerian n k = 0 := by
   induction n with
-    | zero => linarith
+    | zero => contradiction
     | succ n ih =>
         intros k jh
         rw [eulerian]
@@ -29,7 +29,7 @@ theorem eulerian_of_n_succ_n (n:ℕ) (h:n>0) : ∀ k, k>=n -> eulerian n k = 0 :
           constructor
           · apply eulerian_of_0_k; linarith
           · by_cases d : 1-k = 0
-            · omega
+            · exact Or.inl d
             · apply Or.inr
               apply eulerian_of_0_k
               omega
