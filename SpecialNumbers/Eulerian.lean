@@ -1,6 +1,20 @@
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic
 
+/-!
+# Eulerian Numbers
+
+This module formalizes the definition of Eulerian numbers (Section 6.2 from
+[Concrete Mathematics][knuth1989concrete]).
+
+The Eulerian number $\left\langle{n\atop k}\right\rangle$ counts the number of permutations
+of ${1,2,\ldots,n}$ with $k$ ascents.
+
+## References
+
+* [Concrete Mathematics][knuth1989concrete]
+-/
+
 def eulerian (n k:ℕ) : ℕ :=
   match n, k with
     | _, 0 => 1
