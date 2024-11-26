@@ -7,6 +7,8 @@ def eulerian (n k:ℕ) : ℕ :=
     | 0, _ => 0
     | n+1, k => (k+1)*eulerian n k + (n+1-k)*eulerian n (k-1)
 
+theorem eulerian_0_0 : eulerian 0 0 = 1 := by rfl
+
 theorem eulerian_of_n_zero (n:ℕ) : eulerian n 0 = 1 := by
   simp [eulerian]
 
