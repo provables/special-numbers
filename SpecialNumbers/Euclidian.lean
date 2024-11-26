@@ -21,11 +21,11 @@ theorem euclid_two: euclid 2 = 3 := by rfl
 theorem euclid_three: euclid 3 = 7 := by rfl
 
 theorem euclid_eq_prod_euclid (n: ℕ) (h: n≥ 1) :
-    euclid n+1 = ∏ x∈ Finset.Icc 1 n, euclid x + 1 := by
+    euclid (n+1) = ∏ x∈ Finset.Icc 1 n, euclid x + 1 := by
   induction' n with n ih
   contradiction
-  simp
-  by_cases c: n = 1
+  ring_nf
+  by_cases c: n = 0
   rw[c]
   simp
   rw[Finset.prod_Icc_succ_top]
