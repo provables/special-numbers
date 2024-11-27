@@ -2,21 +2,29 @@
 
 Formalization of Chapter 6, Special Numbers, of Concrete Mathematics.
 
-## Building the package
+## Usage
 
-Ensure Mathlib is downloaded from cache with `lake exe cache get`.
+The package includes a Nix flake that provides a development environment with all
+the necessary tools, including a setup of Lean itself.
 
-Build the package with `lake build`.
+Run the development environment with `nix develop`.
 
-## Building the documentation
+Once in the shell, run `task -a` to list the tasks available for building the package
+and its documentation.
 
-Build the documentation with:
-```
-cd docbuild
-lake build SpecialNumbers:docs
-```
+For the simplest use case, run `task build` for building the package. And run
+`task serve-docs` to build and render the documentation.
 
-Access the documentation by running:
-```
-python3 -m http.server -d .lake/build/doc
-```
+### Notes
+
+The tasks ensure that the Mathlib cache is available, so there is no need to run the
+usual `lake exe cache get`.
+
+## Authors
+
+* Walter Moreira
+* Joe Stubbs
+
+## License
+
+MIT
