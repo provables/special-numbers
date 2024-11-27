@@ -29,7 +29,7 @@ tasks:
   serve-docs:
     desc: Serve documentation locally
     cmds:
-      - python3 -m http.server -d .lake/build/doc
+      - python3 -m http.server -d docbuild/.lake/build/doc
     deps:
       - build-docs
 
