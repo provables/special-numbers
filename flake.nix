@@ -24,6 +24,10 @@
         '';
         buildInputs = with pkgs; [
           elan
+          go-task
+          python311
+          bibtool
+          findutils
         ];
       };
     }
