@@ -1,0 +1,55 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  build:
+    desc: Build the library
+    cmds:
+      - lake build
+    deps:
+      - get-cache
+
+  build-docs:
+    desc: Build the docs
+    sources:
+      - ./**/*.lean
+      - ./**/lakefile.toml
+      - exclude: ./**/.lake
+    generates:
+      - docbuild/.lake/build/doc/**/*.html
+    cmds:
+      - cd docbuild && lake build SpecialNumbers:docs
+    deps:
+      - get-cache
+
+  serve-docs:
+    desc: Serve documentation locally
+    cmds:
+      - python3 -m http.server -d .lake/build/doc
+    deps:
+      - build-docs
+
+  get-cache-for-dir:
+    internal: true
+    run: once
+    dir: '{{.DIR | default "." }}'
+    cmds:
+      - lake exe cache get
+    status:
+      - test -d .lake/packages/mathlib/.lake/build/lib/Mathlib
+      - |
+        NUM_SOURCES=$(find .lake/packages/mathlib/Mathlib -name '*.lean' | wc -l)
+        NUM_OLEAN=$(find .lake/packages/mathlib/.lake/build/lib/Mathlib -name '*.olean' | wc -l)
+        test $NUM_SOURCES -eq $NUM_OLEAN
+  
+  get-cache:
+    desc: Ensure Mathlib cache is available
+    cmds:
+      - for: [".", "docbuild"]
+        task: get-cache-for-dir
+        vars:
+          DIR: '{{ .ITEM }}'
