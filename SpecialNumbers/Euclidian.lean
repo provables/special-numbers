@@ -29,10 +29,10 @@ lemma factor (n : ℕ) : n^2 - n = (n-1)*n := by
   exact Eq.symm (Nat.sub_one_mul n n)
 
 
-theorem euclid_eq_prod_euclid (n: ℕ) (h: n≥ 1) :
+theorem euclid_eq_prod_euclid (n: ℕ):
     euclid (n+1) = ∏ x∈ Finset.Icc 1 n, euclid x + 1 := by
   induction' n with n ih
-  contradiction
+  simp
   by_cases c: n = 0
   rw[c]
   simp
@@ -44,7 +44,6 @@ theorem euclid_eq_prod_euclid (n: ℕ) (h: n≥ 1) :
   apply Or.inl
   rw[ih]
   simp
-  omega
   omega
   intro
   linarith
@@ -93,8 +92,6 @@ theorem euclid_m_n_mod_1 (m n : ℕ) (h1: m < n) (h2: m > 0) :
   have h3: euclid m > 1 := by
     apply euclid_n_geq_one
     omega
-  case neg.h =>
-    linarith
   apply Nat.mod_eq_of_lt h3
 
 
@@ -115,6 +112,3 @@ theorem euclid_rel_prime (m n : ℕ) (h: m < n) :
   apply Nat.gcd_one_left
   assumption
   linarith
-
-
-#help tactic
