@@ -95,10 +95,11 @@ theorem euclid_m_n_mod_1 (m n : ℕ) (h1: m < n) (h2: m > 0) :
   apply Nat.mod_eq_of_lt h3
 
 
-theorem gcd_a_b_mod_b_a (a b: ℕ ) : gcd a b = gcd (b % a) a := by
+lemma gcd_a_b_mod_b_a (a b: ℕ ) : gcd a b = gcd (b % a) a := by
   apply Nat.gcd_rec
 
-theorem euclid_rel_prime (m n : ℕ) (h: m < n) :
+
+lemma euclid_rel_prime_lt (m n : ℕ) (h: m < n) :
     gcd (euclid m) (euclid n) = 1 := by
   by_cases c: m = 0
   rw[c]
@@ -112,3 +113,14 @@ theorem euclid_rel_prime (m n : ℕ) (h: m < n) :
   apply Nat.gcd_one_left
   assumption
   linarith
+
+
+theorem euclid_rel_prime (m n : ℕ) (h: m ≠ n) :
+    gcd (euclid m) (euclid n) = 1 := by
+    by_cases mltn : m < n
+    exact euclid_rel_prime_lt m n mltn
+    rw[gcd_comm]
+    simp at mltn
+    have h1: n < m := by omega
+    apply euclid_rel_prime_lt
+    exact h1
