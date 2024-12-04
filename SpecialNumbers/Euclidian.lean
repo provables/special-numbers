@@ -129,6 +129,7 @@ theorem euclid_rel_prime (m n : ℕ) (h: m ≠ n) :
     apply euclid_rel_prime_lt
     exact h1
 
+-- Auxiliary sequences for proving the explicity form of the Euclidean numbers
 noncomputable def a (n : ℕ) : ℝ := (1/2^n)*Real.log (euclid n - 1/2)
 noncomputable def b (n : ℕ) : ℝ := (1/2^n)*Real.log (euclid n + 1/2)
 
@@ -137,6 +138,9 @@ example : a 0 = -Real.log 2 := by
   norm_num
   simp
 
+/-!
+The sequences $a$ and $b$ satisfy the inequality $a_n < b_n$ for all $n : ℕ$.
+-/
 theorem a_lt_b (n : ℕ) : a n < b n := by
   simp [a, b]
   have h : (1 : ℝ) <= euclid n := by
