@@ -128,3 +128,27 @@ theorem euclid_rel_prime (m n : ℕ) (h: m ≠ n) :
     have h1: n < m := by omega
     apply euclid_rel_prime_lt
     exact h1
+
+noncomputable def a (n : ℕ) : ℝ := (1/2^n)*Real.log (euclid n - 1/2)
+noncomputable def b (n : ℕ) : ℝ := (1/2^n)*Real.log (euclid n + 1/2)
+
+example : a 0 = -Real.log 2 := by
+  simp [a]
+  norm_num
+  simp
+
+theorem a_lt_b (n : ℕ) : a n < b n := by
+  simp [a, b]
+  have h : (1 : ℝ) <= euclid n := by
+    norm_cast
+    exact euclid_geq_one n
+  refine (Real.log_lt_log_iff ?_ ?_).mpr ?_
+  · simp
+    have h2 : 2⁻¹ < (1 : ℝ) := by norm_num
+    exact lt_of_lt_of_le h2 h
+  · rw [<- add_zero 0]
+    apply add_lt_add
+    linarith
+    norm_num
+  · apply (add_lt_add_iff_left ((euclid n) : ℝ)).mpr
+    norm_num
