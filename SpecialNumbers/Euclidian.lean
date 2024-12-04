@@ -64,6 +64,10 @@ theorem euclid_n_geq_one (n: ℕ) (h: n ≥ 1) : euclid n > 1 := by
   intro
   linarith
 
+theorem euclid_geq_one (n : ℕ) : 1 <= euclid n := by
+  by_cases h : n = 0
+  · simp [h]
+  · exact Nat.one_le_of_lt (euclid_n_geq_one n (by omega))
 
 #eval 1%1
 #eval 2%1
