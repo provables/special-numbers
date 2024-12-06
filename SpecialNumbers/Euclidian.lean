@@ -3,17 +3,27 @@ import Mathlib.Order.Monotone.Basic
 import Mathlib.Order.Filter.Basic
 import Mathlib.Order.Bounds.Basic
 
+/-!
+# Euclid Numbers
 
---  Function defining the nth Euclid number:
+This file introduces the Euclid numbers as defined in [knuth1989concrete].
+
+## Main results
+
+- Recurrence with a product of euclid numbers.
+- Co-primality of euclid numbers.
+- Explicit formula.
+
+-/
+
+/--
+Definition by a simple recurrence. The more explicit recurrence is proved in
+Theorem `euclid_eq_prod_euclid`.
+-/
 def euclid : ℕ -> ℕ
   | 0 => 1
   | 1 => 2
   | n+1 => (euclid n)^2 - (euclid n) + 1
-
-#eval euclid 5
-#eval euclid 6
-#eval 2*3*7*43*1807 + 1
-
 
 -- The definition conforms to the standard one for the first few examples
 @[simp]
@@ -32,7 +42,12 @@ lemma factor (n : ℕ) : n^2 - n = (n-1)*n := by
   rw [Nat.pow_two]
   exact Eq.symm (Nat.sub_one_mul n n)
 
-
+/--
+The Euclid numbers satisfy the recurrence:
+$$
+e_{n+1} = \prod_{i=1}^n e_i + 1.
+$$
+-/
 theorem euclid_eq_prod_euclid (n: ℕ):
     euclid (n+1) = ∏ x∈ Finset.Icc 1 n, euclid x + 1 := by
   induction' n with n ih
@@ -73,12 +88,6 @@ theorem euclid_geq_one (n : ℕ) : 1 <= euclid n := by
   · simp [h]
   · exact Nat.one_le_of_lt (euclid_n_geq_one n (by omega))
 
-#eval 1%1
-#eval 2%1
-#eval 2%0
-#eval 1%1
-
-
 theorem euclid_m_n_mod_1 (m n : ℕ) (h1: m < n) (h2: m > 0) :
     euclid n % euclid m = 1 := by
   by_cases c: n=0
@@ -102,10 +111,8 @@ theorem euclid_m_n_mod_1 (m n : ℕ) (h1: m < n) (h2: m > 0) :
     omega
   apply Nat.mod_eq_of_lt h3
 
-
 lemma gcd_a_b_mod_b_a (a b: ℕ ) : gcd a b = gcd (b % a) a := by
   apply Nat.gcd_rec
-
 
 lemma euclid_rel_prime_lt (m n : ℕ) (h: m < n) :
     gcd (euclid m) (euclid n) = 1 := by
@@ -122,7 +129,9 @@ lemma euclid_rel_prime_lt (m n : ℕ) (h: m < n) :
   assumption
   linarith
 
-
+/--
+The Euclid numbers are co-prime: $\gcd(e_n, e_m) = 1$, for $n\neq m$.
+-/
 theorem euclid_rel_prime (m n : ℕ) (h: m ≠ n) :
     gcd (euclid m) (euclid n) = 1 := by
     by_cases mltn : m < n
@@ -133,7 +142,9 @@ theorem euclid_rel_prime (m n : ℕ) (h: m ≠ n) :
     apply euclid_rel_prime_lt
     exact h1
 
--- Auxiliary sequences for proving the explicity form of the Euclidean numbers
+/--
+Auxiliary sequences for proving the explicity form of the Euclidean numbers.
+-/
 noncomputable def a (n : ℕ) : ℝ := (1/2^n)*Real.log (euclid n - 1/2)
 noncomputable def b (n : ℕ) : ℝ := (1/2^n)*Real.log (euclid n + 1/2)
 
@@ -164,6 +175,9 @@ theorem a_lt_b (n : ℕ) : a n < b n := by
 theorem a_increasing : Monotone a := by sorry
 theorem b_decreasing : Antitone b := by sorry
 
+/--
+The sequence $a$ is bounded: there exists $M$ such that $a_n ≤ M$, for all $n$.
+-/
 theorem a_bounded_above : BddAbove (Set.range a) := by
   refine bddAbove_def.mpr ?_
   use (b 0)
@@ -181,7 +195,7 @@ theorem a_bounded_above : BddAbove (Set.range a) := by
 open Filter
 
 /--
-The sequence `a` is bounded, so it cannot diverge to $+\infty$.
+The sequence $a$ is bounded, so it cannot diverge to $+\infty$.
 -/
 lemma a_not_diverging : ¬Tendsto a atTop atTop := by
   by_contra h
@@ -189,6 +203,9 @@ lemma a_not_diverging : ¬Tendsto a atTop atTop := by
   have d : BddAbove (Set.range a) := a_bounded_above
   contradiction
 
+/--
+The sequence $a$ converges.
+-/
 theorem a_converges : ∃ l, Tendsto a atTop (nhds l) := by
   have h2 : ¬Tendsto a atTop atTop := a_not_diverging
   refine Or.resolve_left ?_ h2
