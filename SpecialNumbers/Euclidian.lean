@@ -195,19 +195,14 @@ theorem a_bounded_above : BddAbove (Set.range a) := by
 open Filter
 
 /--
-The sequence $a$ is bounded, so it cannot diverge to $+\infty$.
--/
-lemma a_not_diverging : ¬Tendsto a atTop atTop := by
-  by_contra h
-  have c : ¬BddAbove (Set.range a) := Filter.unbounded_of_tendsto_atTop h
-  have d : BddAbove (Set.range a) := a_bounded_above
-  contradiction
-
-/--
 The sequence $a$ converges.
 -/
 theorem a_converges : ∃ l, Tendsto a atTop (nhds l) := by
-  have h2 : ¬Tendsto a atTop atTop := a_not_diverging
+  have h2 : ¬Tendsto a atTop atTop := by
+    by_contra h
+    have c : ¬BddAbove (Set.range a) := Filter.unbounded_of_tendsto_atTop h
+    have d : BddAbove (Set.range a) := a_bounded_above
+    contradiction
   refine Or.resolve_left ?_ h2
   apply tendsto_of_monotone
   exact a_increasing
