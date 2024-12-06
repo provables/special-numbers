@@ -1,4 +1,8 @@
 import Mathlib.Tactic
+import Mathlib.Order.Monotone.Basic
+import Mathlib.Order.Filter.Basic
+import Mathlib.Order.Bounds.Basic
+
 
 --  Function defining the nth Euclid number:
 def euclid : ℕ -> ℕ
@@ -138,7 +142,7 @@ example : a 0 = -Real.log 2 := by
   norm_num
   simp
 
-/-!
+/--
 The sequences $a$ and $b$ satisfy the inequality $a_n < b_n$ for all $n : ℕ$.
 -/
 theorem a_lt_b (n : ℕ) : a n < b n := by
@@ -156,3 +160,37 @@ theorem a_lt_b (n : ℕ) : a n < b n := by
     norm_num
   · apply (add_lt_add_iff_left ((euclid n) : ℝ)).mpr
     norm_num
+
+theorem a_increasing : Monotone a := by sorry
+theorem b_decreasing : Antitone b := by sorry
+
+theorem a_bounded_above : BddAbove (Set.range a) := by
+  refine bddAbove_def.mpr ?_
+  use (b 0)
+  intro y h
+  simp at h
+  obtain ⟨ z, hz ⟩ := h
+  rw [<- hz]
+  have c : a z < b z := a_lt_b z
+  have d : b z <= b 0 := by
+    apply Antitone.imp
+    exact b_decreasing
+    linarith
+  linarith
+
+open Filter
+
+/--
+The sequence `a` is bounded, so it cannot diverge to $+\infty$.
+-/
+lemma a_not_diverging : ¬Tendsto a atTop atTop := by
+  by_contra h
+  have c : ¬BddAbove (Set.range a) := Filter.unbounded_of_tendsto_atTop h
+  have d : BddAbove (Set.range a) := a_bounded_above
+  contradiction
+
+theorem a_converges : ∃ l, Tendsto a atTop (nhds l) := by
+  have h2 : ¬Tendsto a atTop atTop := a_not_diverging
+  refine Or.resolve_left ?_ h2
+  apply tendsto_of_monotone
+  exact a_increasing
