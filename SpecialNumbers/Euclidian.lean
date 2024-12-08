@@ -185,7 +185,7 @@ theorem a_bounded_above : BddAbove (Set.range a) := by
   simp at h
   obtain ⟨ z, hz ⟩ := h
   rw [<- hz]
-  have c : a z < b z := a_lt_b z
+  let c := a_lt_b z
   have d : b z <= b 0 := by
     apply Antitone.imp
     exact b_decreasing
@@ -203,6 +203,5 @@ theorem a_converges : ∃ l, Tendsto a atTop (nhds l) := by
     have c : ¬BddAbove (Set.range a) := Filter.unbounded_of_tendsto_atTop h
     have d : BddAbove (Set.range a) := a_bounded_above
     contradiction
-  refine Or.resolve_left ?_ h2
-  apply tendsto_of_monotone
-  exact a_increasing
+  exact Or.resolve_left (tendsto_of_monotone a_increasing) h2
+
