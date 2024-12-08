@@ -205,3 +205,57 @@ theorem a_converges : ∃ l, Tendsto a atTop (nhds l) := by
     contradiction
   exact Or.resolve_left (tendsto_of_monotone a_increasing) h2
 
+
+/--
+Logarithm of the constant E, where $e_n = \lfloor E^{2^n} \rfloor$.
+-/
+noncomputable def euclid_log_constant : ℝ := Exists.choose a_converges
+
+/--
+Constant E, where $e_n = \lfloor E^{2^n} \rfloor$.
+-/
+noncomputable def euclid_constant : ℝ := Real.exp euclid_log_constant
+
+@[simp]
+theorem exp_of_log_const_eq_const : Real.exp euclid_log_constant = euclid_constant := by
+  simp [euclid_log_constant, euclid_constant]
+
+@[simp]
+theorem log_of_const_eq_log_const : Real.log euclid_constant = euclid_log_constant := by
+  simp [euclid_log_constant, euclid_constant]
+
+/--
+The sequence `a` converges to `euclid_log_constant`.
+-/
+theorem a_tendsto_euclid_log_constant : Tendsto a atTop (nhds euclid_log_constant) := by
+  simp [euclid_log_constant]
+  apply Exists.choose_spec a_converges
+
+/--
+The sequence `a` is bounded above by `euclid_log_constant`.
+-/
+theorem a_le_euclid_log_constant (n : ℕ) : a n <= euclid_log_constant := by
+  exact Monotone.ge_of_tendsto a_increasing a_tendsto_euclid_log_constant n
+
+/--
+The sequence `b` is bounded below by `euclid_log_constant`.
+-/
+theorem euclid_log_constant_le_b (n : ℕ) : euclid_log_constant <= b n := by
+  have h : b n ∈ upperBounds (Set.range a) := by
+    refine mem_upperBounds.mpr ?h
+    intros x h
+    simp at h
+    obtain ⟨ m, h2 ⟩ := h
+    rw [<- h2]
+    let z := max m n
+    have a1 : a m <= a z := by
+      apply a_increasing
+      omega
+    have a2 : b z <= b n := by
+      apply b_decreasing
+      omega
+    have a3 : a z <= b z := le_of_lt (a_lt_b z)
+    linarith
+  let c := a_tendsto_euclid_log_constant
+  let d := isLUB_of_tendsto_atTop a_increasing c
+  exact (isLUB_le_iff d).mpr h
