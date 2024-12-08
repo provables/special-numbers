@@ -71,7 +71,7 @@ theorem euclid_geq_one (n : ℕ) : 1 <= euclid n := by
   · simp [h]
   · exact Nat.one_le_of_lt (euclid_n_gt_one n (by omega))
 
-lemma zero_lt_euc_m_minus_one_half (m : ℕ) : 0 < (↑(euclid m) - (2:ℝ)⁻¹) := by
+theorem zero_lt_euc_m_minus_one_half (m : ℕ) : 0 < (↑(euclid m) - (2:ℝ)⁻¹) := by
   let em := euclid_geq_one m
   simp
   have emr : (1:ℝ) ≤ euclid m := by
@@ -187,7 +187,7 @@ example (a b c : ℝ) (h1: c > 0) (h2: a ≤ b) : (c * a ≤ c * b) := by
 #check @mul_le_mul_iff_of_pos_left
 
 
-lemma powers_two (m: ℕ) : 2^(m+1) * ((2:ℝ)^(m))⁻¹ = 2 := by
+theorem powers_two (m: ℕ) : 2^(m+1) * ((2:ℝ)^(m))⁻¹ = 2 := by
   refine (mul_inv_eq_iff_eq_mul₀ ?hb).mpr ?a
   simp
   rw[← Real.rpow_natCast]
@@ -199,39 +199,64 @@ lemma powers_two (m: ℕ) : 2^(m+1) * ((2:ℝ)^(m))⁻¹ = 2 := by
   simp
 
 
-
--- lemma powers_two (m: ℕ) : 2^m * ((2:ℝ)^(m + 1))⁻¹ = 1/2 := by
---   simp
---   refine (mul_inv_eq_iff_eq_mul₀ ?hb).mpr ?a
---   simp
---   rw[← Real.rpow_neg_one]
---   rw[← Real.rpow_natCast]
---   rw[← Real.rpow_natCast]
---   rw[← Real.rpow_add]
---   simp
---   simp
-
 example (x : ℝ) : x^2 = x^(2:ℝ) := by
   exact Eq.symm (Real.rpow_two x)
 
 
 #leansearch "(a b: R)(h: log(a) ≤ log(b)) : a ≤ b."
 
-lemma foo (a b c: ℝ) (h1: c > 0) (h2: c * a ≤ c * b) : a ≤ b := by
-  exact le_of_mul_le_mul_left h2 h1
-
-
 #check Real.partialOrder.proof_2
 #check Real.le_rpow_iff_log_le
 
 #check Real.log_le_log_iff
 
-#leansearch "(a b : R) : a - b = 0 ↔ a = b."
+#leansearch "(a b : R) : (a - b)^2 = a^2 -2a*b - b^2."
+
+
+theorem euc_recurrence (m : ℕ) (h: m ≥ 1) : euclid (m+1) = (euclid m)^2 - euclid m + 1 := by
+  by_cases c: m = 1
+  · simp[c]
+  · rw[euclid]
+    simp
+    omega
+
+theorem euc_recurrence_real (m : ℕ) (h: m ≥ 1) : euclid (m+1) = ((euclid m:ℝ))^2 - euclid m + 1 := by
+  rw[euclid]
+  · simp
+    rw[← Nat.cast_pow]
+    apply Nat.cast_sub
+    apply Nat.le_self_pow
+    omega
+  · intro
+    linarith
+
+
+lemma log_fact : Real.log (1 / 2) ≤ 1 / 2 ^ 1 * Real.log (↑2 - 1 / 2) := by
+  norm_num
+  have h1: Real.log (1/2) < 0 := by
+    refine Real.log_neg ?b0 ?b1
+    linarith
+    linarith
+  have h2: Real.log (3/2) > 0 := by
+    refine (Real.log_pos_iff ?hx).mpr ?a1
+    linarith
+    linarith
+  linarith
+
 
 -- The pl_euc_m sequence is increasing
-lemma pl_euc_m_monoton : Monotone pl_euc_m := by
+theorem pl_euc_m_monoton : Monotone pl_euc_m := by
   refine monotone_nat_of_le_succ ?ha
   intro m
+  by_cases c: m = 0
+  · simp[c]
+    rw[pl_euc_m]
+    norm_num
+    rw[pl_euc_m]
+    rw[euclid]
+    exact log_fact
+
+  have h1: m ≥ 1 := by omega
   simp[pl_euc_m]
   refine le_of_mul_le_mul_left ?h1 (?h2:(0:ℝ)<(2^(m+1)))
   · simp
@@ -246,7 +271,17 @@ lemma pl_euc_m_monoton : Monotone pl_euc_m := by
       let em := zero_lt_euc_m_minus_one_half m
       linarith
     · exact zero_lt_euc_m_minus_one_half (m+1)
-    ·
+    · calc (euclid m - (2:ℝ)⁻¹)^(2:ℝ) = (euclid m - (2:ℝ)⁻¹)^(2:ℕ) := by exact Real.rpow_two _
+        _ = ((euclid m):ℝ)^2 - 2*((euclid m):ℝ) *2⁻¹ + (2⁻¹)^2 := by rw[sub_pow_two]
+        _ = ((euclid m):ℝ)^2 - euclid m + 1 - 3/4 := by ring
+        _ = (euclid (m+1):ℝ) - 3/4 := by rw[← euc_recurrence_real]; exact h1
+        _ ≤ (euclid (m+1):ℝ) - 2⁻¹ := by linarith
+    · exact zero_lt_euc_m_minus_one_half _
+  · refine pow_pos (by linarith) (m+1)
+
+
+
+
 
 
 
@@ -255,31 +290,31 @@ lemma pl_euc_m_monoton : Monotone pl_euc_m := by
 
   -- refine (Real.le_rpow_iff_log_le ?_ ?_).mp
 
-  refine (inv_mul_le_iff₀ ?ha.h).mpr ?ha.a
-  simp
-  rw[← mul_assoc]
-  rw[powers_two]
-  let euc_gt_half := (@lt_of_lt_of_le _ _ (1/2) (1:ℝ) ((euclid m):ℝ))
-  apply le_mul_of_le_left
+  -- refine (inv_mul_le_iff₀ ?ha.h).mpr ?ha.a
+  -- simp
+  -- rw[← mul_assoc]
+  -- rw[powers_two]
+  -- let euc_gt_half := (@lt_of_lt_of_le _ _ (1/2) (1:ℝ) ((euclid m):ℝ))
+  -- apply le_mul_of_le_left
 
 
-  refine (Real.le_rpow_iff_log_le ?ha.a.hx ?ha.a.hy).mp ?ha.a.a
-  · simp
-    by_cases c: m = 0
-    rw[c]
-    have e0: euclid 0 = 1 := rfl
-    rw[e0]
-    norm_num
-    have mp: m ≥ 1 := by omega
-    let euc_gt_one := euclid_n_geq_one m mp
-    norm_num
-    apply euc_gt_half
-    norm_num
-    simp
-    omega
-  simp
-  norm_num
-  apply euc_gt_half
+  -- refine (Real.le_rpow_iff_log_le ?ha.a.hx ?ha.a.hy).mp ?ha.a.a
+  -- · simp
+  --   by_cases c: m = 0
+  --   rw[c]
+  --   have e0: euclid 0 = 1 := rfl
+  --   rw[e0]
+  --   norm_num
+  --   have mp: m ≥ 1 := by omega
+  --   let euc_gt_one := euclid_n_geq_one m mp
+  --   norm_num
+  --   apply euc_gt_half
+  --   norm_num
+  --   simp
+  --   omega
+  -- simp
+  -- norm_num
+  -- apply euc_gt_half
 
 
 
@@ -309,5 +344,5 @@ lemma pl_euc_m_monoton : Monotone pl_euc_m := by
 -- The pl_euc_p sequence is decreasing
 noncomputable def pl_euc_p (n: ℕ) : ℝ := 1/2^n * Real.log (euclid n + 1/2)
 
-lemma pow_log_euclid_plus_decreasing (n : ℕ) :
-    pl_euc_p n > pl_euc_p (n+1) := by sorry
+-- lemma pow_log_euclid_plus_decreasing (n : ℕ) :
+--     pl_euc_p n > pl_euc_p (n+1) := by sorry
