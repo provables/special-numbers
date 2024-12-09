@@ -38,10 +38,6 @@ theorem euclid_two: euclid 2 = 3 := by rfl
 @[simp]
 theorem euclid_three: euclid 3 = 7 := by rfl
 
-lemma factor (n : ℕ) : n^2 - n = (n-1)*n := by
-  rw [Nat.pow_two]
-  exact Eq.symm (Nat.sub_one_mul n n)
-
 /--
 The Euclid numbers satisfy the recurrence:
 $$
@@ -51,21 +47,14 @@ $$
 theorem euclid_eq_prod_euclid (n: ℕ):
     euclid (n+1) = ∏ x∈ Finset.Icc 1 n, euclid x + 1 := by
   induction' n with n ih
-  simp
-  by_cases c: n = 0
-  rw[c]
-  simp
-  rw[euclid]
-  simp
-  rw[factor]
-  rw[Finset.prod_Icc_succ_top]
-  apply mul_eq_mul_right_iff.mpr
-  apply Or.inl
-  rw[ih]
-  simp
-  omega
-  intro
-  linarith
+  · simp
+  · rw[euclid]
+    · simp [Nat.pow_two, Finset.prod_Icc_succ_top]
+      rw [← Nat.sub_one_mul]
+      apply mul_eq_mul_right_iff.mpr
+      left
+      simp [ih]
+    · simp
 
 /--
 Euclid numbers are strictly greater than 1, except for $e_0$:
