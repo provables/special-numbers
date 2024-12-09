@@ -56,75 +56,38 @@ theorem euclid_eq_prod_euclid (n: ℕ):
       simp [ih]
     · simp
 
-/--
-Euclid numbers are strictly greater than 1, except for $e_0$:
-$$
-e_n > 1, for all $n\ge 1$.
-$$
--/
-theorem euclid_n_gt_one (n: ℕ) (h: n ≥ 1) : euclid n > 1 := by
-  induction' n with n ih
-  contradiction
-  by_cases c: n+1 = 1
-  rw[c]
-  simp
-  have x: n ≥ 1 := by omega
-  rw[euclid]
-  simp
-  have y: euclid n > 1 := ih x
-  rw[pow_two]
-  simp
-  omega
-  intro
+theorem euclid_gt_zero (n:ℕ) : 0 < euclid n := by
+  unfold euclid
+  split
+  · linarith
+  · linarith
+  · simp [Nat.pow_two]
+
+theorem euclid_ge_one (n:ℕ) : 1 <= euclid n := by
+  simp [Nat.one_le_iff_ne_zero]
+  linarith [euclid_gt_zero n]
+
+theorem euclid_gt_one (n : ℕ) (h : n ≥ 1) : 1 < euclid n := by
+  cases n
+  · contradiction
+  · simp [euclid_eq_prod_euclid, euclid_gt_zero]
+
+theorem zero_lt_euc_m_minus_one_half (m : ℕ) : 0 < euclid m - (2:ℝ)⁻¹ := by
+  have : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr (euclid_ge_one m)
   linarith
-
-/--
-$e_n\ge 1$, for all $n\in\N$.
--/
-theorem euclid_geq_one (n : ℕ) : 1 <= euclid n := by
-  by_cases h : n = 0
-  · simp [h]
-  · exact Nat.one_le_of_lt (euclid_n_gt_one n (by omega))
-
-theorem zero_lt_euc_m_minus_one_half (m : ℕ) : 0 < (↑(euclid m) - (2:ℝ)⁻¹) := by
-  let em := euclid_geq_one m
-  simp
-  have emr : (1:ℝ) ≤ euclid m := by
-    exact Nat.one_le_cast.mpr em
-  linarith
-
-theorem euclid_n_geq_zero (n: ℕ) : euclid n > 0 := by
-  by_cases z: n = 0
-  rw[z]
-  simp
-  have hh: euclid n > 1 := by
-    apply euclid_n_gt_one
-    omega
-  exact Nat.one_le_of_lt hh
 
 /--
 The Euclid numbers are strictly increasing: $e_n < e_{n+1}$, for all $n\in\N$.
 -/
 theorem euclid_increasing (n: ℕ) : euclid n < euclid (n+1) := by
   by_cases c: n = 0
-  rw[c]
-  rw[euclid]
-  simp
-  have h1: n ≥ 1 := by omega
-  have h2: euclid n -1 ≥ 1 := by
-    let _:= euclid_n_gt_one n h1
-    omega
-  calc euclid (n+1) = (euclid n)^2 - euclid n + 1 := by simp[euclid]
-    _ = (euclid n) * (euclid n - 1) + 1 := by
-        rw[pow_two]
-        simp
-        rw[Nat.mul_sub_one]
-    _ ≥ euclid n + 1 := by
-        apply add_le_add_right
-        apply le_mul_of_one_le_right
-        simp
-        linarith
-    _ > euclid n := by linarith
+  · simp [c, euclid]
+  · have h2: euclid n -1 ≥ 1 := Nat.le_sub_one_of_lt (euclid_gt_one n (by omega))
+    calc
+      euclid (n+1) = (euclid n)*(euclid n) - euclid n + 1 := by simp[euclid, pow_two]
+      _ = (euclid n) * (euclid n - 1) + 1 := by rw [Nat.mul_sub_one]
+      _ ≥ (euclid n)*1 + 1 := Nat.add_le_add_right (Nat.mul_le_mul_left _ h2) 1
+      _ > euclid n := by linarith
 
 theorem euclid_m_n_mod_1 (m n : ℕ) (h1: m < n) (h2: m > 0) :
     euclid n % euclid m = 1 := by
@@ -145,7 +108,7 @@ theorem euclid_m_n_mod_1 (m n : ℕ) (h1: m < n) (h2: m > 0) :
   rw[z]
   simp
   have h3: euclid m > 1 := by
-    apply euclid_n_gt_one
+    apply euclid_gt_one
     omega
   apply Nat.mod_eq_of_lt h3
 
@@ -161,7 +124,7 @@ lemma euclid_rel_prime_lt (m n : ℕ) (h: m < n) :
   rw[gcd_a_b_mod_b_a]
   rw[euclid_m_n_mod_1]
   have h4: euclid m > 1 := by
-    apply euclid_n_gt_one
+    apply euclid_gt_one
     linarith
   apply Nat.gcd_one_left
   assumption
@@ -279,7 +242,7 @@ theorem a_lt_b (n : ℕ) : a n < b n := by
   simp [a, b]
   have h : (1 : ℝ) <= euclid n := by
     norm_cast
-    exact euclid_geq_one n
+    exact euclid_ge_one n
   refine (Real.log_lt_log_iff ?_ ?_).mpr ?_
   · simp
     have h2 : 2⁻¹ < (1 : ℝ) := by norm_num
