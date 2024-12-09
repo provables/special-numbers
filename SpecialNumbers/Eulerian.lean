@@ -1,4 +1,8 @@
 import Mathlib.Tactic
+import Mathlib.RingTheory.Binomial
+import Mathlib.RingTheory.Polynomial.Pochhammer
+
+open Ring Polynomial
 
 /-!
 # Eulerian Numbers
@@ -66,3 +70,23 @@ theorem eulerian_of_succ_n_n (n:ℕ) : eulerian (n+1) n = 1 := by
       rw [ih]; simp
       apply eulerian_of_n_succ_n
       repeat omega
+
+lemma bar [NonAssocRing S] (r s : S) (a : ℕ) : (a • r) * s = r * (a • s):= by
+  rw [mul_smul_comm]
+  exact smul_mul_assoc a r s
+
+variable [NonAssocRing R] [Pow R ℕ] [BinomialRing R] [NatPowAssoc R]
+
+lemma foo (r : R) (n : ℕ)
+  : (n+1) • choose (r+1) (n+1) = (r+1) * choose r n := by
+  suffices h : (n+1).factorial • choose (r+1) (n+1) = n.factorial • (r+1) * choose r n by
+    rw [Nat.factorial] at h
+    nth_rw 1 [Nat.mul_comm] at h
+    rw [mul_smul] at h
+    rw [smul_mul_assoc] at h
+    refine nsmul_right_injective n.factorial ?_ h
+    exact Nat.factorial_ne_zero n
+  rw [<- descPochhammer_eq_factorial_smul_choose]
+  simp only [descPochhammer]
+  rw [smeval_mul, smeval_X, smeval_comp, bar]
+  simp [descPochhammer_eq_factorial_smul_choose]
