@@ -67,7 +67,12 @@ theorem euclid_eq_prod_euclid (n: ℕ):
   intro
   linarith
 
-
+/--
+Euclid numbers are strictly greater than 1, except for $e_0$:
+$$
+e_n > 1, for all $n\ge 1$.
+$$
+-/
 theorem euclid_n_gt_one (n: ℕ) (h: n ≥ 1) : euclid n > 1 := by
   induction' n with n ih
   contradiction
@@ -84,7 +89,9 @@ theorem euclid_n_gt_one (n: ℕ) (h: n ≥ 1) : euclid n > 1 := by
   intro
   linarith
 
-
+/--
+$e_n\ge 1$, for all $n\in\N$.
+-/
 theorem euclid_geq_one (n : ℕ) : 1 <= euclid n := by
   by_cases h : n = 0
   · simp [h]
@@ -97,11 +104,6 @@ theorem zero_lt_euc_m_minus_one_half (m : ℕ) : 0 < (↑(euclid m) - (2:ℝ)⁻
     exact Nat.one_le_cast.mpr em
   linarith
 
-
-lemma f_gt_zero (n : ℕ) (f: ℕ → ℕ) (h: f n ≥ 1) :  f n  > 0 := by
-  exact h
-
-
 theorem euclid_n_geq_zero (n: ℕ) : euclid n > 0 := by
   by_cases z: n = 0
   rw[z]
@@ -111,7 +113,9 @@ theorem euclid_n_geq_zero (n: ℕ) : euclid n > 0 := by
     omega
   exact Nat.one_le_of_lt hh
 
-
+/--
+The Euclid numbers are strictly increasing: $e_n < e_{n+1}$, for all $n\in\N$.
+-/
 theorem euclid_increasing (n: ℕ) : euclid n < euclid (n+1) := by
   by_cases c: n = 0
   rw[c]
@@ -132,13 +136,6 @@ theorem euclid_increasing (n: ℕ) : euclid n < euclid (n+1) := by
         simp
         linarith
     _ > euclid n := by linarith
-
-
-#eval 1%1
-#eval 2%1
-#eval 2%0
-#eval 1%1
-
 
 theorem euclid_m_n_mod_1 (m n : ℕ) (h1: m < n) (h2: m > 0) :
     euclid n % euclid m = 1 := by
@@ -194,17 +191,7 @@ theorem euclid_rel_prime (m n : ℕ) (h: m ≠ n) :
     apply euclid_rel_prime_lt
     exact h1
 
-
 noncomputable def pl_euc_m (n: ℕ) : ℝ := 1/2^n * Real.log (euclid n - 1/2)
-
-
-example (a b c : ℝ) (h1: c > 0) (h2: a ≤ b) : (c * a ≤ c * b) := by
-  exact (mul_le_mul_iff_of_pos_left h1).mpr h2
-
-
-#check mul_le_mul_iff_of_pos_left
-#check @mul_le_mul_iff_of_pos_left
-
 
 theorem powers_two (m: ℕ) : 2^(m+1) * ((2:ℝ)^(m))⁻¹ = 2 := by
   refine (mul_inv_eq_iff_eq_mul₀ ?hb).mpr ?a
@@ -216,21 +203,6 @@ theorem powers_two (m: ℕ) : 2^(m+1) * ((2:ℝ)^(m))⁻¹ = 2 := by
   rw[Real.rpow_add]
   ring
   simp
-
-
-example (x : ℝ) : x^2 = x^(2:ℝ) := by
-  exact Eq.symm (Real.rpow_two x)
-
-
-#leansearch "(a b: R)(h: log(a) ≤ log(b)) : a ≤ b."
-
-#check Real.partialOrder.proof_2
-#check Real.le_rpow_iff_log_le
-
-#check Real.log_le_log_iff
-
-#leansearch "(a b : R) : (a - b)^2 = a^2 -2a*b - b^2."
-
 
 theorem euc_recurrence (m : ℕ) (h: m ≥ 1) : euclid (m+1) = (euclid m)^2 - euclid m + 1 := by
   by_cases c: m = 1
@@ -249,7 +221,6 @@ theorem euc_recurrence_real (m : ℕ) (h: m ≥ 1) : euclid (m+1) = ((euclid m:�
   · intro
     linarith
 
-
 lemma log_fact : Real.log (1 / 2) ≤ 1 / 2 ^ 1 * Real.log (↑2 - 1 / 2) := by
   norm_num
   have h1: Real.log (1/2) < 0 := by
@@ -261,7 +232,6 @@ lemma log_fact : Real.log (1 / 2) ≤ 1 / 2 ^ 1 * Real.log (↑2 - 1 / 2) := by
     linarith
     linarith
   linarith
-
 
 -- The pl_euc_m sequence is increasing
 theorem pl_euc_m_monoton : Monotone pl_euc_m := by
@@ -301,9 +271,6 @@ theorem pl_euc_m_monoton : Monotone pl_euc_m := by
 
 -- The pl_euc_p sequence is decreasing
 noncomputable def pl_euc_p (n: ℕ) : ℝ := 1/2^n * Real.log (euclid n + 1/2)
-
--- lemma pow_log_euclid_plus_decreasing (n : ℕ) :
---     pl_euc_p n > pl_euc_p (n+1) := by sorry
 
 /--
 Auxiliary sequences for proving the explicity form of the Euclidean numbers.
