@@ -56,6 +56,21 @@ theorem euclid_eq_prod_euclid (n: ℕ):
       simp [ih]
     · simp
 
+/--
+Another expression of `euclid_eq_prod_euclid` for easier application when $n\ge 1$:
+$$
+e_n = \prod_{i=1}^{n-1} e_i + 1.
+$$
+-/
+theorem euclid_of_n_eq_prod_euclid (n : ℕ) (h : n ≥ 1) :
+    euclid n = ∏ x∈Finset.Icc 1 (n-1), euclid x + 1 := by
+  have c : n = (n - 1) + 1 := by omega
+  rw [c, euclid_eq_prod_euclid]
+  simp
+
+/--
+Euclid numbers are positive.
+-/
 theorem euclid_gt_zero (n:ℕ) : 0 < euclid n := by
   unfold euclid
   split
@@ -63,10 +78,16 @@ theorem euclid_gt_zero (n:ℕ) : 0 < euclid n := by
   · linarith
   · simp [Nat.pow_two]
 
+/--
+Euclid numbers are $\ge 1$.
+-/
 theorem euclid_ge_one (n:ℕ) : 1 <= euclid n := by
   simp [Nat.one_le_iff_ne_zero]
   linarith [euclid_gt_zero n]
 
+/--
+Only $e_0 = 1$.
+-/
 theorem euclid_gt_one (n : ℕ) (h : n ≥ 1) : 1 < euclid n := by
   cases n
   · contradiction
@@ -89,59 +110,37 @@ theorem euclid_increasing (n: ℕ) : euclid n < euclid (n+1) := by
       _ ≥ (euclid n)*1 + 1 := Nat.add_le_add_right (Nat.mul_le_mul_left _ h2) 1
       _ > euclid n := by linarith
 
-theorem euclid_m_n_mod_1 (m n : ℕ) (h1: m < n) (h2: m > 0) :
+theorem euclid_m_n_mod_one (m n : ℕ) (h1: m < n) (h2: m > 0) :
     euclid n % euclid m = 1 := by
   by_cases c: n=0
-  omega
-  have c2: n ≥ 1 := by omega
-  have h1: n = n -1 + 1 := by omega
-  rw [h1]
-  rw[euclid_eq_prod_euclid]
-  have : (euclid m) ∣  ∏ x ∈ Finset.Icc 1 (n-1), euclid x := by
-    apply Finset.dvd_prod_of_mem
-    refine Finset.mem_Icc.mpr ?ha.a
-    omega
-
-  rw[Nat.add_mod]
-  have z : (∏ x ∈ Finset.Icc 1 (n-1), euclid x) % euclid m = 0 := by
-    exact Nat.dvd_iff_mod_eq_zero.mp this
-  rw[z]
-  simp
-  have h3: euclid m > 1 := by
-    apply euclid_gt_one
-    omega
-  apply Nat.mod_eq_of_lt h3
-
-lemma gcd_a_b_mod_b_a (a b: ℕ ) : gcd a b = gcd (b % a) a := by
-  apply Nat.gcd_rec
+  · omega
+  · rw [euclid_of_n_eq_prod_euclid]
+    · have d : (euclid m) ∣  ∏ x ∈ Finset.Icc 1 (n-1), euclid x := by
+        apply Finset.dvd_prod_of_mem
+        exact Finset.mem_Icc.mpr (by omega)
+      rw [Nat.add_mod]
+      simp [Nat.dvd_iff_mod_eq_zero.mp d]
+      exact Nat.mod_eq_of_lt (euclid_gt_one _ (by linarith))
+    · linarith
 
 lemma euclid_rel_prime_lt (m n : ℕ) (h: m < n) :
-    gcd (euclid m) (euclid n) = 1 := by
+    (euclid m).gcd (euclid n) = 1 := by
   by_cases c: m = 0
-  rw[c]
-  simp
-  have h3: m ≥ 1 := by omega
-  rw[gcd_a_b_mod_b_a]
-  rw[euclid_m_n_mod_1]
-  have h4: euclid m > 1 := by
-    apply euclid_gt_one
-    linarith
-  apply Nat.gcd_one_left
-  assumption
-  linarith
+  · simp [c]
+  · rw [Nat.gcd_rec, euclid_m_n_mod_one]
+    simp
+    · linarith
+    · omega
 
 /--
 The Euclid numbers are co-prime: $\gcd(e_n, e_m) = 1$, for $n\neq m$.
 -/
 theorem euclid_rel_prime (m n : ℕ) (h: m ≠ n) :
-    gcd (euclid m) (euclid n) = 1 := by
-    by_cases mltn : m < n
-    exact euclid_rel_prime_lt m n mltn
-    rw[gcd_comm]
-    simp at mltn
-    have h1: n < m := by omega
-    apply euclid_rel_prime_lt
-    exact h1
+    (euclid m).gcd (euclid n) = 1 := by
+  by_cases c : m < n
+  · exact euclid_rel_prime_lt m n c
+  · rw [Nat.gcd_comm]
+    exact euclid_rel_prime_lt n m (by omega)
 
 noncomputable def pl_euc_m (n: ℕ) : ℝ := 1/2^n * Real.log (euclid n - 1/2)
 
