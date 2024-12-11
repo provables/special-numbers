@@ -135,6 +135,7 @@ lemma euclid_rel_prime_lt (m n : ℕ) (h: m < n) :
     · linarith
     · omega
 
+example : ((1:ℕ):ℝ) = ↑ 1 := by exact Nat.cast_one
 /--
 The Euclid numbers are co-prime: $\gcd(e_n, e_m) = 1$, for $n\neq m$.
 -/
@@ -165,7 +166,7 @@ theorem pl_euc_m_monotone : Monotone pl_euc_m := by
       case succ m =>
         calc
           (((euclid (m+1)):ℝ) - 2⁻¹)^2 = (euclid (m+1))^2 - euclid (m+1) + 1 - 3/4 := by ring
-          _ = euclid (m+1+1) - ((3/4):ℝ) := by
+          _ = ((euclid (m+1+1)):ℝ) - 3/4 := by
             simp
             rw [← Nat.cast_pow, <- Nat.cast_sub ]
             norm_cast
