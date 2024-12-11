@@ -110,6 +110,9 @@ theorem euclid_increasing (n: ℕ) : euclid n < euclid (n+1) := by
       _ ≥ (euclid n)*1 + 1 := Nat.add_le_add_right (Nat.mul_le_mul_left _ h2) 1
       _ > euclid n := by linarith
 
+theorem euclid_monotone : Monotone euclid :=
+  monotone_nat_of_le_succ (fun n => Nat.le_of_succ_le (euclid_increasing n))
+
 theorem euclid_m_n_mod_one (m n : ℕ) (h1: m < n) (h2: m > 0) :
     euclid n % euclid m = 1 := by
   by_cases c: n=0
