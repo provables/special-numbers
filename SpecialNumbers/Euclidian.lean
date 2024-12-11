@@ -148,40 +148,30 @@ theorem euclid_rel_prime (m n : ℕ) (h: m ≠ n) :
 noncomputable def pl_euc_m (n: ℕ) : ℝ := 1/2^n * Real.log (euclid n - 1/2)
 
 theorem pl_euc_m_monotone : Monotone pl_euc_m := by
+  have euclid_ge_real_one (m:ℕ) : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr (euclid_ge_one m)
   refine monotone_nat_of_le_succ ?ha
   intro m
   simp [pl_euc_m]
-  refine le_of_mul_le_mul_left ?h1 (?h2:(0:ℝ)<(2^(m+1)))
+  refine le_of_mul_le_mul_left ?h1 ((by simp):(0:ℝ)<(2^(m+1)))
   simp
-  rw [← mul_assoc, ← pow_sub₀ 2]
-  simp
-  rw [← Real.log_rpow]
-  refine (Real.log_le_log_iff ?hh1 ?hh2).mpr ?hh3
-  have : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr (euclid_ge_one m)
-  rw[Real.rpow_two]
-  apply sq_pos_iff.mpr
-  refine Ne.symm (ne_of_lt ?xx)
-  linarith
-  have : (1:ℝ) ≤ euclid (m+1) := Nat.one_le_cast.mpr (euclid_ge_one (m+1))
-  linarith
-  rw [Real.rpow_two]
-  cases m
-  case zero => norm_num
-  case succ m =>
-    calc
-      (((euclid (m+1)):ℝ) - 2⁻¹)^2 = (euclid (m+1))^2 - euclid (m+1) + 1 - 3/4 := by ring
-      _ = euclid (m+1+1) - ((3/4):ℝ) := by
-        simp
-        rw [← Nat.cast_pow, <- Nat.cast_sub ]
-        norm_cast
-        exact Nat.le_self_pow (by linarith) (euclid (m + 1))
-      _ <= ((euclid (m+1+1)):ℝ) - 2⁻¹ := by
-        linarith
-  have : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr (euclid_ge_one m)
-  linarith
-  linarith
-  linarith
-  simp
+  rw [← mul_assoc, ← pow_sub₀ 2 (by linarith) (by linarith), Nat.add_sub_self_left m 1,
+      pow_one, ← Real.log_rpow, Real.rpow_two]
+  · refine (Real.log_le_log_iff ?hh1 ?hh2).mpr ?hh3
+    · apply sq_pos_iff.mpr
+      exact Ne.symm (ne_of_lt (by linarith [euclid_ge_real_one m]))
+    · linarith [euclid_ge_real_one (m+1)]
+    · cases m
+      case zero => norm_num
+      case succ m =>
+        calc
+          (((euclid (m+1)):ℝ) - 2⁻¹)^2 = (euclid (m+1))^2 - euclid (m+1) + 1 - 3/4 := by ring
+          _ = euclid (m+1+1) - ((3/4):ℝ) := by
+            simp
+            rw [← Nat.cast_pow, <- Nat.cast_sub ]
+            norm_cast
+            exact Nat.le_self_pow (by linarith) (euclid (m + 1))
+          _ <= ((euclid (m+1+1)):ℝ) - 2⁻¹ := by linarith
+  · linarith [euclid_ge_real_one m]
 
 -- The pl_euc_p sequence is decreasing
 noncomputable def pl_euc_p (n: ℕ) : ℝ := 1/2^n * Real.log (euclid n + 1/2)
