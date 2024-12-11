@@ -147,7 +147,7 @@ theorem euclid_rel_prime (m n : ℕ) (h: m ≠ n) :
 
 noncomputable def pl_euc_m (n: ℕ) : ℝ := 1/2^n * Real.log (euclid n - 1/2)
 
-theorem pl_euc_m_monoton : Monotone pl_euc_m := by
+theorem pl_euc_m_monotone : Monotone pl_euc_m := by
   refine monotone_nat_of_le_succ ?ha
   intro m
   simp [pl_euc_m]
