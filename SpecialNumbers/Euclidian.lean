@@ -193,14 +193,9 @@ theorem a_lt_b (n : ℕ) : a n < b n := by
     exact euclid_ge_one n
   refine (Real.log_lt_log_iff ?_ ?_).mpr ?_
   · simp
-    have h2 : 2⁻¹ < (1 : ℝ) := by norm_num
-    exact lt_of_lt_of_le h2 h
-  · rw [<- add_zero 0]
-    apply add_lt_add
-    linarith
-    norm_num
-  · apply (add_lt_add_iff_left ((euclid n) : ℝ)).mpr
-    norm_num
+    exact lt_of_lt_of_le (by norm_num) h
+  · exact add_pos_of_nonneg_of_pos (by linarith) (by norm_num)
+  · exact (add_lt_add_iff_left ((euclid n) : ℝ)).mpr (by norm_num)
 
 theorem a_increasing : Monotone a := by sorry
 theorem b_decreasing : Antitone b := by sorry
@@ -212,15 +207,10 @@ theorem a_bounded_above : BddAbove (Set.range a) := by
   refine bddAbove_def.mpr ?_
   use (b 0)
   intro y h
-  simp at h
   obtain ⟨ z, hz ⟩ := h
   rw [<- hz]
-  let c := a_lt_b z
-  have d : b z <= b 0 := by
-    apply Antitone.imp
-    exact b_decreasing
-    linarith
-  linarith
+  have d : b z <= b 0 := b_decreasing (by linarith)
+  linarith [a_lt_b z]
 
 open Filter
 
@@ -230,8 +220,8 @@ The sequence $a$ converges.
 theorem a_converges : ∃ l, Tendsto a atTop (nhds l) := by
   have h2 : ¬Tendsto a atTop atTop := by
     by_contra h
-    have c : ¬BddAbove (Set.range a) := Filter.unbounded_of_tendsto_atTop h
-    have d : BddAbove (Set.range a) := a_bounded_above
+    let c := Filter.unbounded_of_tendsto_atTop h
+    let d := a_bounded_above
     contradiction
   exact Or.resolve_left (tendsto_of_monotone a_increasing) h2
 
@@ -274,18 +264,12 @@ theorem euclid_log_constant_le_b (n : ℕ) : euclid_log_constant <= b n := by
   have h : b n ∈ upperBounds (Set.range a) := by
     refine mem_upperBounds.mpr ?h
     intros x h
-    simp at h
     obtain ⟨ m, h2 ⟩ := h
     rw [<- h2]
     let z := max m n
-    have a1 : a m <= a z := by
-      apply a_increasing
-      omega
-    have a2 : b z <= b n := by
-      apply b_decreasing
-      omega
+    have a1 : a m <= a z := a_increasing (by omega)
+    have a2 : b z <= b n := b_decreasing (by omega)
     have a3 : a z <= b z := le_of_lt (a_lt_b z)
     linarith
-  let c := a_tendsto_euclid_log_constant
-  let d := isLUB_of_tendsto_atTop a_increasing c
-  exact (isLUB_le_iff d).mpr h
+  exact (isLUB_le_iff
+    (isLUB_of_tendsto_atTop a_increasing a_tendsto_euclid_log_constant)).mpr h
