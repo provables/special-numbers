@@ -135,7 +135,6 @@ lemma euclid_rel_prime_lt (m n : ℕ) (h: m < n) :
     · linarith
     · omega
 
-example : ((1:ℕ):ℝ) = ↑ 1 := by exact Nat.cast_one
 /--
 The Euclid numbers are co-prime: $\gcd(e_n, e_m) = 1$, for $n\neq m$.
 -/
