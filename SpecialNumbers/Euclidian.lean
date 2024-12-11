@@ -93,10 +93,6 @@ theorem euclid_gt_one (n : ℕ) (h : n ≥ 1) : 1 < euclid n := by
   · contradiction
   · simp [euclid_eq_prod_euclid, euclid_gt_zero]
 
-theorem zero_lt_euc_m_minus_one_half (m : ℕ) : 0 < euclid m - (2:ℝ)⁻¹ := by
-  have : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr (euclid_ge_one m)
-  linarith
-
 /--
 The Euclid numbers are strictly increasing: $e_n < e_{n+1}$, for all $n\in\N$.
 -/
