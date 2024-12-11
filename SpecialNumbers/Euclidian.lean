@@ -144,81 +144,41 @@ theorem euclid_rel_prime (m n : ℕ) (h: m ≠ n) :
 
 noncomputable def pl_euc_m (n: ℕ) : ℝ := 1/2^n * Real.log (euclid n - 1/2)
 
-theorem powers_two (m: ℕ) : 2^(m+1) * ((2:ℝ)^(m))⁻¹ = 2 := by
-  refine (mul_inv_eq_iff_eq_mul₀ ?hb).mpr ?a
-  simp
-  rw[← Real.rpow_natCast]
-  rw[← Real.rpow_natCast]
-  nth_rw 2 [← pow_one 2]
-  rw[Nat.cast_add]
-  rw[Real.rpow_add]
-  ring
-  simp
-
-theorem euc_recurrence (m : ℕ) (h: m ≥ 1) : euclid (m+1) = (euclid m)^2 - euclid m + 1 := by
-  by_cases c: m = 1
-  · simp[c]
-  · rw[euclid]
-    simp
-    omega
-
-theorem euc_recurrence_real (m : ℕ) (h: m ≥ 1) : euclid (m+1) = ((euclid m:ℝ))^2 - euclid m + 1 := by
-  rw[euclid]
-  · simp
-    rw[← Nat.cast_pow]
-    apply Nat.cast_sub
-    apply Nat.le_self_pow
-    omega
-  · intro
-    linarith
-
-lemma log_fact : Real.log (1 / 2) ≤ 1 / 2 ^ 1 * Real.log (↑2 - 1 / 2) := by
-  norm_num
-  have h1: Real.log (1/2) < 0 := by
-    refine Real.log_neg ?b0 ?b1
-    linarith
-    linarith
-  have h2: Real.log (3/2) > 0 := by
-    refine (Real.log_pos_iff ?hx).mpr ?a1
-    linarith
-    linarith
-  linarith
-
--- The pl_euc_m sequence is increasing
 theorem pl_euc_m_monoton : Monotone pl_euc_m := by
   refine monotone_nat_of_le_succ ?ha
   intro m
-  by_cases c: m = 0
-  · simp[c]
-    rw[pl_euc_m]
-    norm_num
-    rw[pl_euc_m]
-    rw[euclid]
-    exact log_fact
-
-  have h1: m ≥ 1 := by omega
-  simp[pl_euc_m]
+  simp [pl_euc_m]
   refine le_of_mul_le_mul_left ?h1 (?h2:(0:ℝ)<(2^(m+1)))
-  · simp
-    rw[← mul_assoc]
-    rw[powers_two]
-    rw[← Real.log_rpow]
-    refine (Real.log_le_log_iff ?b1 ?b2).mpr ?b3
-    · rw[Real.rpow_two]
-      apply sq_pos_iff.mpr
-      simp
-      by_contra c
-      let em := zero_lt_euc_m_minus_one_half m
-      linarith
-    · exact zero_lt_euc_m_minus_one_half (m+1)
-    · calc (euclid m - (2:ℝ)⁻¹)^(2:ℝ) = (euclid m - (2:ℝ)⁻¹)^(2:ℕ) := by exact Real.rpow_two _
-        _ = ((euclid m):ℝ)^2 - 2*((euclid m):ℝ) *2⁻¹ + (2⁻¹)^2 := by rw[sub_pow_two]
-        _ = ((euclid m):ℝ)^2 - euclid m + 1 - 3/4 := by ring
-        _ = (euclid (m+1):ℝ) - 3/4 := by rw[← euc_recurrence_real]; exact h1
-        _ ≤ (euclid (m+1):ℝ) - 2⁻¹ := by linarith
-    · exact zero_lt_euc_m_minus_one_half _
-  · refine pow_pos (by linarith) (m+1)
-
+  simp
+  rw [← mul_assoc, ← pow_sub₀ 2]
+  simp
+  rw [← Real.log_rpow]
+  refine (Real.log_le_log_iff ?hh1 ?hh2).mpr ?hh3
+  have : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr (euclid_ge_one m)
+  rw[Real.rpow_two]
+  apply sq_pos_iff.mpr
+  refine Ne.symm (ne_of_lt ?xx)
+  linarith
+  have : (1:ℝ) ≤ euclid (m+1) := Nat.one_le_cast.mpr (euclid_ge_one (m+1))
+  linarith
+  rw [Real.rpow_two]
+  cases m
+  case zero => norm_num
+  case succ m =>
+    calc
+      (((euclid (m+1)):ℝ) - 2⁻¹)^2 = (euclid (m+1))^2 - euclid (m+1) + 1 - 3/4 := by ring
+      _ = euclid (m+1+1) - ((3/4):ℝ) := by
+        simp
+        rw [← Nat.cast_pow, <- Nat.cast_sub ]
+        norm_cast
+        exact Nat.le_self_pow (by linarith) (euclid (m + 1))
+      _ <= ((euclid (m+1+1)):ℝ) - 2⁻¹ := by
+        linarith
+  have : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr (euclid_ge_one m)
+  linarith
+  linarith
+  linarith
+  simp
 
 -- The pl_euc_p sequence is decreasing
 noncomputable def pl_euc_p (n: ℕ) : ℝ := 1/2^n * Real.log (euclid n + 1/2)
