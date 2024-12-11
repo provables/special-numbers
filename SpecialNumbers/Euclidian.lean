@@ -127,7 +127,7 @@ lemma euclid_rel_prime_lt (m n : ℕ) (h: m < n) :
   by_cases c: m = 0
   · simp [c]
   · rw [Nat.gcd_rec, euclid_m_n_mod_one]
-    simp
+    · simp
     · linarith
     · omega
 
