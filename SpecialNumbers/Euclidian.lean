@@ -144,7 +144,7 @@ theorem euclid_rel_prime (m n : ℕ) (h: m ≠ n) :
 noncomputable def pl_euc_m (n: ℕ) : ℝ := 1/2^n * Real.log (euclid n - 1/2)
 
 theorem pl_euc_m_monotone : Monotone pl_euc_m := by
-  have euclid_ge_real_one (m:ℕ) : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr (euclid_ge_one m)
+  have euclid_ge_real_one (m:ℕ) : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr <| euclid_ge_one m
   refine monotone_nat_of_le_succ ?ha
   intro m
   simp [pl_euc_m]
@@ -154,7 +154,7 @@ theorem pl_euc_m_monotone : Monotone pl_euc_m := by
       pow_one, ← Real.log_rpow, Real.rpow_two]
   · refine (Real.log_le_log_iff ?hh1 ?hh2).mpr ?hh3
     · apply sq_pos_iff.mpr
-      exact Ne.symm (ne_of_lt (by linarith [euclid_ge_real_one m]))
+      exact Ne.symm <| ne_of_lt <| by linarith [euclid_ge_real_one m]
     · linarith [euclid_ge_real_one (m+1)]
     · cases m
       case zero => norm_num
