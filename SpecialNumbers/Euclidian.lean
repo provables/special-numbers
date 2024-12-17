@@ -174,28 +174,28 @@ noncomputable def pl_euc_p : ℕ -> ℝ
   | 0 => 1
   | n => 1/2^n * Real.log (euclid n + 1/2)
 
-theorem pl_euc_p_antitone : Antitone pl_euc_p := by
+theorem pl_euc_p_antitone : StrictAnti pl_euc_p := by
   have euclid_ge_real_one (m:ℕ) : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr <| euclid_ge_one m
-  refine antitone_nat_of_succ_le ?ha
+  refine strictAnti_nat_of_succ_lt ?ha
   intro m
   simp [pl_euc_p]
   split
   · simp
     rw [<-Real.log_rpow]
-    · refine (Real.log_le_iff_le_exp ?hu).mpr ?hv
+    · refine (Real.log_lt_iff_lt_exp ?hu).mpr ?hv
       · exact Real.rpow_pos_of_pos (by linarith) (2⁻¹)
       · let h := @Real.quadratic_le_exp_of_nonneg (1:ℝ) (by linarith)
         norm_num at h
-        have z : ((2:ℝ)+2⁻¹)^((2:ℝ)⁻¹) <= 5/2 := by
-          refine (Real.rpow_inv_le_iff_of_pos ?hx ?hy ?hz).mpr ?hw
+        have z : ((2:ℝ)+2⁻¹)^((2:ℝ)⁻¹) < 5/2 := by
+          refine (Real.rpow_inv_lt_iff_of_pos ?hx ?hy ?hz).mpr ?hw
           all_goals linarith
         linarith
     · linarith
-  · refine le_of_mul_le_mul_left ?h1 ((by simp):(0:ℝ)<(2^(m+1)))
+  · refine lt_of_mul_lt_mul_left ?h1 ((by simp):(0:ℝ)<=(2^(m+1)))
     simp
     rw [← mul_assoc, ← pow_sub₀ 2 (by linarith) (by linarith), Nat.add_sub_self_left m 1,
         pow_one, ← Real.log_rpow, Real.rpow_two]
-    · refine (Real.log_le_log_iff ?hh1 ?hh2).mpr ?hh3
+    · refine (Real.log_lt_log_iff ?hh1 ?hh2).mpr ?hh3
       · linarith
       · apply sq_pos_iff.mpr
         exact Ne.symm <| ne_of_lt <| by linarith [euclid_ge_real_one m]
@@ -212,16 +212,11 @@ theorem pl_euc_p_antitone : Antitone pl_euc_p := by
                 norm_num
               · exact Nat.le_self_pow (by linarith) (euclid m)
             _ = (euclid m + 2⁻¹)^2 - 2*euclid m + 5/4 := by ring
-            _ <= (euclid m + 2⁻¹)^2 := by
-              apply le_sub_iff_add_le.mp
-              apply tsub_le_tsub_left
+            _ < (euclid m + 2⁻¹)^2 := by
+              apply lt_sub_iff_add_lt.mp
+              apply sub_lt_sub_left
               linarith [euclid_ge_real_one m]
     · linarith [euclid_ge_real_one m]
-
-example : pl_euc_m 0 = -Real.log 2 := by
-  simp [pl_euc_m]
-  norm_num
-  simp
 
 /--
 The sequences $a$ and $b$ satisfy the inequality $a_n < b_n$ for all $n : ℕ$.
@@ -252,7 +247,7 @@ theorem pl_euc_m_bounded_above : BddAbove (Set.range pl_euc_m) := by
   intro y h
   obtain ⟨ z, hz ⟩ := h
   rw [<- hz]
-  have d : pl_euc_p z <= pl_euc_p 0 := pl_euc_p_antitone (by linarith)
+  have d : pl_euc_p z <= pl_euc_p 0 := StrictAnti.antitone pl_euc_p_antitone (by linarith)
   linarith [pl_euc_m_lt_pl_euc_p z]
 
 open Filter
@@ -303,23 +298,22 @@ theorem pl_euc_m_le_euclid_log_constant (n : ℕ) : pl_euc_m n <= euclid_log_con
 /--
 The sequence `b` is bounded below by `euclid_log_constant`.
 -/
-theorem euclid_log_constant_le_pl_euc_p (n : ℕ) : euclid_log_constant <= pl_euc_p n := by
-  have h : pl_euc_p n ∈ upperBounds (Set.range pl_euc_m) := by
+theorem euclid_log_constant_le_pl_euc_p (n : ℕ) : euclid_log_constant < pl_euc_p n := by
+  have h : pl_euc_p (n+1) ∈ upperBounds (Set.range pl_euc_m) := by
     refine mem_upperBounds.mpr ?h
     intros x h
     obtain ⟨ m, h2 ⟩ := h
     rw [<- h2]
-    let z := max m n
+    let z := max m (n+1)
     have a1 : pl_euc_m m <= pl_euc_m z := pl_euc_m_monotone (by omega)
-    have a2 : pl_euc_p z <= pl_euc_p n := pl_euc_p_antitone (by omega)
-    have a3 : pl_euc_m z <= pl_euc_p z := le_of_lt (pl_euc_m_lt_pl_euc_p z)
+    have a2 : pl_euc_p z <= pl_euc_p (n+1) := StrictAnti.antitone pl_euc_p_antitone (by omega)
+    have a3 : pl_euc_m z < pl_euc_p z := pl_euc_m_lt_pl_euc_p z
     linarith
-  exact (isLUB_le_iff
+  have c : euclid_log_constant <= pl_euc_p (n+1) := (isLUB_le_iff
     (isLUB_of_tendsto_atTop pl_euc_m_monotone pl_euc_m_tendsto_euclid_log_constant)).mpr h
+  have d : pl_euc_p (n+1) < pl_euc_p n := pl_euc_p_antitone (by linarith)
+  linarith
 
-/--
-A private theorem
--/
-private theorem foo2 (n : ℕ) :
+theorem foo2 (n : ℕ) :
   euclid n ≤ euclid_constant ^ (2^n) + 1/2
   ∧ euclid_constant ^ (2^n) + 1/2 < euclid n + 1 := by sorry
