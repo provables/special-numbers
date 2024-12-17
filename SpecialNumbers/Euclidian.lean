@@ -174,7 +174,7 @@ noncomputable def pl_euc_p : ℕ -> ℝ
   | 0 => 1
   | n => 1/2^n * Real.log (euclid n + 1/2)
 
-theorem pl_euc_p_monotone : Antitone pl_euc_p := by
+theorem pl_euc_p_antitone : Antitone pl_euc_p := by
   have euclid_ge_real_one (m:ℕ) : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr <| euclid_ge_one m
   refine antitone_nat_of_succ_le ?ha
   intro m
@@ -218,64 +218,61 @@ theorem pl_euc_p_monotone : Antitone pl_euc_p := by
               linarith [euclid_ge_real_one m]
     · linarith [euclid_ge_real_one m]
 
-/--
-Auxiliary sequences for proving the explicity form of the Euclidean numbers.
--/
-noncomputable def a (n : ℕ) : ℝ := (1/2^n)*Real.log (euclid n - 1/2)
-noncomputable def b (n : ℕ) : ℝ := (1/2^n)*Real.log (euclid n + 1/2)
-
-example : a 0 = -Real.log 2 := by
-  simp [a]
+example : pl_euc_m 0 = -Real.log 2 := by
+  simp [pl_euc_m]
   norm_num
   simp
 
 /--
 The sequences $a$ and $b$ satisfy the inequality $a_n < b_n$ for all $n : ℕ$.
 -/
-theorem a_lt_b (n : ℕ) : a n < b n := by
-  simp [a, b]
-  have h : (1 : ℝ) <= euclid n := by
-    norm_cast
-    exact euclid_ge_one n
-  refine (Real.log_lt_log_iff ?_ ?_).mpr ?_
-  · simp
-    exact lt_of_lt_of_le (by norm_num) h
-  · exact add_pos_of_nonneg_of_pos (by linarith) (by norm_num)
-  · exact (add_lt_add_iff_left ((euclid n) : ℝ)).mpr (by norm_num)
-
-theorem a_increasing : Monotone a := by sorry
-theorem b_decreasing : Antitone b := by sorry
+theorem pl_euc_m_lt_pl_euc_p (n : ℕ) : pl_euc_m n < pl_euc_p n := by
+  simp [pl_euc_m, pl_euc_p]
+  cases n
+  case zero =>
+    simp
+    norm_num
+    have c : Real.log (1/2) < 0 := (Real.log_neg_iff (by linarith)).mpr (by linarith)
+    linarith
+  case succ m =>
+    simp
+    have h : (1 : ℝ) <= euclid (m+1) := Nat.one_le_cast.mpr <| euclid_ge_one (m+1)
+    refine (Real.log_lt_log_iff ?_ ?_).mpr ?_
+    · simp
+      exact lt_of_lt_of_le (by norm_num) h
+    · exact add_pos_of_nonneg_of_pos (by linarith) (by norm_num)
+    · exact (add_lt_add_iff_left ((euclid (m+1)) : ℝ)).mpr (by norm_num)
 
 /--
 The sequence $a$ is bounded: there exists $M$ such that $a_n ≤ M$, for all $n$.
 -/
-theorem a_bounded_above : BddAbove (Set.range a) := by
+theorem pl_euc_m_bounded_above : BddAbove (Set.range pl_euc_m) := by
   refine bddAbove_def.mpr ?_
-  use (b 0)
+  use (pl_euc_p 0)
   intro y h
   obtain ⟨ z, hz ⟩ := h
   rw [<- hz]
-  have d : b z <= b 0 := b_decreasing (by linarith)
-  linarith [a_lt_b z]
+  have d : pl_euc_p z <= pl_euc_p 0 := pl_euc_p_antitone (by linarith)
+  linarith [pl_euc_m_lt_pl_euc_p z]
 
 open Filter
 
 /--
 The sequence $a$ converges.
 -/
-theorem a_converges : ∃ l, Tendsto a atTop (nhds l) := by
-  have h2 : ¬Tendsto a atTop atTop := by
+theorem pl_euc_m_converges : ∃ l, Tendsto pl_euc_m atTop (nhds l) := by
+  have h2 : ¬Tendsto pl_euc_m atTop atTop := by
     by_contra h
     let c := Filter.unbounded_of_tendsto_atTop h
-    let d := a_bounded_above
+    let d := pl_euc_m_bounded_above
     contradiction
-  exact Or.resolve_left (tendsto_of_monotone a_increasing) h2
+  exact Or.resolve_left (tendsto_of_monotone pl_euc_m_monotone) h2
 
 
 /--
 Logarithm of the constant E, where $e_n = \lfloor E^{2^n} \rfloor$.
 -/
-noncomputable def euclid_log_constant : ℝ := Exists.choose a_converges
+noncomputable def euclid_log_constant : ℝ := Exists.choose pl_euc_m_converges
 
 /--
 Constant E, where $e_n = \lfloor E^{2^n} \rfloor$.
@@ -293,32 +290,32 @@ theorem log_of_const_eq_log_const : Real.log euclid_constant = euclid_log_consta
 /--
 The sequence `a` converges to `euclid_log_constant`.
 -/
-theorem a_tendsto_euclid_log_constant : Tendsto a atTop (nhds euclid_log_constant) := by
+theorem pl_euc_m_tendsto_euclid_log_constant : Tendsto pl_euc_m atTop (nhds euclid_log_constant) := by
   simp [euclid_log_constant]
-  apply Exists.choose_spec a_converges
+  apply Exists.choose_spec pl_euc_m_converges
 
 /--
 The sequence `a` is bounded above by `euclid_log_constant`.
 -/
-theorem a_le_euclid_log_constant (n : ℕ) : a n <= euclid_log_constant := by
-  exact Monotone.ge_of_tendsto a_increasing a_tendsto_euclid_log_constant n
+theorem pl_euc_m_le_euclid_log_constant (n : ℕ) : pl_euc_m n <= euclid_log_constant := by
+  exact Monotone.ge_of_tendsto pl_euc_m_monotone pl_euc_m_tendsto_euclid_log_constant n
 
 /--
 The sequence `b` is bounded below by `euclid_log_constant`.
 -/
-theorem euclid_log_constant_le_b (n : ℕ) : euclid_log_constant <= b n := by
-  have h : b n ∈ upperBounds (Set.range a) := by
+theorem euclid_log_constant_le_pl_euc_p (n : ℕ) : euclid_log_constant <= pl_euc_p n := by
+  have h : pl_euc_p n ∈ upperBounds (Set.range pl_euc_m) := by
     refine mem_upperBounds.mpr ?h
     intros x h
     obtain ⟨ m, h2 ⟩ := h
     rw [<- h2]
     let z := max m n
-    have a1 : a m <= a z := a_increasing (by omega)
-    have a2 : b z <= b n := b_decreasing (by omega)
-    have a3 : a z <= b z := le_of_lt (a_lt_b z)
+    have a1 : pl_euc_m m <= pl_euc_m z := pl_euc_m_monotone (by omega)
+    have a2 : pl_euc_p z <= pl_euc_p n := pl_euc_p_antitone (by omega)
+    have a3 : pl_euc_m z <= pl_euc_p z := le_of_lt (pl_euc_m_lt_pl_euc_p z)
     linarith
   exact (isLUB_le_iff
-    (isLUB_of_tendsto_atTop a_increasing a_tendsto_euclid_log_constant)).mpr h
+    (isLUB_of_tendsto_atTop pl_euc_m_monotone pl_euc_m_tendsto_euclid_log_constant)).mpr h
 
 /--
 A private theorem
