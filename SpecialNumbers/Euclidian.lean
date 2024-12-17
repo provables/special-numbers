@@ -174,14 +174,6 @@ noncomputable def pl_euc_p : ℕ -> ℝ
   | 0 => 1
   | n => 1/2^n * Real.log (euclid n + 1/2)
 
-lemma foo3 : (2+2⁻¹)^((2:ℝ)⁻¹) <= Real.exp 1 := by
-  let h := @Real.quadratic_le_exp_of_nonneg (1:ℝ) (by linarith)
-  norm_num at h
-  have z : (2+(2:ℝ)⁻¹)^((2:ℝ)⁻¹) <=5/2 := by
-    refine (Real.rpow_inv_le_iff_of_pos ?hx ?hy ?hz).mpr ?hw
-    all_goals linarith
-  linarith
-
 theorem pl_euc_p_monotone : Antitone pl_euc_p := by
   have euclid_ge_real_one (m:ℕ) : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr <| euclid_ge_one m
   refine antitone_nat_of_succ_le ?ha
@@ -192,15 +184,13 @@ theorem pl_euc_p_monotone : Antitone pl_euc_p := by
     rw [<-Real.log_rpow]
     · refine (Real.log_le_iff_le_exp ?hu).mpr ?hv
       · exact Real.rpow_pos_of_pos (by linarith) (2⁻¹)
-      /-
-      case hv
-      euclid_ge_real_one : ∀ (m : ℕ), 1 ≤ ↑(euclid m)
-      x✝ : ℕ
-      ⊢ (2 + 2⁻¹) ^ 2⁻¹ ≤ Real.exp 1
-      -/
-      · exact foo3
+      · let h := @Real.quadratic_le_exp_of_nonneg (1:ℝ) (by linarith)
+        norm_num at h
+        have z : ((2:ℝ)+2⁻¹)^((2:ℝ)⁻¹) <= 5/2 := by
+          refine (Real.rpow_inv_le_iff_of_pos ?hx ?hy ?hz).mpr ?hw
+          all_goals linarith
+        linarith
     · linarith
-
   · refine le_of_mul_le_mul_left ?h1 ((by simp):(0:ℝ)<(2^(m+1)))
     simp
     rw [← mul_assoc, ← pow_sub₀ 2 (by linarith) (by linarith), Nat.add_sub_self_left m 1,
@@ -209,27 +199,22 @@ theorem pl_euc_p_monotone : Antitone pl_euc_p := by
       · linarith
       · apply sq_pos_iff.mpr
         exact Ne.symm <| ne_of_lt <| by linarith [euclid_ge_real_one m]
-      ·
-        by_cases c: m = 1
+      · by_cases c: m = 1
         · rw [c]
           norm_num
-        ·
-          rename_i h
+        · rename_i h
           simp at h
-          have d : 2 <= m := by omega
           calc
             ((euclid (m+1)):ℝ) + 2⁻¹ = (euclid m)^2 - euclid m +3/2 := by
               simp [euclid]
               rw [<-Nat.cast_pow, <-Nat.cast_sub]
-              simp [add_assoc]
-              norm_num
-              exact Nat.le_self_pow (by linarith) (euclid m)
-            _ = (euclid m)^2 + euclid m + 1/4 - 2*euclid m + 5/4 := by ring
+              · simp [add_assoc]
+                norm_num
+              · exact Nat.le_self_pow (by linarith) (euclid m)
             _ = (euclid m + 2⁻¹)^2 - 2*euclid m + 5/4 := by ring
             _ <= (euclid m + 2⁻¹)^2 := by
               apply le_sub_iff_add_le.mp
               apply tsub_le_tsub_left
-              refine (div_le_iff₀' (by linarith)).mp ?hb
               linarith [euclid_ge_real_one m]
     · linarith [euclid_ge_real_one m]
 
