@@ -369,6 +369,4 @@ theorem euclid_formula (n : ℕ) : euclid n = ⌊euclid_constant ^ (2^n) + 1/2�
   symm
   refine (Nat.floor_eq_iff ?h).mpr ?hb
   · linarith [pow_pos euclid_constant_pos (2^n)]
-  · constructor
-    · exact euc_le_euclid_constant n
-    · exact euclid_constant_lt_euc n
+  · exact ⟨ euc_le_euclid_constant n, euclid_constant_lt_euc n ⟩
