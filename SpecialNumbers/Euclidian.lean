@@ -265,12 +265,12 @@ theorem pl_euc_m_converges : ∃ l, Tendsto pl_euc_m atTop (nhds l) := by
 
 
 /--
-Logarithm of the constant E, where $e_n = \lfloor E^{2^n} \rfloor$.
+Logarithm of the constant E, where $e_n = \lfloor E^{2^n} + 1/2\rfloor$.
 -/
 noncomputable def euclid_log_constant : ℝ := Exists.choose pl_euc_m_converges
 
 /--
-Constant E, where $e_n = \lfloor E^{2^n} \rfloor$.
+Constant E, where $e_n = \lfloor E^{2^n} + 1/2\rfloor$.
 -/
 noncomputable def euclid_constant : ℝ := Real.exp euclid_log_constant
 
@@ -314,6 +314,61 @@ theorem euclid_log_constant_le_pl_euc_p (n : ℕ) : euclid_log_constant < pl_euc
   have d : pl_euc_p (n+1) < pl_euc_p n := pl_euc_p_antitone (by linarith)
   linarith
 
-theorem foo2 (n : ℕ) :
-  euclid n ≤ euclid_constant ^ (2^n) + 1/2
-  ∧ euclid_constant ^ (2^n) + 1/2 < euclid n + 1 := by sorry
+theorem euclid_constant_pos : 0 < euclid_constant := Real.exp_pos euclid_log_constant
+
+theorem euc_le_euclid_constant (n : ℕ) : euclid n ≤ euclid_constant ^ (2^n) + 1/2 := by
+  have euclid_ge_real_one (m:ℕ) : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr <| euclid_ge_one m
+  apply tsub_le_iff_right.mp
+  refine (Real.log_le_log_iff ?ha ?hb).mp ?h
+  · linarith [euclid_ge_real_one n]
+  · exact pow_pos euclid_constant_pos (2 ^ n)
+  · rw [Real.log_pow]
+    refine (div_le_iff₀' (by positivity)).mp ?h2
+    rw [log_of_const_eq_log_const]
+    push_cast
+    have c : pl_euc_m n <= euclid_log_constant := by
+      exact pl_euc_m_le_euclid_log_constant n
+    rw [div_eq_inv_mul]
+    simp [pl_euc_m] at *
+    exact c
+
+theorem euclid_constant_lt_euc (n : ℕ) : euclid_constant ^ (2^n) + 1/2 < euclid n + 1 := by
+  have euclid_ge_real_one (m:ℕ) : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr <| euclid_ge_one m
+  apply lt_tsub_iff_right.mp
+  rw [add_sub_assoc]
+  norm_num
+  refine (Real.log_lt_log_iff ?ha ?hb).mp ?h
+  · exact pow_pos euclid_constant_pos (2^n)
+  · linarith [euclid_ge_real_one n]
+  · norm_num
+    refine (lt_div_iff₀' (by positivity)).mp ?he
+    rw [div_eq_inv_mul]
+    simp
+    let c := euclid_log_constant_le_pl_euc_p n
+    simp [pl_euc_p] at c
+    split at c
+    · let d := euclid_log_constant_le_pl_euc_p 2
+      simp [pl_euc_p] at d
+      norm_num at *
+      have e : (1/4)*Real.log (7/2) < Real.log (3/2) := by
+        rw [<-Real.log_rpow]
+        refine (Real.log_lt_log_iff ?haa ?hbb).mpr ?hcc
+        · positivity
+        · positivity
+        · simp
+          refine (Real.lt_rpow_inv_iff_of_pos ?hhx ?hy ?hz).mp ?aa
+          · positivity
+          · positivity
+          · positivity
+          · norm_num
+        · positivity
+      linarith
+    · exact c
+
+theorem euclid_formula (n : ℕ) : euclid n = ⌊euclid_constant ^ (2^n) + 1/2⌋₊ := by
+  symm
+  refine (Nat.floor_eq_iff ?h).mpr ?hb
+  · linarith [pow_pos euclid_constant_pos (2^n)]
+  · constructor
+    · exact euc_le_euclid_constant n
+    · exact euclid_constant_lt_euc n
