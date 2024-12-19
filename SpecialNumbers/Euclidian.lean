@@ -353,15 +353,11 @@ theorem euclid_constant_lt_euc (n : ℕ) : euclid_constant ^ (2^n) + 1/2 < eucli
       have e : (1/4)*Real.log (7/2) < Real.log (3/2) := by
         rw [<-Real.log_rpow]
         refine (Real.log_lt_log_iff ?haa ?hbb).mpr ?hcc
-        · positivity
-        · positivity
+        any_goals positivity
         · simp
           refine (Real.lt_rpow_inv_iff_of_pos ?hhx ?hy ?hz).mp ?aa
-          · positivity
-          · positivity
-          · positivity
-          · norm_num
-        · positivity
+          any_goals positivity
+          norm_num
       linarith
     · exact c
 
