@@ -354,8 +354,7 @@ theorem euclid_constant_lt_euc (n : ℕ) : euclid_constant ^ (2^n) + 1/2 < eucli
         rw [<-Real.log_rpow]
         refine (Real.log_lt_log_iff ?haa ?hbb).mpr ?hcc
         any_goals positivity
-        · simp
-          refine (Real.lt_rpow_inv_iff_of_pos ?hhx ?hy ?hz).mp ?aa
+        · refine (Real.lt_rpow_inv_iff_of_pos ?hhx ?hy ?hz).mp ?aa
           any_goals positivity
           norm_num
       linarith
