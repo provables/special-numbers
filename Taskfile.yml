@@ -20,8 +20,10 @@ tasks:
       - ./**/lakefile.toml
       - exclude: ./**/.lake
     generates:
-      - docbuild/.lake/build/doc/**/*.html
+      - docbuild/.lake/build/doc/SpecialNumbers.html
+    method: checksum
     cmds:
+      - rm -rf docbuild/.lake/build/doc/SpecialNumbers*
       - cd docbuild && lake build SpecialNumbers:docs
     deps:
       - get-cache
