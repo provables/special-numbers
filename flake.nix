@@ -56,6 +56,9 @@
           bibtool
           findutils
           python
+          graphviz
+          texliveFull
+          ghostscript
         ];
       };
     }
