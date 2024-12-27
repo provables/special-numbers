@@ -36,14 +36,10 @@ theorem eulerian_of_zero_k (k : ℕ) (h : k > 0): eulerian 0 k = 0 := by
   linarith
   simp [eulerian]
 
-example (n : ℕ) (h : n > 0) (k : ℕ) (hp : k ≥ n): eulerian n k = 0 := by
-  sorry
-
-theorem eulerian_of_n_succ_n (n : ℕ) (h : n > 0) : ∀ k, k ≥ n -> eulerian n k = 0 := by
-  induction n with
+theorem eulerian_of_n_succ_n (n k : ℕ) (h : n > 0) (hp : k ≥ n) : eulerian n k = 0 := by
+  induction n generalizing k with
     | zero => contradiction
     | succ n ih =>
-        intros k jh
         rw [eulerian]
         · by_cases c : n = 0
           · rw [c]
@@ -53,7 +49,7 @@ theorem eulerian_of_n_succ_n (n : ℕ) (h : n > 0) : ∀ k, k ≥ n -> eulerian 
             · by_cases d : 1 - k = 0
               · exact Or.inl d
               · exact Or.inr <| eulerian_of_zero_k (k - 1) (by omega)
-          · simp [ih (by omega) k (by omega), ih (by omega) (k - 1) (by omega)]
+          · simp [ih k (by omega) (by omega), ih (k - 1) (by omega) (by omega)]
         · omega
 
 theorem eulerian_of_succ_n_n (n : ℕ) : eulerian (n + 1) n = 1 := by
