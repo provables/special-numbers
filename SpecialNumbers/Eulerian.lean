@@ -42,25 +42,16 @@ theorem eulerian_of_n_succ_n (n:ℕ) (h:n>0) : ∀ k, k>=n -> eulerian n k = 0 :
     | succ n ih =>
         intros k jh
         rw [eulerian]
-        by_cases c : n = 0
-        · rw [c]
-          simp
-          constructor
-          · apply eulerian_of_zero_k; linarith
-          · by_cases d : 1-k = 0
-            · exact Or.inl d
-            · apply Or.inr
-              apply eulerian_of_zero_k
-              omega
-        · have x : eulerian n k = 0 := by
-            apply ih
-            repeat omega
-          have y : eulerian n (k-1) = 0 := by
-            apply ih
-            repeat omega
-          rw [x, y]
-          omega
-        omega
+        · by_cases c : n = 0
+          · rw [c]
+            simp
+            constructor
+            · exact eulerian_of_zero_k k (by linarith)
+            · by_cases d : 1-k = 0
+              · exact Or.inl d
+              · exact Or.inr <| eulerian_of_zero_k (k-1) (by omega)
+          · simp [ih (by omega) k (by omega), ih (by omega) (k-1) (by omega)]
+        · omega
 
 theorem eulerian_of_succ_n_n (n:ℕ) : eulerian (n+1) n = 1 := by
   induction n with
