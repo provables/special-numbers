@@ -27,16 +27,16 @@ def euclid : ℕ -> ℕ
 
 -- The definition conforms to the standard one for the first few examples
 @[simp]
-theorem euclid_zero: euclid 0 = 1 := by rfl
+theorem euclid_zero : euclid 0 = 1 := by rfl
 
 @[simp]
-theorem euclid_one: euclid 1 = 2 := by rfl
+theorem euclid_one : euclid 1 = 2 := by rfl
 
 @[simp]
-theorem euclid_two: euclid 2 = 3 := by rfl
+theorem euclid_two : euclid 2 = 3 := by rfl
 
 @[simp]
-theorem euclid_three: euclid 3 = 7 := by rfl
+theorem euclid_three : euclid 3 = 7 := by rfl
 
 /--
 The Euclid numbers satisfy the recurrence:
@@ -44,7 +44,7 @@ $$
 e_{n+1} = \prod_{i=1}^n e_i + 1.
 $$
 -/
-theorem euclid_eq_prod_euclid (n: ℕ):
+theorem euclid_eq_prod_euclid (n : ℕ) :
     euclid (n+1) = ∏ x∈ Finset.Icc 1 n, euclid x + 1 := by
   induction' n with n ih
   · simp
@@ -71,7 +71,7 @@ theorem euclid_of_n_eq_prod_euclid (n : ℕ) (h : n ≥ 1) :
 /--
 Euclid numbers are positive.
 -/
-theorem euclid_gt_zero (n:ℕ) : 0 < euclid n := by
+theorem euclid_gt_zero (n : ℕ) : 0 < euclid n := by
   unfold euclid
   split
   · linarith
@@ -81,7 +81,7 @@ theorem euclid_gt_zero (n:ℕ) : 0 < euclid n := by
 /--
 Euclid numbers are $\ge 1$.
 -/
-theorem euclid_ge_one (n:ℕ) : 1 <= euclid n := by
+theorem euclid_ge_one (n : ℕ) : 1 <= euclid n := by
   simp [Nat.one_le_iff_ne_zero]
   linarith [euclid_gt_zero n]
 
@@ -96,12 +96,12 @@ theorem euclid_gt_one (n : ℕ) (h : n ≥ 1) : 1 < euclid n := by
 /--
 The Euclid numbers are strictly increasing: $e_n < e_{n+1}$, for all $n\in\N$.
 -/
-theorem euclid_increasing (n: ℕ) : euclid n < euclid (n+1) := by
-  by_cases c: n = 0
+theorem euclid_increasing (n : ℕ) : euclid n < euclid (n+1) := by
+  by_cases c : n = 0
   · simp [c, euclid]
-  · have h2: euclid n -1 ≥ 1 := Nat.le_sub_one_of_lt (euclid_gt_one n (by omega))
+  · have h2 : euclid n -1 ≥ 1 := Nat.le_sub_one_of_lt (euclid_gt_one n (by omega))
     calc
-      euclid (n+1) = (euclid n)*(euclid n) - euclid n + 1 := by simp[euclid, pow_two]
+      euclid (n+1) = (euclid n)*(euclid n) - euclid n + 1 := by simp [euclid, pow_two]
       _ = (euclid n) * (euclid n - 1) + 1 := by rw [Nat.mul_sub_one]
       _ ≥ (euclid n)*1 + 1 := Nat.add_le_add_right (Nat.mul_le_mul_left _ h2) 1
       _ > euclid n := by linarith
@@ -109,9 +109,9 @@ theorem euclid_increasing (n: ℕ) : euclid n < euclid (n+1) := by
 theorem euclid_monotone : Monotone euclid :=
   monotone_nat_of_le_succ (fun n => Nat.le_of_succ_le (euclid_increasing n))
 
-theorem euclid_m_n_mod_one (m n : ℕ) (h1: m < n) (h2: m > 0) :
+theorem euclid_m_n_mod_one (m n : ℕ) (h1 : m < n) (h2 : m > 0) :
     euclid n % euclid m = 1 := by
-  by_cases c: n=0
+  by_cases c : n=0
   · omega
   · rw [euclid_of_n_eq_prod_euclid]
     · have d : (euclid m) ∣  ∏ x ∈ Finset.Icc 1 (n-1), euclid x := by
@@ -122,9 +122,9 @@ theorem euclid_m_n_mod_one (m n : ℕ) (h1: m < n) (h2: m > 0) :
       exact Nat.mod_eq_of_lt (euclid_gt_one _ (by linarith))
     · linarith
 
-lemma euclid_rel_prime_lt (m n : ℕ) (h: m < n) :
+lemma euclid_rel_prime_lt (m n : ℕ) (h : m < n) :
     (euclid m).gcd (euclid n) = 1 := by
-  by_cases c: m = 0
+  by_cases c : m = 0
   · simp [c]
   · rw [Nat.gcd_rec, euclid_m_n_mod_one]
     · simp
@@ -134,21 +134,21 @@ lemma euclid_rel_prime_lt (m n : ℕ) (h: m < n) :
 /--
 The Euclid numbers are co-prime: $\gcd(e_n, e_m) = 1$, for $n\neq m$.
 -/
-theorem euclid_rel_prime (m n : ℕ) (h: m ≠ n) :
+theorem euclid_rel_prime (m n : ℕ) (h : m ≠ n) :
     (euclid m).gcd (euclid n) = 1 := by
   by_cases c : m < n
   · exact euclid_rel_prime_lt m n c
   · rw [Nat.gcd_comm]
     exact euclid_rel_prime_lt n m (by omega)
 
-noncomputable def pl_euc_m (n: ℕ) : ℝ := 1/2^n * Real.log (euclid n - 1/2)
+noncomputable def pl_euc_m (n : ℕ) : ℝ := 1/2^n * Real.log (euclid n - 1/2)
 
 theorem pl_euc_m_monotone : Monotone pl_euc_m := by
-  have euclid_ge_real_one (m:ℕ) : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr <| euclid_ge_one m
+  have euclid_ge_real_one (m : ℕ) : (1 : ℝ) ≤ euclid m := Nat.one_le_cast.mpr <| euclid_ge_one m
   refine monotone_nat_of_le_succ ?ha
   intro m
   simp [pl_euc_m]
-  refine le_of_mul_le_mul_left ?h1 ((by simp):(0:ℝ)<(2^(m+1)))
+  refine le_of_mul_le_mul_left ?h1 ((by simp) : (0 : ℝ)<(2^(m+1)))
   simp
   rw [← mul_assoc, ← pow_sub₀ 2 (by linarith) (by linarith), Nat.add_sub_self_left m 1,
       pow_one, ← Real.log_rpow, Real.rpow_two]
@@ -160,13 +160,13 @@ theorem pl_euc_m_monotone : Monotone pl_euc_m := by
       case zero => norm_num
       case succ m =>
         calc
-          (((euclid (m+1)):ℝ) - 2⁻¹)^2 = (euclid (m+1))^2 - euclid (m+1) + 1 - 3/4 := by ring
-          _ = ((euclid (m+1+1)):ℝ) - 3/4 := by
+          (((euclid (m+1)) : ℝ) - 2⁻¹)^2 = (euclid (m+1))^2 - euclid (m+1) + 1 - 3/4 := by ring
+          _ = ((euclid (m+1+1)) : ℝ) - 3/4 := by
             simp
             rw [← Nat.cast_pow, <- Nat.cast_sub ]
             norm_cast
             exact Nat.le_self_pow (by linarith) (euclid (m + 1))
-          _ <= ((euclid (m+1+1)):ℝ) - 2⁻¹ := by linarith
+          _ <= ((euclid (m+1+1)) : ℝ) - 2⁻¹ := by linarith
   · linarith [euclid_ge_real_one m]
 
 -- The pl_euc_p sequence is decreasing
@@ -175,23 +175,23 @@ noncomputable def pl_euc_p : ℕ -> ℝ
   | n => 1/2^n * Real.log (euclid n + 1/2)
 
 theorem pl_euc_p_antitone : StrictAnti pl_euc_p := by
-  have euclid_ge_real_one (m:ℕ) : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr <| euclid_ge_one m
+  have euclid_ge_real_one (m : ℕ) : (1 : ℝ) ≤ euclid m := Nat.one_le_cast.mpr <| euclid_ge_one m
   refine strictAnti_nat_of_succ_lt ?ha
   intro m
   simp [pl_euc_p]
   split
   · simp
-    rw [<-Real.log_rpow]
+    rw [<- Real.log_rpow]
     · refine (Real.log_lt_iff_lt_exp ?hu).mpr ?hv
       · exact Real.rpow_pos_of_pos (by linarith) (2⁻¹)
-      · let h := @Real.quadratic_le_exp_of_nonneg (1:ℝ) (by linarith)
+      · let h := @Real.quadratic_le_exp_of_nonneg (1 : ℝ) (by linarith)
         norm_num at h
-        have z : ((2:ℝ)+2⁻¹)^((2:ℝ)⁻¹) < 5/2 := by
+        have z : ((2 : ℝ)+2⁻¹)^((2 : ℝ)⁻¹) < 5/2 := by
           refine (Real.rpow_inv_lt_iff_of_pos ?hx ?hy ?hz).mpr ?hw
           all_goals linarith
         linarith
     · linarith
-  · refine lt_of_mul_lt_mul_left ?h1 ((by simp):(0:ℝ)<=(2^(m+1)))
+  · refine lt_of_mul_lt_mul_left ?h1 ((by simp) : (0 : ℝ)<=(2^(m+1)))
     simp
     rw [← mul_assoc, ← pow_sub₀ 2 (by linarith) (by linarith), Nat.add_sub_self_left m 1,
         pow_one, ← Real.log_rpow, Real.rpow_two]
@@ -199,15 +199,15 @@ theorem pl_euc_p_antitone : StrictAnti pl_euc_p := by
       · linarith
       · apply sq_pos_iff.mpr
         exact Ne.symm <| ne_of_lt <| by linarith [euclid_ge_real_one m]
-      · by_cases c: m = 1
+      · by_cases c : m = 1
         · rw [c]
           norm_num
         · rename_i h
           simp at h
           calc
-            ((euclid (m+1)):ℝ) + 2⁻¹ = (euclid m)^2 - euclid m +3/2 := by
+            ((euclid (m+1)) : ℝ) + 2⁻¹ = (euclid m)^2 - euclid m +3/2 := by
               simp [euclid]
-              rw [<-Nat.cast_pow, <-Nat.cast_sub]
+              rw [<- Nat.cast_pow, <- Nat.cast_sub]
               · simp [add_assoc]
                 norm_num
               · exact Nat.le_self_pow (by linarith) (euclid m)
@@ -333,7 +333,7 @@ theorem euc_le_euclid_constant (n : ℕ) : euclid n ≤ euclid_constant ^ (2^n) 
     exact c
 
 theorem euclid_constant_lt_euc (n : ℕ) : euclid_constant ^ (2^n) + 1/2 < euclid n + 1 := by
-  have euclid_ge_real_one (m:ℕ) : (1:ℝ) ≤ euclid m := Nat.one_le_cast.mpr <| euclid_ge_one m
+  have euclid_ge_real_one (m : ℕ) : (1 : ℝ) ≤ euclid m := Nat.one_le_cast.mpr <| euclid_ge_one m
   apply lt_tsub_iff_right.mp
   rw [add_sub_assoc]
   norm_num
@@ -351,7 +351,7 @@ theorem euclid_constant_lt_euc (n : ℕ) : euclid_constant ^ (2^n) + 1/2 < eucli
       simp [pl_euc_p] at d
       norm_num at *
       have e : (1/4)*Real.log (7/2) < Real.log (3/2) := by
-        rw [<-Real.log_rpow]
+        rw [<- Real.log_rpow]
         refine (Real.log_lt_log_iff ?haa ?hbb).mpr ?hcc
         any_goals positivity
         · refine (Real.lt_rpow_inv_iff_of_pos ?hhx ?hy ?hz).mp ?aa
