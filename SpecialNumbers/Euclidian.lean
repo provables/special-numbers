@@ -20,7 +20,7 @@ This file introduces the Euclid numbers as defined in [knuth1989concrete].
 Definition by a simple recurrence. The more explicit recurrence is proved in
 Theorem `euclid_eq_prod_euclid`.
 -/
-def euclid : ℕ -> ℕ
+def euclid : ℕ → ℕ
   | 0 => 1
   | 1 => 2
   | n + 1 => (euclid n) ^ 2 - (euclid n) + 1
@@ -81,7 +81,7 @@ theorem euclid_gt_zero (n : ℕ) : 0 < euclid n := by
 /--
 Euclid numbers are $\ge 1$.
 -/
-theorem euclid_ge_one (n : ℕ) : 1 <= euclid n := by
+theorem euclid_ge_one (n : ℕ) : 1 ≤ euclid n := by
   simp [Nat.one_le_iff_ne_zero]
   linarith [euclid_gt_zero n]
 
@@ -166,11 +166,11 @@ theorem pl_euc_m_monotone : Monotone pl_euc_m := by
             rw [← Nat.cast_pow, <- Nat.cast_sub]
             norm_cast
             exact Nat.le_self_pow (by linarith) (euclid (m + 1))
-          _ <= ((euclid (m + 1 + 1)) : ℝ) - 2⁻¹ := by linarith
+          _ ≤ ((euclid (m + 1 + 1)) : ℝ) - 2⁻¹ := by linarith
   · linarith [euclid_ge_real_one m]
 
 -- The pl_euc_p sequence is decreasing
-noncomputable def pl_euc_p : ℕ -> ℝ
+noncomputable def pl_euc_p : ℕ → ℝ
   | 0 => 1
   | n => 1 / 2 ^ n * Real.log (euclid n + 1 / 2)
 
@@ -231,7 +231,7 @@ theorem pl_euc_m_lt_pl_euc_p (n : ℕ) : pl_euc_m n < pl_euc_p n := by
     linarith
   case succ m =>
     simp
-    have h : (1 : ℝ) <= euclid (m + 1) := Nat.one_le_cast.mpr <| euclid_ge_one (m + 1)
+    have h : (1 : ℝ) ≤ euclid (m + 1) := Nat.one_le_cast.mpr <| euclid_ge_one (m + 1)
     refine (Real.log_lt_log_iff ?_ ?_).mpr ?_
     · simp
       exact lt_of_lt_of_le (by norm_num) h
@@ -247,7 +247,7 @@ theorem pl_euc_m_bounded_above : BddAbove (Set.range pl_euc_m) := by
   intro y h
   obtain ⟨ z, hz ⟩ := h
   rw [<- hz]
-  have d : pl_euc_p z <= pl_euc_p 0 := StrictAnti.antitone pl_euc_p_antitone (by linarith)
+  have d : pl_euc_p z ≤ pl_euc_p 0 := StrictAnti.antitone pl_euc_p_antitone (by linarith)
   linarith [pl_euc_m_lt_pl_euc_p z]
 
 open Filter
@@ -292,7 +292,7 @@ theorem pl_euc_m_tendsto_euclid_log_constant : Tendsto pl_euc_m atTop (nhds eucl
 /--
 The sequence `a` is bounded above by `euclid_log_constant`.
 -/
-theorem pl_euc_m_le_euclid_log_constant (n : ℕ) : pl_euc_m n <= euclid_log_constant := by
+theorem pl_euc_m_le_euclid_log_constant (n : ℕ) : pl_euc_m n ≤ euclid_log_constant := by
   exact Monotone.ge_of_tendsto pl_euc_m_monotone pl_euc_m_tendsto_euclid_log_constant n
 
 /--
@@ -305,11 +305,11 @@ theorem euclid_log_constant_le_pl_euc_p (n : ℕ) : euclid_log_constant < pl_euc
     obtain ⟨ m, h2 ⟩ := h
     rw [<- h2]
     let z := max m (n + 1)
-    have a1 : pl_euc_m m <= pl_euc_m z := pl_euc_m_monotone (by omega)
-    have a2 : pl_euc_p z <= pl_euc_p (n + 1) := StrictAnti.antitone pl_euc_p_antitone (by omega)
+    have a1 : pl_euc_m m ≤ pl_euc_m z := pl_euc_m_monotone (by omega)
+    have a2 : pl_euc_p z ≤ pl_euc_p (n + 1) := StrictAnti.antitone pl_euc_p_antitone (by omega)
     have a3 : pl_euc_m z < pl_euc_p z := pl_euc_m_lt_pl_euc_p z
     linarith
-  have c : euclid_log_constant <= pl_euc_p (n + 1) := (isLUB_le_iff
+  have c : euclid_log_constant ≤ pl_euc_p (n + 1) := (isLUB_le_iff
     (isLUB_of_tendsto_atTop pl_euc_m_monotone pl_euc_m_tendsto_euclid_log_constant)).mpr h
   have d : pl_euc_p (n + 1) < pl_euc_p n := pl_euc_p_antitone (by linarith)
   linarith
@@ -326,7 +326,7 @@ theorem euc_le_euclid_constant (n : ℕ) : euclid n ≤ euclid_constant ^ (2 ^ n
     refine (div_le_iff₀' (by positivity)).mp ?h2
     rw [log_of_const_eq_log_const]
     push_cast
-    have c : pl_euc_m n <= euclid_log_constant := by
+    have c : pl_euc_m n ≤ euclid_log_constant := by
       exact pl_euc_m_le_euclid_log_constant n
     rw [div_eq_inv_mul]
     simp [pl_euc_m] at *
