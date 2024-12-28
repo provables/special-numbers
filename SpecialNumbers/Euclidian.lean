@@ -225,9 +225,8 @@ theorem pl_euc_m_lt_pl_euc_p {n : ℕ} : pl_euc_m n < pl_euc_p n := by
   simp [pl_euc_m, pl_euc_p]
   cases n
   case zero =>
-    simp
     norm_num
-    have c : Real.log (1 / 2) < 0 := (Real.log_neg_iff (by linarith)).mpr (by linarith)
+    have c : Real.log (1 / 2) < 0 := (Real.log_neg_iff <| by linarith).mpr <| by linarith
     linarith
   case succ m =>
     simp
@@ -243,7 +242,7 @@ The sequence $a$ is bounded: there exists $M$ such that $a_n ≤ M$, for all $n$
 -/
 theorem pl_euc_m_bounded_above : BddAbove (Set.range pl_euc_m) := by
   refine bddAbove_def.mpr ?_
-  use (pl_euc_p 0)
+  use pl_euc_p 0
   intro y h
   obtain ⟨ z, hz ⟩ := h
   rw [<- hz]
@@ -258,7 +257,7 @@ The sequence $a$ converges.
 theorem pl_euc_m_converges : ∃ l, Tendsto pl_euc_m atTop (nhds l) := by
   have h2 : ¬Tendsto pl_euc_m atTop atTop := by
     by_contra h
-    let c := Filter.unbounded_of_tendsto_atTop h
+    let c := unbounded_of_tendsto_atTop h
     let d := pl_euc_m_bounded_above
     contradiction
   exact Or.resolve_left (tendsto_of_monotone pl_euc_m_monotone) h2
