@@ -10,13 +10,15 @@ This file introduces the Euclid numbers as defined in [knuth1989concrete].
 
 ## Main results
 
-- Recurrence with a product of euclid numbers.
-- Co-primality of euclid numbers.
+- Recurrence with a product of Euclid numbers.
+- Co-primality of Euclid numbers.
 - Explicit formula.
 
 -/
 
 /--
+The sequence of Euclid numbers $(e_n)_{n\ge 0}$.
+
 Definition by a simple recurrence. The more explicit recurrence is proved in
 Theorem `euclid_eq_prod_euclid`.
 -/
@@ -94,7 +96,7 @@ theorem euclid_gt_one {n : ℕ} (h : n ≥ 1) : 1 < euclid n := by
   · simp [euclid_eq_prod_euclid, euclid_gt_zero]
 
 /--
-The Euclid numbers are strictly increasing: $e_n < e_{n+1}$, for all $n\in\N$.
+The Euclid numbers are strictly increasing: $e_n < e_{n+1}$, for all $n\in\mathbb{N}$.
 -/
 theorem euclid_increasing {n : ℕ} : euclid n < euclid (n + 1) := by
   by_cases c : n = 0
@@ -106,9 +108,15 @@ theorem euclid_increasing {n : ℕ} : euclid n < euclid (n + 1) := by
       _ ≥ (euclid n) * 1 + 1 := Nat.add_le_add_right (Nat.mul_le_mul_left _ h2) 1
       _ > euclid n := by linarith
 
+/--
+Euclid numbers form a `Monotone` sequence.
+-/
 theorem euclid_monotone : Monotone euclid :=
   monotone_nat_of_le_succ (fun _ => Nat.le_of_succ_le euclid_increasing)
 
+/--
+$e_n \equiv 1\ (\mathrm{mod}~e_m)$, when $0 < m < n$.
+-/
 theorem euclid_m_n_mod_one {m n : ℕ} (h1 : m < n) (h2 : 0 < m) :
     euclid n % euclid m = 1 := by
   by_cases c : n=0
@@ -122,7 +130,7 @@ theorem euclid_m_n_mod_one {m n : ℕ} (h1 : m < n) (h2 : 0 < m) :
       exact Nat.mod_eq_of_lt (euclid_gt_one (by linarith))
     · linarith
 
-lemma euclid_rel_prime_lt {m n : ℕ} (h : m < n) :
+private lemma euclid_rel_prime_lt {m n : ℕ} (h : m < n) :
     (euclid m).gcd (euclid n) = 1 := by
   by_cases c : m = 0
   · simp [c]
@@ -141,6 +149,10 @@ theorem euclid_rel_prime {m n : ℕ} (h : m ≠ n) :
   · rw [Nat.gcd_comm]
     exact euclid_rel_prime_lt (by omega)
 
+/--
+The constant in the explicit formula for the Euclid numbers comes from
+the limit of the sequence $\frac{1}{2^n}\log(e_n - \frac{1}{2})$.
+-/
 noncomputable def pl_euc_m (n : ℕ) : ℝ := 1 / 2 ^ n * Real.log (euclid n - 1 / 2)
 
 theorem pl_euc_m_monotone : Monotone pl_euc_m := by
@@ -169,12 +181,11 @@ theorem pl_euc_m_monotone : Monotone pl_euc_m := by
           _ ≤ ((euclid (m + 1 + 1)) : ℝ) - 2⁻¹ := by linarith
   · linarith [euclid_ge_real_one m]
 
--- The pl_euc_p sequence is decreasing
-noncomputable def pl_euc_p : ℕ → ℝ
+private noncomputable def pl_euc_p : ℕ → ℝ
   | 0 => 1
   | n => 1 / 2 ^ n * Real.log (euclid n + 1 / 2)
 
-theorem pl_euc_p_antitone : StrictAnti pl_euc_p := by
+private theorem pl_euc_p_antitone : StrictAnti pl_euc_p := by
   have euclid_ge_real_one (m : ℕ) : (1 : ℝ) ≤ euclid m := Nat.one_le_cast.mpr euclid_ge_one
   refine strictAnti_nat_of_succ_lt ?ha
   intro m
@@ -218,10 +229,7 @@ theorem pl_euc_p_antitone : StrictAnti pl_euc_p := by
               linarith [euclid_ge_real_one m]
     · linarith [euclid_ge_real_one m]
 
-/--
-The sequences $a$ and $b$ satisfy the inequality $a_n < b_n$ for all $n : ℕ$.
--/
-theorem pl_euc_m_lt_pl_euc_p {n : ℕ} : pl_euc_m n < pl_euc_p n := by
+private theorem pl_euc_m_lt_pl_euc_p {n : ℕ} : pl_euc_m n < pl_euc_p n := by
   simp [pl_euc_m, pl_euc_p]
   cases n
   case zero =>
@@ -237,10 +245,7 @@ theorem pl_euc_m_lt_pl_euc_p {n : ℕ} : pl_euc_m n < pl_euc_p n := by
     · exact add_pos_of_nonneg_of_pos (by linarith) (by norm_num)
     · exact (add_lt_add_iff_left ((euclid (m + 1)) : ℝ)).mpr (by norm_num)
 
-/--
-The sequence $a$ is bounded: there exists $M$ such that $a_n ≤ M$, for all $n$.
--/
-theorem pl_euc_m_bounded_above : BddAbove (Set.range pl_euc_m) := by
+private theorem pl_euc_m_bounded_above : BddAbove (Set.range pl_euc_m) := by
   refine bddAbove_def.mpr ?_
   use pl_euc_p 0
   intro y h
@@ -252,7 +257,8 @@ theorem pl_euc_m_bounded_above : BddAbove (Set.range pl_euc_m) := by
 open Filter
 
 /--
-The sequence $a$ converges.
+The sequence `pl_euc_m` converges to $\log E$, where $E$ is the contant in the
+explicit `euclid_formula`.
 -/
 theorem pl_euc_m_converges : ∃ l, Tendsto pl_euc_m atTop (nhds l) := by
   have h2 : ¬Tendsto pl_euc_m atTop atTop := by
@@ -264,12 +270,13 @@ theorem pl_euc_m_converges : ∃ l, Tendsto pl_euc_m atTop (nhds l) := by
 
 
 /--
-Logarithm of the constant E, where $e_n = \lfloor E^{2^n} + 1/2\rfloor$.
+The constant $\log E$ in the explicit formula for the Euclid numbers
+`euclid_formula`.
 -/
 noncomputable def euclid_log_constant : ℝ := Exists.choose pl_euc_m_converges
 
 /--
-Constant E, where $e_n = \lfloor E^{2^n} + 1/2\rfloor$.
+Constant $E$ in the explicit `euclid_formula`.
 -/
 noncomputable def euclid_constant : ℝ := Real.exp euclid_log_constant
 
@@ -281,23 +288,21 @@ theorem exp_of_log_const_eq_const : Real.exp euclid_log_constant = euclid_consta
 theorem log_of_const_eq_log_const : Real.log euclid_constant = euclid_log_constant := by
   simp [euclid_log_constant, euclid_constant]
 
-/--
-The sequence `a` converges to `euclid_log_constant`.
--/
 theorem pl_euc_m_tendsto_euclid_log_constant : Tendsto pl_euc_m atTop (nhds euclid_log_constant) := by
   simp [euclid_log_constant]
   apply Exists.choose_spec pl_euc_m_converges
 
 /--
-The sequence `a` is bounded above by `euclid_log_constant`.
+The sequence `pl_euc_m` is bounded above by `euclid_log_constant`:
+$$
+\frac{1}{2^n}\log\left(e_n - \frac{1}{2}\right) \le \log E
+$$
+for all $n\in\mathbb{N}$.
 -/
 theorem pl_euc_m_le_euclid_log_constant {n : ℕ} : pl_euc_m n ≤ euclid_log_constant := by
   exact Monotone.ge_of_tendsto pl_euc_m_monotone pl_euc_m_tendsto_euclid_log_constant n
 
-/--
-The sequence `b` is bounded below by `euclid_log_constant`.
--/
-theorem euclid_log_constant_le_pl_euc_p {n : ℕ} : euclid_log_constant < pl_euc_p n := by
+private theorem euclid_log_constant_le_pl_euc_p {n : ℕ} : euclid_log_constant < pl_euc_p n := by
   have h : pl_euc_p (n + 1) ∈ upperBounds (Set.range pl_euc_m) := by
     refine mem_upperBounds.mpr ?h
     intros x h
@@ -313,8 +318,14 @@ theorem euclid_log_constant_le_pl_euc_p {n : ℕ} : euclid_log_constant < pl_euc
   have d : pl_euc_p (n + 1) < pl_euc_p n := pl_euc_p_antitone (by linarith)
   linarith
 
+/--
+$0 < E$.
+-/
 theorem euclid_constant_pos : 0 < euclid_constant := Real.exp_pos euclid_log_constant
 
+/--
+$e_n \le E^{2^n} + \frac{1}{2}$ for all $n\in\mathbb{N}$.
+-/
 theorem euc_le_euclid_constant {n : ℕ} : euclid n ≤ euclid_constant ^ (2 ^ n) + 1 / 2 := by
   have euclid_ge_real_one (m : ℕ) : (1 : ℝ) ≤ euclid m := Nat.one_le_cast.mpr euclid_ge_one
   apply tsub_le_iff_right.mp
@@ -331,6 +342,9 @@ theorem euc_le_euclid_constant {n : ℕ} : euclid n ≤ euclid_constant ^ (2 ^ n
     simp [pl_euc_m] at *
     exact c
 
+/--
+$E^{2^n} + \frac{1}{2} < e_n + 1$ for all $n\in\mathbb{N}$.
+-/
 theorem euclid_constant_lt_euc {n : ℕ} : euclid_constant ^ (2 ^ n) + 1 / 2 < euclid n + 1 := by
   have euclid_ge_real_one (m : ℕ) : (1 : ℝ) ≤ euclid m := Nat.one_le_cast.mpr euclid_ge_one
   apply lt_tsub_iff_right.mp
@@ -359,6 +373,9 @@ theorem euclid_constant_lt_euc {n : ℕ} : euclid_constant ^ (2 ^ n) + 1 / 2 < e
       linarith
     · exact c
 
+/--
+$e_n = \lfloor E^{2^n} + \frac{1}{2}\rfloor$ for all $n\in\mathbb{N}$.
+-/
 theorem euclid_formula {n : ℕ} : euclid n = ⌊euclid_constant ^ (2 ^ n) + 1 / 2⌋₊ := by
   symm
   refine (Nat.floor_eq_iff ?h).mpr ?hb
