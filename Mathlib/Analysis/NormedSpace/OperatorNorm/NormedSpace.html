@@ -1,0 +1,917 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.NormedSpace.OperatorNorm.NormedSpace</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.NormedSpace.OperatorNorm.NormedSpace";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">NormedSpace</span>.<span class="name">OperatorNorm</span>.<span class="name">NormedSpace</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Analysis/Normed/Module/Span.html">Mathlib.Analysis.Normed.Module.Span</a></li><li><a href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/Bilinear.html">Mathlib.Analysis.NormedSpace.OperatorNorm.Bilinear</a></li><li><a href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NNNorm.html">Mathlib.Analysis.NormedSpace.OperatorNorm.NNNorm</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.NormedSpace.OperatorNorm.NormedSpace" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#LinearMap.bound_of_shell"><span class="name">LinearMap</span>.<span class="name">bound_of_shell</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.bound_of_ball_bound"><span class="name">LinearMap</span>.<span class="name">bound_of_ball_bound</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.antilipschitz_of_comap_nhds_le"><span class="name">LinearMap</span>.<span class="name">antilipschitz_of_comap_nhds_le</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.opNorm_zero_iff"><span class="name">ContinuousLinearMap</span>.<span class="name">opNorm_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.op_norm_zero_iff"><span class="name">ContinuousLinearMap</span>.<span class="name">op_norm_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.norm_id"><span class="name">ContinuousLinearMap</span>.<span class="name">norm_id</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.nnnorm_id"><span class="name">ContinuousLinearMap</span>.<span class="name">nnnorm_id</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.normOneClass"><span class="name">ContinuousLinearMap</span>.<span class="name">normOneClass</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.toNormedAddCommGroup"><span class="name">ContinuousLinearMap</span>.<span class="name">toNormedAddCommGroup</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.toNormedRing"><span class="name">ContinuousLinearMap</span>.<span class="name">toNormedRing</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.homothety_norm"><span class="name">ContinuousLinearMap</span>.<span class="name">homothety_norm</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.antilipschitz_of_isEmbedding"><span class="name">ContinuousLinearMap</span>.<span class="name">antilipschitz_of_isEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.antilipschitz_of_embedding"><span class="name">ContinuousLinearMap</span>.<span class="name">antilipschitz_of_embedding</span></a></div><div class="nav_link"><a class="break_within" href="#LinearIsometry.norm_toContinuousLinearMap"><span class="name">LinearIsometry</span>.<span class="name">norm_toContinuousLinearMap</span></a></div><div class="nav_link"><a class="break_within" href="#LinearIsometry.norm_toContinuousLinearMap_comp"><span class="name">LinearIsometry</span>.<span class="name">norm_toContinuousLinearMap_comp</span></a></div><div class="nav_link"><a class="break_within" href="#LinearIsometry.postcomp"><span class="name">LinearIsometry</span>.<span class="name">postcomp</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.opNorm_comp_linearIsometryEquiv"><span class="name">ContinuousLinearMap</span>.<span class="name">opNorm_comp_linearIsometryEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.op_norm_comp_linearIsometryEquiv"><span class="name">ContinuousLinearMap</span>.<span class="name">op_norm_comp_linearIsometryEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.norm_smulRightL"><span class="name">ContinuousLinearMap</span>.<span class="name">norm_smulRightL</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.norm_smulRightL_le"><span class="name">ContinuousLinearMap</span>.<span class="name">norm_smulRightL_le</span></a></div><div class="nav_link"><a class="break_within" href="#Submodule.norm_subtypeL"><span class="name">Submodule</span>.<span class="name">norm_subtypeL</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearEquiv.antilipschitz"><span class="name">ContinuousLinearEquiv</span>.<span class="name">antilipschitz</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearEquiv.one_le_norm_mul_norm_symm"><span class="name">ContinuousLinearEquiv</span>.<span class="name">one_le_norm_mul_norm_symm</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearEquiv.norm_pos"><span class="name">ContinuousLinearEquiv</span>.<span class="name">norm_pos</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearEquiv.norm_symm_pos"><span class="name">ContinuousLinearEquiv</span>.<span class="name">norm_symm_pos</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearEquiv.nnnorm_symm_pos"><span class="name">ContinuousLinearEquiv</span>.<span class="name">nnnorm_symm_pos</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearEquiv.subsingleton_or_norm_symm_pos"><span class="name">ContinuousLinearEquiv</span>.<span class="name">subsingleton_or_norm_symm_pos</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearEquiv.subsingleton_or_nnnorm_symm_pos"><span class="name">ContinuousLinearEquiv</span>.<span class="name">subsingleton_or_nnnorm_symm_pos</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearEquiv.coord_norm"><span class="name">ContinuousLinearEquiv</span>.<span class="name">coord_norm</span></a></div><div class="nav_link"><a class="break_within" href="#IsCoercive"><span class="name">IsCoercive</span></a></div><div class="nav_link"><a class="break_within" href="#NormedSpace.equicontinuous_TFAE"><span class="name">NormedSpace</span>.<span class="name">equicontinuous_TFAE</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Operator-norm-for-maps-on-normed-spaces">Operator norm for maps on normed spaces <a class="hover-link" href="#Operator-norm-for-maps-on-normed-spaces">#</a></h1><p>This file contains statements about operator norm for which it really matters that the
+underlying space has a norm (rather than just a seminorm).</p></div><div class="decl" id="LinearMap.bound_of_shell"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L41-L45">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#LinearMap.bound_of_shell"><span class="name">LinearMap</span>.<span class="name">bound_of_shell</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε C : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ε_pos : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">ε</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">c</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">c</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">x</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span> → <span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">x</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">ε</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">C</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">x</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">C</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">x</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span></div></div></div></div><div class="decl" id="LinearMap.bound_of_ball_bound"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L47-L62">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#LinearMap.bound_of_ball_bound"><span class="name">LinearMap</span>.<span class="name">bound_of_ball_bound</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Fₗ : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">Fₗ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">Fₗ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(r_pos : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">Fₗ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ <span class="fn">z</span> ∈ <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Pseudo/Defs.html#Metric.ball">Metric.ball</a> <span class="fn">0</span> <span class="fn">r</span></span>, <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">C</span> : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn">∀ (<span class="fn">z</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">C</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">z</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span></span></span></div></div><p><code>LinearMap.bound_of_ball_bound'</code> is a version of this lemma over a field satisfying <code>RCLike</code>
+that produces a concrete bound.</p></div></div><div class="decl" id="LinearMap.antilipschitz_of_comap_nhds_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L64-L84">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#LinearMap.antilipschitz_of_comap_nhds_le"><span class="name">LinearMap</span>.<span class="name">antilipschitz_of_comap_nhds_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.comap">Filter.comap</a> <span class="fn">(⇑<span class="fn">f</span>)</span> <span class="fn">(<a href="../../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">K</span> : <a href="../../../.././Mathlib/Data/NNReal/Defs.html#NNReal">NNReal</a>), <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Antilipschitz.html#AntilipschitzWith">AntilipschitzWith</a> <span class="fn">K</span> <span class="fn">⇑<span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="ContinuousLinearMap.opNorm_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L94-L103">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.opNorm_zero_iff"><span class="name">ContinuousLinearMap</span>.<span class="name">opNorm_zero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div><p>An operator is zero iff its norm vanishes.</p></div></div><div class="decl" id="ContinuousLinearMap.op_norm_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L105-L105">source</a></div><div class="attributes">@[deprecated ContinuousLinearMap.opNorm_zero_iff]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.op_norm_zero_iff"><span class="name">ContinuousLinearMap</span>.<span class="name">op_norm_zero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.opNorm_zero_iff">ContinuousLinearMap.opNorm_zero_iff</a></code>.</p><hr></hr><p>An operator is zero iff its norm vanishes.</p></div></div><div class="decl" id="ContinuousLinearMap.norm_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L107-L112">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.norm_id"><span class="name">ContinuousLinearMap</span>.<span class="name">norm_id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap.id">ContinuousLinearMap.id</a> <span class="fn">𝕜</span> <span class="fn">E</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div><p>If a normed space is non-trivial, then the norm of the identity equals <code>1</code>.</p></div></div><div class="decl" id="ContinuousLinearMap.nnnorm_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L114-L115">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.nnnorm_id"><span class="name">ContinuousLinearMap</span>.<span class="name">nnnorm_id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap.id">ContinuousLinearMap.id</a> <span class="fn">𝕜</span> <span class="fn">E</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="ContinuousLinearMap.normOneClass"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L117-L118">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.normOneClass"><span class="name">ContinuousLinearMap</span>.<span class="name">normOneClass</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormOneClass">NormOneClass</a> <span class="fn">(<span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">E</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="ContinuousLinearMap.toNormedAddCommGroup"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L120-L123">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.toNormedAddCommGroup"><span class="name">ContinuousLinearMap</span>.<span class="name">toNormedAddCommGroup</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">(<span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span>)</span></span></div></div><p>Continuous linear maps themselves form a normed space with respect to
+the operator norm.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">ContinuousLinearMap.toNormedAddCommGroup</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup.ofSeparation">NormedAddCommGroup.ofSeparation</a> <span class="fn">⋯</span></span></span></li></ul></details></div></div><div class="decl" id="ContinuousLinearMap.toNormedRing"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L125-L127">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.toNormedRing"><span class="name">ContinuousLinearMap</span>.<span class="name">toNormedRing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedRing">NormedRing</a> <span class="fn">(<span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">E</span>)</span></span></div></div><p>Continuous linear maps form a normed ring with respect to the operator norm.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">ContinuousLinearMap.toNormedRing</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedRing.mk">NormedRing.mk</a> <span class="fn">⋯</span> <span class="fn">⋯</span></span></span></li></ul></details></div></div><div class="decl" id="ContinuousLinearMap.homothety_norm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L131-L137">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.homothety_norm"><span class="name">ContinuousLinearMap</span>.<span class="name">homothety_norm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">x</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="ContinuousLinearMap.antilipschitz_of_isEmbedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L141-L145">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.antilipschitz_of_isEmbedding"><span class="name">ContinuousLinearMap</span>.<span class="name">antilipschitz_of_isEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Fₗ : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">Fₗ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">Fₗ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">Fₗ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">K</span> : <a href="../../../.././Mathlib/Data/NNReal/Defs.html#NNReal">NNReal</a>), <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Antilipschitz.html#AntilipschitzWith">AntilipschitzWith</a> <span class="fn">K</span> <span class="fn">⇑<span class="fn">f</span></span></span></span></div></div><p>If a continuous linear map is a topology embedding, then it is expands the distances
+by a positive factor.</p></div></div><div class="decl" id="ContinuousLinearMap.antilipschitz_of_embedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L147-L148">source</a></div><div class="attributes">@[deprecated ContinuousLinearMap.antilipschitz_of_isEmbedding]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.antilipschitz_of_embedding"><span class="name">ContinuousLinearMap</span>.<span class="name">antilipschitz_of_embedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Fₗ : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">Fₗ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">Fₗ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">Fₗ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">K</span> : <a href="../../../.././Mathlib/Data/NNReal/Defs.html#NNReal">NNReal</a>), <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Antilipschitz.html#AntilipschitzWith">AntilipschitzWith</a> <span class="fn">K</span> <span class="fn">⇑<span class="fn">f</span></span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.antilipschitz_of_isEmbedding">ContinuousLinearMap.antilipschitz_of_isEmbedding</a></code>.</p><hr></hr><p>If a continuous linear map is a topology embedding, then it is expands the distances
+by a positive factor.</p></div></div><div class="decl" id="LinearIsometry.norm_toContinuousLinearMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L156-L159">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#LinearIsometry.norm_toContinuousLinearMap"><span class="name">LinearIsometry</span>.<span class="name">norm_toContinuousLinearMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Analysis/Normed/Operator/LinearIsometry.html#LinearIsometry">→ₛₗᵢ[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Analysis/Normed/Operator/LinearIsometry.html#LinearIsometry">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span>.toContinuousLinearMap</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="LinearIsometry.norm_toContinuousLinearMap_comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L163-L168">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#LinearIsometry.norm_toContinuousLinearMap_comp"><span class="name">LinearIsometry</span>.<span class="name">norm_toContinuousLinearMap_comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₃ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₃</span> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₃ : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₃</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₃ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₃</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomCompTriple">RingHomCompTriple</a> <span class="fn">σ₁₂</span> <span class="fn">σ₂₃</span> <span class="fn">σ₁₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">F</span> <a href="../../../.././Mathlib/Analysis/Normed/Operator/LinearIsometry.html#LinearIsometry">→ₛₗᵢ[</a><span class="fn">σ₂₃</span><a href="../../../.././Mathlib/Analysis/Normed/Operator/LinearIsometry.html#LinearIsometry">]</a> <span class="fn">G</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span>.toContinuousLinearMap</span>.comp</span> <span class="fn">g</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">g</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></div></div><p>Postcomposition of a continuous linear map with a linear isometry preserves
+the operator norm.</p></div></div><div class="decl" id="LinearIsometry.postcomp"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L170-L177">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#LinearIsometry.postcomp"><span class="name">LinearIsometry</span>.<span class="name">postcomp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₃ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₃</span> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₃ : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₃</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₃ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₃</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomCompTriple">RingHomCompTriple</a> <span class="fn">σ₁₂</span> <span class="fn">σ₂₃</span> <span class="fn">σ₁₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₃</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn"><span class="fn">F</span> <a href="../../../.././Mathlib/Analysis/Normed/Operator/LinearIsometry.html#LinearIsometry">→ₛₗᵢ[</a><span class="fn">σ₂₃</span><a href="../../../.././Mathlib/Analysis/Normed/Operator/LinearIsometry.html#LinearIsometry">]</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span>)</span> <a href="../../../.././Mathlib/Analysis/Normed/Operator/LinearIsometry.html#LinearIsometry">→ₛₗᵢ[</a><span class="fn">σ₂₃</span><a href="../../../.././Mathlib/Analysis/Normed/Operator/LinearIsometry.html#LinearIsometry">]</a> <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₃</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">G</span></span></span></div></div><p>Composing on the left with a linear isometry gives a linear isometry between spaces of
+continuous linear maps.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">a</span>.postcomp</span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">fun (<span class="fn">f</span> : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>) =&gt; <span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span>.toContinuousLinearMap</span>.comp</span> <span class="fn">f</span></span></span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span>, <span class="fn">norm_map'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-LinearIsometry.postcomp" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="ContinuousLinearMap.opNorm_comp_linearIsometryEquiv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L195-L209">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.opNorm_comp_linearIsometryEquiv"><span class="name">ContinuousLinearMap</span>.<span class="name">opNorm_comp_linearIsometryEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₃ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₃</span> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₃ : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₃</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂' : <a href="../../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_9}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂'</span> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂' : <span class="fn"><span class="fn">𝕜₂'</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂'' : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₃' : <span class="fn"><span class="fn">𝕜₂'</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₃</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₂'</span> <span class="fn">σ₂''</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₂''</span> <span class="fn">σ₂'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomCompTriple">RingHomCompTriple</a> <span class="fn">σ₂'</span> <span class="fn">σ₂₃</span> <span class="fn">σ₂₃'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomCompTriple">RingHomCompTriple</a> <span class="fn">σ₂''</span> <span class="fn">σ₂₃'</span> <span class="fn">σ₂₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂''</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂₃'</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">F</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₂₃</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">F'</span> <a href="../../../.././Mathlib/Analysis/Normed/Operator/LinearIsometry.html#LinearIsometryEquiv">≃ₛₗᵢ[</a><span class="fn">σ₂'</span><a href="../../../.././Mathlib/Analysis/Normed/Operator/LinearIsometry.html#LinearIsometryEquiv">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn"><span class="fn">f</span>.comp</span> <span class="fn"><span class="fn"><span class="fn">g</span>.toLinearIsometry</span>.toContinuousLinearMap</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></div></div><p>Precomposition with a linear isometry preserves the operator norm.</p></div></div><div class="decl" id="ContinuousLinearMap.op_norm_comp_linearIsometryEquiv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L211-L212">source</a></div><div class="attributes">@[deprecated ContinuousLinearMap.opNorm_comp_linearIsometryEquiv]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.op_norm_comp_linearIsometryEquiv"><span class="name">ContinuousLinearMap</span>.<span class="name">op_norm_comp_linearIsometryEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₃ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₃</span> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₃ : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₃</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂' : <a href="../../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_9}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂'</span> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂' : <span class="fn"><span class="fn">𝕜₂'</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂'' : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₃' : <span class="fn"><span class="fn">𝕜₂'</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₃</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₂'</span> <span class="fn">σ₂''</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₂''</span> <span class="fn">σ₂'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomCompTriple">RingHomCompTriple</a> <span class="fn">σ₂'</span> <span class="fn">σ₂₃</span> <span class="fn">σ₂₃'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomCompTriple">RingHomCompTriple</a> <span class="fn">σ₂''</span> <span class="fn">σ₂₃'</span> <span class="fn">σ₂₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂''</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂₃'</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">F</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₂₃</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">F'</span> <a href="../../../.././Mathlib/Analysis/Normed/Operator/LinearIsometry.html#LinearIsometryEquiv">≃ₛₗᵢ[</a><span class="fn">σ₂'</span><a href="../../../.././Mathlib/Analysis/Normed/Operator/LinearIsometry.html#LinearIsometryEquiv">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn"><span class="fn">f</span>.comp</span> <span class="fn"><span class="fn"><span class="fn">g</span>.toLinearIsometry</span>.toContinuousLinearMap</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.opNorm_comp_linearIsometryEquiv">ContinuousLinearMap.opNorm_comp_linearIsometryEquiv</a></code>.</p><hr></hr><p>Precomposition with a linear isometry preserves the operator norm.</p></div></div><div class="decl" id="ContinuousLinearMap.norm_smulRightL"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L214-L216">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.norm_smulRightL"><span class="name">ContinuousLinearMap</span>.<span class="name">norm_smulRightL</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Fₗ : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">Fₗ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">Fₗ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">𝕜</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">Fₗ</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/Bilinear.html#ContinuousLinearMap.smulRightL">ContinuousLinearMap.smulRightL</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">Fₗ</span>)</span> <span class="fn">c</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">c</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></div></div></div></div><div class="decl" id="ContinuousLinearMap.norm_smulRightL_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L227-L228">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearMap.norm_smulRightL_le"><span class="name">ContinuousLinearMap</span>.<span class="name">norm_smulRightL_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Fₗ : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">Fₗ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">Fₗ</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/Bilinear.html#ContinuousLinearMap.smulRightL">ContinuousLinearMap.smulRightL</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">Fₗ</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="Submodule.norm_subtypeL"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L236-L237">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#Submodule.norm_subtypeL"><span class="name">Submodule</span>.<span class="name">norm_subtypeL</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Submodule/Defs.html#Submodule">Submodule</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">↥<span class="fn">K</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">K</span>.subtypeL</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="ContinuousLinearEquiv.antilipschitz"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L251-L253">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearEquiv.antilipschitz"><span class="name">ContinuousLinearEquiv</span>.<span class="name">antilipschitz</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₁ : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₁₂</span> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₂₁</span> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">≃SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Antilipschitz.html#AntilipschitzWith">AntilipschitzWith</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">↑<span class="fn"><span class="fn">e</span>.symm</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <span class="fn">⇑<span class="fn">e</span></span></span></div></div></div></div><div class="decl" id="ContinuousLinearEquiv.one_le_norm_mul_norm_symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L255-L259">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearEquiv.one_le_norm_mul_norm_symm"><span class="name">ContinuousLinearEquiv</span>.<span class="name">one_le_norm_mul_norm_symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₁ : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₁₂</span> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₂₁</span> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">≃SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">↑<span class="fn">e</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">↑<span class="fn"><span class="fn">e</span>.symm</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span></div></div></div></div><div class="decl" id="ContinuousLinearEquiv.norm_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L261-L263">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearEquiv.norm_pos"><span class="name">ContinuousLinearEquiv</span>.<span class="name">norm_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₁ : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₁₂</span> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₂₁</span> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">≃SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">↑<span class="fn">e</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></div></div></div></div><div class="decl" id="ContinuousLinearEquiv.norm_symm_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L265-L267">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearEquiv.norm_symm_pos"><span class="name">ContinuousLinearEquiv</span>.<span class="name">norm_symm_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₁ : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₁₂</span> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₂₁</span> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">≃SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">↑<span class="fn"><span class="fn">e</span>.symm</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></div></div></div></div><div class="decl" id="ContinuousLinearEquiv.nnnorm_symm_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L269-L271">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearEquiv.nnnorm_symm_pos"><span class="name">ContinuousLinearEquiv</span>.<span class="name">nnnorm_symm_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₁ : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₁₂</span> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₂₁</span> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">≃SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">↑<span class="fn"><span class="fn">e</span>.symm</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span></div></div></div></div><div class="decl" id="ContinuousLinearEquiv.subsingleton_or_norm_symm_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L273-L279">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearEquiv.subsingleton_or_norm_symm_pos"><span class="name">ContinuousLinearEquiv</span>.<span class="name">subsingleton_or_norm_symm_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₁ : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₁₂</span> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₂₁</span> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">≃SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">E</span></span> <a href="../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">↑<span class="fn"><span class="fn">e</span>.symm</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span></div></div></div></div><div class="decl" id="ContinuousLinearEquiv.subsingleton_or_nnnorm_symm_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L281-L283">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearEquiv.subsingleton_or_nnnorm_symm_pos"><span class="name">ContinuousLinearEquiv</span>.<span class="name">subsingleton_or_nnnorm_symm_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₁ : <span class="fn"><span class="fn">𝕜₂</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₁₂</span> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomInvPair">RingHomInvPair</a> <span class="fn">σ₂₁</span> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₂₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">≃SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">E</span></span> <a href="../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">↑<span class="fn"><span class="fn">e</span>.symm</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span></span></div></div></div></div><div class="decl" id="ContinuousLinearEquiv.coord_norm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L287-L292">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#ContinuousLinearEquiv.coord_norm"><span class="name">ContinuousLinearEquiv</span>.<span class="name">coord_norm</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Span.html#ContinuousLinearEquiv.coord">ContinuousLinearEquiv.coord</a> <span class="fn">𝕜</span> <span class="fn">x</span> <span class="fn">h</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">x</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></div></div></div></div><div class="decl" id="IsCoercive"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L300-L304">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#IsCoercive"><span class="name">IsCoercive</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(B : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Prop</a></div></div><p>A bounded bilinear form <code>B</code> in a real normed space is <em>coercive</em>
+if there is some positive constant C such that <code>C * ‖u‖ * ‖u‖ ≤ B u u</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#IsCoercive">IsCoercive</a> <span class="fn">B</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∃ (<span class="fn">C</span> : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">C</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ (<span class="fn">u</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">C</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">u</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">u</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">(<span class="fn">B</span> <span class="fn">u</span>)</span> <span class="fn">u</span></span></span></span></span></span></span></li></ul></details><details id="instances-for-list-IsCoercive" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="NormedSpace.equicontinuous_TFAE"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.lean#L312-L360">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/OperatorNorm/NormedSpace.html#NormedSpace.equicontinuous_TFAE"><span class="name">NormedSpace</span>.<span class="name">equicontinuous_TFAE</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Equicontinuity.html#EquicontinuousAt">EquicontinuousAt</a> <span class="fn">(<span class="fn">DFunLike.coe</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span>)</span> <span class="fn">0</span></span>, <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Equicontinuity.html#Equicontinuous">Equicontinuous</a> <span class="fn">(<span class="fn">DFunLike.coe</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span>)</span></span>, <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Equicontinuity.html#UniformEquicontinuous">UniformEquicontinuous</a> <span class="fn">(<span class="fn">DFunLike.coe</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span>)</span></span>,
+    <span class="fn">∃ (<span class="fn">C</span> : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn">i</span>)</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">C</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">x</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span></span></span>, <span class="fn">∃ <span class="fn">C</span> ≥ <span class="fn">0</span>, <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn">i</span>)</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">C</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">x</span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span></span></span>,
+    <span class="fn">∃ (<span class="fn">C</span> : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">i</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">C</span></span></span></span>, <span class="fn">∃ <span class="fn">C</span> ≥ <span class="fn">0</span>, <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">i</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">C</span></span></span></span>, <span class="fn"><a href="../../../.././Mathlib/Order/Bounds/Defs.html#BddAbove">BddAbove</a> <span class="fn">(<a href="../../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">ι</span>) =&gt; <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span>)</span></span>,
+    <span class="fn"><span class="fn">⨆ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn">↑<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">i</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>]</span>.TFAE</span></div></div><p>Equivalent characterizations for equicontinuity of a family of continuous linear maps
+between normed spaces. See also <code><a href="../../../.././Mathlib/Analysis/LocallyConvex/WithSeminorms.html#WithSeminorms.equicontinuous_TFAE">WithSeminorms.equicontinuous_TFAE</a></code> for similar characterizations
+between spaces satisfying <code><a href="../../../.././Mathlib/Analysis/LocallyConvex/WithSeminorms.html#WithSeminorms">WithSeminorms</a></code>.</p></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

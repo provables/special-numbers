@@ -1,0 +1,836 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Order.Filter.AtTopBot.Field</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Order.Filter.AtTopBot.Field";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Order</span>.<span class="name">Filter</span>.<span class="name">AtTopBot</span>.<span class="name">Field</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html">Mathlib.Algebra.Order.Field.Defs</a></li><li><a href="../../../.././Mathlib/Order/Filter/AtTopBot/Ring.html">Mathlib.Order.Filter.AtTopBot.Ring</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Order.Filter.AtTopBot.Field" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_atTop_of_pos"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atTop_of_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_mul_const_atTop_of_pos"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atTop_of_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_div_const_atTop_of_pos"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atTop_of_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_atTop_iff_pos"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atTop_iff_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_mul_const_atTop_iff_pos"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atTop_iff_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_div_const_atTop_iff_pos"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atTop_iff_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.const_mul_atTop"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">const_mul_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.atTop_mul_const"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atTop_mul_const</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.atTop_div_const"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atTop_div_const</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_pow_atTop"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_pow_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_pow_atTop_iff"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_pow_atTop_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_zpow_atTop_atTop"><span class="name">Filter</span>.<span class="name">tendsto_zpow_atTop_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_atBot_of_pos"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atBot_of_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_mul_const_atBot_of_pos"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atBot_of_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_div_const_atBot_of_pos"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atBot_of_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_atTop_of_neg"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atTop_of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_mul_const_atTop_of_neg"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atTop_of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_div_const_atTop_of_neg"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atTop_of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_atBot_of_neg"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atBot_of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_mul_const_atBot_of_neg"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atBot_of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_div_const_atBot_of_neg"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atBot_of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_atTop_iff"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atTop_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_mul_const_atTop_iff"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atTop_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_div_const_atTop_iff"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atTop_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_atBot_iff"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atBot_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_mul_const_atBot_iff"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atBot_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_div_const_atBot_iff"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atBot_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_atTop_iff_neg"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atTop_iff_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_mul_const_atTop_iff_neg"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atTop_iff_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_div_const_atTop_iff_neg"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atTop_iff_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_atBot_iff_pos"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atBot_iff_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_mul_const_atBot_iff_pos"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atBot_iff_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_div_const_atBot_iff_pos"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atBot_iff_pos</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_atBot_iff_neg"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atBot_iff_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_mul_const_atBot_iff_neg"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atBot_iff_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_div_const_atBot_iff_neg"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atBot_iff_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.const_mul_atTop_of_neg"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">const_mul_atTop_of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.atTop_mul_const_of_neg"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atTop_mul_const_of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.atTop_div_const_of_neg"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atTop_div_const_of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.const_mul_atBot"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">const_mul_atBot</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.atBot_mul_const"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atBot_mul_const</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.atBot_div_const"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atBot_div_const</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.const_mul_atBot_of_neg"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">const_mul_atBot_of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.atBot_mul_const_of_neg"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atBot_mul_const_of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_neg_const_mul_pow_atTop"><span class="name">Filter</span>.<span class="name">tendsto_neg_const_mul_pow_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.tendsto_const_mul_pow_atBot_iff"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_pow_atBot_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.neg_const_mul_atTop"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">neg_const_mul_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.atTop_mul_neg_const"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atTop_mul_neg_const</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.neg_const_mul_atBot"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">neg_const_mul_atBot</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.atBot_mul_neg_const"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atBot_mul_neg_const</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Convergence-to-±infinity-in-linear-ordered-semi-fields">Convergence to ±infinity in linear ordered (semi)fields <a class="hover-link" href="#Convergence-to-±infinity-in-linear-ordered-semi-fields">#</a></h1></div><div class="mod_doc"><h3 class="markdown-heading" id="Multiplication-by-constant-iff-lemmas">Multiplication by constant: iff lemmas <a class="hover-link" href="#Multiplication-by-constant-iff-lemmas">#</a></h3></div><div class="decl" id="Filter.tendsto_const_mul_atTop_of_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L25-L30">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_atTop_of_pos"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atTop_of_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedSemifield">LinearOrderedSemifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></span></div></div><p>If <code>r</code> is a positive constant, <code>fun x ↦ r * f x</code> tends to infinity along a filter
+if and only if <code>f</code> tends to infinity along the same filter.</p></div></div><div class="decl" id="Filter.tendsto_mul_const_atTop_of_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L32-L36">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_mul_const_atTop_of_pos"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atTop_of_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedSemifield">LinearOrderedSemifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></span></div></div><p>If <code>r</code> is a positive constant, <code>fun x ↦ f x * r</code> tends to infinity along a filter
+if and only if <code>f</code> tends to infinity along the same filter.</p></div></div><div class="decl" id="Filter.tendsto_div_const_atTop_of_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L38-L42">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_div_const_atTop_of_pos"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atTop_of_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedSemifield">LinearOrderedSemifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></span></div></div><p>If <code>r</code> is a positive constant, <code>x ↦ f x / r</code> tends to infinity along a filter
+if and only if <code>f</code> tends to infinity along the same filter.</p></div></div><div class="decl" id="Filter.tendsto_const_mul_atTop_iff_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L44-L50">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_atTop_iff_pos"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atTop_iff_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedSemifield">LinearOrderedSemifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span></span></div></div><p>If <code>f</code> tends to infinity along a nontrivial filter <code>l</code>, then
+<code>fun x ↦ r * f x</code> tends to infinity if and only if <code>0 &lt; r. </code></p></div></div><div class="decl" id="Filter.tendsto_mul_const_atTop_iff_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L52-L56">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_mul_const_atTop_iff_pos"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atTop_iff_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedSemifield">LinearOrderedSemifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span></span></div></div><p>If <code>f</code> tends to infinity along a nontrivial filter <code>l</code>, then
+<code>fun x ↦ f x * r</code> tends to infinity if and only if <code>0 &lt; r. </code></p></div></div><div class="decl" id="Filter.tendsto_div_const_atTop_iff_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L58-L62">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_div_const_atTop_iff_pos"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atTop_iff_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedSemifield">LinearOrderedSemifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span></span></div></div><p>If <code>f</code> tends to infinity along a nontrivial filter <code>l</code>, then
+<code>x ↦ f x * r</code> tends to infinity if and only if <code>0 &lt; r. </code></p></div></div><div class="decl" id="Filter.Tendsto.const_mul_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L64-L69">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.const_mul_atTop"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">const_mul_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedSemifield">LinearOrderedSemifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></div></div><p>If <code>f</code> tends to infinity along a filter, then <code>f</code> multiplied by a positive
+constant (on the left) also tends to infinity. For a version working in <code>ℕ</code> or <code>ℤ</code>, use
+<code>Filter.Tendsto.const_mul_atTop'</code> instead.</p></div></div><div class="decl" id="Filter.Tendsto.atTop_mul_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L71-L76">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.atTop_mul_const"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atTop_mul_const</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedSemifield">LinearOrderedSemifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></div></div><p>If a function <code>f</code> tends to infinity along a filter, then <code>f</code> multiplied by a positive
+constant (on the right) also tends to infinity. For a version working in <code>ℕ</code> or <code>ℤ</code>, use
+<code>Filter.Tendsto.atTop_mul_const'</code> instead.</p></div></div><div class="decl" id="Filter.Tendsto.atTop_div_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L78-L82">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.atTop_div_const"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atTop_div_const</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedSemifield">LinearOrderedSemifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></div></div><p>If a function <code>f</code> tends to infinity along a filter, then <code>f</code> divided by a positive
+constant also tends to infinity.</p></div></div><div class="decl" id="Filter.tendsto_const_mul_pow_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L84-L86">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_pow_atTop"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_pow_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedSemifield">LinearOrderedSemifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">n</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span>)</span> <span class="fn">Filter.atTop</span> <span class="fn">Filter.atTop</span></span></div></div></div></div><div class="decl" id="Filter.tendsto_const_mul_pow_atTop_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L88-L94">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_pow_atTop_iff"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_pow_atTop_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedSemifield">LinearOrderedSemifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span>)</span> <span class="fn">Filter.atTop</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="Filter.tendsto_zpow_atTop_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L96-L97">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_zpow_atTop_atTop"><span class="name">Filter</span>.<span class="name">tendsto_zpow_atTop_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedSemifield">LinearOrderedSemifield</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)</span> <span class="fn">Filter.atTop</span> <span class="fn">Filter.atTop</span></span></div></div></div></div><div class="decl" id="Filter.tendsto_const_mul_atBot_of_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L106-L110">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_atBot_of_pos"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atBot_of_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></span></div></div><p>If <code>r</code> is a positive constant, <code>fun x ↦ r * f x</code> tends to negative infinity along a filter
+if and only if <code>f</code> tends to negative infinity along the same filter.</p></div></div><div class="decl" id="Filter.tendsto_mul_const_atBot_of_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L112-L116">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_mul_const_atBot_of_pos"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atBot_of_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></span></div></div><p>If <code>r</code> is a positive constant, <code>fun x ↦ f x * r</code> tends to negative infinity along a filter
+if and only if <code>f</code> tends to negative infinity along the same filter.</p></div></div><div class="decl" id="Filter.tendsto_div_const_atBot_of_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L118-L122">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_div_const_atBot_of_pos"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atBot_of_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></span></div></div><p>If <code>r</code> is a positive constant, <code>fun x ↦ f x / r</code> tends to negative infinity along a filter
+if and only if <code>f</code> tends to negative infinity along the same filter.</p></div></div><div class="decl" id="Filter.tendsto_const_mul_atTop_of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L124-L128">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_atTop_of_neg"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atTop_of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></span></div></div><p>If <code>r</code> is a negative constant, <code>fun x ↦ r * f x</code> tends to infinity along a filter <code>l</code>
+if and only if <code>f</code> tends to negative infinity along <code>l</code>.</p></div></div><div class="decl" id="Filter.tendsto_mul_const_atTop_of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L130-L134">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_mul_const_atTop_of_neg"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atTop_of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></span></div></div><p>If <code>r</code> is a negative constant, <code>fun x ↦ f x * r</code> tends to infinity along a filter <code>l</code>
+if and only if <code>f</code> tends to negative infinity along <code>l</code>.</p></div></div><div class="decl" id="Filter.tendsto_div_const_atTop_of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L136-L140">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_div_const_atTop_of_neg"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atTop_of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></span></div></div><p>If <code>r</code> is a negative constant, <code>fun x ↦ f x / r</code> tends to infinity along a filter <code>l</code>
+if and only if <code>f</code> tends to negative infinity along <code>l</code>.</p></div></div><div class="decl" id="Filter.tendsto_const_mul_atBot_of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L142-L146">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_atBot_of_neg"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atBot_of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></span></div></div><p>If <code>r</code> is a negative constant, <code>fun x ↦ r * f x</code> tends to negative infinity along a filter <code>l</code>
+if and only if <code>f</code> tends to infinity along <code>l</code>.</p></div></div><div class="decl" id="Filter.tendsto_mul_const_atBot_of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L148-L152">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_mul_const_atBot_of_neg"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atBot_of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></span></div></div><p>If <code>r</code> is a negative constant, <code>fun x ↦ f x * r</code> tends to negative infinity along a filter <code>l</code>
+if and only if <code>f</code> tends to infinity along <code>l</code>.</p></div></div><div class="decl" id="Filter.tendsto_div_const_atBot_of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L154-L158">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_div_const_atBot_of_neg"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atBot_of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></span></div></div><p>If <code>r</code> is a negative constant, <code>fun x ↦ f x / r</code> tends to negative infinity along a filter <code>l</code>
+if and only if <code>f</code> tends to infinity along <code>l</code>.</p></div></div><div class="decl" id="Filter.tendsto_const_mul_atTop_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L160-L167">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_atTop_iff"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atTop_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></span> <a href="../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></span></span></span></div></div><p>The function <code>fun x ↦ r * f x</code> tends to infinity along a nontrivial filter
+if and only if <code>r &gt; 0</code> and <code>f</code> tends to infinity or <code>r &lt; 0</code> and <code>f</code> tends to negative infinity.</p></div></div><div class="decl" id="Filter.tendsto_mul_const_atTop_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L169-L173">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_mul_const_atTop_iff"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atTop_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></span> <a href="../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></span></span></span></div></div><p>The function <code>fun x ↦ f x * r</code> tends to infinity along a nontrivial filter
+if and only if <code>r &gt; 0</code> and <code>f</code> tends to infinity or <code>r &lt; 0</code> and <code>f</code> tends to negative infinity.</p></div></div><div class="decl" id="Filter.tendsto_div_const_atTop_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L175-L179">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_div_const_atTop_iff"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atTop_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></span> <a href="../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></span></span></span></div></div><p>The function <code>fun x ↦ f x / r</code> tends to infinity along a nontrivial filter
+if and only if <code>r &gt; 0</code> and <code>f</code> tends to infinity or <code>r &lt; 0</code> and <code>f</code> tends to negative infinity.</p></div></div><div class="decl" id="Filter.tendsto_const_mul_atBot_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L181-L185">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_atBot_iff"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atBot_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></span> <a href="../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></span></span></span></div></div><p>The function <code>fun x ↦ r * f x</code> tends to negative infinity along a nontrivial filter
+if and only if <code>r &gt; 0</code> and <code>f</code> tends to negative infinity or <code>r &lt; 0</code> and <code>f</code> tends to infinity.</p></div></div><div class="decl" id="Filter.tendsto_mul_const_atBot_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L187-L191">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_mul_const_atBot_iff"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atBot_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></span> <a href="../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></span></span></span></div></div><p>The function <code>fun x ↦ f x * r</code> tends to negative infinity along a nontrivial filter
+if and only if <code>r &gt; 0</code> and <code>f</code> tends to negative infinity or <code>r &lt; 0</code> and <code>f</code> tends to infinity.</p></div></div><div class="decl" id="Filter.tendsto_div_const_atBot_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L193-L197">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_div_const_atBot_iff"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atBot_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></span> <a href="../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></span></span></span></div></div><p>The function <code>fun x ↦ f x / r</code> tends to negative infinity along a nontrivial filter
+if and only if <code>r &gt; 0</code> and <code>f</code> tends to negative infinity or <code>r &lt; 0</code> and <code>f</code> tends to infinity.</p></div></div><div class="decl" id="Filter.tendsto_const_mul_atTop_iff_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L199-L203">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_atTop_iff_neg"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atTop_iff_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span></span></div></div><p>If <code>f</code> tends to negative infinity along a nontrivial filter <code>l</code>,
+then <code>fun x ↦ r * f x</code> tends to infinity if and only if <code>r &lt; 0. </code></p></div></div><div class="decl" id="Filter.tendsto_mul_const_atTop_iff_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L205-L209">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_mul_const_atTop_iff_neg"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atTop_iff_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span></span></div></div><p>If <code>f</code> tends to negative infinity along a nontrivial filter <code>l</code>,
+then <code>fun x ↦ f x * r</code> tends to infinity if and only if <code>r &lt; 0. </code></p></div></div><div class="decl" id="Filter.tendsto_div_const_atTop_iff_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L211-L215">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_div_const_atTop_iff_neg"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atTop_iff_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span></span></div></div><p>If <code>f</code> tends to negative infinity along a nontrivial filter <code>l</code>,
+then <code>fun x ↦ f x / r</code> tends to infinity if and only if <code>r &lt; 0. </code></p></div></div><div class="decl" id="Filter.tendsto_const_mul_atBot_iff_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L217-L221">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_atBot_iff_pos"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atBot_iff_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span></span></div></div><p>If <code>f</code> tends to negative infinity along a nontrivial filter <code>l</code>, then
+<code>fun x ↦ r * f x</code> tends to negative infinity if and only if <code>0 &lt; r. </code></p></div></div><div class="decl" id="Filter.tendsto_mul_const_atBot_iff_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L223-L227">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_mul_const_atBot_iff_pos"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atBot_iff_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span></span></div></div><p>If <code>f</code> tends to negative infinity along a nontrivial filter <code>l</code>, then
+<code>fun x ↦ f x * r</code> tends to negative infinity if and only if <code>0 &lt; r. </code></p></div></div><div class="decl" id="Filter.tendsto_div_const_atBot_iff_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L229-L233">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_div_const_atBot_iff_pos"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atBot_iff_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span></span></div></div><p>If <code>f</code> tends to negative infinity along a nontrivial filter <code>l</code>, then
+<code>fun x ↦ f x / r</code> tends to negative infinity if and only if <code>0 &lt; r. </code></p></div></div><div class="decl" id="Filter.tendsto_const_mul_atBot_iff_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L235-L239">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_atBot_iff_neg"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_atBot_iff_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span></span></div></div><p>If <code>f</code> tends to infinity along a nontrivial filter,
+<code>fun x ↦ r * f x</code> tends to negative infinity if and only if <code>r &lt; 0. </code></p></div></div><div class="decl" id="Filter.tendsto_mul_const_atBot_iff_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L241-L245">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_mul_const_atBot_iff_neg"><span class="name">Filter</span>.<span class="name">tendsto_mul_const_atBot_iff_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span></span></div></div><p>If <code>f</code> tends to infinity along a nontrivial filter,
+<code>fun x ↦ f x * r</code> tends to negative infinity if and only if <code>r &lt; 0. </code></p></div></div><div class="decl" id="Filter.tendsto_div_const_atBot_iff_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L247-L251">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_div_const_atBot_iff_neg"><span class="name">Filter</span>.<span class="name">tendsto_div_const_atBot_iff_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span></span></div></div><p>If <code>f</code> tends to infinity along a nontrivial filter,
+<code>fun x ↦ f x / r</code> tends to negative infinity if and only if <code>r &lt; 0. </code></p></div></div><div class="decl" id="Filter.Tendsto.const_mul_atTop_of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L253-L257">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.const_mul_atTop_of_neg"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">const_mul_atTop_of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></div></div><p>If a function <code>f</code> tends to infinity along a filter,
+then <code>f</code> multiplied by a negative constant (on the left) tends to negative infinity.</p></div></div><div class="decl" id="Filter.Tendsto.atTop_mul_const_of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L259-L263">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.atTop_mul_const_of_neg"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atTop_mul_const_of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></div></div><p>If a function <code>f</code> tends to infinity along a filter,
+then <code>f</code> multiplied by a negative constant (on the right) tends to negative infinity.</p></div></div><div class="decl" id="Filter.Tendsto.atTop_div_const_of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L265-L268">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.atTop_div_const_of_neg"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atTop_div_const_of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></div></div><p>If a function <code>f</code> tends to infinity along a filter,
+then <code>f</code> divided by a negative constant tends to negative infinity.</p></div></div><div class="decl" id="Filter.Tendsto.const_mul_atBot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L270-L274">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.const_mul_atBot"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">const_mul_atBot</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></div></div><p>If a function <code>f</code> tends to negative infinity along a filter, then <code>f</code> multiplied by
+a positive constant (on the left) also tends to negative infinity.</p></div></div><div class="decl" id="Filter.Tendsto.atBot_mul_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L276-L280">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.atBot_mul_const"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atBot_mul_const</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></div></div><p>If a function <code>f</code> tends to negative infinity along a filter, then <code>f</code> multiplied by
+a positive constant (on the right) also tends to negative infinity.</p></div></div><div class="decl" id="Filter.Tendsto.atBot_div_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L282-L285">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.atBot_div_const"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atBot_div_const</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></div></div><p>If a function <code>f</code> tends to negative infinity along a filter, then <code>f</code> divided by
+a positive constant also tends to negative infinity.</p></div></div><div class="decl" id="Filter.Tendsto.const_mul_atBot_of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L287-L291">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.const_mul_atBot_of_neg"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">const_mul_atBot_of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></div></div><p>If a function <code>f</code> tends to negative infinity along a filter,
+then <code>f</code> multiplied by a negative constant (on the left) tends to positive infinity.</p></div></div><div class="decl" id="Filter.Tendsto.atBot_mul_const_of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L293-L297">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.atBot_mul_const_of_neg"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atBot_mul_const_of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></div></div><p>If a function tends to negative infinity along a filter,
+then <code>f</code> multiplied by a negative constant (on the right) tends to positive infinity.</p></div></div><div class="decl" id="Filter.tendsto_neg_const_mul_pow_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L299-L301">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_neg_const_mul_pow_atTop"><span class="name">Filter</span>.<span class="name">tendsto_neg_const_mul_pow_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">n</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span>)</span> <span class="fn">Filter.atTop</span> <span class="fn">Filter.atBot</span></span></div></div></div></div><div class="decl" id="Filter.tendsto_const_mul_pow_atBot_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L303-L305">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.tendsto_const_mul_pow_atBot_iff"><span class="name">Filter</span>.<span class="name">tendsto_const_mul_pow_atBot_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span>)</span> <span class="fn">Filter.atTop</span> <span class="fn">Filter.atBot</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span></span></span></div></div></div></div><div class="decl" id="Filter.Tendsto.neg_const_mul_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L307-L308">source</a></div><div class="attributes">@[deprecated Filter.Tendsto.const_mul_atTop_of_neg]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.neg_const_mul_atTop"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">neg_const_mul_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.const_mul_atTop_of_neg">Filter.Tendsto.const_mul_atTop_of_neg</a></code>.</p><hr></hr><p>If a function <code>f</code> tends to infinity along a filter,
+then <code>f</code> multiplied by a negative constant (on the left) tends to negative infinity.</p></div></div><div class="decl" id="Filter.Tendsto.atTop_mul_neg_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L310-L311">source</a></div><div class="attributes">@[deprecated Filter.Tendsto.atTop_mul_const_of_neg]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.atTop_mul_neg_const"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atTop_mul_neg_const</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.atTop_mul_const_of_neg">Filter.Tendsto.atTop_mul_const_of_neg</a></code>.</p><hr></hr><p>If a function <code>f</code> tends to infinity along a filter,
+then <code>f</code> multiplied by a negative constant (on the right) tends to negative infinity.</p></div></div><div class="decl" id="Filter.Tendsto.neg_const_mul_atBot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L313-L314">source</a></div><div class="attributes">@[deprecated Filter.Tendsto.const_mul_atBot_of_neg]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.neg_const_mul_atBot"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">neg_const_mul_atBot</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.const_mul_atBot_of_neg">Filter.Tendsto.const_mul_atBot_of_neg</a></code>.</p><hr></hr><p>If a function <code>f</code> tends to negative infinity along a filter,
+then <code>f</code> multiplied by a negative constant (on the left) tends to positive infinity.</p></div></div><div class="decl" id="Filter.Tendsto.atBot_mul_neg_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Order/Filter/AtTopBot/Field.lean#L316-L317">source</a></div><div class="attributes">@[deprecated Filter.Tendsto.atBot_mul_const_of_neg]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.atBot_mul_neg_const"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">atBot_mul_neg_const</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">β</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Order/Filter/AtTopBot/Field.html#Filter.Tendsto.atBot_mul_const_of_neg">Filter.Tendsto.atBot_mul_const_of_neg</a></code>.</p><hr></hr><p>If a function tends to negative infinity along a filter,
+then <code>f</code> multiplied by a negative constant (on the right) tends to positive infinity.</p></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

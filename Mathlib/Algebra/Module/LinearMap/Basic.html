@@ -1,0 +1,280 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Module.LinearMap.Basic</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Module.LinearMap.Basic";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Module</span>.<span class="name">LinearMap</span>.<span class="name">Basic</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/LinearMap/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/NoZeroSMulDivisors/Pi.html">Mathlib.Algebra.NoZeroSMulDivisors.Pi</a></li><li><a href="../../../.././Mathlib/Algebra/Ring/Opposite.html">Mathlib.Algebra.Ring.Opposite</a></li><li><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html">Mathlib.Algebra.Module.LinearMap.Defs</a></li><li><a href="../../../.././Mathlib/GroupTheory/GroupAction/DomAct/Basic.html">Mathlib.GroupTheory.GroupAction.DomAct.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Module.LinearMap.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#LinearMap.instSMulDomMulAct"><span class="name">LinearMap</span>.<span class="name">instSMulDomMulAct</span></a></div><div class="nav_link"><a class="break_within" href="#DomMulAct.smul_linearMap_apply"><span class="name">DomMulAct</span>.<span class="name">smul_linearMap_apply</span></a></div><div class="nav_link"><a class="break_within" href="#DomMulAct.mk_smul_linearMap_apply"><span class="name">DomMulAct</span>.<span class="name">mk_smul_linearMap_apply</span></a></div><div class="nav_link"><a class="break_within" href="#DomMulAct.coe_smul_linearMap"><span class="name">DomMulAct</span>.<span class="name">coe_smul_linearMap</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.instSMulCommClassDomMulAct"><span class="name">LinearMap</span>.<span class="name">instSMulCommClassDomMulAct</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.instDistribMulActionDomMulActOfSMulCommClass"><span class="name">LinearMap</span>.<span class="name">instDistribMulActionDomMulActOfSMulCommClass</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.instNoZeroSMulDivisors"><span class="name">LinearMap</span>.<span class="name">instNoZeroSMulDivisors</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.instModuleDomMulActOfSMulCommClass"><span class="name">LinearMap</span>.<span class="name">instModuleDomMulActOfSMulCommClass</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Further-results-on-semi-linear-maps">Further results on (semi)linear maps <a class="hover-link" href="#Further-results-on-semi-linear-maps">#</a></h1></div><div class="decl" id="LinearMap.instSMulDomMulAct"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/LinearMap/Basic.lean#L40-L44">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Module/LinearMap/Basic.html#LinearMap.instSMulDomMulAct"><span class="name">LinearMap</span>.<span class="name">instSMulDomMulAct</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M' : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R'</span> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">R</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S' : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn">S'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">S'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn"><span class="fn">S'</span><a href="../../../.././Mathlib/GroupTheory/GroupAction/DomAct/Basic.html#DomMulAct">ᵈᵐᵃ</a></span> <span class="fn">(<span class="fn">M</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">M'</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">LinearMap.instSMulDomMulAct</span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">smul</span> := <span class="fn">fun (<span class="fn">a</span> : <span class="fn"><span class="fn">S'</span><a href="../../../.././Mathlib/GroupTheory/GroupAction/DomAct/Basic.html#DomMulAct">ᵈᵐᵃ</a></span>) (<span class="fn">f</span> : <span class="fn"><span class="fn">M</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">M'</span></span>) =&gt; <span class="fn">{ <span class="fn">toFun</span> := <span class="fn"><span class="fn">a</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">⇑<span class="fn">f</span></span></span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span> }</span></span> }</span></span></li></ul></details></div></div><div class="decl" id="DomMulAct.smul_linearMap_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/LinearMap/Basic.lean#L46-L48">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Module/LinearMap/Basic.html#DomMulAct.smul_linearMap_apply"><span class="name">DomMulAct</span>.<span class="name">smul_linearMap_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M' : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R'</span> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">R</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S' : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn">S'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">S'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn"><span class="fn">S'</span><a href="../../../.././Mathlib/GroupTheory/GroupAction/DomAct/Basic.html#DomMulAct">ᵈᵐᵃ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">M'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">a</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">f</span>)</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">DomMulAct.mk</span>.symm</span> <span class="fn">a</span></span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span></span></div></div></div></div><div class="decl" id="DomMulAct.mk_smul_linearMap_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/LinearMap/Basic.lean#L50-L53">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Module/LinearMap/Basic.html#DomMulAct.mk_smul_linearMap_apply"><span class="name">DomMulAct</span>.<span class="name">mk_smul_linearMap_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M' : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R'</span> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">R</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S' : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn">S'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">S'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">S'</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">M'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">DomMulAct.mk</span> <span class="fn">a</span></span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">f</span>)</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">a</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span></span></span></div></div></div></div><div class="decl" id="DomMulAct.coe_smul_linearMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/LinearMap/Basic.lean#L55-L57">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Module/LinearMap/Basic.html#DomMulAct.coe_smul_linearMap"><span class="name">DomMulAct</span>.<span class="name">coe_smul_linearMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M' : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R'</span> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">R</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S' : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn">S'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">S'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn"><span class="fn">S'</span><a href="../../../.././Mathlib/GroupTheory/GroupAction/DomAct/Basic.html#DomMulAct">ᵈᵐᵃ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">M'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⇑<span class="fn">(<span class="fn">a</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">f</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">⇑<span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="LinearMap.instSMulCommClassDomMulAct"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/LinearMap/Basic.lean#L59-L60">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Module/LinearMap/Basic.html#LinearMap.instSMulCommClassDomMulAct"><span class="name">LinearMap</span>.<span class="name">instSMulCommClassDomMulAct</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M' : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R'</span> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">R</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S' : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T' : <a href="../../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn">S'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">S'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">T'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn">T'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">T'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">S'</span> <span class="fn">T'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn"><span class="fn">S'</span><a href="../../../.././Mathlib/GroupTheory/GroupAction/DomAct/Basic.html#DomMulAct">ᵈᵐᵃ</a></span> <span class="fn"><span class="fn">T'</span><a href="../../../.././Mathlib/GroupTheory/GroupAction/DomAct/Basic.html#DomMulAct">ᵈᵐᵃ</a></span> <span class="fn">(<span class="fn">M</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">M'</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="LinearMap.instDistribMulActionDomMulActOfSMulCommClass"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/LinearMap/Basic.lean#L74-L79">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Module/LinearMap/Basic.html#LinearMap.instDistribMulActionDomMulActOfSMulCommClass"><span class="name">LinearMap</span>.<span class="name">instDistribMulActionDomMulActOfSMulCommClass</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M' : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R'</span> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">R</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S' : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn">S'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">S'</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn"><span class="fn">S'</span><a href="../../../.././Mathlib/GroupTheory/GroupAction/DomAct/Basic.html#DomMulAct">ᵈᵐᵃ</a></span> <span class="fn">(<span class="fn">M</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">M'</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">LinearMap.instDistribMulActionDomMulActOfSMulCommClass</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction.mk">DistribMulAction.mk</a> <span class="fn">⋯</span> <span class="fn">⋯</span></span></span></li></ul></details></div></div><div class="decl" id="LinearMap.instNoZeroSMulDivisors"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/LinearMap/Basic.lean#L87-L88">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Module/LinearMap/Basic.html#LinearMap.instNoZeroSMulDivisors"><span class="name">LinearMap</span>.<span class="name">instNoZeroSMulDivisors</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M' : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R'</span> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">R</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">S</span> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R'</span> <span class="fn">S</span> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">S</span> <span class="fn">M'</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">S</span> <span class="fn">(<span class="fn">M</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">M'</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="LinearMap.instModuleDomMulActOfSMulCommClass"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/LinearMap/Basic.lean#L90-L93">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Module/LinearMap/Basic.html#LinearMap.instModuleDomMulActOfSMulCommClass"><span class="name">LinearMap</span>.<span class="name">instModuleDomMulActOfSMulCommClass</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M' : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R'</span> <span class="fn">M'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">R</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">S</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn"><span class="fn">S</span><a href="../../../.././Mathlib/GroupTheory/GroupAction/DomAct/Basic.html#DomMulAct">ᵈᵐᵃ</a></span> <span class="fn">(<span class="fn">M</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">M'</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">LinearMap.instModuleDomMulActOfSMulCommClass</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module.mk">Module.mk</a> <span class="fn">⋯</span> <span class="fn">⋯</span></span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

@@ -1,0 +1,955 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.NumberTheory.Cyclotomic.Basic</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.NumberTheory.Cyclotomic.Basic";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">NumberTheory</span>.<span class="name">Cyclotomic</span>.<span class="name">Basic</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/FieldTheory/Galois/Basic.html">Mathlib.FieldTheory.Galois.Basic</a></li><li><a href="../../.././Mathlib/NumberTheory/NumberField/Basic.html">Mathlib.NumberTheory.NumberField.Basic</a></li><li><a href="../../.././Mathlib/RingTheory/Polynomial/Cyclotomic/Roots.html">Mathlib.RingTheory.Polynomial.Cyclotomic.Roots</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.NumberTheory.Cyclotomic.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension"><span class="name">IsCyclotomicExtension</span></a></div><div class="nav_link"><a class="break_within" href="#isCyclotomicExtension_iff"><span class="name">isCyclotomicExtension_iff</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.iff_adjoin_eq_top"><span class="name">IsCyclotomicExtension</span>.<span class="name">iff_adjoin_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.iff_singleton"><span class="name">IsCyclotomicExtension</span>.<span class="name">iff_singleton</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.empty"><span class="name">IsCyclotomicExtension</span>.<span class="name">empty</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.singleton_one"><span class="name">IsCyclotomicExtension</span>.<span class="name">singleton_one</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.singleton_zero_of_bot_eq_top"><span class="name">IsCyclotomicExtension</span>.<span class="name">singleton_zero_of_bot_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.trans"><span class="name">IsCyclotomicExtension</span>.<span class="name">trans</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.subsingleton_iff"><span class="name">IsCyclotomicExtension</span>.<span class="name">subsingleton_iff</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.union_right"><span class="name">IsCyclotomicExtension</span>.<span class="name">union_right</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.union_left"><span class="name">IsCyclotomicExtension</span>.<span class="name">union_left</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.of_union_of_dvd"><span class="name">IsCyclotomicExtension</span>.<span class="name">of_union_of_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.iff_union_of_dvd"><span class="name">IsCyclotomicExtension</span>.<span class="name">iff_union_of_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.iff_union_singleton_one"><span class="name">IsCyclotomicExtension</span>.<span class="name">iff_union_singleton_one</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.singleton_one_of_bot_eq_top"><span class="name">IsCyclotomicExtension</span>.<span class="name">singleton_one_of_bot_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.singleton_one_of_algebraMap_bijective"><span class="name">IsCyclotomicExtension</span>.<span class="name">singleton_one_of_algebraMap_bijective</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.equiv"><span class="name">IsCyclotomicExtension</span>.<span class="name">equiv</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.neZero"><span class="name">IsCyclotomicExtension</span>.<span class="name">neZero</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.neZero'"><span class="name">IsCyclotomicExtension</span>.<span class="name">neZero'</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.finite_of_singleton"><span class="name">IsCyclotomicExtension</span>.<span class="name">finite_of_singleton</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.finite"><span class="name">IsCyclotomicExtension</span>.<span class="name">finite</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.numberField"><span class="name">IsCyclotomicExtension</span>.<span class="name">numberField</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.integral"><span class="name">IsCyclotomicExtension</span>.<span class="name">integral</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.finiteDimensional"><span class="name">IsCyclotomicExtension</span>.<span class="name">finiteDimensional</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.adjoin_roots_cyclotomic_eq_adjoin_nth_roots"><span class="name">IsCyclotomicExtension</span>.<span class="name">adjoin_roots_cyclotomic_eq_adjoin_nth_roots</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.adjoin_roots_cyclotomic_eq_adjoin_root_cyclotomic"><span class="name">IsCyclotomicExtension</span>.<span class="name">adjoin_roots_cyclotomic_eq_adjoin_root_cyclotomic</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.adjoin_primitive_root_eq_top"><span class="name">IsCyclotomicExtension</span>.<span class="name">adjoin_primitive_root_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#IsPrimitiveRoot.adjoin_isCyclotomicExtension"><span class="name">IsPrimitiveRoot</span>.<span class="name">adjoin_isCyclotomicExtension</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.splits_X_pow_sub_one"><span class="name">IsCyclotomicExtension</span>.<span class="name">splits_X_pow_sub_one</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.splits_cyclotomic"><span class="name">IsCyclotomicExtension</span>.<span class="name">splits_cyclotomic</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.isSplittingField_X_pow_sub_one"><span class="name">IsCyclotomicExtension</span>.<span class="name">isSplittingField_X_pow_sub_one</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.algEquiv"><span class="name">IsCyclotomicExtension</span>.<span class="name">algEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.isGalois"><span class="name">IsCyclotomicExtension</span>.<span class="name">isGalois</span></a></div><div class="nav_link"><a class="break_within" href="#IsCyclotomicExtension.splitting_field_cyclotomic"><span class="name">IsCyclotomicExtension</span>.<span class="name">splitting_field_cyclotomic</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicField"><span class="name">CyclotomicField</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicField.instField"><span class="name">CyclotomicField</span>.<span class="name">instField</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicField.algebra"><span class="name">CyclotomicField</span>.<span class="name">algebra</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicField.instInhabited"><span class="name">CyclotomicField</span>.<span class="name">instInhabited</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicField.instCharZero"><span class="name">CyclotomicField</span>.<span class="name">instCharZero</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicField.isCyclotomicExtension"><span class="name">CyclotomicField</span>.<span class="name">isCyclotomicExtension</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicField.algebraBase"><span class="name">CyclotomicField</span>.<span class="name">algebraBase</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicField.algebra'"><span class="name">CyclotomicField</span>.<span class="name">algebra'</span></a></div><div class="nav_link"><a class="break_within" href="#instIsScalarTowerCyclotomicField"><span class="name">instIsScalarTowerCyclotomicField</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicField.noZeroSMulDivisors"><span class="name">CyclotomicField</span>.<span class="name">noZeroSMulDivisors</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing"><span class="name">CyclotomicRing</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.instCommRing"><span class="name">CyclotomicRing</span>.<span class="name">instCommRing</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.instIsDomain"><span class="name">CyclotomicRing</span>.<span class="name">instIsDomain</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.instInhabited"><span class="name">CyclotomicRing</span>.<span class="name">instInhabited</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.algebraBase"><span class="name">CyclotomicRing</span>.<span class="name">algebraBase</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.instNoZeroSMulDivisorsOfIsFractionRing"><span class="name">CyclotomicRing</span>.<span class="name">instNoZeroSMulDivisorsOfIsFractionRing</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.algebraBase_injective"><span class="name">CyclotomicRing</span>.<span class="name">algebraBase_injective</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.instAlgebraCyclotomicField"><span class="name">CyclotomicRing</span>.<span class="name">instAlgebraCyclotomicField</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.adjoin_algebra_injective"><span class="name">CyclotomicRing</span>.<span class="name">adjoin_algebra_injective</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.instNoZeroSMulDivisorsCyclotomicField"><span class="name">CyclotomicRing</span>.<span class="name">instNoZeroSMulDivisorsCyclotomicField</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.instIsScalarTowerCyclotomicField"><span class="name">CyclotomicRing</span>.<span class="name">instIsScalarTowerCyclotomicField</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.isCyclotomicExtension"><span class="name">CyclotomicRing</span>.<span class="name">isCyclotomicExtension</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.instIsFractionRingCyclotomicFieldOfIsDomainOfNeZeroCastVal"><span class="name">CyclotomicRing</span>.<span class="name">instIsFractionRingCyclotomicFieldOfIsDomainOfNeZeroCastVal</span></a></div><div class="nav_link"><a class="break_within" href="#CyclotomicRing.eq_adjoin_primitive_root"><span class="name">CyclotomicRing</span>.<span class="name">eq_adjoin_primitive_root</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.isCyclotomicExtension"><span class="name">IsAlgClosed</span>.<span class="name">isCyclotomicExtension</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosedOfCharZero.isCyclotomicExtension"><span class="name">IsAlgClosedOfCharZero</span>.<span class="name">isCyclotomicExtension</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Cyclotomic-extensions">Cyclotomic extensions <a class="hover-link" href="#Cyclotomic-extensions">#</a></h1><p>Let <code>A</code> and <code>B</code> be commutative rings with <code><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> A B</code>. For <code>S : <a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> ℕ+</code>, we define a class
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S A B</code> expressing the fact that <code>B</code> is obtained from <code>A</code> by adding <code>n</code>-th
+primitive roots of unity, for all <code>n ∈ S</code>.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S A B</code> : means that <code>B</code> is obtained from <code>A</code> by adding <code>n</code>-th primitive
+roots of unity, for all <code>n ∈ S</code>.</li>
+<li><code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a></code>: given <code>n : ℕ+</code> and a field <code>K</code>, we define <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> n K</code> as the
+splitting field of <code>cyclotomic n K</code>. If <code>n</code> is nonzero in <code>K</code>, it has the instance
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> {n} K (CyclotomicField n K)</code>.</li>
+<li><code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a></code> : if <code>A</code> is a domain with fraction field <code>K</code> and <code>n : ℕ+</code>, we define
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> n A K</code> as the <code>A</code>-subalgebra of <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> n K</code> generated by the roots of
+<code>X ^ n - 1</code>. If <code>n</code> is nonzero in <code>A</code>, it has the instance
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> {n} A (CyclotomicRing n A K)</code>.</li>
+</ul><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.trans">IsCyclotomicExtension.trans</a></code> : if <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S A B</code> and
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> T B C</code>, then <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> (S ∪ T) A C</code> if
+<code><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> (algebraMap B C)</code>.</li>
+<li><code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.union_right">IsCyclotomicExtension.union_right</a></code> : given <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> (S ∪ T) A B</code>, then
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> T (adjoin A { b : B | ∃ a : ℕ+, a ∈ S ∧ b ^ (a : ℕ) = 1 }) B</code>.</li>
+<li><code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.union_left">IsCyclotomicExtension.union_left</a></code> : given <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> T A B</code> and <code>S ⊆ T</code>, then
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S A (adjoin A { b : B | ∃ a : ℕ+, a ∈ S ∧ b ^ (a : ℕ) = 1 })</code>.</li>
+<li><code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.finite">IsCyclotomicExtension.finite</a></code> : if <code>S</code> is finite and <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S A B</code>, then
+<code>B</code> is a finite <code>A</code>-algebra.</li>
+<li><code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.numberField">IsCyclotomicExtension.numberField</a></code> : a finite cyclotomic extension of a number field is a
+number field.</li>
+<li><code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.isSplittingField_X_pow_sub_one">IsCyclotomicExtension.isSplittingField_X_pow_sub_one</a></code> : if <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> {n} K L</code>,
+then <code>L</code> is the splitting field of <code>X ^ n - 1</code>.</li>
+<li><code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.splitting_field_cyclotomic">IsCyclotomicExtension.splitting_field_cyclotomic</a></code> : if <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> {n} K L</code>,
+then <code>L</code> is the splitting field of <code>cyclotomic n K</code>.</li>
+</ul><h2 class="markdown-heading" id="Implementation-details">Implementation details <a class="hover-link" href="#Implementation-details">#</a></h2><p>Our definition of <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a></code> is very general, to allow rings of any characteristic
+and infinite extensions, but it will mainly be used in the case <code>S = {n}</code> and for integral domains.
+All results are in the <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a></code> namespace.
+Note that some results, for example <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.trans">IsCyclotomicExtension.trans</a></code>,
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.finite">IsCyclotomicExtension.finite</a></code>, <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.numberField">IsCyclotomicExtension.numberField</a></code>,
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.finiteDimensional">IsCyclotomicExtension.finiteDimensional</a></code>, <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.isGalois">IsCyclotomicExtension.isGalois</a></code> and
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.algebraBase">CyclotomicField.algebraBase</a></code> are lemmas, but they can be made local instances. Some of them are
+included in the <code>Cyclotomic</code> locale.</p></div><div class="decl" id="IsCyclotomicExtension"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L71-L80">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension"><span class="name">IsCyclotomicExtension</span></a></span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>Given an <code>A</code>-algebra <code>B</code> and <code>S : <a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> ℕ+</code>, we define <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S A B</code> requiring
+that there is an <code>n</code>-th primitive root of unity in <code>B</code> for all <code>n ∈ S</code> and that <code>B</code> is generated
+over <code>A</code> by the roots of <code>X ^ n - 1</code>.</p><ul class="structure_fields" id="IsCyclotomicExtension.mk"><li id="IsCyclotomicExtension.exists_prim_root" class="structure_field"><div class="structure_field_info">exists_prim_root : <span class="fn">∀ {<span class="fn">n</span> : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>}, <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span> → <span class="fn">∃ (<span class="fn">r</span> : <span class="fn">B</span>), <span class="fn"><a href="../../.././Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.html#IsPrimitiveRoot">IsPrimitiveRoot</a> <span class="fn">r</span> <span class="fn">↑<span class="fn">n</span></span></span></span></span></span></div><div class="structure_field_doc"><p>For all <code>n ∈ S</code>, there exists a primitive <code>n</code>-th root of unity in <code>B</code>.</p></div></li><li id="IsCyclotomicExtension.adjoin_roots" class="structure_field"><div class="structure_field_info">adjoin_roots : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">B</span>), <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">b</span> : <span class="fn">B</span> | <span class="fn">∃ <span class="fn">n</span> ∈ <span class="fn">S</span>, <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span>}</span></span></span></span></div><div class="structure_field_doc"><p>The <code>n</code>-th roots of unity, for <code>n ∈ S</code>, generate <code>B</code> as an <code>A</code>-algebra.</p></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-IsCyclotomicExtension" class="instances-list"></ul></details></div></div><div class="decl" id="isCyclotomicExtension_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L75-L75">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#isCyclotomicExtension_iff"><span class="name">isCyclotomicExtension_iff</span></a></span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">A</span> <span class="fn">B</span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn">(∀ {<span class="fn">n</span> : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>}, <span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span> → <span class="fn">∃ (<span class="fn">r</span> : <span class="fn">B</span>), <span class="fn"><a href="../../.././Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.html#IsPrimitiveRoot">IsPrimitiveRoot</a> <span class="fn">r</span> <span class="fn">↑<span class="fn">n</span></span></span></span></span>)</span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">B</span>), <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">b</span> : <span class="fn">B</span> | <span class="fn">∃ <span class="fn">n</span> ∈ <span class="fn">S</span>, <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span>}</span></span></span></span></span></span></div></div></div></div><div class="decl" id="IsCyclotomicExtension.iff_adjoin_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L86-L92">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.iff_adjoin_eq_top"><span class="name">IsCyclotomicExtension</span>.<span class="name">iff_adjoin_eq_top</span></a></span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">A</span> <span class="fn">B</span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn">(∀ <span class="fn">n</span> ∈ <span class="fn">S</span>, <span class="fn">∃ (<span class="fn">r</span> : <span class="fn">B</span>), <span class="fn"><a href="../../.././Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.html#IsPrimitiveRoot">IsPrimitiveRoot</a> <span class="fn">r</span> <span class="fn">↑<span class="fn">n</span></span></span></span>)</span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">b</span> : <span class="fn">B</span> | <span class="fn">∃ <span class="fn">n</span> ∈ <span class="fn">S</span>, <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span>}</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></span></span></div></div><p>A reformulation of <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a></code> that uses <code>⊤</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.iff_singleton"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L94-L98">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.iff_singleton"><span class="name">IsCyclotomicExtension</span>.<span class="name">iff_singleton</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">A</span> <span class="fn">B</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">(∃ (<span class="fn">r</span> : <span class="fn">B</span>), <span class="fn"><a href="../../.././Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.html#IsPrimitiveRoot">IsPrimitiveRoot</a> <span class="fn">r</span> <span class="fn">↑<span class="fn">n</span></span></span>)</span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">B</span>), <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">b</span> : <span class="fn">B</span> | <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>}</span></span></span></span></span></span></div></div><p>A reformulation of <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a></code> in the case <code>S</code> is a singleton.</p></div></div><div class="decl" id="IsCyclotomicExtension.empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L100-L102">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.empty"><span class="name">IsCyclotomicExtension</span>.<span class="name">empty</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Notation.html#Bot.bot">⊥</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></div><p>If <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> ∅ A B</code>, then the image of <code>A</code> in <code>B</code> equals <code>B</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.singleton_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L104-L107">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.singleton_one"><span class="name">IsCyclotomicExtension</span>.<span class="name">singleton_one</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">1</span>}</span> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Notation.html#Bot.bot">⊥</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></div><p>If <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> {1} A B</code>, then the image of <code>A</code> in <code>B</code> equals <code>B</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.singleton_zero_of_bot_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L111-L118">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.singleton_zero_of_bot_eq_top"><span class="name">IsCyclotomicExtension</span>.<span class="name">singleton_zero_of_bot_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Order/Notation.html#Bot.bot">⊥</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a> <span class="fn">A</span> <span class="fn">B</span></span></div></div><p>If <code>(⊥ : SubAlgebra A B) = ⊤</code>, then <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> ∅ A B</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.trans"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L122-L142">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.trans"><span class="name">IsCyclotomicExtension</span>.<span class="name">trans</span></a></span><span class="decl_args">
+<span class="fn">(S T : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(C : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">B</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hS : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hT : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">T</span> <span class="fn">B</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">B</span> <span class="fn">C</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">(<span class="fn">S</span> <a href="../../.././Init/Core.html#Union.union">∪</a> <span class="fn">T</span>)</span> <span class="fn">A</span> <span class="fn">C</span></span></div></div><p>Transitivity of cyclotomic extensions.</p></div></div><div class="decl" id="IsCyclotomicExtension.subsingleton_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L144-L159">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.subsingleton_iff"><span class="name">IsCyclotomicExtension</span>.<span class="name">subsingleton_iff</span></a></span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">A</span> <span class="fn">B</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">S</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">S</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{<span class="fn">1</span>}</span></span></span></span></div></div></div></div><div class="decl" id="IsCyclotomicExtension.union_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L161-L178">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.union_right"><span class="name">IsCyclotomicExtension</span>.<span class="name">union_right</span></a></span><span class="decl_args">
+<span class="fn">(S T : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">(<span class="fn">S</span> <a href="../../.././Init/Core.html#Union.union">∪</a> <span class="fn">T</span>)</span> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">T</span> <span class="fn">(↥<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">b</span> : <span class="fn">B</span> | <span class="fn">∃ <span class="fn">a</span> ∈ <span class="fn">S</span>, <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span>}</span>)</span>)</span> <span class="fn">B</span></span></div></div><p>If <code>B</code> is a cyclotomic extension of <code>A</code> given by roots of unity of order in <code>S ∪ T</code>, then <code>B</code>
+is a cyclotomic extension of <code>adjoin A { b : B | ∃ a : ℕ+, a ∈ S ∧ b ^ (a : ℕ) = 1 }</code> given by
+roots of unity of order in <code>T</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.union_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L180-L191">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.union_left"><span class="name">IsCyclotomicExtension</span>.<span class="name">union_left</span></a></span><span class="decl_args">
+<span class="fn">(S T : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">T</span> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn">S</span> <a href="../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">T</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">A</span> <span class="fn">↥<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">b</span> : <span class="fn">B</span> | <span class="fn">∃ <span class="fn">a</span> ∈ <span class="fn">S</span>, <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span>}</span>)</span></span></span></div></div><p>If <code>B</code> is a cyclotomic extension of <code>A</code> given by roots of unity of order in <code>T</code> and <code>S ⊆ T</code>,
+then <code>adjoin A { b : B | ∃ a : ℕ+, a ∈ S ∧ b ^ (a : ℕ) = 1 }</code> is a cyclotomic extension of <code>B</code>
+given by roots of unity of order in <code>S</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.of_union_of_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L195-L214">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.of_union_of_dvd"><span class="name">IsCyclotomicExtension</span>.<span class="name">of_union_of_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ <span class="fn">s</span> ∈ <span class="fn">S</span>, <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#Dvd.dvd">∣</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn">S</span>.Nonempty</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[H : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">(<span class="fn">S</span> <a href="../../.././Init/Core.html#Union.union">∪</a> <span class="fn">{<span class="fn">n</span>}</span>)</span> <span class="fn">A</span> <span class="fn">B</span></span></div></div><p>If <code>∀ s ∈ S, n ∣ s</code> and <code>S</code> is not empty, then <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S A B</code> implies
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> (S ∪ {n}) A B</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.iff_union_of_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L216-L231">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.iff_union_of_dvd"><span class="name">IsCyclotomicExtension</span>.<span class="name">iff_union_of_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ <span class="fn">s</span> ∈ <span class="fn">S</span>, <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#Dvd.dvd">∣</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn">S</span>.Nonempty</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">A</span> <span class="fn">B</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">(<span class="fn">S</span> <a href="../../.././Init/Core.html#Union.union">∪</a> <span class="fn">{<span class="fn">n</span>}</span>)</span> <span class="fn">A</span> <span class="fn">B</span></span></span></div></div><p>If <code>∀ s ∈ S, n ∣ s</code> and <code>S</code> is not empty, then <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S A B</code> if and only if
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> (S ∪ {n}) A B</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.iff_union_singleton_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L235-L245">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.iff_union_singleton_one"><span class="name">IsCyclotomicExtension</span>.<span class="name">iff_union_singleton_one</span></a></span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">A</span> <span class="fn">B</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">(<span class="fn">S</span> <a href="../../.././Init/Core.html#Union.union">∪</a> <span class="fn">{<span class="fn">1</span>}</span>)</span> <span class="fn">A</span> <span class="fn">B</span></span></span></div></div><p><code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S A B</code> is equivalent to <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> (S ∪ {1}) A B</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.singleton_one_of_bot_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L249-L253">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.singleton_one_of_bot_eq_top"><span class="name">IsCyclotomicExtension</span>.<span class="name">singleton_one_of_bot_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Order/Notation.html#Bot.bot">⊥</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">1</span>}</span> <span class="fn">A</span> <span class="fn">B</span></span></div></div><p>If <code>(⊥ : SubAlgebra A B) = ⊤</code>, then <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> {1} A B</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.singleton_one_of_algebraMap_bijective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L255-L258">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.singleton_one_of_algebraMap_bijective"><span class="name">IsCyclotomicExtension</span>.<span class="name">singleton_one_of_algebraMap_bijective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">A</span> <span class="fn">B</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">1</span>}</span> <span class="fn">A</span> <span class="fn">B</span></span></div></div><p>If <code><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> (algebraMap A B)</code>, then <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> {1} A B</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.equiv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L262-L270">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.equiv"><span class="name">IsCyclotomicExtension</span>.<span class="name">equiv</span></a></span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">B</span> <a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">≃ₐ[</a><span class="fn">A</span><a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">]</a> <span class="fn">C</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">A</span> <span class="fn">C</span></span></div></div><p>Given <code>(f : B ≃ₐ[A] C)</code>, if <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S A B</code> then
+<code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S A C</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.neZero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L272-L275">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.neZero"><span class="name">IsCyclotomicExtension</span>.<span class="name">neZero</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Data/NeZero.html#NeZero">NeZero</a> <span class="fn">↑<span class="fn">↑<span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="IsCyclotomicExtension.neZero'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L277-L280">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.neZero'"><span class="name">IsCyclotomicExtension</span>.<span class="name">neZero'</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Data/NeZero.html#NeZero">NeZero</a> <span class="fn">↑<span class="fn">↑<span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="IsCyclotomicExtension.finite_of_singleton"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L286-L297">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.finite_of_singleton"><span class="name">IsCyclotomicExtension</span>.<span class="name">finite_of_singleton</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Finiteness/Defs.html#Module.Finite">Module.Finite</a> <span class="fn">A</span> <span class="fn">B</span></span></div></div></div></div><div class="decl" id="IsCyclotomicExtension.finite"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L299-L316">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.finite"><span class="name">IsCyclotomicExtension</span>.<span class="name">finite</span></a></span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h₁ : <span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">↑<span class="fn">S</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h₂ : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Finiteness/Defs.html#Module.Finite">Module.Finite</a> <span class="fn">A</span> <span class="fn">B</span></span></div></div><p>If <code>S</code> is finite and <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S A B</code>, then <code>B</code> is a finite <code>A</code>-algebra.</p></div></div><div class="decl" id="IsCyclotomicExtension.numberField"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L318-L324">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.numberField"><span class="name">IsCyclotomicExtension</span>.<span class="name">numberField</span></a></span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> z)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Mathlib/NumberTheory/NumberField/Basic.html#NumberField">NumberField</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">↑<span class="fn">S</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/NumberField/Basic.html#NumberField">NumberField</a> <span class="fn">L</span></span></div></div><p>A cyclotomic finite extension of a number field is a number field.</p></div></div><div class="decl" id="IsCyclotomicExtension.integral"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L326-L330">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.integral"><span class="name">IsCyclotomicExtension</span>.<span class="name">integral</span></a></span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Noetherian/Defs.html#IsNoetherianRing">IsNoetherianRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">↑<span class="fn">S</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/IntegralClosure/Algebra/Defs.html#Algebra.IsIntegral">Algebra.IsIntegral</a> <span class="fn">A</span> <span class="fn">B</span></span></div></div><p>A finite cyclotomic extension of an integral noetherian domain is integral</p></div></div><div class="decl" id="IsCyclotomicExtension.finiteDimensional"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L332-L335">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.finiteDimensional"><span class="name">IsCyclotomicExtension</span>.<span class="name">finiteDimensional</span></a></span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(C : <a href="../../.././foundational_types.html">Type</a> z)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">↑<span class="fn">S</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">K</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/FiniteDimensional/Defs.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">K</span> <span class="fn">C</span></span></div></div><p>If <code>S</code> is finite and <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> S K A</code>, then <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.finiteDimensional">finiteDimensional</a> K A</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.adjoin_roots_cyclotomic_eq_adjoin_nth_roots"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L343-L359">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.adjoin_roots_cyclotomic_eq_adjoin_nth_roots"><span class="name">IsCyclotomicExtension</span>.<span class="name">adjoin_roots_cyclotomic_eq_adjoin_nth_roots</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ζ : <span class="fn">B</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hζ : <span class="fn"><a href="../../.././Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.html#IsPrimitiveRoot">IsPrimitiveRoot</a> <span class="fn">ζ</span> <span class="fn">↑<span class="fn">n</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.html#Polynomial.cyclotomic">Polynomial.cyclotomic</a> <span class="fn">(↑<span class="fn">n</span>)</span> <span class="fn">A</span>)</span>.rootSet</span> <span class="fn">B</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">b</span> : <span class="fn">B</span> | <span class="fn">∃ <span class="fn">a</span> ∈ <span class="fn">{<span class="fn">n</span>}</span>, <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span>}</span></span></span></div></div></div></div><div class="decl" id="IsCyclotomicExtension.adjoin_roots_cyclotomic_eq_adjoin_root_cyclotomic"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L361-L373">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.adjoin_roots_cyclotomic_eq_adjoin_root_cyclotomic"><span class="name">IsCyclotomicExtension</span>.<span class="name">adjoin_roots_cyclotomic_eq_adjoin_root_cyclotomic</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ζ : <span class="fn">B</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hζ : <span class="fn"><a href="../../.././Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.html#IsPrimitiveRoot">IsPrimitiveRoot</a> <span class="fn">ζ</span> <span class="fn">↑<span class="fn">n</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.html#Polynomial.cyclotomic">Polynomial.cyclotomic</a> <span class="fn">(↑<span class="fn">n</span>)</span> <span class="fn">A</span>)</span>.rootSet</span> <span class="fn">B</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">ζ</span>}</span></span></span></div></div></div></div><div class="decl" id="IsCyclotomicExtension.adjoin_primitive_root_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L375-L380">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.adjoin_primitive_root_eq_top"><span class="name">IsCyclotomicExtension</span>.<span class="name">adjoin_primitive_root_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ζ : <span class="fn">B</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hζ : <span class="fn"><a href="../../.././Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.html#IsPrimitiveRoot">IsPrimitiveRoot</a> <span class="fn">ζ</span> <span class="fn">↑<span class="fn">n</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">ζ</span>}</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></div></div></div><div class="decl" id="IsPrimitiveRoot.adjoin_isCyclotomicExtension"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L384-L402">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsPrimitiveRoot.adjoin_isCyclotomicExtension"><span class="name">IsPrimitiveRoot</span>.<span class="name">adjoin_isCyclotomicExtension</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ζ : <span class="fn">B</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.html#IsPrimitiveRoot">IsPrimitiveRoot</a> <span class="fn">ζ</span> <span class="fn">↑<span class="fn">n</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">A</span> <span class="fn">↥<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">ζ</span>}</span>)</span></span></span></div></div></div></div><div class="decl" id="IsCyclotomicExtension.splits_X_pow_sub_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L410-L416">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.splits_X_pow_sub_one"><span class="name">IsCyclotomicExtension</span>.<span class="name">splits_X_pow_sub_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> z)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[H : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">L</span>)</span> <span class="fn">(<span class="fn"><span class="fn">Polynomial.X</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span>)</span></span></div></div><p>A cyclotomic extension splits <code>X ^ n - 1</code> if <code>n ∈ S</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.splits_cyclotomic"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L418-L423">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.splits_cyclotomic"><span class="name">IsCyclotomicExtension</span>.<span class="name">splits_cyclotomic</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> z)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">L</span>)</span> <span class="fn">(<a href="../../.././Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.html#Polynomial.cyclotomic">Polynomial.cyclotomic</a> <span class="fn">(↑<span class="fn">n</span>)</span> <span class="fn">K</span>)</span></span></div></div><p>A cyclotomic extension splits <code>cyclotomic n K</code> if <code>n ∈ S</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.isSplittingField_X_pow_sub_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L431-L442">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.isSplittingField_X_pow_sub_one"><span class="name">IsCyclotomicExtension</span>.<span class="name">isSplittingField_X_pow_sub_one</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> z)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">(<span class="fn"><span class="fn">Polynomial.X</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span>)</span></span></div></div><p>If <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> {n} K L</code>, then <code>L</code> is the splitting field of <code>X ^ n - 1</code>.</p></div></div><div class="decl" id="IsCyclotomicExtension.algEquiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L444-L450">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.algEquiv"><span class="name">IsCyclotomicExtension</span>.<span class="name">algEquiv</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> z)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(L' : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">K</span> <span class="fn">L'</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">≃ₐ[</a><span class="fn">K</span><a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">]</a> <span class="fn">L'</span></span></div></div><p>Any two <code>n</code>-th cyclotomic extensions are isomorphic.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.algEquiv">IsCyclotomicExtension.algEquiv</a> <span class="fn">n</span> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">L'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/FieldTheory/SplittingField/Construction.html#Polynomial.IsSplittingField.algEquiv">Polynomial.IsSplittingField.algEquiv</a> <span class="fn">L</span> <span class="fn">(<span class="fn"><span class="fn">Polynomial.X</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span>)</span>)</span>.trans</span>
+    <span class="fn"><span class="fn">(<a href="../../.././Mathlib/FieldTheory/SplittingField/Construction.html#Polynomial.IsSplittingField.algEquiv">Polynomial.IsSplittingField.algEquiv</a> <span class="fn">L'</span> <span class="fn">(<span class="fn"><span class="fn">Polynomial.X</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span>)</span>)</span>.symm</span></span></span></li></ul></details><details id="instances-for-list-IsCyclotomicExtension.algEquiv" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsCyclotomicExtension.isGalois"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L455-L458">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.isGalois"><span class="name">IsCyclotomicExtension</span>.<span class="name">isGalois</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> z)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/Galois/Basic.html#IsGalois">IsGalois</a> <span class="fn">K</span> <span class="fn">L</span></span></div></div></div></div><div class="decl" id="IsCyclotomicExtension.splitting_field_cyclotomic"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L460-L468">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension.splitting_field_cyclotomic"><span class="name">IsCyclotomicExtension</span>.<span class="name">splitting_field_cyclotomic</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> z)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">(<a href="../../.././Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.html#Polynomial.cyclotomic">Polynomial.cyclotomic</a> <span class="fn">(↑<span class="fn">n</span>)</span> <span class="fn">K</span>)</span></span></div></div><p>If <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> {n} K L</code>, then <code>L</code> is the splitting field of <code>cyclotomic n K</code>.</p></div></div><div class="decl" id="CyclotomicField"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L480-L484">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField"><span class="name">CyclotomicField</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a> w</div></div><p>Given <code>n : ℕ+</code> and a field <code>K</code>, we define <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> n K</code> as the
+splitting field of <code>cyclotomic n K</code>. If <code>n</code> is nonzero in <code>K</code>, it has
+the instance <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> {n} K (CyclotomicField n K)</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.html#Polynomial.cyclotomic">Polynomial.cyclotomic</a> <span class="fn">(↑<span class="fn">n</span>)</span> <span class="fn">K</span>)</span>.SplittingField</span></span></li></ul></details><details id="instances-for-list-CyclotomicField" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CyclotomicField.instField"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L489-L490">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.instField"><span class="name">CyclotomicField</span>.<span class="name">instField</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.instField">CyclotomicField.instField</a> <span class="fn">n</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#id">id</a> <span class="fn">inferInstance</span></span></span></li></ul></details></div></div><div class="decl" id="CyclotomicField.algebra"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L493-L494">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.algebra"><span class="name">CyclotomicField</span>.<span class="name">algebra</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.algebra">CyclotomicField.algebra</a> <span class="fn">n</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#id">id</a> <span class="fn">inferInstance</span></span></span></li></ul></details></div></div><div class="decl" id="CyclotomicField.instInhabited"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L497-L498">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.instInhabited"><span class="name">CyclotomicField</span>.<span class="name">instInhabited</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.instInhabited">CyclotomicField.instInhabited</a> <span class="fn">n</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#id">id</a> <span class="fn">inferInstance</span></span></span></li></ul></details></div></div><div class="decl" id="CyclotomicField.instCharZero"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L500-L501">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.instCharZero"><span class="name">CyclotomicField</span>.<span class="name">instCharZero</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CyclotomicField.isCyclotomicExtension"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L503-L517">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.isCyclotomicExtension"><span class="name">CyclotomicField</span>.<span class="name">isCyclotomicExtension</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/NeZero.html#NeZero">NeZero</a> <span class="fn">↑<span class="fn">↑<span class="fn">n</span></span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">K</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CyclotomicField.algebraBase"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L529-L533">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.algebraBase"><span class="name">CyclotomicField</span>.<span class="name">algebraBase</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><p>If <code>K</code> is the fraction field of <code>A</code>, the <code>A</code>-algebra structure on <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> n K</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.algebraBase">CyclotomicField.algebraBase</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/Construction.html#Polynomial.SplittingField.algebra'">Polynomial.SplittingField.algebra'</a> <span class="fn">(<a href="../../.././Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.html#Polynomial.cyclotomic">Polynomial.cyclotomic</a> <span class="fn">(↑<span class="fn">n</span>)</span> <span class="fn">K</span>)</span></span></span></li></ul></details></div></div><div class="decl" id="CyclotomicField.algebra'"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L538-L540">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.algebra'"><span class="name">CyclotomicField</span>.<span class="name">algebra'</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.algebra'">CyclotomicField.algebra'</a> <span class="fn">n</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/Construction.html#Polynomial.SplittingField.algebra'">Polynomial.SplittingField.algebra'</a> <span class="fn">(<a href="../../.././Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.html#Polynomial.cyclotomic">Polynomial.cyclotomic</a> <span class="fn">(↑<span class="fn">n</span>)</span> <span class="fn">K</span>)</span></span></span></li></ul></details></div></div><div class="decl" id="instIsScalarTowerCyclotomicField"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L542-L543">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#instIsScalarTowerCyclotomicField"><span class="name">instIsScalarTowerCyclotomicField</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">K</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CyclotomicField.noZeroSMulDivisors"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L545-L551">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField.noZeroSMulDivisors"><span class="name">CyclotomicField</span>.<span class="name">noZeroSMulDivisors</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">A</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CyclotomicRing"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L553-L558">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing"><span class="name">CyclotomicRing</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a> w</div></div><p>If <code>A</code> is a domain with fraction field <code>K</code> and <code>n : ℕ+</code>, we define <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> n A K</code> as
+the <code>A</code>-subalgebra of <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> n K</code> generated by the roots of <code>X ^ n - 1</code>. If <code>n</code>
+is nonzero in <code>A</code>, it has the instance <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> {n} A (CyclotomicRing n A K)</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↥<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">b</span> : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span></span> | <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>}</span>)</span></span></span></li></ul></details><details id="instances-for-list-CyclotomicRing" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CyclotomicRing.instCommRing"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L564-L565">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.instCommRing"><span class="name">CyclotomicRing</span>.<span class="name">instCommRing</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.instCommRing">CyclotomicRing.instCommRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#id">id</a> <span class="fn">inferInstance</span></span></span></li></ul></details></div></div><div class="decl" id="CyclotomicRing.instIsDomain"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L568-L569">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.instIsDomain"><span class="name">CyclotomicRing</span>.<span class="name">instIsDomain</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CyclotomicRing.instInhabited"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L572-L573">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.instInhabited"><span class="name">CyclotomicRing</span>.<span class="name">instInhabited</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.instInhabited">CyclotomicRing.instInhabited</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#id">id</a> <span class="fn">inferInstance</span></span></span></li></ul></details></div></div><div class="decl" id="CyclotomicRing.algebraBase"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L575-L577">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.algebraBase"><span class="name">CyclotomicRing</span>.<span class="name">algebraBase</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span>)</span></span></div></div><p>The <code>A</code>-algebra structure on <code><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> n A K</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.algebraBase">CyclotomicRing.algebraBase</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">b</span> : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span></span> | <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>}</span>)</span>.algebra</span></span></li></ul></details></div></div><div class="decl" id="CyclotomicRing.instNoZeroSMulDivisorsOfIsFractionRing"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L583-L585">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.instNoZeroSMulDivisorsOfIsFractionRing"><span class="name">CyclotomicRing</span>.<span class="name">instNoZeroSMulDivisorsOfIsFractionRing</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">A</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CyclotomicRing.algebraBase_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L587-L589">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.algebraBase_injective"><span class="name">CyclotomicRing</span>.<span class="name">algebraBase_injective</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">A</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span>)</span>)</span></span></span></div></div></div></div><div class="decl" id="CyclotomicRing.instAlgebraCyclotomicField"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L591-L592">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.instAlgebraCyclotomicField"><span class="name">CyclotomicRing</span>.<span class="name">instAlgebraCyclotomicField</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span>)</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.instAlgebraCyclotomicField">CyclotomicRing.instAlgebraCyclotomicField</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">b</span> : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span></span> | <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>}</span>)</span>.toAlgebra</span></span></li></ul></details></div></div><div class="decl" id="CyclotomicRing.adjoin_algebra_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L594-L596">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.adjoin_algebra_injective"><span class="name">CyclotomicRing</span>.<span class="name">adjoin_algebra_injective</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span>)</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span>)</span></span></span></div></div></div></div><div class="decl" id="CyclotomicRing.instNoZeroSMulDivisorsCyclotomicField"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L598-L599">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.instNoZeroSMulDivisorsCyclotomicField"><span class="name">CyclotomicRing</span>.<span class="name">instNoZeroSMulDivisorsCyclotomicField</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span>)</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CyclotomicRing.instIsScalarTowerCyclotomicField"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L601-L602">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.instIsScalarTowerCyclotomicField"><span class="name">CyclotomicRing</span>.<span class="name">instIsScalarTowerCyclotomicField</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">A</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span>)</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CyclotomicRing.isCyclotomicExtension"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L604-L627">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.isCyclotomicExtension"><span class="name">CyclotomicRing</span>.<span class="name">isCyclotomicExtension</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/NeZero.html#NeZero">NeZero</a> <span class="fn">↑<span class="fn">↑<span class="fn">n</span></span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">{<span class="fn">n</span>}</span> <span class="fn">A</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CyclotomicRing.instIsFractionRingCyclotomicFieldOfIsDomainOfNeZeroCastVal"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L629-L665">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.instIsFractionRingCyclotomicFieldOfIsDomainOfNeZeroCastVal"><span class="name">CyclotomicRing</span>.<span class="name">instIsFractionRingCyclotomicFieldOfIsDomainOfNeZeroCastVal</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Data/NeZero.html#NeZero">NeZero</a> <span class="fn">↑<span class="fn">↑<span class="fn">n</span></span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span>)</span> <span class="fn">(<a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CyclotomicRing.eq_adjoin_primitive_root"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L667-L671">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing.eq_adjoin_primitive_root"><span class="name">CyclotomicRing</span>.<span class="name">eq_adjoin_primitive_root</span></a></span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicField">CyclotomicField</a> <span class="fn">n</span> <span class="fn">K</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/RingTheory/RootsOfUnity/PrimitiveRoots.html#IsPrimitiveRoot">IsPrimitiveRoot</a> <span class="fn">μ</span> <span class="fn">↑<span class="fn">n</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#CyclotomicRing">CyclotomicRing</a> <span class="fn">n</span> <span class="fn">A</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↥<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">A</span> <span class="fn">{<span class="fn">μ</span>}</span>)</span></span></span></div></div></div></div><div class="decl" id="IsAlgClosed.isCyclotomicExtension"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L683-L691">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsAlgClosed.isCyclotomicExtension"><span class="name">IsAlgClosed</span>.<span class="name">isCyclotomicExtension</span></a></span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ <span class="fn">a</span> ∈ <span class="fn">S</span>, <span class="fn"><a href="../../.././Init/Data/NeZero.html#NeZero">NeZero</a> <span class="fn">↑<span class="fn">↑<span class="fn">a</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">K</span> <span class="fn">K</span></span></div></div><p>Algebraically closed fields are <code>S</code>-cyclotomic extensions over themselves if
+<code><a href="../../.././Init/Data/NeZero.html#NeZero">NeZero</a> ((a : ℕ) : K))</code> for all <code>a ∈ S</code>.</p></div></div><div class="decl" id="IsAlgClosedOfCharZero.isCyclotomicExtension"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/NumberTheory/Cyclotomic/Basic.lean#L693-L695">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsAlgClosedOfCharZero.isCyclotomicExtension"><span class="name">IsAlgClosedOfCharZero</span>.<span class="name">isCyclotomicExtension</span></a></span><span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <a href="../../.././Mathlib/Order/TypeTags.html#PNat">ℕ+</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/NumberTheory/Cyclotomic/Basic.html#IsCyclotomicExtension">IsCyclotomicExtension</a> <span class="fn">S</span> <span class="fn">K</span> <span class="fn">K</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

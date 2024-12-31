@@ -1,0 +1,1134 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.LocallyConvex.Bounded</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.LocallyConvex.Bounded";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">LocallyConvex</span>.<span class="name">Bounded</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Analysis/Seminorm.html">Mathlib.Analysis.Seminorm</a></li><li><a href="../../.././Mathlib/Analysis/LocallyConvex/BalancedCoreHull.html">Mathlib.Analysis.LocallyConvex.BalancedCoreHull</a></li><li><a href="../../.././Mathlib/Analysis/LocallyConvex/Basic.html">Mathlib.Analysis.LocallyConvex.Basic</a></li><li><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html">Mathlib.GroupTheory.GroupAction.Pointwise</a></li><li><a href="../../.././Mathlib/LinearAlgebra/Basis/VectorSpace.html">Mathlib.LinearAlgebra.Basis.VectorSpace</a></li><li><a href="../../.././Mathlib/Topology/Bornology/Basic.html">Mathlib.Topology.Bornology.Basic</a></li><li><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html">Mathlib.Topology.UniformSpace.Cauchy</a></li><li><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html">Mathlib.Topology.Algebra.Module.Basic</a></li><li><a href="../../.././Mathlib/Topology/Algebra/UniformGroup/Basic.html">Mathlib.Topology.Algebra.UniformGroup.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.LocallyConvex.Bounded" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_empty"><span class="name">Bornology</span>.<span class="name">isVonNBounded_empty</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_iff"><span class="name">Bornology</span>.<span class="name">isVonNBounded_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.HasBasis.isVonNBounded_iff"><span class="name">Filter</span>.<span class="name">HasBasis</span>.<span class="name">isVonNBounded_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.subset"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">subset</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_union"><span class="name">Bornology</span>.<span class="name">isVonNBounded_union</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.union"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">union</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.of_boundedSpace"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_boundedSpace</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.of_subsingleton"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_subsingleton</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_iUnion"><span class="name">Bornology</span>.<span class="name">isVonNBounded_iUnion</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_biUnion"><span class="name">Bornology</span>.<span class="name">isVonNBounded_biUnion</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_sUnion"><span class="name">Bornology</span>.<span class="name">isVonNBounded_sUnion</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.add"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">add</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.neg"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">neg</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_neg"><span class="name">Bornology</span>.<span class="name">isVonNBounded_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.of_neg"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.sub"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">sub</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.of_topologicalSpace_le"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_topologicalSpace_le</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_iff_tendsto_smallSets_nhds"><span class="name">Bornology</span>.<span class="name">isVonNBounded_iff_tendsto_smallSets_nhds</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.tendsto_smallSets_nhds"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">tendsto_smallSets_nhds</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_iff_absorbing_le"><span class="name">Bornology</span>.<span class="name">isVonNBounded_iff_absorbing_le</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_pi_iff"><span class="name">Bornology</span>.<span class="name">isVonNBounded_pi_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.image"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">image</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.smul_tendsto_zero"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">smul_tendsto_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_of_smul_tendsto_zero"><span class="name">Bornology</span>.<span class="name">isVonNBounded_of_smul_tendsto_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_iff_smul_tendsto_zero"><span class="name">Bornology</span>.<span class="name">isVonNBounded_iff_smul_tendsto_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.extend_scalars"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">extend_scalars</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_singleton"><span class="name">Bornology</span>.<span class="name">isVonNBounded_singleton</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_insert"><span class="name">Bornology</span>.<span class="name">isVonNBounded_insert</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.insert"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">insert</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.vadd"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">vadd</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_vadd"><span class="name">Bornology</span>.<span class="name">isVonNBounded_vadd</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.of_add_right"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_add_right</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.of_add_left"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_add_left</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_add_of_nonempty"><span class="name">Bornology</span>.<span class="name">isVonNBounded_add_of_nonempty</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_add"><span class="name">Bornology</span>.<span class="name">isVonNBounded_add</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_add_self"><span class="name">Bornology</span>.<span class="name">isVonNBounded_add_self</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.of_sub_left"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_sub_left</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.of_sub_right"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_sub_right</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_sub_of_nonempty"><span class="name">Bornology</span>.<span class="name">isVonNBounded_sub_of_nonempty</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_sub"><span class="name">Bornology</span>.<span class="name">isVonNBounded_sub</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isVonNBounded_covers"><span class="name">Bornology</span>.<span class="name">isVonNBounded_covers</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.vonNBornology"><span class="name">Bornology</span>.<span class="name">vonNBornology</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.isBounded_iff_isVonNBounded"><span class="name">Bornology</span>.<span class="name">isBounded_iff_isVonNBounded</span></a></div><div class="nav_link"><a class="break_within" href="#TotallyBounded.isVonNBounded"><span class="name">TotallyBounded</span>.<span class="name">isVonNBounded</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.isVonNBounded_range"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isVonNBounded_range</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.restrict_scalars_of_nontrivial"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">restrict_scalars_of_nontrivial</span></a></div><div class="nav_link"><a class="break_within" href="#Bornology.IsVonNBounded.restrict_scalars"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">restrict_scalars</span></a></div><div class="nav_link"><a class="break_within" href="#NormedSpace.isVonNBounded_of_isBounded"><span class="name">NormedSpace</span>.<span class="name">isVonNBounded_of_isBounded</span></a></div><div class="nav_link"><a class="break_within" href="#NormedSpace.isVonNBounded_ball"><span class="name">NormedSpace</span>.<span class="name">isVonNBounded_ball</span></a></div><div class="nav_link"><a class="break_within" href="#NormedSpace.isVonNBounded_closedBall"><span class="name">NormedSpace</span>.<span class="name">isVonNBounded_closedBall</span></a></div><div class="nav_link"><a class="break_within" href="#NormedSpace.isVonNBounded_iff"><span class="name">NormedSpace</span>.<span class="name">isVonNBounded_iff</span></a></div><div class="nav_link"><a class="break_within" href="#NormedSpace.isVonNBounded_iff'"><span class="name">NormedSpace</span>.<span class="name">isVonNBounded_iff'</span></a></div><div class="nav_link"><a class="break_within" href="#NormedSpace.image_isVonNBounded_iff"><span class="name">NormedSpace</span>.<span class="name">image_isVonNBounded_iff</span></a></div><div class="nav_link"><a class="break_within" href="#NormedSpace.vonNBornology_eq"><span class="name">NormedSpace</span>.<span class="name">vonNBornology_eq</span></a></div><div class="nav_link"><a class="break_within" href="#NormedSpace.isBounded_iff_subset_smul_ball"><span class="name">NormedSpace</span>.<span class="name">isBounded_iff_subset_smul_ball</span></a></div><div class="nav_link"><a class="break_within" href="#NormedSpace.isBounded_iff_subset_smul_closedBall"><span class="name">NormedSpace</span>.<span class="name">isBounded_iff_subset_smul_closedBall</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Von-Neumann-Boundedness">Von Neumann Boundedness <a class="hover-link" href="#Von-Neumann-Boundedness">#</a></h1><p>This file defines natural or von Neumann bounded sets and proves elementary properties.</p><h2 class="markdown-heading" id="Main-declarations">Main declarations <a class="hover-link" href="#Main-declarations">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a></code>: A set <code>s</code> is von Neumann-bounded if every neighborhood of zero
+absorbs <code>s</code>.</li>
+<li><code><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.vonNBornology">Bornology.vonNBornology</a></code>: The bornology made of the von Neumann-bounded sets.</li>
+</ul><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.of_topologicalSpace_le">Bornology.IsVonNBounded.of_topologicalSpace_le</a></code>: A coarser topology admits more
+von Neumann-bounded sets.</li>
+<li><code><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.image">Bornology.IsVonNBounded.image</a></code>: A continuous linear image of a bounded set is bounded.</li>
+<li><code><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_iff_smul_tendsto_zero">Bornology.isVonNBounded_iff_smul_tendsto_zero</a></code>: Given any sequence <code>ε</code> of scalars which tends
+to <code>𝓝[≠] 0</code>, we have that a set <code>S</code> is bounded if and only if for any sequence <code>x : ℕ → S</code>,
+<code>ε • x</code> tends to 0. This shows that bounded sets are completely determined by sequences, which is
+the key fact for proving that sequential continuity implies continuity for linear maps defined on
+a bornological space</li>
+</ul><h2 class="markdown-heading" id="References">References <a class="hover-link" href="#References">#</a></h2><ul>
+<li>[Bourbaki, <em>Topological Vector Spaces</em>][bourbaki1987]</li>
+</ul></div><div class="decl" id="Bornology.IsVonNBounded"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L61-L63">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A set <code>s</code> is von Neumann bounded if every neighborhood of 0 absorbs <code>s</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∀ ⦃<span class="fn">V</span> : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>⦄, <span class="fn"><span class="fn"><span class="fn">V</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span></span></span> → <span class="fn"><a href="../../.././Mathlib/Topology/Bornology/Absorbs.html#Absorbs">Absorbs</a> <span class="fn">𝕜</span> <span class="fn">V</span> <span class="fn">s</span></span></span></span></span></li></ul></details><details id="instances-for-list-Bornology.IsVonNBounded" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Bornology.isVonNBounded_empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L67-L68">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_empty"><span class="name">Bornology</span>.<span class="name">isVonNBounded_empty</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L72-L73">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_iff"><span class="name">Bornology</span>.<span class="name">isVonNBounded_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ <span class="fn">V</span> ∈ <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span></span>, <span class="fn"><a href="../../.././Mathlib/Topology/Bornology/Absorbs.html#Absorbs">Absorbs</a> <span class="fn">𝕜</span> <span class="fn">V</span> <span class="fn">s</span></span></span></span></div></div></div></div><div class="decl" id="Filter.HasBasis.isVonNBounded_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L75-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Filter.HasBasis.isVonNBounded_iff"><span class="name">Filter</span>.<span class="name">HasBasis</span>.<span class="name">isVonNBounded_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><span class="fn">ι</span> → <a href="../../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span>.HasBasis</span> <span class="fn">q</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">A</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><span class="fn">q</span> <span class="fn">i</span></span> → <span class="fn"><a href="../../.././Mathlib/Topology/Bornology/Absorbs.html#Absorbs">Absorbs</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <span class="fn">i</span>)</span> <span class="fn">A</span></span></span></span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L81-L83">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.subset"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₁ s₂ : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">s₁</span> <a href="../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s₁</span></span></div></div><p>Subsets of bounded sets are bounded.</p></div></div><div class="decl" id="Bornology.isVonNBounded_union"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L85-L88">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_union"><span class="name">Bornology</span>.<span class="name">isVonNBounded_union</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <a href="../../.././Init/Core.html#Union.union">∪</a> <span class="fn">t</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">t</span></span></span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.union"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L90-L92">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.union"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">union</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₁ s₂ : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs₁ : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s₁</span> <a href="../../.././Init/Core.html#Union.union">∪</a> <span class="fn">s₂</span>)</span></span></div></div><p>The union of two bounded sets is bounded.</p></div></div><div class="decl" id="Bornology.IsVonNBounded.of_boundedSpace"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L94-L96">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.of_boundedSpace"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_boundedSpace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Bornology/Basic.html#BoundedSpace">BoundedSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.of_subsingleton"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L98-L102">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.of_subsingleton"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_subsingleton</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_iUnion"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L104-L107">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_iUnion"><span class="name">Bornology</span>.<span class="name">isVonNBounded_iUnion</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Sort</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(⋃ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn">s</span> <span class="fn">i</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <span class="fn">i</span>)</span></span></span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_biUnion"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L109-L112">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_biUnion"><span class="name">Bornology</span>.<span class="name">isVonNBounded_biUnion</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hI : <span class="fn"><span class="fn">I</span>.Finite</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(⋃ <span class="fn">i</span> ∈ <span class="fn">I</span>, <span class="fn"><span class="fn">s</span> <span class="fn">i</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ <span class="fn">i</span> ∈ <span class="fn">I</span>, <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <span class="fn">i</span>)</span></span></span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_sUnion"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L114-L116">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_sUnion"><span class="name">Bornology</span>.<span class="name">isVonNBounded_sUnion</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">(<a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span>)</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn">S</span>.Finite</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<a href="../../.././Mathlib/Order/SetNotation.html#Set.sUnion">⋃₀</a> <span class="fn">S</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ <span class="fn">s</span> ∈ <span class="fn">S</span>, <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L125-L128">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.add"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribSMul">DistribSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">t</span>)</span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L137-L139">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.neg"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">s</span>)</span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L141-L143">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_neg"><span class="name">Bornology</span>.<span class="name">isVonNBounded_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">s</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.of_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L145-L145">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.of_neg"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">s</span>)</span></span> → <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></span></div></div><p><strong>Alias</strong> of the forward direction of <code><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_neg">Bornology.isVonNBounded_neg</a></code>.</p></div></div><div class="decl" id="Bornology.IsVonNBounded.sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L147-L150">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.sub"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">t</span>)</span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.of_topologicalSpace_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L160-L164">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.of_topologicalSpace_le"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_topologicalSpace_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t t' : <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">t</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">t'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></div></div><p>If a topology <code>t'</code> is coarser than <code>t</code>, then any set <code>s</code> that is bounded with respect to
+<code>t</code> is bounded with respect to <code>t'</code>.</p></div></div><div class="decl" id="Bornology.isVonNBounded_iff_tendsto_smallSets_nhds"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L168-L173">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_iff_tendsto_smallSets_nhds"><span class="name">Bornology</span>.<span class="name">isVonNBounded_iff_tendsto_smallSets_nhds</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedDivisionRing">NormedDivisionRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">S</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">𝕜</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">S</span></span>)</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span>.smallSets</span></span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.tendsto_smallSets_nhds"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L175-L175">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.tendsto_smallSets_nhds"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">tendsto_smallSets_nhds</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedDivisionRing">NormedDivisionRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">S</span></span> → <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">𝕜</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">S</span></span>)</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span>.smallSets</span></span></span></div></div><p><strong>Alias</strong> of the forward direction of <code><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_iff_tendsto_smallSets_nhds">Bornology.isVonNBounded_iff_tendsto_smallSets_nhds</a></code>.</p></div></div><div class="decl" id="Bornology.isVonNBounded_iff_absorbing_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L177-L180">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_iff_absorbing_le"><span class="name">Bornology</span>.<span class="name">isVonNBounded_iff_absorbing_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedDivisionRing">NormedDivisionRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">S</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Bornology/Absorbs.html#Filter.absorbing">Filter.absorbing</a> <span class="fn">𝕜</span> <span class="fn">S</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span></span></span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_pi_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L182-L187">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_pi_iff"><span class="name">Bornology</span>.<span class="name">isVonNBounded_pi_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <span class="fn"><span class="fn">ι</span> → <a href="../../.././foundational_types.html">Type</a> u_8</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedDivisionRing">NormedDivisionRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">(<span class="fn">E</span> <span class="fn">i</span>)</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">E</span> <span class="fn">i</span>)</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">(<span class="fn">E</span> <span class="fn">i</span>)</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">((<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><span class="fn">E</span> <span class="fn">i</span></span>)</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">S</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.eval">Function.eval</a> <span class="fn">i</span></span> <a href="../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">S</span>)</span></span></span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.image"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L194-L202">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.image"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">image</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedDivisionRing">NormedDivisionRing</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedDivisionRing">NormedDivisionRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜₁</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/CompTypeclasses.html#RingHomSurjective">RingHomSurjective</a> <span class="fn">σ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜₁</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜₂</span> <span class="fn">(<span class="fn">⇑<span class="fn">f</span></span> <a href="../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">s</span>)</span></span></div></div><p>A continuous linear image of a bounded set is bounded.</p></div></div><div class="decl" id="Bornology.IsVonNBounded.smul_tendsto_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L208-L213">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.smul_tendsto_zero"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">smul_tendsto_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn"><span class="fn">ι</span> → <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn"><span class="fn">ι</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hxS : <span class="fn">∀ᶠ (<span class="fn">n</span> : <span class="fn">ι</span>) in <span class="fn">l</span>, <span class="fn"><span class="fn"><span class="fn">x</span> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hε : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">ε</span> <span class="fn">l</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(<span class="fn">ε</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span> <span class="fn">l</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_of_smul_tendsto_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L218-L236">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_of_smul_tendsto_zero"><span class="name">Bornology</span>.<span class="name">isVonNBounded_of_smul_tendsto_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn"><span class="fn">ι</span> → <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hε : <span class="fn">∀ᶠ (<span class="fn">n</span> : <span class="fn">ι</span>) in <span class="fn">l</span>, <span class="fn"><span class="fn"><span class="fn">ε</span> <span class="fn">n</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn"><span class="fn">ι</span> → <span class="fn">E</span></span>), <span class="fn"><span class="fn">(∀ (<span class="fn">n</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span>)</span> → <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(<span class="fn">ε</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span> <span class="fn">l</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">S</span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_iff_smul_tendsto_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L238-L246">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_iff_smul_tendsto_zero"><span class="name">Bornology</span>.<span class="name">isVonNBounded_iff_smul_tendsto_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn"><span class="fn">ι</span> → <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">l</span>.NeBot</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hε : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">ε</span> <span class="fn">l</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhdsWithin">nhdsWithin</a> <span class="fn">0</span> <span class="fn"><span class="fn">{<span class="fn">0</span>}</span><a href="../../.././Mathlib/Order/Notation.html#HasCompl.compl">ᶜ</a></span>)</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">S</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">x</span> : <span class="fn"><span class="fn">ι</span> → <span class="fn">E</span></span>), <span class="fn"><span class="fn">(∀ (<span class="fn">n</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span>)</span> → <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(<span class="fn">ε</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span>)</span> <span class="fn">l</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span></span></span></span></span></div></div><p>Given any sequence <code>ε</code> of scalars which tends to <code>𝓝[≠] 0</code>, we have that a set <code>S</code> is bounded
+if and only if for any sequence <code>x : ℕ → S</code>, <code>ε • x</code> tends to 0. This actually works for any
+indexing type <code>ι</code>, but in the special case <code>ι = ℕ</code> we get the important fact that convergent
+sequences fully characterize bounded sets.</p></div></div><div class="decl" id="Bornology.IsVonNBounded.extend_scalars"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L250-L262">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.extend_scalars"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">extend_scalars</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(𝕝 : <a href="../../.././foundational_types.html">Type</a> u_7)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕝</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedAlgebra">NormedAlgebra</a> <span class="fn">𝕜</span> <span class="fn">𝕝</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕝</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕝</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">𝕜</span> <span class="fn">𝕝</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕝</span> <span class="fn">s</span></span></div></div><p>If a set is von Neumann bounded with respect to a smaller field,
+then it is also von Neumann bounded with respect to a larger field.
+See also <code><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.restrict_scalars">Bornology.IsVonNBounded.restrict_scalars</a></code> below.</p></div></div><div class="decl" id="Bornology.isVonNBounded_singleton"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L269-L271">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_singleton"><span class="name">Bornology</span>.<span class="name">isVonNBounded_singleton</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">{<span class="fn">x</span>}</span></span></div></div><p>Singletons are bounded.</p></div></div><div class="decl" id="Bornology.isVonNBounded_insert"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L273-L276">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_insert"><span class="name">Bornology</span>.<span class="name">isVonNBounded_insert</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<a href="../../.././Init/Core.html#Insert.insert">insert</a> <span class="fn">x</span> <span class="fn">s</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.insert"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L278-L278">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.insert"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">insert</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span> → <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<a href="../../.././Init/Core.html#Insert.insert">insert</a> <span class="fn">x</span> <span class="fn">s</span>)</span></span></span></div></div><p><strong>Alias</strong> of the reverse direction of <code><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_insert">Bornology.isVonNBounded_insert</a></code>.</p></div></div><div class="decl" id="Bornology.IsVonNBounded.vadd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L284-L288">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.vadd"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">vadd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HVAdd.hVAdd">+ᵥ</a> <span class="fn">s</span>)</span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_vadd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L290-L292">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_vadd"><span class="name">Bornology</span>.<span class="name">isVonNBounded_vadd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HVAdd.hVAdd">+ᵥ</a> <span class="fn">s</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.of_add_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L294-L297">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.of_add_right"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_add_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hst : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">t</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.Nonempty</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">t</span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.of_add_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L299-L301">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.of_add_left"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_add_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hst : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">t</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span>.Nonempty</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_add_of_nonempty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L303-L305">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_add_of_nonempty"><span class="name">Bornology</span>.<span class="name">isVonNBounded_add_of_nonempty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.Nonempty</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span>.Nonempty</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">t</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">t</span></span></span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L307-L311">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_add"><span class="name">Bornology</span>.<span class="name">isVonNBounded_add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">t</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">s</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">t</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">t</span></span></span></span></span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_add_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L313-L315">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_add_self"><span class="name">Bornology</span>.<span class="name">isVonNBounded_add_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">s</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.of_sub_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L317-L319">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.of_sub_left"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_sub_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hst : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">t</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span>.Nonempty</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.of_sub_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L327-L329">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.of_sub_right"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">of_sub_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hst : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">t</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.Nonempty</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">t</span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_sub_of_nonempty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L331-L333">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_sub_of_nonempty"><span class="name">Bornology</span>.<span class="name">isVonNBounded_sub_of_nonempty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.Nonempty</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span>.Nonempty</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">t</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">t</span></span></span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L335-L337">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_sub"><span class="name">Bornology</span>.<span class="name">isVonNBounded_sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">s</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">t</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">s</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">t</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">t</span></span></span></span></span></span></div></div></div></div><div class="decl" id="Bornology.isVonNBounded_covers"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L341-L344">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isVonNBounded_covers"><span class="name">Bornology</span>.<span class="name">isVonNBounded_covers</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SetNotation.html#Set.sUnion">⋃₀</a> <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#setOf">setOf</a> <span class="fn">(<a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span>)</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">Set.univ</span></span></div></div><p>The union of all bounded set is the whole space.</p></div></div><div class="decl" id="Bornology.vonNBornology"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L349-L355">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.vonNBornology"><span class="name">Bornology</span>.<span class="name">vonNBornology</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Bornology/Basic.html#Bornology">Bornology</a> <span class="fn">E</span></span></div></div><p>The von Neumann bornology defined by the von Neumann bounded sets.</p><p>Note that this is not registered as an instance, in order to avoid diamonds with the
+metric bornology.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.vonNBornology">Bornology.vonNBornology</a> <span class="fn">𝕜</span> <span class="fn">E</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Topology/Bornology/Basic.html#Bornology.ofBounded">Bornology.ofBounded</a> <span class="fn">(<a href="../../.././Mathlib/Data/Set/Defs.html#setOf">setOf</a> <span class="fn">(<a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span>)</span>)</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-Bornology.vonNBornology" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Bornology.isBounded_iff_isVonNBounded"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L359-L362">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.isBounded_iff_isVonNBounded"><span class="name">Bornology</span>.<span class="name">isBounded_iff_isVonNBounded</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Bornology/Basic.html#Bornology.IsBounded">Bornology.IsBounded</a> <span class="fn">s</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="TotallyBounded.isVonNBounded"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L373-L394">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#TotallyBounded.isVonNBounded"><span class="name">TotallyBounded</span>.<span class="name">isVonNBounded</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Basic.html#UniformSpace">UniformSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/UniformGroup/Defs.html#UniformAddGroup">UniformAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#TotallyBounded">TotallyBounded</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Filter.Tendsto.isVonNBounded_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L399-L404">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Filter.Tendsto.isVonNBounded_range"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isVonNBounded_range</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">Filter.atTop</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">x</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<a href="../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">f</span>)</span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.restrict_scalars_of_nontrivial"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L407-L416">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.restrict_scalars_of_nontrivial"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">restrict_scalars_of_nontrivial</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜' : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedRing">NormedRing</a> <span class="fn">𝕜'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedAlgebra">NormedAlgebra</a> <span class="fn">𝕜</span> <span class="fn">𝕜'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">𝕜'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">𝕜'</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">𝕜</span> <span class="fn">𝕜'</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜'</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Bornology.IsVonNBounded.restrict_scalars"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L419-L429">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded.restrict_scalars"><span class="name">Bornology</span>.<span class="name">IsVonNBounded</span>.<span class="name">restrict_scalars</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜' : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedRing">NormedRing</a> <span class="fn">𝕜'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedAlgebra">NormedAlgebra</a> <span class="fn">𝕜</span> <span class="fn">𝕜'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul">SMul</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/SMulWithZero.html#MulActionWithZero">MulActionWithZero</a> <span class="fn">𝕜'</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">𝕜</span> <span class="fn">𝕜'</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜'</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="NormedSpace.isVonNBounded_of_isBounded"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L440-L445">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#NormedSpace.isVonNBounded_of_isBounded"><span class="name">NormedSpace</span>.<span class="name">isVonNBounded_of_isBounded</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Topology/Bornology/Basic.html#Bornology.IsBounded">Bornology.IsBounded</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="NormedSpace.isVonNBounded_ball"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L449-L450">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#NormedSpace.isVonNBounded_ball"><span class="name">NormedSpace</span>.<span class="name">isVonNBounded_ball</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/Pseudo/Defs.html#Metric.ball">Metric.ball</a> <span class="fn">0</span> <span class="fn">r</span>)</span></span></div></div></div></div><div class="decl" id="NormedSpace.isVonNBounded_closedBall"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L452-L454">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#NormedSpace.isVonNBounded_closedBall"><span class="name">NormedSpace</span>.<span class="name">isVonNBounded_closedBall</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/Pseudo/Defs.html#Metric.closedBall">Metric.closedBall</a> <span class="fn">0</span> <span class="fn">r</span>)</span></span></div></div></div></div><div class="decl" id="NormedSpace.isVonNBounded_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L461-L468">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#NormedSpace.isVonNBounded_iff"><span class="name">NormedSpace</span>.<span class="name">isVonNBounded_iff</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Topology/Bornology/Basic.html#Bornology.IsBounded">Bornology.IsBounded</a> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="NormedSpace.isVonNBounded_iff'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L470-L472">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#NormedSpace.isVonNBounded_iff'"><span class="name">NormedSpace</span>.<span class="name">isVonNBounded_iff'</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">s</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">r</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn">∀ <span class="fn">x</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">x</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">r</span></span></span></span></span></div></div></div></div><div class="decl" id="NormedSpace.image_isVonNBounded_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L474-L476">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#NormedSpace.image_isVonNBounded_iff"><span class="name">NormedSpace</span>.<span class="name">image_isVonNBounded_iff</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜</span> <span class="fn">(<span class="fn">f</span> <a href="../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">s</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">r</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn">∀ <span class="fn">x</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">r</span></span></span></span></span></div></div></div></div><div class="decl" id="NormedSpace.vonNBornology_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L478-L484">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#NormedSpace.vonNBornology_eq"><span class="name">NormedSpace</span>.<span class="name">vonNBornology_eq</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.vonNBornology">Bornology.vonNBornology</a> <span class="fn">𝕜</span> <span class="fn">E</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">PseudoMetricSpace.toBornology</span></span></div></div><p>In a normed space, the von Neumann bornology (<code><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.vonNBornology">Bornology.vonNBornology</a></code>) is equal to the
+metric bornology.</p></div></div><div class="decl" id="NormedSpace.isBounded_iff_subset_smul_ball"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L486-L495">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#NormedSpace.isBounded_iff_subset_smul_ball"><span class="name">NormedSpace</span>.<span class="name">isBounded_iff_subset_smul_ball</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Bornology/Basic.html#Bornology.IsBounded">Bornology.IsBounded</a> <span class="fn">s</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">a</span> : <span class="fn">𝕜</span>), <span class="fn"><span class="fn">s</span> <a href="../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Pseudo/Defs.html#Metric.ball">Metric.ball</a> <span class="fn">0</span> <span class="fn">1</span></span></span></span></span></span></div></div></div></div><div class="decl" id="NormedSpace.isBounded_iff_subset_smul_closedBall"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/LocallyConvex/Bounded.lean#L497-L504">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#NormedSpace.isBounded_iff_subset_smul_closedBall"><span class="name">NormedSpace</span>.<span class="name">isBounded_iff_subset_smul_closedBall</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Bornology/Basic.html#Bornology.IsBounded">Bornology.IsBounded</a> <span class="fn">s</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">a</span> : <span class="fn">𝕜</span>), <span class="fn"><span class="fn">s</span> <a href="../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Pseudo/Defs.html#Metric.closedBall">Metric.closedBall</a> <span class="fn">0</span> <span class="fn">1</span></span></span></span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

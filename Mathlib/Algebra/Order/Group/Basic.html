@@ -1,0 +1,574 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Order.Group.Basic</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Order.Group.Basic";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Order</span>.<span class="name">Group</span>.<span class="name">Basic</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html">Mathlib.Algebra.Order.Group.Defs</a></li><li><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Pow.html">Mathlib.Algebra.Order.Monoid.Unbundled.Pow</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Order.Group.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#zpow_right_strictMono"><span class="name">zpow_right_strictMono</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_left_strictMono"><span class="name">zsmul_left_strictMono</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_strictMono_left"><span class="name">zsmul_strictMono_left</span></a></div><div class="nav_link"><a class="break_within" href="#one_lt_zpow"><span class="name">one_lt_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_pos"><span class="name">zsmul_pos</span></a></div><div class="nav_link"><a class="break_within" href="#one_lt_zpow'"><span class="name">one_lt_zpow'</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_right_strictAnti"><span class="name">zpow_right_strictAnti</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_left_strictAnti"><span class="name">zsmul_left_strictAnti</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_right_inj"><span class="name">zpow_right_inj</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_left_inj"><span class="name">zsmul_left_inj</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_right_mono"><span class="name">zpow_right_mono</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_left_mono"><span class="name">zsmul_left_mono</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_mono_right"><span class="name">zpow_mono_right</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_le_zpow_right"><span class="name">zpow_le_zpow_right</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_le_zsmul_left"><span class="name">zsmul_le_zsmul_left</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_le_zpow"><span class="name">zpow_le_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_lt_zpow_right"><span class="name">zpow_lt_zpow_right</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_lt_zsmul_left"><span class="name">zsmul_lt_zsmul_left</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_lt_zpow"><span class="name">zpow_lt_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_le_zpow_iff_right"><span class="name">zpow_le_zpow_iff_right</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_le_zsmul_iff_left"><span class="name">zsmul_le_zsmul_iff_left</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_le_zpow_iff"><span class="name">zpow_le_zpow_iff</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_lt_zpow_iff_right"><span class="name">zpow_lt_zpow_iff_right</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_lt_zsmul_iff_left"><span class="name">zsmul_lt_zsmul_iff_left</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_lt_zpow_iff"><span class="name">zpow_lt_zpow_iff</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_left_strictMono"><span class="name">zpow_left_strictMono</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_strictMono_right"><span class="name">zsmul_strictMono_right</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_strictMono_left"><span class="name">zpow_strictMono_left</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_left_mono"><span class="name">zpow_left_mono</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_mono_right"><span class="name">zsmul_mono_right</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_mono_left"><span class="name">zpow_mono_left</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_le_zpow_left"><span class="name">zpow_le_zpow_left</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_le_zsmul_right"><span class="name">zsmul_le_zsmul_right</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_le_zpow'"><span class="name">zpow_le_zpow'</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_lt_zpow_left"><span class="name">zpow_lt_zpow_left</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_lt_zsmul_right"><span class="name">zsmul_lt_zsmul_right</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_lt_zpow'"><span class="name">zpow_lt_zpow'</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_le_zpow_iff_left"><span class="name">zpow_le_zpow_iff_left</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_le_zsmul_iff_right"><span class="name">zsmul_le_zsmul_iff_right</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_le_zpow_iff'"><span class="name">zpow_le_zpow_iff'</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_lt_zpow_iff_left"><span class="name">zpow_lt_zpow_iff_left</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_lt_zsmul_iff_right"><span class="name">zsmul_lt_zsmul_iff_right</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_lt_zpow_iff'"><span class="name">zpow_lt_zpow_iff'</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_left_injective"><span class="name">zpow_left_injective</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_right_injective"><span class="name">zsmul_right_injective</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_left_inj"><span class="name">zpow_left_inj</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_right_inj"><span class="name">zsmul_right_inj</span></a></div><div class="nav_link"><a class="break_within" href="#zpow_eq_zpow_iff'"><span class="name">zpow_eq_zpow_iff'</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_eq_zsmul_iff'"><span class="name">zsmul_eq_zsmul_iff'</span></a></div><div class="nav_link"><a class="break_within" href="#not_isCyclic_of_denselyOrdered"><span class="name">not_isCyclic_of_denselyOrdered</span></a></div><div class="nav_link"><a class="break_within" href="#not_isAddCyclic_of_denselyOrdered"><span class="name">not_isAddCyclic_of_denselyOrdered</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Lemmas-about-the-interaction-of-power-operations-with-order">Lemmas about the interaction of power operations with order <a class="hover-link" href="#Lemmas-about-the-interaction-of-power-operations-with-order">#</a></h1></div><div class="decl" id="zpow_right_strictMono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L23-L27">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_right_strictMono"><span class="name">zpow_right_strictMono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">fun (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) =&gt; <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="zsmul_left_strictMono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L23-L23">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_left_strictMono"><span class="name">zsmul_left_strictMono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">fun (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) =&gt; <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="zsmul_strictMono_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L29-L29">source</a></div><div class="attributes">@[deprecated zsmul_left_strictMono]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_strictMono_left"><span class="name">zsmul_strictMono_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">fun (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) =&gt; <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_left_strictMono">zsmul_left_strictMono</a></code>.</p></div></div><div class="decl" id="one_lt_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L31-L32">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#one_lt_zpow"><span class="name">one_lt_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="zsmul_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L31-L31">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_pos"><span class="name">zsmul_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="one_lt_zpow'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L34-L34">source</a></div><div class="attributes">@[deprecated one_lt_zpow]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#one_lt_zpow'"><span class="name">one_lt_zpow'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#one_lt_zpow">one_lt_zpow</a></code>.</p></div></div><div class="decl" id="zpow_right_strictAnti"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L36-L40">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_right_strictAnti"><span class="name">zpow_right_strictAnti</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#StrictAnti">StrictAnti</a> <span class="fn">fun (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) =&gt; <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="zsmul_left_strictAnti"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L36-L36">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_left_strictAnti"><span class="name">zsmul_left_strictAnti</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#StrictAnti">StrictAnti</a> <span class="fn">fun (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) =&gt; <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="zpow_right_inj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L42-L44">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_right_inj"><span class="name">zpow_right_inj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="zsmul_left_inj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L42-L42">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_left_inj"><span class="name">zsmul_left_inj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="zpow_right_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L46-L50">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_right_mono"><span class="name">zpow_right_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">fun (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) =&gt; <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="zsmul_left_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L46-L46">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_left_mono"><span class="name">zsmul_left_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">fun (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) =&gt; <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="zpow_mono_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L52-L52">source</a></div><div class="attributes">@[deprecated zpow_right_mono]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_mono_right"><span class="name">zpow_mono_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">fun (<span class="fn">n</span> : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>) =&gt; <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_right_mono">zpow_right_mono</a></code>.</p></div></div><div class="decl" id="zpow_le_zpow_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L54-L55">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_le_zpow_right"><span class="name">zpow_le_zpow_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="zsmul_le_zsmul_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L54-L54">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_le_zsmul_left"><span class="name">zsmul_le_zsmul_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">m</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="zpow_le_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L57-L57">source</a></div><div class="attributes">@[deprecated zpow_le_zpow_right]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_le_zpow"><span class="name">zpow_le_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_le_zpow_right">zpow_le_zpow_right</a></code>.</p></div></div><div class="decl" id="zpow_lt_zpow_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L59-L60">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_lt_zpow_right"><span class="name">zpow_lt_zpow_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="zsmul_lt_zsmul_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L59-L59">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_lt_zsmul_left"><span class="name">zsmul_lt_zsmul_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">m</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="zpow_lt_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L62-L62">source</a></div><div class="attributes">@[deprecated zpow_lt_zpow_right]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_lt_zpow"><span class="name">zpow_lt_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_lt_zpow_right">zpow_lt_zpow_right</a></code>.</p></div></div><div class="decl" id="zpow_le_zpow_iff_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L64-L66">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_le_zpow_iff_right"><span class="name">zpow_le_zpow_iff_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="zsmul_le_zsmul_iff_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L64-L64">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_le_zsmul_iff_left"><span class="name">zsmul_le_zsmul_iff_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="zpow_le_zpow_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L68-L68">source</a></div><div class="attributes">@[deprecated zpow_le_zpow_iff_right]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_le_zpow_iff"><span class="name">zpow_le_zpow_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_le_zpow_iff_right">zpow_le_zpow_iff_right</a></code>.</p></div></div><div class="decl" id="zpow_lt_zpow_iff_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L70-L72">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_lt_zpow_iff_right"><span class="name">zpow_lt_zpow_iff_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="zsmul_lt_zsmul_iff_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L70-L70">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_lt_zsmul_iff_left"><span class="name">zsmul_lt_zsmul_iff_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">m</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="zpow_lt_zpow_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L74-L74">source</a></div><div class="attributes">@[deprecated zpow_lt_zpow_iff_right]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_lt_zpow_iff"><span class="name">zpow_lt_zpow_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_lt_zpow_iff_right">zpow_lt_zpow_iff_right</a></code>.</p></div></div><div class="decl" id="zpow_left_strictMono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L78-L80">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_left_strictMono"><span class="name">zpow_left_strictMono</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="zsmul_strictMono_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L78-L78">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_strictMono_right"><span class="name">zsmul_strictMono_right</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="zpow_strictMono_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L82-L82">source</a></div><div class="attributes">@[deprecated zpow_left_strictMono]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_strictMono_left"><span class="name">zpow_strictMono_left</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_left_strictMono">zpow_left_strictMono</a></code>.</p></div></div><div class="decl" id="zpow_left_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L84-L86">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_left_mono"><span class="name">zpow_left_mono</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="zsmul_mono_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L84-L84">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_mono_right"><span class="name">zsmul_mono_right</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="zpow_mono_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L88-L88">source</a></div><div class="attributes">@[deprecated zpow_left_mono]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_mono_left"><span class="name">zpow_mono_left</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_left_mono">zpow_left_mono</a></code>.</p></div></div><div class="decl" id="zpow_le_zpow_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L92-L93">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_le_zpow_left"><span class="name">zpow_le_zpow_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="zsmul_le_zsmul_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L92-L92">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_le_zsmul_right"><span class="name">zsmul_le_zsmul_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="zpow_le_zpow'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L95-L95">source</a></div><div class="attributes">@[deprecated zpow_le_zpow_left]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_le_zpow'"><span class="name">zpow_le_zpow'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_le_zpow_left">zpow_le_zpow_left</a></code>.</p></div></div><div class="decl" id="zpow_lt_zpow_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L97-L98">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_lt_zpow_left"><span class="name">zpow_lt_zpow_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="zsmul_lt_zsmul_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L97-L97">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_lt_zsmul_right"><span class="name">zsmul_lt_zsmul_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="zpow_lt_zpow'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L100-L100">source</a></div><div class="attributes">@[deprecated zpow_lt_zpow_left]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_lt_zpow'"><span class="name">zpow_lt_zpow'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedCommGroup">OrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_lt_zpow_left">zpow_lt_zpow_left</a></code>.</p></div></div><div class="decl" id="zpow_le_zpow_iff_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L108-L110">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_le_zpow_iff_left"><span class="name">zpow_le_zpow_iff_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedCommGroup">LinearOrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="zsmul_le_zsmul_iff_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L108-L108">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_le_zsmul_iff_right"><span class="name">zsmul_le_zsmul_iff_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedAddCommGroup">LinearOrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="zpow_le_zpow_iff'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L112-L112">source</a></div><div class="attributes">@[deprecated zpow_le_zpow_iff_left]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_le_zpow_iff'"><span class="name">zpow_le_zpow_iff'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedCommGroup">LinearOrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_le_zpow_iff_left">zpow_le_zpow_iff_left</a></code>.</p></div></div><div class="decl" id="zpow_lt_zpow_iff_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L114-L116">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_lt_zpow_iff_left"><span class="name">zpow_lt_zpow_iff_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedCommGroup">LinearOrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="zsmul_lt_zsmul_iff_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L114-L114">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_lt_zsmul_iff_right"><span class="name">zsmul_lt_zsmul_iff_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedAddCommGroup">LinearOrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="zpow_lt_zpow_iff'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L118-L118">source</a></div><div class="attributes">@[deprecated zpow_lt_zpow_iff_left]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_lt_zpow_iff'"><span class="name">zpow_lt_zpow_iff'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedCommGroup">LinearOrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_lt_zpow_iff_left">zpow_lt_zpow_iff_left</a></code>.</p></div></div><div class="decl" id="zpow_left_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L120-L128">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_left_injective"><span class="name">zpow_left_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedCommGroup">LinearOrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">n</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="zsmul_right_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L120-L122">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_right_injective"><span class="name">zsmul_right_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedAddCommGroup">LinearOrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">n</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span></span></span></span></div></div><p>See also <code>smul_right_injective</code>. TODO: provide a <code>NoZeroSMulDivisors</code> instance. We can't do
+that here because importing that definition would create import cycles.</p></div></div><div class="decl" id="zpow_left_inj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L130-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_left_inj"><span class="name">zpow_left_inj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedCommGroup">LinearOrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">n</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="zsmul_right_inj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L130-L130">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_right_inj"><span class="name">zsmul_right_inj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedAddCommGroup">LinearOrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">n</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="zpow_eq_zpow_iff'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L133-L137">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_eq_zpow_iff'"><span class="name">zpow_eq_zpow_iff'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedCommGroup">LinearOrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">n</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></span></div></div><p>Alias of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zpow_left_inj">zpow_left_inj</a></code>, for ease of discovery alongside <code>zsmul_le_zsmul_iff'</code> and
+<code>zsmul_lt_zsmul_iff'</code>.</p></div></div><div class="decl" id="zsmul_eq_zsmul_iff'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L135-L136">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_eq_zsmul_iff'"><span class="name">zsmul_eq_zsmul_iff'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedAddCommGroup">LinearOrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">n</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></span></div></div><p>Alias of <code><a href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#zsmul_right_inj">zsmul_right_inj</a></code>, for ease of discovery alongside <code>zsmul_le_zsmul_iff'</code> and
+<code>zsmul_lt_zsmul_iff'</code>.</p></div></div><div class="decl" id="not_isCyclic_of_denselyOrdered"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L140-L159">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#not_isCyclic_of_denselyOrdered"><span class="name">not_isCyclic_of_denselyOrdered</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedCommGroup">LinearOrderedCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Basic.html#DenselyOrdered">DenselyOrdered</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#IsCyclic">IsCyclic</a> <span class="fn">α</span></span></span></div></div><p>A nontrivial densely linear ordered commutative group can't be a cyclic group.</p></div></div><div class="decl" id="not_isAddCyclic_of_denselyOrdered"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Group/Basic.lean#L141-L142">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Group/Basic.html#not_isAddCyclic_of_denselyOrdered"><span class="name">not_isAddCyclic_of_denselyOrdered</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#LinearOrderedAddCommGroup">LinearOrderedAddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Basic.html#DenselyOrdered">DenselyOrdered</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#IsAddCyclic">IsAddCyclic</a> <span class="fn">α</span></span></span></div></div><p>A nontrivial densely linear ordered additive commutative group can't be a cyclic group.</p></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

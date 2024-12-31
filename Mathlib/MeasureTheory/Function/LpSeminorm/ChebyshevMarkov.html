@@ -1,0 +1,246 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.MeasureTheory.Function.LpSeminorm.ChebyshevMarkov</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.MeasureTheory.Function.LpSeminorm.ChebyshevMarkov";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">MeasureTheory</span>.<span class="name">Function</span>.<span class="name">LpSeminorm</span>.<span class="name">ChebyshevMarkov</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/Basic.html">Mathlib.MeasureTheory.Function.LpSeminorm.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.MeasureTheory.Function.LpSeminorm.ChebyshevMarkov" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.pow_mul_meas_ge_le_eLpNorm"><span class="name">MeasureTheory</span>.<span class="name">pow_mul_meas_ge_le_eLpNorm</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.pow_mul_meas_ge_le_snorm"><span class="name">MeasureTheory</span>.<span class="name">pow_mul_meas_ge_le_snorm</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.mul_meas_ge_le_pow_eLpNorm"><span class="name">MeasureTheory</span>.<span class="name">mul_meas_ge_le_pow_eLpNorm</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.mul_meas_ge_le_pow_snorm"><span class="name">MeasureTheory</span>.<span class="name">mul_meas_ge_le_pow_snorm</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.mul_meas_ge_le_pow_eLpNorm'"><span class="name">MeasureTheory</span>.<span class="name">mul_meas_ge_le_pow_eLpNorm'</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.mul_meas_ge_le_pow_snorm'"><span class="name">MeasureTheory</span>.<span class="name">mul_meas_ge_le_pow_snorm'</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.meas_ge_le_mul_pow_eLpNorm"><span class="name">MeasureTheory</span>.<span class="name">meas_ge_le_mul_pow_eLpNorm</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.meas_ge_le_mul_pow_snorm"><span class="name">MeasureTheory</span>.<span class="name">meas_ge_le_mul_pow_snorm</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.Memℒp.meas_ge_lt_top'"><span class="name">MeasureTheory</span>.<span class="name">Memℒp</span>.<span class="name">meas_ge_lt_top'</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.Memℒp.meas_ge_lt_top"><span class="name">MeasureTheory</span>.<span class="name">Memℒp</span>.<span class="name">meas_ge_lt_top</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Chebyshev-Markov-inequality-in-terms-of-Lp-seminorms">Chebyshev-Markov inequality in terms of Lp seminorms <a class="hover-link" href="#Chebyshev-Markov-inequality-in-terms-of-Lp-seminorms">#</a></h1><p>In this file we formulate several versions of the Chebyshev-Markov inequality
+in terms of the <code><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/Basic.html#MeasureTheory.eLpNorm">MeasureTheory.eLpNorm</a></code> seminorm.</p></div><div class="decl" id="MeasureTheory.pow_mul_meas_ge_le_eLpNorm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.lean#L21-L26">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.pow_mul_meas_ge_le_eLpNorm"><span class="name">MeasureTheory</span>.<span class="name">pow_mul_meas_ge_le_eLpNorm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_top : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">μ</span> <span class="fn">{<span class="fn">x</span> : <span class="fn">α</span> | <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">↑<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span></span>}</span></span>)</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">(<span class="fn">1</span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><span class="fn">p</span>.toReal</span>)</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/Basic.html#MeasureTheory.eLpNorm">MeasureTheory.eLpNorm</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">μ</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.pow_mul_meas_ge_le_snorm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.lean#L28-L29">source</a></div><div class="attributes">@[deprecated MeasureTheory.pow_mul_meas_ge_le_eLpNorm]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.pow_mul_meas_ge_le_snorm"><span class="name">MeasureTheory</span>.<span class="name">pow_mul_meas_ge_le_snorm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_top : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">μ</span> <span class="fn">{<span class="fn">x</span> : <span class="fn">α</span> | <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">↑<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span></span>}</span></span>)</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">(<span class="fn">1</span> <a href="../../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><span class="fn">p</span>.toReal</span>)</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/Basic.html#MeasureTheory.eLpNorm">MeasureTheory.eLpNorm</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">μ</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.pow_mul_meas_ge_le_eLpNorm">MeasureTheory.pow_mul_meas_ge_le_eLpNorm</a></code>.</p></div></div><div class="decl" id="MeasureTheory.mul_meas_ge_le_pow_eLpNorm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.lean#L31-L40">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.mul_meas_ge_le_pow_eLpNorm"><span class="name">MeasureTheory</span>.<span class="name">mul_meas_ge_le_pow_eLpNorm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_top : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">μ</span> <span class="fn">{<span class="fn">x</span> : <span class="fn">α</span> | <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">↑<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span></span>}</span></span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/Basic.html#MeasureTheory.eLpNorm">MeasureTheory.eLpNorm</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">μ</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.mul_meas_ge_le_pow_snorm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.lean#L42-L43">source</a></div><div class="attributes">@[deprecated MeasureTheory.mul_meas_ge_le_pow_eLpNorm]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.mul_meas_ge_le_pow_snorm"><span class="name">MeasureTheory</span>.<span class="name">mul_meas_ge_le_pow_snorm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_top : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">μ</span> <span class="fn">{<span class="fn">x</span> : <span class="fn">α</span> | <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">↑<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span></span>}</span></span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/Basic.html#MeasureTheory.eLpNorm">MeasureTheory.eLpNorm</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">μ</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.mul_meas_ge_le_pow_eLpNorm">MeasureTheory.mul_meas_ge_le_pow_eLpNorm</a></code>.</p></div></div><div class="decl" id="MeasureTheory.mul_meas_ge_le_pow_eLpNorm'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.lean#L45-L51">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.mul_meas_ge_le_pow_eLpNorm'"><span class="name">MeasureTheory</span>.<span class="name">mul_meas_ge_le_pow_eLpNorm'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_top : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">μ</span> <span class="fn">{<span class="fn">x</span> : <span class="fn">α</span> | <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span></span>}</span></span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/Basic.html#MeasureTheory.eLpNorm">MeasureTheory.eLpNorm</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">μ</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span></span></div></div><p>A version of Chebyshev-Markov's inequality using Lp-norms.</p></div></div><div class="decl" id="MeasureTheory.mul_meas_ge_le_pow_snorm'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.lean#L53-L54">source</a></div><div class="attributes">@[deprecated MeasureTheory.mul_meas_ge_le_pow_eLpNorm']</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.mul_meas_ge_le_pow_snorm'"><span class="name">MeasureTheory</span>.<span class="name">mul_meas_ge_le_pow_snorm'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_top : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">μ</span> <span class="fn">{<span class="fn">x</span> : <span class="fn">α</span> | <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span></span>}</span></span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/Basic.html#MeasureTheory.eLpNorm">MeasureTheory.eLpNorm</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">μ</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.mul_meas_ge_le_pow_eLpNorm'">MeasureTheory.mul_meas_ge_le_pow_eLpNorm'</a></code>.</p><hr></hr><p>A version of Chebyshev-Markov's inequality using Lp-norms.</p></div></div><div class="decl" id="MeasureTheory.meas_ge_le_mul_pow_eLpNorm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.lean#L56-L65">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.meas_ge_le_mul_pow_eLpNorm"><span class="name">MeasureTheory</span>.<span class="name">meas_ge_le_mul_pow_eLpNorm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_top : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hε : <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">μ</span> <span class="fn">{<span class="fn">x</span> : <span class="fn">α</span> | <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span></span>}</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">ε</span><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/Basic.html#MeasureTheory.eLpNorm">MeasureTheory.eLpNorm</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">μ</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.meas_ge_le_mul_pow_snorm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.lean#L67-L68">source</a></div><div class="attributes">@[deprecated MeasureTheory.meas_ge_le_mul_pow_eLpNorm]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.meas_ge_le_mul_pow_snorm"><span class="name">MeasureTheory</span>.<span class="name">meas_ge_le_mul_pow_snorm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_top : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hε : <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">μ</span> <span class="fn">{<span class="fn">x</span> : <span class="fn">α</span> | <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span></span>}</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">ε</span><a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/Basic.html#MeasureTheory.eLpNorm">MeasureTheory.eLpNorm</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">μ</span></span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span>.toReal</span></span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.meas_ge_le_mul_pow_eLpNorm">MeasureTheory.meas_ge_le_mul_pow_eLpNorm</a></code>.</p></div></div><div class="decl" id="MeasureTheory.Memℒp.meas_ge_lt_top'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.lean#L70-L76">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.Memℒp.meas_ge_lt_top'"><span class="name">MeasureTheory</span>.<span class="name">Memℒp</span>.<span class="name">meas_ge_lt_top'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hℒp : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/Basic.html#MeasureTheory.Memℒp">MeasureTheory.Memℒp</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_top : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hε : <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">μ</span> <span class="fn">{<span class="fn">x</span> : <span class="fn">α</span> | <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span></span>}</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></div></div></div><div class="decl" id="MeasureTheory.Memℒp.meas_ge_lt_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.lean#L78-L82">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/ChebyshevMarkov.html#MeasureTheory.Memℒp.meas_ge_lt_top"><span class="name">MeasureTheory</span>.<span class="name">Memℒp</span>.<span class="name">meas_ge_lt_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpace/Defs.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hℒp : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/LpSeminorm/Basic.html#MeasureTheory.Memℒp">MeasureTheory.Memℒp</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_top : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../../.././Mathlib/Data/NNReal/Defs.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hε : <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">μ</span> <span class="fn">{<span class="fn">x</span> : <span class="fn">α</span> | <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span>}</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

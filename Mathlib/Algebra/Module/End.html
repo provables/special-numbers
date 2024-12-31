@@ -1,0 +1,182 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Module.End</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Module.End";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Module</span>.<span class="name">End</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Algebra/Module/Defs.html">Mathlib.Algebra.Module.Defs</a></li><li><a href="../../.././Mathlib/Algebra/Module/NatInt.html">Mathlib.Algebra.Module.NatInt</a></li><li><a href="../../.././Mathlib/Algebra/Group/Hom/End.html">Mathlib.Algebra.Group.Hom.End</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Module.End" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#AddMonoid.End.natCast_def"><span class="name">AddMonoid</span>.<span class="name">End</span>.<span class="name">natCast_def</span></a></div><div class="nav_link"><a class="break_within" href="#Module.toAddMonoidEnd"><span class="name">Module</span>.<span class="name">toAddMonoidEnd</span></a></div><div class="nav_link"><a class="break_within" href="#Module.toAddMonoidEnd_apply_apply"><span class="name">Module</span>.<span class="name">toAddMonoidEnd_apply_apply</span></a></div><div class="nav_link"><a class="break_within" href="#smulAddHom"><span class="name">smulAddHom</span></a></div><div class="nav_link"><a class="break_within" href="#smulAddHom_apply"><span class="name">smulAddHom_apply</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoid.End.intCast_def"><span class="name">AddMonoid</span>.<span class="name">End</span>.<span class="name">intCast_def</span></a></div><div class="nav_link"><a class="break_within" href="#Int.cast_smul_eq_zsmul"><span class="name">Int</span>.<span class="name">cast_smul_eq_zsmul</span></a></div><div class="nav_link"><a class="break_within" href="#intCast_smul"><span class="name">intCast_smul</span></a></div><div class="nav_link"><a class="break_within" href="#zsmul_eq_smul_cast"><span class="name">zsmul_eq_smul_cast</span></a></div><div class="nav_link"><a class="break_within" href="#int_smul_eq_zsmul"><span class="name">int_smul_eq_zsmul</span></a></div><div class="nav_link"><a class="break_within" href="#AddCommGroup.uniqueIntModule"><span class="name">AddCommGroup</span>.<span class="name">uniqueIntModule</span></a></div><div class="nav_link"><a class="break_within" href="#map_intCast_smul"><span class="name">map_intCast_smul</span></a></div><div class="nav_link"><a class="break_within" href="#AddCommGroup.intIsScalarTower"><span class="name">AddCommGroup</span>.<span class="name">intIsScalarTower</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Module-structure-and-endomorphisms">Module structure and endomorphisms <a class="hover-link" href="#Module-structure-and-endomorphisms">#</a></h1><p>In this file, we define <code><a href="../../.././Mathlib/Algebra/Module/End.html#Module.toAddMonoidEnd">Module.toAddMonoidEnd</a></code>, which is <code>(•)</code> as a monoid homomorphism.
+We use this to prove some results on scalar multiplication by integers.</p></div><div class="decl" id="AddMonoid.End.natCast_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L32-L34">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#AddMonoid.End.natCast_def"><span class="name">AddMonoid</span>.<span class="name">End</span>.<span class="name">natCast_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction.toAddMonoidEnd">DistribMulAction.toAddMonoidEnd</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">M</span>)</span> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Module.toAddMonoidEnd"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L38-L50">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#Module.toAddMonoidEnd"><span class="name">Module</span>.<span class="name">toAddMonoidEnd</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoid.End">AddMonoid.End</a> <span class="fn">M</span></span></span></div></div><p><code>(•)</code> as an <code><a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">AddMonoidHom</a></code>.</p><p>This is a stronger version of <code><a href="../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction.toAddMonoidEnd">DistribMulAction.toAddMonoidEnd</a></code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/End.html#Module.toAddMonoidEnd">Module.toAddMonoidEnd</a> <span class="fn">R</span> <span class="fn">M</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toMonoidHom</span> := <span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction.toAddMonoidEnd">DistribMulAction.toAddMonoidEnd</a> <span class="fn">R</span> <span class="fn">M</span></span>, <span class="fn">map_zero'</span> := <span class="fn">⋯</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Module.toAddMonoidEnd" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Module.toAddMonoidEnd_apply_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L41-L41">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#Module.toAddMonoidEnd_apply_apply"><span class="name">Module</span>.<span class="name">toAddMonoidEnd_apply_apply</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x✝ : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">(<a href="../../.././Mathlib/Algebra/Module/End.html#Module.toAddMonoidEnd">Module.toAddMonoidEnd</a> <span class="fn">R</span> <span class="fn">M</span>)</span> <span class="fn">x</span>)</span> <span class="fn">x✝</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x✝</span></span></span></div></div></div></div><div class="decl" id="smulAddHom"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L52-L55">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#smulAddHom"><span class="name">smulAddHom</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">M</span></span></span></div></div><p>A convenience alias for <code><a href="../../.././Mathlib/Algebra/Module/End.html#Module.toAddMonoidEnd">Module.toAddMonoidEnd</a></code> as an <code><a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">AddMonoidHom</a></code>, usually to allow the
+use of <code><a href="../../.././Mathlib/Algebra/Group/Hom/Instances.html#AddMonoidHom.flip">AddMonoidHom.flip</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/End.html#smulAddHom">smulAddHom</a> <span class="fn">R</span> <span class="fn">M</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Module/End.html#Module.toAddMonoidEnd">Module.toAddMonoidEnd</a> <span class="fn">R</span> <span class="fn">M</span>)</span>.toAddMonoidHom</span></span></li></ul></details><details id="instances-for-list-smulAddHom" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="smulAddHom_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L59-L61">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#smulAddHom_apply"><span class="name">smulAddHom_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">(<a href="../../.././Mathlib/Algebra/Module/End.html#smulAddHom">smulAddHom</a> <span class="fn">R</span> <span class="fn">M</span>)</span> <span class="fn">r</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="AddMonoid.End.intCast_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L69-L71">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#AddMonoid.End.intCast_def"><span class="name">AddMonoid</span>.<span class="name">End</span>.<span class="name">intCast_def</span></a></span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(z : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#DistribMulAction.toAddMonoidEnd">DistribMulAction.toAddMonoidEnd</a> <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">M</span>)</span> <span class="fn">z</span></span></span></div></div></div></div><div class="decl" id="Int.cast_smul_eq_zsmul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L83-L88">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#Int.cast_smul_eq_zsmul"><span class="name">Int</span>.<span class="name">cast_smul_eq_zsmul</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">n</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span></span></div></div><p><code>zsmul</code> is equal to any other module structure via a cast.</p></div></div><div class="decl" id="intCast_smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L90-L90">source</a></div><div class="attributes">@[deprecated Int.cast_smul_eq_zsmul]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#intCast_smul"><span class="name">intCast_smul</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑<span class="fn">n</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/Algebra/Module/End.html#Int.cast_smul_eq_zsmul">Int.cast_smul_eq_zsmul</a></code>.</p><hr></hr><p><code>zsmul</code> is equal to any other module structure via a cast.</p></div></div><div class="decl" id="zsmul_eq_smul_cast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L92-L94">source</a></div><div class="attributes">@[deprecated Int.cast_smul_eq_zsmul]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#zsmul_eq_smul_cast"><span class="name">zsmul_eq_smul_cast</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">n</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span></span></div></div><p><code>zsmul</code> is equal to any other module structure via a cast.</p></div></div><div class="decl" id="int_smul_eq_zsmul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L98-L101">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#int_smul_eq_zsmul"><span class="name">int_smul_eq_zsmul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#SMul.smul">SMul.smul</a> <span class="fn">n</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">n</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span></span></span></div></div><p>Convert back any exotic <code>ℤ</code>-smul to the canonical instance. This should not be needed since in
+mathlib all <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a></code>s should normally have exactly one <code>ℤ</code>-module structure by design.</p></div></div><div class="decl" id="AddCommGroup.uniqueIntModule"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L103-L107">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#AddCommGroup.uniqueIntModule"><span class="name">AddCommGroup</span>.<span class="name">uniqueIntModule</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Unique.html#Unique">Unique</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">M</span>)</span></span></div></div><p>All <code>ℤ</code>-module structures are equal. Not an instance since in mathlib all <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a></code>
+should normally have exactly one <code>ℤ</code>-module structure by design.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">AddCommGroup.uniqueIntModule</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">default</span> := <span class="fn">inferInstance</span>, <span class="fn">uniq</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-AddCommGroup.uniqueIntModule" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="map_intCast_smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L111-L114">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#map_intCast_smul"><span class="name">map_intCast_smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">M</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHomClass">AddMonoidHomClass</a> <span class="fn">F</span> <span class="fn">M</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> u_7)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">S</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="AddCommGroup.intIsScalarTower"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Module/End.lean#L116-L118">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/End.html#AddCommGroup.intIsScalarTower"><span class="name">AddCommGroup</span>.<span class="name">intIsScalarTower</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">R</span> <span class="fn">M</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

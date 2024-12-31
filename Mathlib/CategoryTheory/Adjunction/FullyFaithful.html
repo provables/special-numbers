@@ -1,0 +1,879 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.CategoryTheory.Adjunction.FullyFaithful</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.CategoryTheory.Adjunction.FullyFaithful";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">FullyFaithful</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/CategoryTheory/EpiMono.html">Mathlib.CategoryTheory.EpiMono</a></li><li><a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html">Mathlib.CategoryTheory.Adjunction.Basic</a></li><li><a href="../../.././Mathlib/CategoryTheory/MorphismProperty/Basic.html">Mathlib.CategoryTheory.MorphismProperty.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.CategoryTheory.Adjunction.FullyFaithful" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.unit_mono_of_L_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">unit_mono_of_L_faithful</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.unitSplitEpiOfLFull"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">unitSplitEpiOfLFull</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.unit_isSplitEpi_of_L_full"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">unit_isSplitEpi_of_L_full</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.instIsIsoAppUnitOfFullOfFaithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoAppUnitOfFullOfFaithful</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">unit_isIso_of_L_fully_faithful</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.counit_epi_of_R_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">counit_epi_of_R_faithful</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.counitSplitMonoOfRFull"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">counitSplitMonoOfRFull</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.counit_isSplitMono_of_R_full"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">counit_isSplitMono_of_R_full</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.instIsIsoAppCounitOfFullOfFaithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoAppCounitOfFullOfFaithful</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">counit_isIso_of_R_fully_faithful</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.inv_map_unit"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">inv_map_unit</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeftLCounitIsoOfIsIsoUnit</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit_inv_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeftLCounitIsoOfIsIsoUnit_inv_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit_hom_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeftLCounitIsoOfIsIsoUnit_hom_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.inv_counit_map"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">inv_counit_map</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeftRUnitIsoOfIsIsoCounit</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit_hom_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeftRUnitIsoOfIsIsoCounit_hom_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit_inv_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeftRUnitIsoOfIsIsoCounit_inv_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.faithful_L_of_mono_unit_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">faithful_L_of_mono_unit_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.full_L_of_isSplitEpi_unit_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">full_L_of_isSplitEpi_unit_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">fullyFaithfulLOfIsIsoUnit</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.faithful_R_of_epi_counit_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">faithful_R_of_epi_counit_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.full_R_of_isSplitMono_counit_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">full_R_of_isSplitMono_counit_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">fullyFaithfulROfIsIsoCounit</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.whiskerLeft_counit_iso_of_L_fully_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeft_counit_iso_of_L_fully_faithful</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.whiskerRight_counit_iso_of_L_fully_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerRight_counit_iso_of_L_fully_faithful</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.whiskerLeft_unit_iso_of_R_fully_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeft_unit_iso_of_R_fully_faithful</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.whiskerRight_unit_iso_of_R_fully_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerRight_unit_iso_of_R_fully_faithful</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.instIsIsoAppCounitObjOfFaithfulOfFull"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoAppCounitObjOfFaithfulOfFull</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.instIsIsoMapAppCounitOfFaithfulOfFull"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoMapAppCounitOfFaithfulOfFull</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.isIso_counit_app_iff_mem_essImage"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">isIso_counit_app_iff_mem_essImage</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.mem_essImage_of_counit_isIso"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">mem_essImage_of_counit_isIso</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.isIso_counit_app_of_iso"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">isIso_counit_app_of_iso</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoAppUnitObjOfFaithfulOfFull</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.instIsIsoMapAppUnitOfFaithfulOfFull"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoMapAppUnitOfFaithfulOfFull</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.isIso_unit_app_iff_mem_essImage"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">isIso_unit_app_iff_mem_essImage</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.mem_essImage_of_unit_isIso"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">mem_essImage_of_unit_isIso</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.mem_essImage_of_unit_isIso"><span class="name">CategoryTheory</span>.<span class="name">mem_essImage_of_unit_isIso</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.isIso_unit_app_of_iso"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">isIso_unit_app_of_iso</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoFunctorUnitOfIsEquivalence</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoFunctorCounitOfIsEquivalence</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.isEquivalence_left_of_isEquivalence_right"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">isEquivalence_left_of_isEquivalence_right</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.isEquivalence_right_of_isEquivalence_left"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">isEquivalence_right_of_isEquivalence_left</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence_1"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoFunctorUnitOfIsEquivalence_1</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoFunctorCounitOfIsEquivalence_1</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Adjoints-of-fully-faithful-functors">Adjoints of fully faithful functors <a class="hover-link" href="#Adjoints-of-fully-faithful-functors">#</a></h1><p>A left adjoint is</p><ul>
+<li>faithful, if and only if the unit is a monomorphism</li>
+<li>full, if and only if the unit is a split epimorphism</li>
+<li>fully faithful, if and only if the unit is an isomorphism</li>
+</ul><p>A right adjoint is</p><ul>
+<li>faithful, if and only if the counit is an epimorphism</li>
+<li>full, if and only if the counit is a split monomorphism</li>
+<li>fully faithful, if and only if the counit is an isomorphism</li>
+</ul><p>This is Lemma 4.5.13 in Riehl's <em>Category Theory in Context</em> [riehl2017].
+See also <a href="https://stacks.math.columbia.edu/tag/07RB">https://stacks.math.columbia.edu/tag/07RB</a> for the statements about fully faithful functors.</p><p>In the file <code>Mathlib.CategoryTheory.Monad.Adjunction</code>, we prove that in fact, if there exists an
+isomorphism <code>L ⋙ R ≅ 𝟭 C</code>, then the unit is an isomorphism, and similarly for the counit.
+See <code>CategoryTheory.Adjunction.isIso_unit_of_iso</code> and
+<code>CategoryTheory.Adjunction.isIso_counit_of_iso</code>.</p></div><div class="decl" id="CategoryTheory.Adjunction.unit_mono_of_L_faithful"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L51-L54">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.unit_mono_of_L_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">unit_mono_of_L_faithful</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Faithful</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn">C</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">X</span>)</span></span></div></div><p>If the left adjoint is faithful, then each component of the unit is an monomorphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.unitSplitEpiOfLFull"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L56-L59">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.unitSplitEpiOfLFull"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">unitSplitEpiOfLFull</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Full</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn">C</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.SplitEpi">CategoryTheory.SplitEpi</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">X</span>)</span></span></div></div><p>If the left adjoint is full, then each component of the unit is a split epimorphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">h</span>.unitSplitEpiOfLFull</span> <span class="fn">X</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">section_</span> := <span class="fn"><span class="fn"><span class="fn">L</span>.preimage</span> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">(<span class="fn"><span class="fn">L</span>.obj</span> <span class="fn">X</span>)</span>)</span></span>, <span class="fn">id</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-CategoryTheory.Adjunction.unitSplitEpiOfLFull" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.unit_isSplitEpi_of_L_full"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L61-L63">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.unit_isSplitEpi_of_L_full"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">unit_isSplitEpi_of_L_full</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Full</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn">C</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.IsSplitEpi">CategoryTheory.IsSplitEpi</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">X</span>)</span></span></div></div><p>If the right adjoint is full, then each component of the counit is a split monomorphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.instIsIsoAppUnitOfFullOfFaithful"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L65-L66">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.instIsIsoAppUnitOfFullOfFaithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoAppUnitOfFullOfFaithful</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Faithful</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn">C</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">X</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L68-L70">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">unit_isIso_of_L_fully_faithful</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Faithful</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.unit</span></span></div></div><p>If the left adjoint is fully faithful, then the unit is an isomorphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.counit_epi_of_R_faithful"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L72-L75">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.counit_epi_of_R_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">counit_epi_of_R_faithful</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Faithful</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">X</span>)</span></span></div></div><p>If the right adjoint is faithful, then each component of the counit is an epimorphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.counitSplitMonoOfRFull"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L77-L80">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.counitSplitMonoOfRFull"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">counitSplitMonoOfRFull</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Full</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.SplitMono">CategoryTheory.SplitMono</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">X</span>)</span></span></div></div><p>If the right adjoint is full, then each component of the counit is a split monomorphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">h</span>.counitSplitMonoOfRFull</span> <span class="fn">X</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">retraction</span> := <span class="fn"><span class="fn"><span class="fn">R</span>.preimage</span> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">(<span class="fn"><span class="fn">R</span>.obj</span> <span class="fn">X</span>)</span>)</span></span>, <span class="fn">id</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-CategoryTheory.Adjunction.counitSplitMonoOfRFull" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.counit_isSplitMono_of_R_full"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L82-L84">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.counit_isSplitMono_of_R_full"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">counit_isSplitMono_of_R_full</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Full</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.IsSplitMono">CategoryTheory.IsSplitMono</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">X</span>)</span></span></div></div><p>If the right adjoint is full, then each component of the counit is a split monomorphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.instIsIsoAppCounitOfFullOfFaithful"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L86-L87">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.instIsIsoAppCounitOfFullOfFaithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoAppCounitOfFullOfFaithful</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Faithful</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">X</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L89-L91">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">counit_isIso_of_R_fully_faithful</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Faithful</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.counit</span></span></div></div><p>If the right adjoint is fully faithful, then the counit is an isomorphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.inv_map_unit"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L93-L98">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.inv_map_unit"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">inv_map_unit</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">X</span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.inv">CategoryTheory.inv</a> <span class="fn">(<span class="fn"><span class="fn">L</span>.map</span> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">X</span>)</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">(<span class="fn"><span class="fn">L</span>.obj</span> <span class="fn">X</span>)</span></span></span></div></div><p>If the unit of an adjunction is an isomorphism, then its inverse on the image of L is given
+by L whiskered with the counit.</p></div></div><div class="decl" id="CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L100-L103">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeftLCounitIsoOfIsIsoUnit</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.unit</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">L</span>.comp</span> <span class="fn">(<span class="fn"><span class="fn">R</span>.comp</span> <span class="fn">L</span>)</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn">L</span></span></div></div><p>If the unit is an isomorphism, bundle one has an isomorphism <code>L ⋙ R ⋙ L ≅ L</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">h</span>.whiskerLeftLCounitIsoOfIsIsoUnit</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">L</span>.associator</span> <span class="fn">R</span> <span class="fn">L</span>)</span>.symm</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso.trans">≪≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Whiskering.html#CategoryTheory.isoWhiskerRight">CategoryTheory.isoWhiskerRight</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.asIso">CategoryTheory.asIso</a> <span class="fn"><span class="fn">h</span>.unit</span>)</span>.symm</span> <span class="fn">L</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso.trans">≪≫</a> <span class="fn"><span class="fn">L</span>.leftUnitor</span></span></span></span></li></ul></details><details id="instances-for-list-CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit_inv_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L101-L101">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit_inv_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeftLCounitIsoOfIsIsoUnit_inv_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.unit</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn">C</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">h</span>.whiskerLeftLCounitIsoOfIsIsoUnit</span>.inv</span>.app</span> <span class="fn">X</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">L</span>.map</span> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">X</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit_hom_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L101-L101">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit_hom_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeftLCounitIsoOfIsIsoUnit_hom_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.unit</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn">C</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">h</span>.whiskerLeftLCounitIsoOfIsIsoUnit</span>.hom</span>.app</span> <span class="fn">X</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">(<span class="fn"><span class="fn">L</span>.obj</span> <span class="fn">X</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Adjunction.inv_counit_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L105-L110">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.inv_counit_map"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">inv_counit_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">D</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">X</span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.inv">CategoryTheory.inv</a> <span class="fn">(<span class="fn"><span class="fn">R</span>.map</span> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">X</span>)</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">(<span class="fn"><span class="fn">R</span>.obj</span> <span class="fn">X</span>)</span></span></span></div></div><p>If the counit of an adjunction is an isomorphism, then its inverse on the image of R is given
+by R whiskered with the unit.</p></div></div><div class="decl" id="CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L112-L115">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeftRUnitIsoOfIsIsoCounit</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.counit</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">R</span>.comp</span> <span class="fn">(<span class="fn"><span class="fn">L</span>.comp</span> <span class="fn">R</span>)</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn">R</span></span></div></div><p>If the counit of an is an isomorphism, one has an isomorphism <code>(R ⋙ L ⋙ R) ≅ R</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">h</span>.whiskerLeftRUnitIsoOfIsIsoCounit</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">R</span>.associator</span> <span class="fn">L</span> <span class="fn">R</span>)</span>.symm</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso.trans">≪≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Whiskering.html#CategoryTheory.isoWhiskerRight">CategoryTheory.isoWhiskerRight</a> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.asIso">CategoryTheory.asIso</a> <span class="fn"><span class="fn">h</span>.counit</span>)</span> <span class="fn">R</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso.trans">≪≫</a> <span class="fn"><span class="fn">R</span>.leftUnitor</span></span></span></span></li></ul></details><details id="instances-for-list-CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit_hom_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L113-L113">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit_hom_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeftRUnitIsoOfIsIsoCounit_hom_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.counit</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">h</span>.whiskerLeftRUnitIsoOfIsIsoCounit</span>.hom</span>.app</span> <span class="fn">X</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">R</span>.map</span> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">X</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit_inv_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L113-L113">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit_inv_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeftRUnitIsoOfIsIsoCounit_inv_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.counit</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">h</span>.whiskerLeftRUnitIsoOfIsIsoCounit</span>.inv</span>.app</span> <span class="fn">X</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">(<span class="fn"><span class="fn">R</span>.obj</span> <span class="fn">X</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Adjunction.faithful_L_of_mono_unit_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L117-L122">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.faithful_L_of_mono_unit_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">faithful_L_of_mono_unit_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">X</span> : <span class="fn">C</span>), <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">X</span>)</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span>.Faithful</span></div></div><p>If each component of the unit is a monomorphism, then the left adjoint is faithful.</p></div></div><div class="decl" id="CategoryTheory.Adjunction.full_L_of_isSplitEpi_unit_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L124-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.full_L_of_isSplitEpi_unit_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">full_L_of_isSplitEpi_unit_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">X</span> : <span class="fn">C</span>), <span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.IsSplitEpi">CategoryTheory.IsSplitEpi</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">X</span>)</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span>.Full</span></div></div><p>If each component of the unit is a split epimorphism, then the left adjoint is full.</p></div></div><div class="decl" id="CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L133-L135">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">fullyFaithfulLOfIsIsoUnit</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.unit</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span>.FullyFaithful</span></div></div><p>If the unit is an isomorphism, then the left adjoint is fully faithful.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.faithful_R_of_epi_counit_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L137-L142">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.faithful_R_of_epi_counit_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">faithful_R_of_epi_counit_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">X</span> : <span class="fn">D</span>), <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">X</span>)</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">R</span>.Faithful</span></div></div><p>If each component of the counit is an epimorphism, then the right adjoint is faithful.</p></div></div><div class="decl" id="CategoryTheory.Adjunction.full_R_of_isSplitMono_counit_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L144-L151">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.full_R_of_isSplitMono_counit_app"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">full_R_of_isSplitMono_counit_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">X</span> : <span class="fn">D</span>), <span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.IsSplitMono">CategoryTheory.IsSplitMono</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">X</span>)</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">R</span>.Full</span></div></div><p>If each component of the counit is a split monomorphism, then the right adjoint is full.</p></div></div><div class="decl" id="CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L153-L155">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">fullyFaithfulROfIsIsoCounit</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.counit</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">R</span>.FullyFaithful</span></div></div><p>If the counit is an isomorphism, then the right adjoint is fully faithful.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.whiskerLeft_counit_iso_of_L_fully_faithful"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L157-L162">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.whiskerLeft_counit_iso_of_L_fully_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeft_counit_iso_of_L_fully_faithful</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Faithful</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Whiskering.html#CategoryTheory.whiskerLeft">CategoryTheory.whiskerLeft</a> <span class="fn">L</span> <span class="fn"><span class="fn">h</span>.counit</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.whiskerRight_counit_iso_of_L_fully_faithful"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L164-L169">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.whiskerRight_counit_iso_of_L_fully_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerRight_counit_iso_of_L_fully_faithful</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Faithful</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Whiskering.html#CategoryTheory.whiskerRight">CategoryTheory.whiskerRight</a> <span class="fn"><span class="fn">h</span>.counit</span> <span class="fn">R</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.whiskerLeft_unit_iso_of_R_fully_faithful"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L171-L176">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.whiskerLeft_unit_iso_of_R_fully_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerLeft_unit_iso_of_R_fully_faithful</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Faithful</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Whiskering.html#CategoryTheory.whiskerLeft">CategoryTheory.whiskerLeft</a> <span class="fn">R</span> <span class="fn"><span class="fn">h</span>.unit</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.whiskerRight_unit_iso_of_R_fully_faithful"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L178-L183">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.whiskerRight_unit_iso_of_R_fully_faithful"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">whiskerRight_unit_iso_of_R_fully_faithful</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Faithful</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Whiskering.html#CategoryTheory.whiskerRight">CategoryTheory.whiskerRight</a> <span class="fn"><span class="fn">h</span>.unit</span> <span class="fn">L</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.instIsIsoAppCounitObjOfFaithfulOfFull"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L185-L186">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.instIsIsoAppCounitObjOfFaithfulOfFull"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoAppCounitObjOfFaithfulOfFull</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Faithful</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">(<span class="fn"><span class="fn">L</span>.obj</span> <span class="fn">Y</span>)</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.instIsIsoMapAppCounitOfFaithfulOfFull"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L188-L189">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.instIsIsoMapAppCounitOfFaithfulOfFull"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoMapAppCounitOfFaithfulOfFull</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Faithful</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">D</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn">R</span>.map</span> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">Y</span>)</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.isIso_counit_app_iff_mem_essImage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L191-L198">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.isIso_counit_app_iff_mem_essImage"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">isIso_counit_app_iff_mem_essImage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Faithful</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">D</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">X</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">X</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">L</span>.essImage</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Adjunction.mem_essImage_of_counit_isIso"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L200-L202">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.mem_essImage_of_counit_isIso"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">mem_essImage_of_counit_isIso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn">D</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">A</span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">L</span>.essImage</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Adjunction.isIso_counit_app_of_iso"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L204-L206">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.isIso_counit_app_of_iso"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">isIso_counit_app_of_iso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Faithful</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">D</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><span class="fn"><span class="fn">L</span>.obj</span> <span class="fn">Y</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.counit</span>.app</span> <span class="fn">X</span>)</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L208-L209">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoAppUnitObjOfFaithfulOfFull</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Faithful</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">D</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">(<span class="fn"><span class="fn">R</span>.obj</span> <span class="fn">Y</span>)</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.instIsIsoMapAppUnitOfFaithfulOfFull"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L211-L212">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.instIsIsoMapAppUnitOfFaithfulOfFull"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoMapAppUnitOfFaithfulOfFull</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Faithful</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn">L</span>.map</span> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">X</span>)</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.isIso_unit_app_iff_mem_essImage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L214-L221">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.isIso_unit_app_iff_mem_essImage"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">isIso_unit_app_iff_mem_essImage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Faithful</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">Y</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">Y</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">R</span>.essImage</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Adjunction.mem_essImage_of_unit_isIso"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L223-L226">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.mem_essImage_of_unit_isIso"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">mem_essImage_of_unit_isIso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn">C</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">A</span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">R</span>.essImage</span></span></div></div><p>If <code>η_A</code> is an isomorphism, then <code>A</code> is in the essential image of <code>i</code>.</p></div></div><div class="decl" id="CategoryTheory.mem_essImage_of_unit_isIso"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L228-L229">source</a></div><div class="attributes">@[deprecated CategoryTheory.Adjunction.mem_essImage_of_unit_isIso]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.mem_essImage_of_unit_isIso"><span class="name">CategoryTheory</span>.<span class="name">mem_essImage_of_unit_isIso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <span class="fn">C</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">A</span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">R</span>.essImage</span></span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.mem_essImage_of_unit_isIso">CategoryTheory.Adjunction.mem_essImage_of_unit_isIso</a></code>.</p><hr></hr><p>If <code>η_A</code> is an isomorphism, then <code>A</code> is in the essential image of <code>i</code>.</p></div></div><div class="decl" id="CategoryTheory.Adjunction.isIso_unit_app_of_iso"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L231-L233">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.isIso_unit_app_of_iso"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">isIso_unit_app_of_iso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Faithful</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">D</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><span class="fn"><span class="fn">R</span>.obj</span> <span class="fn">X</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">h</span>.unit</span>.app</span> <span class="fn">Y</span>)</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L235-L237">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoFunctorUnitOfIsEquivalence</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.IsEquivalence</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.unit</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L239-L241">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoFunctorCounitOfIsEquivalence</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.IsEquivalence</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.counit</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.isEquivalence_left_of_isEquivalence_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L243-L244">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.isEquivalence_left_of_isEquivalence_right"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">isEquivalence_left_of_isEquivalence_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.IsEquivalence</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span>.IsEquivalence</span></div></div></div></div><div class="decl" id="CategoryTheory.Adjunction.isEquivalence_right_of_isEquivalence_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L246-L247">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.isEquivalence_right_of_isEquivalence_left"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">isEquivalence_right_of_isEquivalence_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.IsEquivalence</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">R</span>.IsEquivalence</span></div></div></div></div><div class="decl" id="CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence_1"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L249-L251">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence_1"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoFunctorUnitOfIsEquivalence_1</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">L</span>.IsEquivalence</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.unit</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean#L253-L255">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Adjunction/FullyFaithful.html#CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instIsIsoFunctorCounitOfIsEquivalence_1</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">R</span>.IsEquivalence</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> <span class="fn"><span class="fn">h</span>.counit</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

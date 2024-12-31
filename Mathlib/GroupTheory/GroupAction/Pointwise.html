@@ -1,0 +1,372 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.GroupTheory.GroupAction.Pointwise</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.GroupTheory.GroupAction.Pointwise";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">GroupTheory</span>.<span class="name">GroupAction</span>.<span class="name">Pointwise</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/GroupTheory/GroupAction/Hom.html">Mathlib.GroupTheory.GroupAction.Hom</a></li><li><a href="../../.././Mathlib/Algebra/Group/Pointwise/Set/Basic.html">Mathlib.Algebra.Group.Pointwise.Set.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.GroupTheory.GroupAction.Pointwise" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#MulAction.smul_bijective_of_is_unit"><span class="name">MulAction</span>.<span class="name">smul_bijective_of_is_unit</span></a></div><div class="nav_link"><a class="break_within" href="#image_smul_setₛₗ"><span class="name">image_smul_setₛₗ</span></a></div><div class="nav_link"><a class="break_within" href="#smul_preimage_set_leₛₗ"><span class="name">smul_preimage_set_leₛₗ</span></a></div><div class="nav_link"><a class="break_within" href="#preimage_smul_setₛₗ'"><span class="name">preimage_smul_setₛₗ'</span></a></div><div class="nav_link"><a class="break_within" href="#preimage_smul_setₛₗ_of_units"><span class="name">preimage_smul_setₛₗ_of_units</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidHom.preimage_smul_setₛₗ"><span class="name">MonoidHom</span>.<span class="name">preimage_smul_setₛₗ</span></a></div><div class="nav_link"><a class="break_within" href="#preimage_smul_setₛₗ"><span class="name">preimage_smul_setₛₗ</span></a></div><div class="nav_link"><a class="break_within" href="#Group.preimage_smul_setₛₗ"><span class="name">Group</span>.<span class="name">preimage_smul_setₛₗ</span></a></div><div class="nav_link"><a class="break_within" href="#image_smul_set"><span class="name">image_smul_set</span></a></div><div class="nav_link"><a class="break_within" href="#smul_preimage_set_le"><span class="name">smul_preimage_set_le</span></a></div><div class="nav_link"><a class="break_within" href="#preimage_smul_set"><span class="name">preimage_smul_set</span></a></div><div class="nav_link"><a class="break_within" href="#Group.preimage_smul_set"><span class="name">Group</span>.<span class="name">preimage_smul_set</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Pointwise-actions-of-equivariant-maps">Pointwise actions of equivariant maps <a class="hover-link" href="#Pointwise-actions-of-equivariant-maps">#</a></h1><ul>
+<li><p><code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#image_smul_setₛₗ">image_smul_setₛₗ</a></code> : under a <code>σ</code>-equivariant map,
+one has <code>h '' (c • s) = (σ c) • h '' s</code>.</p>
+</li>
+<li><p><code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_setₛₗ'">preimage_smul_setₛₗ'</a></code> is a general version of the equality
+<code>h ⁻¹' (σ c • s) = c • h⁻¹' s</code>.
+It requires that <code>c</code> acts surjectively and <code>σ c</code> acts injectively and
+is provided with specific versions:</p>
+<ul>
+<li><code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_setₛₗ_of_units">preimage_smul_setₛₗ_of_units</a></code> when <code>c</code> and <code>σ c</code> are units</li>
+<li><code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_setₛₗ">preimage_smul_setₛₗ</a></code> when <code>σ</code> belongs to a <code><a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHomClass">MonoidHomClass</a></code>and <code>c</code> is a unit</li>
+<li><code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#MonoidHom.preimage_smul_setₛₗ">MonoidHom.preimage_smul_setₛₗ</a></code> when <code>σ</code> is a <code><a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">MonoidHom</a></code> and <code>c</code> is a unit</li>
+<li><code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#Group.preimage_smul_setₛₗ">Group.preimage_smul_setₛₗ</a></code> : when the types of <code>c</code> and <code>σ c</code> are groups.</li>
+</ul>
+</li>
+<li><p><code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#image_smul_set">image_smul_set</a></code>, <code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_set">preimage_smul_set</a></code> and <code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#Group.preimage_smul_set">Group.preimage_smul_set</a></code> are
+the variants when <code>σ</code> is the identity.</p>
+</li>
+</ul></div><div class="decl" id="MulAction.smul_bijective_of_is_unit"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean#L32-L40">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#MulAction.smul_bijective_of_is_unit"><span class="name">MulAction</span>.<span class="name">smul_bijective_of_is_unit</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">M</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units/Defs.html#IsUnit">IsUnit</a> <span class="fn">m</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Bijective">Function.Bijective</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">m</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="image_smul_setₛₗ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean#L57-L59">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#image_smul_setₛₗ"><span class="name">image_smul_setₛₗ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="decl_args">
+<span class="fn">(N : <a href="../../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(σ : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">S</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Hom.html#MulActionSemiHomClass">MulActionSemiHomClass</a> <span class="fn">F</span> <span class="fn">σ</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">(<span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">s</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">σ</span> <span class="fn">c</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">s</span></span></span></span></div></div></div></div><div class="decl" id="smul_preimage_set_leₛₗ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean#L61-L65">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#smul_preimage_set_leₛₗ"><span class="name">smul_preimage_set_leₛₗ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="decl_args">
+<span class="fn">(N : <a href="../../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(σ : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">S</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Hom.html#MulActionSemiHomClass">MulActionSemiHomClass</a> <span class="fn">F</span> <span class="fn">σ</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">t</span></span></span> <a href="../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">(<span class="fn"><span class="fn">σ</span> <span class="fn">c</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">t</span>)</span></span></span></div></div><p>Translation of preimage is contained in preimage of translation</p></div></div><div class="decl" id="preimage_smul_setₛₗ'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean#L69-L82">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_setₛₗ'"><span class="name">preimage_smul_setₛₗ'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="decl_args">
+<span class="fn">(N : <a href="../../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(σ : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">S</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Hom.html#MulActionSemiHomClass">MulActionSemiHomClass</a> <span class="fn">F</span> <span class="fn">σ</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">fun (<span class="fn">m</span> : <span class="fn">M</span>) =&gt; <span class="fn"><span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">m</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc' : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">fun (<span class="fn">n</span> : <span class="fn">N</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">σ</span> <span class="fn">c</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">(<span class="fn"><span class="fn">σ</span> <span class="fn">c</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">t</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">t</span></span></span></span></div></div><p>General version of <code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_setₛₗ">preimage_smul_setₛₗ</a></code></p></div></div><div class="decl" id="preimage_smul_setₛₗ_of_units"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean#L84-L89">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_setₛₗ_of_units"><span class="name">preimage_smul_setₛₗ_of_units</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="decl_args">
+<span class="fn">(N : <a href="../../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(σ : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">S</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Hom.html#MulActionSemiHomClass">MulActionSemiHomClass</a> <span class="fn">F</span> <span class="fn">σ</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units/Defs.html#IsUnit">IsUnit</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc' : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units/Defs.html#IsUnit">IsUnit</a> <span class="fn">(<span class="fn">σ</span> <span class="fn">c</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">(<span class="fn"><span class="fn">σ</span> <span class="fn">c</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">t</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">t</span></span></span></span></div></div><p><code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_setₛₗ">preimage_smul_setₛₗ</a></code> when both scalars act by unit</p></div></div><div class="decl" id="MonoidHom.preimage_smul_setₛₗ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean#L92-L97">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#MonoidHom.preimage_smul_setₛₗ"><span class="name">MonoidHom</span>.<span class="name">preimage_smul_setₛₗ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="decl_args">
+<span class="fn">(N : <a href="../../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">S</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(σ : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">S</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Hom.html#MulActionSemiHomClass">MulActionSemiHomClass</a> <span class="fn">F</span> <span class="fn">(⇑<span class="fn">σ</span>)</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units/Defs.html#IsUnit">IsUnit</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">(<span class="fn"><span class="fn">σ</span> <span class="fn">c</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">t</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">t</span></span></span></span></div></div><p><code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_setₛₗ">preimage_smul_setₛₗ</a></code> in the context of a <code><a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">MonoidHom</a></code></p></div></div><div class="decl" id="preimage_smul_setₛₗ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean#L99-L105">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_setₛₗ"><span class="name">preimage_smul_setₛₗ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="decl_args">
+<span class="fn">(N : <a href="../../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">S</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">G</span> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHomClass">MonoidHomClass</a> <span class="fn">G</span> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(σ : <span class="fn">G</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_9}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Hom.html#MulActionSemiHomClass">MulActionSemiHomClass</a> <span class="fn">F</span> <span class="fn">(⇑<span class="fn">σ</span>)</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units/Defs.html#IsUnit">IsUnit</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">(<span class="fn"><span class="fn">σ</span> <span class="fn">c</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">t</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">t</span></span></span></span></div></div><p><code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_setₛₗ">preimage_smul_setₛₗ</a></code> in the context of a <code><a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHomClass">MonoidHomClass</a></code></p></div></div><div class="decl" id="Group.preimage_smul_setₛₗ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean#L107-L114">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#Group.preimage_smul_setₛₗ"><span class="name">Group</span>.<span class="name">preimage_smul_setₛₗ</span></a></span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="decl_args">
+<span class="fn">(N : <a href="../../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_9}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(σ : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">S</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_10}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Hom.html#MulActionSemiHomClass">MulActionSemiHomClass</a> <span class="fn">F</span> <span class="fn">σ</span> <span class="fn">M</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">(<span class="fn"><span class="fn">σ</span> <span class="fn">c</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">t</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">t</span></span></span></span></div></div><p><code><a href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_setₛₗ">preimage_smul_setₛₗ</a></code> in the context of a groups</p></div></div><div class="decl" id="image_smul_set"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean#L124-L127">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#image_smul_set"><span class="name">image_smul_set</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(M₁ : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="decl_args">
+<span class="fn">(M₂ : <a href="../../.././foundational_types.html">Type</a> u_5)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">M₁</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Hom.html#MulActionHomClass">MulActionHomClass</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">M₁</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">(<span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">s</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">s</span></span></span></span></div></div></div></div><div class="decl" id="smul_preimage_set_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean#L129-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#smul_preimage_set_le"><span class="name">smul_preimage_set_le</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(M₁ : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="decl_args">
+<span class="fn">(M₂ : <a href="../../.././foundational_types.html">Type</a> u_5)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">M₁</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Hom.html#MulActionHomClass">MulActionHomClass</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">M₁</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">t</span></span></span> <a href="../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">(<span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">t</span>)</span></span></span></div></div></div></div><div class="decl" id="preimage_smul_set"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean#L135-L137">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#preimage_smul_set"><span class="name">preimage_smul_set</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(M₁ : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="decl_args">
+<span class="fn">(M₂ : <a href="../../.././foundational_types.html">Type</a> u_5)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">F</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">M₁</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Hom.html#MulActionHomClass">MulActionHomClass</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">M₁</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units/Defs.html#IsUnit">IsUnit</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">(<span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">t</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">t</span></span></span></span></div></div></div></div><div class="decl" id="Group.preimage_smul_set"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/GroupAction/Pointwise.lean#L139-L145">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/GroupAction/Pointwise.html#Group.preimage_smul_set"><span class="name">Group</span>.<span class="name">preimage_smul_set</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(M₁ : <a href="../../.././foundational_types.html">Type</a> u_9)</span></span>
+<span class="decl_args">
+<span class="fn">(M₂ : <a href="../../.././foundational_types.html">Type</a> u_10)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#MulAction">MulAction</a> <span class="fn">R</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_11}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">M₁</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Hom.html#MulActionHomClass">MulActionHomClass</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">M₁</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">(<span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">t</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">⇑<span class="fn">h</span></span> <a href="../../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">t</span></span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

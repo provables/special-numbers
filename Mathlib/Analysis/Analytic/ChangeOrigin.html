@@ -1,0 +1,925 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.Analytic.ChangeOrigin</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.Analytic.ChangeOrigin";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">Analytic</span>.<span class="name">ChangeOrigin</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Analysis/Analytic/Basic.html">Mathlib.Analysis.Analytic.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.Analytic.ChangeOrigin" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginSeriesTerm"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeriesTerm</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginSeriesTerm_apply"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeriesTerm_apply</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.norm_changeOriginSeriesTerm"><span class="name">FormalMultilinearSeries</span>.<span class="name">norm_changeOriginSeriesTerm</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.nnnorm_changeOriginSeriesTerm"><span class="name">FormalMultilinearSeries</span>.<span class="name">nnnorm_changeOriginSeriesTerm</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.nnnorm_changeOriginSeriesTerm_apply_le"><span class="name">FormalMultilinearSeries</span>.<span class="name">nnnorm_changeOriginSeriesTerm_apply_le</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginSeries"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeries</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.nnnorm_changeOriginSeries_le_tsum"><span class="name">FormalMultilinearSeries</span>.<span class="name">nnnorm_changeOriginSeries_le_tsum</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.nnnorm_changeOriginSeries_apply_le_tsum"><span class="name">FormalMultilinearSeries</span>.<span class="name">nnnorm_changeOriginSeries_apply_le_tsum</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOrigin"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOrigin</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginIndexEquiv"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginIndexEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginIndexEquiv_apply_fst"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginIndexEquiv_apply_fst</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginIndexEquiv_apply_snd"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginIndexEquiv_apply_snd</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginIndexEquiv_symm_apply_snd_snd_coe"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginIndexEquiv_symm_apply_snd_snd_coe</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginIndexEquiv_symm_apply_snd_fst"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginIndexEquiv_symm_apply_snd_fst</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginIndexEquiv_symm_apply_fst"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginIndexEquiv_symm_apply_fst</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginSeriesTerm_changeOriginIndexEquiv_symm"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeriesTerm_changeOriginIndexEquiv_symm</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginSeries_summable_aux₁"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeries_summable_aux₁</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginSeries_summable_aux₂"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeries_summable_aux₂</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOriginSeries_summable_aux₃"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeries_summable_aux₃</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.le_changeOriginSeries_radius"><span class="name">FormalMultilinearSeries</span>.<span class="name">le_changeOriginSeries_radius</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.nnnorm_changeOrigin_le"><span class="name">FormalMultilinearSeries</span>.<span class="name">nnnorm_changeOrigin_le</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOrigin_radius"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOrigin_radius</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.derivSeries"><span class="name">FormalMultilinearSeries</span>.<span class="name">derivSeries</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.radius_le_radius_derivSeries"><span class="name">FormalMultilinearSeries</span>.<span class="name">radius_le_radius_derivSeries</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.hasFPowerSeriesOnBall_changeOrigin"><span class="name">FormalMultilinearSeries</span>.<span class="name">hasFPowerSeriesOnBall_changeOrigin</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.changeOrigin_eval"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOrigin_eval</span></a></div><div class="nav_link"><a class="break_within" href="#FormalMultilinearSeries.analyticAt_changeOrigin"><span class="name">FormalMultilinearSeries</span>.<span class="name">analyticAt_changeOrigin</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesWithinOnBall.changeOrigin"><span class="name">HasFPowerSeriesWithinOnBall</span>.<span class="name">changeOrigin</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesOnBall.changeOrigin"><span class="name">HasFPowerSeriesOnBall</span>.<span class="name">changeOrigin</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesWithinOnBall.analyticWithinAt_of_mem"><span class="name">HasFPowerSeriesWithinOnBall</span>.<span class="name">analyticWithinAt_of_mem</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesOnBall.analyticAt_of_mem"><span class="name">HasFPowerSeriesOnBall</span>.<span class="name">analyticAt_of_mem</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesWithinOnBall.analyticOn"><span class="name">HasFPowerSeriesWithinOnBall</span>.<span class="name">analyticOn</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesOnBall.analyticOnNhd"><span class="name">HasFPowerSeriesOnBall</span>.<span class="name">analyticOnNhd</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesOnBall.analyticOn"><span class="name">HasFPowerSeriesOnBall</span>.<span class="name">analyticOn</span></a></div><div class="nav_link"><a class="break_within" href="#isOpen_analyticAt"><span class="name">isOpen_analyticAt</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticAt.eventually_analyticAt"><span class="name">AnalyticAt</span>.<span class="name">eventually_analyticAt</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticAt.exists_mem_nhds_analyticOnNhd"><span class="name">AnalyticAt</span>.<span class="name">exists_mem_nhds_analyticOnNhd</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticAt.exists_mem_nhds_analyticOn"><span class="name">AnalyticAt</span>.<span class="name">exists_mem_nhds_analyticOn</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticAt.exists_ball_analyticOnNhd"><span class="name">AnalyticAt</span>.<span class="name">exists_ball_analyticOnNhd</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticAt.exists_ball_analyticOn"><span class="name">AnalyticAt</span>.<span class="name">exists_ball_analyticOn</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Changing-origin-in-a-power-series">Changing origin in a power series <a class="hover-link" href="#Changing-origin-in-a-power-series">#</a></h1><p>If a function is analytic in a disk <code>D(x, R)</code>, then it is analytic in any disk contained in that
+one. Indeed, one can write
+$$ f (x + y + z) = \sum_{n} p_n (y + z)^n = \sum_{n, k} \binom{n}{k} p_n y^{n-k} z^k = \sum_{k} \Bigl(\sum_{n} \binom{n}{k} p_n y^{n-k}\Bigr) z^k. $$
+The corresponding power series has thus a <code>k</code>-th coefficient equal to
+$\sum_{n} \binom{n}{k} p_n y^{n-k}$. In the general case where <code>pₙ</code> is a multilinear map, this has
+to be interpreted suitably: instead of having a binomial coefficient, one should sum over all
+possible subsets <code>s</code> of <code><a href="../../.././Init/Prelude.html#Fin">Fin</a> n</code> of cardinality <code>k</code>, and attribute <code>z</code> to the indices in <code>s</code> and
+<code>y</code> to the indices outside of <code>s</code>.</p><p>In this file, we implement this. The new power series is called <code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a> y</code>. Then, we
+check its convergence and the fact that its sum coincides with the original sum. The outcome of this
+discussion is that the set of points where a function is analytic is open. All these arguments
+require the target space to be complete, as otherwise the series might not converge.</p><h3 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h3><p>In a complete space, if a function admits a power series in a ball, then it is analytic at any
+point <code>y</code> of this ball, and the power series there can be expressed in terms of the initial power
+series <code>p</code> as <code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a> y</code>. See <code><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#HasFPowerSeriesOnBall.changeOrigin">HasFPowerSeriesOnBall.changeOrigin</a></code>. It follows in particular
+that the set of points at which a given function is analytic is open, see <code><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#isOpen_analyticAt">isOpen_analyticAt</a></code>.</p></div><div class="decl" id="FormalMultilinearSeries.changeOriginSeriesTerm"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L50-L64">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeriesTerm"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeriesTerm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k l : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Module/Multilinear/Basic.html#ContinuousMultilinearMap">ContinuousMultilinearMap</a> <span class="fn">𝕜</span> <span class="fn">(fun (<span class="fn">i</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">l</span></span>) =&gt; <span class="fn">E</span>)</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Algebra/Module/Multilinear/Basic.html#ContinuousMultilinearMap">ContinuousMultilinearMap</a> <span class="fn">𝕜</span> <span class="fn">(fun (<span class="fn">i</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">k</span></span>) =&gt; <span class="fn">E</span>)</span> <span class="fn">F</span>)</span></span></div></div><p>A term of <code><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeries">FormalMultilinearSeries.changeOriginSeries</a></code>.</p><p>Given a formal multilinear series <code>p</code> and a point <code>x</code> in its ball of convergence,
+<code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a> x</code> is a formal multilinear series such that
+<code>p.sum (x+y) = (p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a> x).sum y</code> when this makes sense. Each term of <code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a> x</code>
+is itself an analytic function of <code>x</code> given by the series <code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeries">changeOriginSeries</a></code>. Each term in
+<code><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeries">changeOriginSeries</a></code> is the sum of <code><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeriesTerm">changeOriginSeriesTerm</a></code>'s over all <code>s</code> of cardinality <code>l</code>.
+The definition is such that <code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeriesTerm">changeOriginSeriesTerm</a> k l s hs (fun _ ↦ x) (fun _ ↦ y) = p (k + l) (s.piecewise (fun _ ↦ x) (fun _ ↦ y))</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">p</span>.changeOriginSeriesTerm</span> <span class="fn">k</span> <span class="fn">l</span> <span class="fn">s</span> <span class="fn">hs</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Analysis/NormedSpace/Multilinear/Curry.html#ContinuousMultilinearMap.curryFinFinset">ContinuousMultilinearMap.curryFinFinset</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">hs</span> <span class="fn">⋯</span>)</span> <span class="fn">(<span class="fn">p</span> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span></span></li></ul></details><details id="instances-for-list-FormalMultilinearSeries.changeOriginSeriesTerm" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="FormalMultilinearSeries.changeOriginSeriesTerm_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L66-L70">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeriesTerm_apply"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeriesTerm_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k l : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x y : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">(<span class="fn">(<span class="fn"><span class="fn">p</span>.changeOriginSeriesTerm</span> <span class="fn">k</span> <span class="fn">l</span> <span class="fn">s</span> <span class="fn">hs</span>)</span> <span class="fn">fun (<span class="fn">x_1</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">l</span></span>) =&gt; <span class="fn">x</span></span>)</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">k</span></span>) =&gt; <span class="fn">y</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">(<span class="fn">p</span> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span> <span class="fn">(<span class="fn"><span class="fn">s</span>.piecewise</span> <span class="fn">(fun (<span class="fn">x_1</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span></span>) =&gt; <span class="fn">x</span>)</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span></span>) =&gt; <span class="fn">y</span></span>)</span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.norm_changeOriginSeriesTerm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L72-L75">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.norm_changeOriginSeriesTerm"><span class="name">FormalMultilinearSeries</span>.<span class="name">norm_changeOriginSeriesTerm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k l : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn"><span class="fn">p</span>.changeOriginSeriesTerm</span> <span class="fn">k</span> <span class="fn">l</span> <span class="fn">s</span> <span class="fn">hs</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">p</span> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.nnnorm_changeOriginSeriesTerm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L77-L80">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.nnnorm_changeOriginSeriesTerm"><span class="name">FormalMultilinearSeries</span>.<span class="name">nnnorm_changeOriginSeriesTerm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k l : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn"><span class="fn">p</span>.changeOriginSeriesTerm</span> <span class="fn">k</span> <span class="fn">l</span> <span class="fn">s</span> <span class="fn">hs</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">p</span> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.nnnorm_changeOriginSeriesTerm_apply_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L82-L88">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.nnnorm_changeOriginSeriesTerm_apply_le"><span class="name">FormalMultilinearSeries</span>.<span class="name">nnnorm_changeOriginSeriesTerm_apply_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k l : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x y : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">(<span class="fn">(<span class="fn"><span class="fn">p</span>.changeOriginSeriesTerm</span> <span class="fn">k</span> <span class="fn">l</span> <span class="fn">s</span> <span class="fn">hs</span>)</span> <span class="fn">fun (<span class="fn">x_1</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">l</span></span>) =&gt; <span class="fn">x</span></span>)</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">k</span></span>) =&gt; <span class="fn">y</span></span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a>   <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">p</span> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">x</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">l</span></span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">y</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">k</span></span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.changeOriginSeries"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L90-L97">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeries"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeries</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Algebra/Module/Multilinear/Basic.html#ContinuousMultilinearMap">ContinuousMultilinearMap</a> <span class="fn">𝕜</span> <span class="fn">(fun (<span class="fn">i</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">k</span></span>) =&gt; <span class="fn">E</span>)</span> <span class="fn">F</span>)</span></span></div></div><p>The power series for <code>f.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a> k</code>.</p><p>Given a formal multilinear series <code>p</code> and a point <code>x</code> in its ball of convergence,
+<code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a> x</code> is a formal multilinear series such that
+<code>p.sum (x+y) = (p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a> x).sum y</code> when this makes sense. Its <code>k</code>-th term is the sum of
+the series <code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeries">changeOriginSeries</a> k</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">p</span>.changeOriginSeries</span> <span class="fn">k</span> <span class="fn">l</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∑ <span class="fn">s</span> : <span class="fn">{ <span class="fn">s</span> : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span> // <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span> }</span>, <span class="fn"><span class="fn"><span class="fn">p</span>.changeOriginSeriesTerm</span> <span class="fn">k</span> <span class="fn">l</span> <span class="fn">↑<span class="fn">s</span></span> <span class="fn">⋯</span></span></span></span></li></ul></details><details id="instances-for-list-FormalMultilinearSeries.changeOriginSeries" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="FormalMultilinearSeries.nnnorm_changeOriginSeries_le_tsum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L99-L103">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.nnnorm_changeOriginSeries_le_tsum"><span class="name">FormalMultilinearSeries</span>.<span class="name">nnnorm_changeOriginSeries_le_tsum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k l : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn"><span class="fn">p</span>.changeOriginSeries</span> <span class="fn">k</span> <span class="fn">l</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">∑' (<span class="fn">x</span> : <span class="fn">{ <span class="fn">s</span> : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span> // <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span> }</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">p</span> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.nnnorm_changeOriginSeries_apply_le_tsum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L105-L109">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.nnnorm_changeOriginSeries_apply_le_tsum"><span class="name">FormalMultilinearSeries</span>.<span class="name">nnnorm_changeOriginSeries_apply_le_tsum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k l : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">(<span class="fn"><span class="fn">p</span>.changeOriginSeries</span> <span class="fn">k</span> <span class="fn">l</span>)</span> <span class="fn">fun (<span class="fn">x_1</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">l</span></span>) =&gt; <span class="fn">x</span></span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a>   <span class="fn">∑' (<span class="fn">x_1</span> : <span class="fn">{ <span class="fn">s</span> : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span> // <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span> }</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">p</span> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">x</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">l</span></span></span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.changeOrigin"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L111-L115">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOrigin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span></div></div><p>Changing the origin of a formal multilinear series <code>p</code>, so that
+<code>p.sum (x+y) = (p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a> x).sum y</code> when this makes sense.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">p</span>.changeOrigin</span> <span class="fn">x</span> <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">p</span>.changeOriginSeries</span> <span class="fn">k</span>)</span>.sum</span> <span class="fn">x</span></span></span></li></ul></details><details id="instances-for-list-FormalMultilinearSeries.changeOrigin" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="FormalMultilinearSeries.changeOriginIndexEquiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L117-L148">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginIndexEquiv"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginIndexEquiv</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn">(<span class="fn">l</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn">{ <span class="fn">s</span> : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span> // <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span> }</span></span></span> <a href="../../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">(<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span>)</span></span></span></span></div></div><p>An auxiliary equivalence useful in the proofs about
+<code><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeries">FormalMultilinearSeries.changeOriginSeries</a></code>: the set of triples <code>(k, l, s)</code>, where <code>s</code> is a
+<code><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> (Fin (k + l))</code> of cardinality <code>l</code> is equivalent to the set of pairs <code>(n, s)</code>, where <code>s</code> is a
+<code><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> (Fin n)</code>.</p><p>The forward map sends <code>(k, l, s)</code> to <code>(k + l, s)</code> and the inverse map sends <code>(n, s)</code> to
+<code>(n - <a href="../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> s, <a href="../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> s, s)</code>. The actual definition is less readable because of problems
+with non-definitional equalities.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-FormalMultilinearSeries.changeOriginIndexEquiv" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="FormalMultilinearSeries.changeOriginIndexEquiv_apply_fst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L125-L125">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginIndexEquiv_apply_fst"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginIndexEquiv_apply_fst</span></a></span><span class="decl_args">
+<span class="fn">(s : <span class="fn">(<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn">(<span class="fn">l</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn">{ <span class="fn">s</span> : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span> // <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span> }</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">FormalMultilinearSeries.changeOriginIndexEquiv</span> <span class="fn">s</span>)</span>.fst</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">s</span>.fst</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn"><span class="fn">s</span>.snd</span>.fst</span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.changeOriginIndexEquiv_apply_snd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L125-L125">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginIndexEquiv_apply_snd"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginIndexEquiv_apply_snd</span></a></span><span class="decl_args">
+<span class="fn">(s : <span class="fn">(<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn">(<span class="fn">l</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn">{ <span class="fn">s</span> : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span> // <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span> }</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">FormalMultilinearSeries.changeOriginIndexEquiv</span> <span class="fn">s</span>)</span>.snd</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn"><span class="fn"><span class="fn">s</span>.snd</span>.snd</span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.changeOriginIndexEquiv_symm_apply_snd_snd_coe"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L125-L125">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginIndexEquiv_symm_apply_snd_snd_coe"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginIndexEquiv_symm_apply_snd_snd_coe</span></a></span><span class="decl_args">
+<span class="fn">(s : <span class="fn">(<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn"><span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginIndexEquiv">FormalMultilinearSeries.changeOriginIndexEquiv</a>.symm</span> <span class="fn">s</span>)</span>.snd</span>.snd</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Finset/Image.html#Finset.map">Finset.map</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Data/Fin/Basic.html#finCongr">finCongr</a> <span class="fn">⋯</span>)</span>.toEmbedding</span> <span class="fn"><span class="fn">s</span>.snd</span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.changeOriginIndexEquiv_symm_apply_snd_fst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L125-L125">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginIndexEquiv_symm_apply_snd_fst"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginIndexEquiv_symm_apply_snd_fst</span></a></span><span class="decl_args">
+<span class="fn">(s : <span class="fn">(<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginIndexEquiv">FormalMultilinearSeries.changeOriginIndexEquiv</a>.symm</span> <span class="fn">s</span>)</span>.snd</span>.fst</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">s</span>.snd</span>.card</span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.changeOriginIndexEquiv_symm_apply_fst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L125-L125">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginIndexEquiv_symm_apply_fst"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginIndexEquiv_symm_apply_fst</span></a></span><span class="decl_args">
+<span class="fn">(s : <span class="fn">(<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginIndexEquiv">FormalMultilinearSeries.changeOriginIndexEquiv</a>.symm</span> <span class="fn">s</span>)</span>.fst</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">s</span>.fst</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn"><span class="fn">s</span>.snd</span>.card</span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.changeOriginSeriesTerm_changeOriginIndexEquiv_symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L150-L158">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeriesTerm_changeOriginIndexEquiv_symm"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeriesTerm_changeOriginIndexEquiv_symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">let <span class="fn">s</span> := <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginIndexEquiv">FormalMultilinearSeries.changeOriginIndexEquiv</a>.symm</span> <span class="fn">⟨<span class="fn">n</span>, <span class="fn">t</span>⟩</span></span>;
+<span class="fn"><span class="fn">(<span class="fn">(<span class="fn">(<span class="fn"><span class="fn">p</span>.changeOriginSeriesTerm</span> <span class="fn"><span class="fn">s</span>.fst</span> <span class="fn"><span class="fn"><span class="fn">s</span>.snd</span>.fst</span> <span class="fn">↑<span class="fn"><span class="fn"><span class="fn">s</span>.snd</span>.snd</span></span> <span class="fn">⋯</span>)</span> <span class="fn">fun (<span class="fn">x_1</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn"><span class="fn"><span class="fn">s</span>.snd</span>.fst</span></span>) =&gt; <span class="fn">x</span></span>)</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn"><span class="fn">s</span>.fst</span></span>) =&gt; <span class="fn">y</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">(<span class="fn">p</span> <span class="fn">n</span>)</span> <span class="fn">(<span class="fn"><span class="fn">t</span>.piecewise</span> <span class="fn">(fun (<span class="fn">x_1</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>) =&gt; <span class="fn">x</span>)</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>) =&gt; <span class="fn">y</span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.changeOriginSeries_summable_aux₁"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L160-L178">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeries_summable_aux₁"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeries_summable_aux₁</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{r r' : <a href="../../.././Mathlib/Data/NNReal/Defs.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">↑<span class="fn">r'</span></span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">p</span>.radius</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable">Summable</a> <span class="fn">fun (<span class="fn">s</span> : <span class="fn">(<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn">(<span class="fn">l</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn">{ <span class="fn">s</span> : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span> // <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span> }</span></span></span>) =&gt;
+  <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">p</span> <span class="fn">(<span class="fn"><span class="fn">s</span>.fst</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn"><span class="fn">s</span>.snd</span>.fst</span>)</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn"><span class="fn">s</span>.snd</span>.fst</span></span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">r'</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">s</span>.fst</span></span></span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.changeOriginSeries_summable_aux₂"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L180-L185">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeries_summable_aux₂"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeries_summable_aux₂</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/NNReal/Defs.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">↑<span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">p</span>.radius</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable">Summable</a> <span class="fn">fun (<span class="fn">s</span> : <span class="fn">(<span class="fn">l</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn">{ <span class="fn">s</span> : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span> // <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span> }</span></span>) =&gt; <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">p</span> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">s</span>.fst</span>)</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">s</span>.fst</span></span></span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.changeOriginSeries_summable_aux₃"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L187-L192">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOriginSeries_summable_aux₃"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOriginSeries_summable_aux₃</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/NNReal/Defs.html#NNReal">NNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">↑<span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">p</span>.radius</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable">Summable</a> <span class="fn">fun (<span class="fn">l</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) =&gt; <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn"><span class="fn">p</span>.changeOriginSeries</span> <span class="fn">k</span> <span class="fn">l</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">l</span></span></span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.le_changeOriginSeries_radius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L194-L196">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.le_changeOriginSeries_radius"><span class="name">FormalMultilinearSeries</span>.<span class="name">le_changeOriginSeries_radius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span>.radius</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">p</span>.changeOriginSeries</span> <span class="fn">k</span>)</span>.radius</span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.nnnorm_changeOrigin_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L198-L204">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.nnnorm_changeOrigin_le"><span class="name">FormalMultilinearSeries</span>.<span class="name">nnnorm_changeOrigin_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">↑<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">x</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">p</span>.radius</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn"><span class="fn">p</span>.changeOrigin</span> <span class="fn">x</span> <span class="fn">k</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">∑' (<span class="fn">s</span> : <span class="fn">(<span class="fn">l</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) × <span class="fn">{ <span class="fn">s</span> : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">l</span>)</span>)</span></span> // <span class="fn"><span class="fn"><span class="fn">s</span>.card</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">l</span></span> }</span></span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn"><span class="fn">p</span> <span class="fn">(<span class="fn">k</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">s</span>.fst</span>)</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">x</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">s</span>.fst</span></span></span></span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.changeOrigin_radius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L206-L221">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin_radius"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOrigin_radius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">p</span>.radius</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">x</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">p</span>.changeOrigin</span> <span class="fn">x</span>)</span>.radius</span></span></div></div><p>The radius of convergence of <code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a> x</code> is at least <code>p.radius - ‖x‖</code>. In other words,
+<code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a> x</code> is well defined on the largest ball contained in the original ball of
+convergence.</p></div></div><div class="decl" id="FormalMultilinearSeries.derivSeries"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L223-L227">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.derivSeries"><span class="name">FormalMultilinearSeries</span>.<span class="name">derivSeries</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">(<span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span>)</span></span></div></div><p><code><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.derivSeries">derivSeries</a> p</code> is a power series for <code>fderiv 𝕜 f</code> if <code>p</code> is a power series for <code>f</code>,
+see <code>HasFPowerSeriesOnBall.fderiv</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-FormalMultilinearSeries.derivSeries" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="FormalMultilinearSeries.radius_le_radius_derivSeries"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L229-L233">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.radius_le_radius_derivSeries"><span class="name">FormalMultilinearSeries</span>.<span class="name">radius_le_radius_derivSeries</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span>.radius</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">p</span>.derivSeries</span>.radius</span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.hasFPowerSeriesOnBall_changeOrigin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L241-L244">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.hasFPowerSeriesOnBall_changeOrigin"><span class="name">FormalMultilinearSeries</span>.<span class="name">hasFPowerSeriesOnBall_changeOrigin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">p</span>.radius</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesOnBall">HasFPowerSeriesOnBall</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">E</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">p</span>.changeOrigin</span> <span class="fn">x</span> <span class="fn">k</span></span>)</span> <span class="fn">(<span class="fn"><span class="fn">p</span>.changeOriginSeries</span> <span class="fn">k</span>)</span> <span class="fn">0</span> <span class="fn"><span class="fn">p</span>.radius</span></span></div></div></div></div><div class="decl" id="FormalMultilinearSeries.changeOrigin_eval"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L246-L284">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin_eval"><span class="name">FormalMultilinearSeries</span>.<span class="name">changeOrigin_eval</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">↑<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">x</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">↑<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">y</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">p</span>.radius</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">p</span>.changeOrigin</span> <span class="fn">x</span>)</span>.sum</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">p</span>.sum</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span></span></div></div><p>Summing the series <code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a> x</code> at a point <code>y</code> gives back <code>p (x + y)</code>.</p></div></div><div class="decl" id="FormalMultilinearSeries.analyticAt_changeOrigin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L286-L289">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.analyticAt_changeOrigin"><span class="name">FormalMultilinearSeries</span>.<span class="name">analyticAt_changeOrigin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(rp : <span class="fn"><span class="fn"><span class="fn">p</span>.radius</span> <a href="../../.././Init/Prelude.html#GT.gt">&gt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">E</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">p</span>.changeOrigin</span> <span class="fn">x</span> <span class="fn">n</span></span>)</span> <span class="fn">0</span></span></div></div><p>Power series terms are analytic as we vary the origin</p></div></div><div class="decl" id="HasFPowerSeriesWithinOnBall.changeOrigin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L299-L324">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#HasFPowerSeriesWithinOnBall.changeOrigin"><span class="name">HasFPowerSeriesWithinOnBall</span>.<span class="name">changeOrigin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesWithinOnBall">HasFPowerSeriesWithinOnBall</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">↑<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">y</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hy : <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Init/Core.html#Insert.insert">insert</a> <span class="fn">x</span> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesWithinOnBall">HasFPowerSeriesWithinOnBall</a> <span class="fn">f</span> <span class="fn">(<span class="fn"><span class="fn">p</span>.changeOrigin</span> <span class="fn">y</span>)</span> <span class="fn">s</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span> <span class="fn">(<span class="fn">r</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">y</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span>)</span></span></div></div><p>If a function admits a power series expansion <code>p</code> within a set <code>s</code> on a ball <code>B (x, r)</code>, then
+it also admits a power series on any subball of this ball (even with a different center provided
+it belongs to <code>s</code>), given by <code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a></code>.</p></div></div><div class="decl" id="HasFPowerSeriesOnBall.changeOrigin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L326-L332">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#HasFPowerSeriesOnBall.changeOrigin"><span class="name">HasFPowerSeriesOnBall</span>.<span class="name">changeOrigin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesOnBall">HasFPowerSeriesOnBall</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">x</span> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">↑<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">y</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesOnBall">HasFPowerSeriesOnBall</a> <span class="fn">f</span> <span class="fn">(<span class="fn"><span class="fn">p</span>.changeOrigin</span> <span class="fn">y</span>)</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span> <span class="fn">(<span class="fn">r</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖</a><span class="fn">y</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NNNorm.nnnorm">‖₊</a></span></span>)</span></span></div></div><p>If a function admits a power series expansion <code>p</code> on a ball <code>B (x, r)</code>, then it also admits a
+power series on any subball of this ball (even with a different center), given by <code>p.<a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#FormalMultilinearSeries.changeOrigin">changeOrigin</a></code>.</p></div></div><div class="decl" id="HasFPowerSeriesWithinOnBall.analyticWithinAt_of_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L334-L342">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#HasFPowerSeriesWithinOnBall.analyticWithinAt_of_mem"><span class="name">HasFPowerSeriesWithinOnBall</span>.<span class="name">analyticWithinAt_of_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesWithinOnBall">HasFPowerSeriesWithinOnBall</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn"><a href="../../.././Init/Core.html#Insert.insert">insert</a> <span class="fn">x</span> <span class="fn">s</span></span> <a href="../../.././Init/Core.html#Inter.inter">∩</a> <span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#EMetric.ball">EMetric.ball</a> <span class="fn">x</span> <span class="fn">r</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticWithinAt">AnalyticWithinAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">s</span> <span class="fn">y</span></span></div></div><p>If a function admits a power series expansion <code>p</code> on an open ball <code>B (x, r)</code>, then
+it is analytic at every point of this ball.</p></div></div><div class="decl" id="HasFPowerSeriesOnBall.analyticAt_of_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L344-L350">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#HasFPowerSeriesOnBall.analyticAt_of_mem"><span class="name">HasFPowerSeriesOnBall</span>.<span class="name">analyticAt_of_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesOnBall">HasFPowerSeriesOnBall</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">x</span> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#EMetric.ball">EMetric.ball</a> <span class="fn">x</span> <span class="fn">r</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">y</span></span></div></div><p>If a function admits a power series expansion <code>p</code> on an open ball <code>B (x, r)</code>, then
+it is analytic at every point of this ball.</p></div></div><div class="decl" id="HasFPowerSeriesWithinOnBall.analyticOn"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L352-L355">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#HasFPowerSeriesWithinOnBall.analyticOn"><span class="name">HasFPowerSeriesWithinOnBall</span>.<span class="name">analyticOn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesWithinOnBall">HasFPowerSeriesWithinOnBall</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">s</span> <span class="fn">x</span> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOn">AnalyticOn</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">(<span class="fn"><a href="../../.././Init/Core.html#Insert.insert">insert</a> <span class="fn">x</span> <span class="fn">s</span></span> <a href="../../.././Init/Core.html#Inter.inter">∩</a> <span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#EMetric.ball">EMetric.ball</a> <span class="fn">x</span> <span class="fn">r</span></span>)</span></span></div></div></div></div><div class="decl" id="HasFPowerSeriesOnBall.analyticOnNhd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L357-L359">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#HasFPowerSeriesOnBall.analyticOnNhd"><span class="name">HasFPowerSeriesOnBall</span>.<span class="name">analyticOnNhd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesOnBall">HasFPowerSeriesOnBall</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">x</span> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOnNhd">AnalyticOnNhd</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">(<a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#EMetric.ball">EMetric.ball</a> <span class="fn">x</span> <span class="fn">r</span>)</span></span></div></div></div></div><div class="decl" id="HasFPowerSeriesOnBall.analyticOn"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L361-L362">source</a></div><div class="attributes">@[deprecated HasFPowerSeriesOnBall.analyticOnNhd]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#HasFPowerSeriesOnBall.analyticOn"><span class="name">HasFPowerSeriesOnBall</span>.<span class="name">analyticOn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesOnBall">HasFPowerSeriesOnBall</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">x</span> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOnNhd">AnalyticOnNhd</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">(<a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#EMetric.ball">EMetric.ball</a> <span class="fn">x</span> <span class="fn">r</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#HasFPowerSeriesOnBall.analyticOnNhd">HasFPowerSeriesOnBall.analyticOnNhd</a></code>.</p></div></div><div class="decl" id="isOpen_analyticAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L365-L370">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#isOpen_analyticAt"><span class="name">isOpen_analyticAt</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#IsOpen">IsOpen</a> <span class="fn">{<span class="fn">x</span> : <span class="fn">E</span> | <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span>}</span></span></div></div><p>For any function <code>f</code> from a normed vector space to a Banach space, the set of points <code>x</code> such
+that <code>f</code> is analytic at <code>x</code> is open.</p></div></div><div class="decl" id="AnalyticAt.eventually_analyticAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L372-L374">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#AnalyticAt.eventually_analyticAt"><span class="name">AnalyticAt</span>.<span class="name">eventually_analyticAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ᶠ (<span class="fn">y</span> : <span class="fn">E</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">x</span></span>, <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">y</span></span></span></div></div></div></div><div class="decl" id="AnalyticAt.exists_mem_nhds_analyticOnNhd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L376-L378">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#AnalyticAt.exists_mem_nhds_analyticOnNhd"><span class="name">AnalyticAt</span>.<span class="name">exists_mem_nhds_analyticOnNhd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">s</span> ∈ <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">x</span></span>, <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOnNhd">AnalyticOnNhd</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="AnalyticAt.exists_mem_nhds_analyticOn"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L380-L381">source</a></div><div class="attributes">@[deprecated AnalyticAt.exists_mem_nhds_analyticOnNhd]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#AnalyticAt.exists_mem_nhds_analyticOn"><span class="name">AnalyticAt</span>.<span class="name">exists_mem_nhds_analyticOn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">s</span> ∈ <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">x</span></span>, <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOnNhd">AnalyticOnNhd</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">s</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#AnalyticAt.exists_mem_nhds_analyticOnNhd">AnalyticAt.exists_mem_nhds_analyticOnNhd</a></code>.</p></div></div><div class="decl" id="AnalyticAt.exists_ball_analyticOnNhd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L383-L386">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#AnalyticAt.exists_ball_analyticOnNhd"><span class="name">AnalyticAt</span>.<span class="name">exists_ball_analyticOnNhd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">r</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOnNhd">AnalyticOnNhd</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/Pseudo/Defs.html#Metric.ball">Metric.ball</a> <span class="fn">x</span> <span class="fn">r</span>)</span></span></span></span></div></div><p>If we're analytic at a point, we're analytic in a nonempty ball</p></div></div><div class="decl" id="AnalyticAt.exists_ball_analyticOn"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/Analytic/ChangeOrigin.lean#L388-L389">source</a></div><div class="attributes">@[deprecated AnalyticAt.exists_ball_analyticOnNhd]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#AnalyticAt.exists_ball_analyticOn"><span class="name">AnalyticAt</span>.<span class="name">exists_ball_analyticOn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">r</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOnNhd">AnalyticOnNhd</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/Pseudo/Defs.html#Metric.ball">Metric.ball</a> <span class="fn">x</span> <span class="fn">r</span>)</span></span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/Analysis/Analytic/ChangeOrigin.html#AnalyticAt.exists_ball_analyticOnNhd">AnalyticAt.exists_ball_analyticOnNhd</a></code>.</p><hr></hr><p>If we're analytic at a point, we're analytic in a nonempty ball</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

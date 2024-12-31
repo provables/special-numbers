@@ -1,0 +1,356 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Topology.Algebra.Polynomial</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Topology.Algebra.Polynomial";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Topology</span>.<span class="name">Algebra</span>.<span class="name">Polynomial</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Algebra/Polynomial/AlgebraMap.html">Mathlib.Algebra.Polynomial.AlgebraMap</a></li><li><a href="../../.././Mathlib/Algebra/Polynomial/Inductions.html">Mathlib.Algebra.Polynomial.Inductions</a></li><li><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html">Mathlib.Algebra.Polynomial.Splits</a></li><li><a href="../../.././Mathlib/RingTheory/Polynomial/Vieta.html">Mathlib.RingTheory.Polynomial.Vieta</a></li><li><a href="../../.././Mathlib/Analysis/Normed/Field/Lemmas.html">Mathlib.Analysis.Normed.Field.Lemmas</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Topology.Algebra.Polynomial" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Polynomial.continuous_eval₂"><span class="name">Polynomial</span>.<span class="name">continuous_eval₂</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.continuous"><span class="name">Polynomial</span>.<span class="name">continuous</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.continuousAt"><span class="name">Polynomial</span>.<span class="name">continuousAt</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.continuousWithinAt"><span class="name">Polynomial</span>.<span class="name">continuousWithinAt</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.continuousOn"><span class="name">Polynomial</span>.<span class="name">continuousOn</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.continuous_aeval"><span class="name">Polynomial</span>.<span class="name">continuous_aeval</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.continuousAt_aeval"><span class="name">Polynomial</span>.<span class="name">continuousAt_aeval</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.continuousWithinAt_aeval"><span class="name">Polynomial</span>.<span class="name">continuousWithinAt_aeval</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.continuousOn_aeval"><span class="name">Polynomial</span>.<span class="name">continuousOn_aeval</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.tendsto_abv_eval₂_atTop"><span class="name">Polynomial</span>.<span class="name">tendsto_abv_eval₂_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.tendsto_abv_atTop"><span class="name">Polynomial</span>.<span class="name">tendsto_abv_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.tendsto_abv_aeval_atTop"><span class="name">Polynomial</span>.<span class="name">tendsto_abv_aeval_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.tendsto_norm_atTop"><span class="name">Polynomial</span>.<span class="name">tendsto_norm_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.exists_forall_norm_le"><span class="name">Polynomial</span>.<span class="name">exists_forall_norm_le</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.eq_one_of_roots_le"><span class="name">Polynomial</span>.<span class="name">eq_one_of_roots_le</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.coeff_le_of_roots_le"><span class="name">Polynomial</span>.<span class="name">coeff_le_of_roots_le</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.coeff_bdd_of_roots_le"><span class="name">Polynomial</span>.<span class="name">coeff_bdd_of_roots_le</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Polynomials-and-limits">Polynomials and limits <a class="hover-link" href="#Polynomials-and-limits">#</a></h1><p>In this file we prove the following lemmas.</p><ul>
+<li><code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuous_eval₂">Polynomial.continuous_eval₂</a></code>: <code><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval₂">Polynomial.eval₂</a></code> defines a continuous function.</li>
+<li><code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuous_aeval">Polynomial.continuous_aeval</a></code>: <code><a href="../../.././Mathlib/Algebra/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a></code> defines a continuous function;
+we also prove convenience lemmas <code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuousAt_aeval">Polynomial.continuousAt_aeval</a></code>,
+<code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuousWithinAt_aeval">Polynomial.continuousWithinAt_aeval</a></code>, <code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuousOn_aeval">Polynomial.continuousOn_aeval</a></code>.</li>
+<li><code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuous">Polynomial.continuous</a></code>:  <code><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval">Polynomial.eval</a></code> defines a continuous functions;
+we also prove convenience lemmas <code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuousAt">Polynomial.continuousAt</a></code>, <code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuousWithinAt">Polynomial.continuousWithinAt</a></code>,
+<code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuousOn">Polynomial.continuousOn</a></code>.</li>
+<li><code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.tendsto_norm_atTop">Polynomial.tendsto_norm_atTop</a></code>: <code>fun x ↦ ‖Polynomial.eval (z x) p‖</code> tends to infinity provided
+that <code>fun x ↦ ‖z x‖</code> tends to infinity and <code>0 &lt; degree p</code>;</li>
+<li><code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.tendsto_abv_eval₂_atTop">Polynomial.tendsto_abv_eval₂_atTop</a></code>, <code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.tendsto_abv_atTop">Polynomial.tendsto_abv_atTop</a></code>,
+<code><a href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.tendsto_abv_aeval_atTop">Polynomial.tendsto_abv_aeval_atTop</a></code>: a few versions of the previous statement for
+<code><a href="../../.././Mathlib/Algebra/Order/AbsoluteValue.html#IsAbsoluteValue">IsAbsoluteValue</a> abv</code> instead of norm.</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>Polynomial, continuity</p></div><div class="decl" id="Polynomial.continuous_eval₂"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L44-L48">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuous_eval₂"><span class="name">Polynomial</span>.<span class="name">continuous_eval₂</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalSemiring">TopologicalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">S</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">R</span>) =&gt; <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval₂">Polynomial.eval₂</a> <span class="fn">f</span> <span class="fn">x</span> <span class="fn">p</span></span></span></span></div></div></div></div><div class="decl" id="Polynomial.continuous"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L50-L52">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuous"><span class="name">Polynomial</span>.<span class="name">continuous</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalSemiring">TopologicalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">R</span>) =&gt; <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval">Polynomial.eval</a> <span class="fn">x</span> <span class="fn">p</span></span></span></span></div></div></div></div><div class="decl" id="Polynomial.continuousAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L54-L56">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuousAt"><span class="name">Polynomial</span>.<span class="name">continuousAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalSemiring">TopologicalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#ContinuousAt">ContinuousAt</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">R</span>) =&gt; <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval">Polynomial.eval</a> <span class="fn">x</span> <span class="fn">p</span></span>)</span> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="Polynomial.continuousWithinAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L58-L60">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuousWithinAt"><span class="name">Polynomial</span>.<span class="name">continuousWithinAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalSemiring">TopologicalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#ContinuousWithinAt">ContinuousWithinAt</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">R</span>) =&gt; <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval">Polynomial.eval</a> <span class="fn">x</span> <span class="fn">p</span></span>)</span> <span class="fn">s</span> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="Polynomial.continuousOn"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L62-L64">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuousOn"><span class="name">Polynomial</span>.<span class="name">continuousOn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalSemiring">TopologicalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#ContinuousOn">ContinuousOn</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">R</span>) =&gt; <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval">Polynomial.eval</a> <span class="fn">x</span> <span class="fn">p</span></span>)</span> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Polynomial.continuous_aeval"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L73-L75">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuous_aeval"><span class="name">Polynomial</span>.<span class="name">continuous_aeval</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalSemiring">TopologicalSemiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">A</span>) =&gt; <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn">x</span>)</span> <span class="fn">p</span></span></span></span></div></div></div></div><div class="decl" id="Polynomial.continuousAt_aeval"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L77-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuousAt_aeval"><span class="name">Polynomial</span>.<span class="name">continuousAt_aeval</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalSemiring">TopologicalSemiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#ContinuousAt">ContinuousAt</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">A</span>) =&gt; <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn">x</span>)</span> <span class="fn">p</span></span>)</span> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="Polynomial.continuousWithinAt_aeval"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L81-L84">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuousWithinAt_aeval"><span class="name">Polynomial</span>.<span class="name">continuousWithinAt_aeval</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalSemiring">TopologicalSemiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">A</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#ContinuousWithinAt">ContinuousWithinAt</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">A</span>) =&gt; <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn">x</span>)</span> <span class="fn">p</span></span>)</span> <span class="fn">s</span> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="Polynomial.continuousOn_aeval"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L86-L88">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.continuousOn_aeval"><span class="name">Polynomial</span>.<span class="name">continuousOn_aeval</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalSemiring">TopologicalSemiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">A</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#ContinuousOn">ContinuousOn</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">A</span>) =&gt; <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn">x</span>)</span> <span class="fn">p</span></span>)</span> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="Polynomial.tendsto_abv_eval₂_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L92-L107">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.tendsto_abv_eval₂_atTop"><span class="name">Polynomial</span>.<span class="name">tendsto_abv_eval₂_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(abv : <span class="fn"><span class="fn">S</span> → <span class="fn">k</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/AbsoluteValue.html#IsAbsoluteValue">IsAbsoluteValue</a> <span class="fn">abv</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hd : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">p</span>.degree</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">p</span>.leadingCoeff</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn"><span class="fn">α</span> → <span class="fn">S</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hz : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(<span class="fn">abv</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">z</span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">abv</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval₂">Polynomial.eval₂</a> <span class="fn">f</span> <span class="fn">(<span class="fn">z</span> <span class="fn">x</span>)</span> <span class="fn">p</span>)</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></div></div></div></div><div class="decl" id="Polynomial.tendsto_abv_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L109-L113">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.tendsto_abv_atTop"><span class="name">Polynomial</span>.<span class="name">tendsto_abv_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(abv : <span class="fn"><span class="fn">R</span> → <span class="fn">k</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/AbsoluteValue.html#IsAbsoluteValue">IsAbsoluteValue</a> <span class="fn">abv</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">p</span>.degree</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn"><span class="fn">α</span> → <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hz : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(<span class="fn">abv</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">z</span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">abv</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval">Polynomial.eval</a> <span class="fn">(<span class="fn">z</span> <span class="fn">x</span>)</span> <span class="fn">p</span>)</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></div></div></div></div><div class="decl" id="Polynomial.tendsto_abv_aeval_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L115-L119">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.tendsto_abv_aeval_atTop"><span class="name">Polynomial</span>.<span class="name">tendsto_abv_aeval_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(abv : <span class="fn"><span class="fn">A</span> → <span class="fn">k</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/AbsoluteValue.html#IsAbsoluteValue">IsAbsoluteValue</a> <span class="fn">abv</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hd : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">p</span>.degree</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">A</span>)</span> <span class="fn"><span class="fn">p</span>.leadingCoeff</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn"><span class="fn">α</span> → <span class="fn">A</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hz : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(<span class="fn">abv</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">z</span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">abv</span> <span class="fn">(<span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn">(<span class="fn">z</span> <span class="fn">x</span>)</span>)</span> <span class="fn">p</span>)</span></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></div></div></div></div><div class="decl" id="Polynomial.tendsto_norm_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L123-L125">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.tendsto_norm_atTop"><span class="name">Polynomial</span>.<span class="name">tendsto_norm_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedRing">NormedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/AbsoluteValue.html#IsAbsoluteValue">IsAbsoluteValue</a> <span class="fn">norm</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">p</span>.degree</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter">Filter</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn"><span class="fn">α</span> → <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hz : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">z</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval">Polynomial.eval</a> <span class="fn">(<span class="fn">z</span> <span class="fn">x</span>)</span> <span class="fn">p</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span>)</span> <span class="fn">l</span> <span class="fn">Filter.atTop</span></span></div></div></div></div><div class="decl" id="Polynomial.exists_forall_norm_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L127-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.exists_forall_norm_le"><span class="name">Polynomial</span>.<span class="name">exists_forall_norm_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedRing">NormedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Order/AbsoluteValue.html#IsAbsoluteValue">IsAbsoluteValue</a> <span class="fn">norm</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ProperSpace.html#ProperSpace">ProperSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">x</span> : <span class="fn">R</span>), <span class="fn">∀ (<span class="fn">y</span> : <span class="fn">R</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval">Polynomial.eval</a> <span class="fn">x</span> <span class="fn">p</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval">Polynomial.eval</a> <span class="fn">y</span> <span class="fn">p</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span></span></div></div></div></div><div class="decl" id="Polynomial.eq_one_of_roots_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L141-L147">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.eq_one_of_roots_le"><span class="name">Polynomial</span>.<span class="name">eq_one_of_roots_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hB : <span class="fn"><span class="fn">B</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">p</span>.Monic</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h2 : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">f</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h3 : <span class="fn">∀ <span class="fn">z</span> ∈ <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.map">Polynomial.map</a> <span class="fn">f</span> <span class="fn">p</span>)</span>.roots</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">z</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">B</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="Polynomial.coeff_le_of_roots_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L149-L174">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.coeff_le_of_roots_le"><span class="name">Polynomial</span>.<span class="name">coeff_le_of_roots_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">p</span>.Monic</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h2 : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">f</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h3 : <span class="fn">∀ <span class="fn">z</span> ∈ <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.map">Polynomial.map</a> <span class="fn">f</span> <span class="fn">p</span>)</span>.roots</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">z</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">B</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.map">Polynomial.map</a> <span class="fn">f</span> <span class="fn">p</span>)</span>.coeff</span> <span class="fn">i</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">B</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">(<span class="fn"><span class="fn">p</span>.natDegree</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">i</span>)</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">(<span class="fn"><span class="fn"><span class="fn">p</span>.natDegree</span>.choose</span> <span class="fn">i</span>)</span></span></span></span></div></div></div></div><div class="decl" id="Polynomial.coeff_bdd_of_roots_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/Polynomial.lean#L176-L194">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Algebra/Polynomial.html#Polynomial.coeff_bdd_of_roots_le"><span class="name">Polynomial</span>.<span class="name">coeff_bdd_of_roots_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">K</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">p</span>.Monic</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h2 : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">f</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h3 : <span class="fn"><span class="fn"><span class="fn">p</span>.natDegree</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h4 : <span class="fn">∀ <span class="fn">z</span> ∈ <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.map">Polynomial.map</a> <span class="fn">f</span> <span class="fn">p</span>)</span>.roots</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">z</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">B</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.map">Polynomial.map</a> <span class="fn">f</span> <span class="fn">p</span>)</span>.coeff</span> <span class="fn">i</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn">B</span> <a href="../../.././Init/Prelude.html#Max.max">⊔</a> <span class="fn">1</span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">(<span class="fn"><span class="fn">d</span>.choose</span> <span class="fn">(<span class="fn">d</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span>)</span>)</span></span></span></span></div></div><p>The coefficients of the monic polynomials of bounded degree with bounded roots are
+uniformly bounded.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

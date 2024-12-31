@@ -1,0 +1,488 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Topology.MetricSpace.ThickenedIndicator</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Topology.MetricSpace.ThickenedIndicator";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Topology</span>.<span class="name">MetricSpace</span>.<span class="name">ThickenedIndicator</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Data/ENNReal/Lemmas.html">Mathlib.Data.ENNReal.Lemmas</a></li><li><a href="../../.././Mathlib/Topology/MetricSpace/Thickening.html">Mathlib.Topology.MetricSpace.Thickening</a></li><li><a href="../../.././Mathlib/Topology/ContinuousMap/Bounded/Basic.html">Mathlib.Topology.ContinuousMap.Bounded.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Topology.MetricSpace.ThickenedIndicator" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#thickenedIndicatorAux"><span class="name">thickenedIndicatorAux</span></a></div><div class="nav_link"><a class="break_within" href="#continuous_thickenedIndicatorAux"><span class="name">continuous_thickenedIndicatorAux</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicatorAux_le_one"><span class="name">thickenedIndicatorAux_le_one</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicatorAux_lt_top"><span class="name">thickenedIndicatorAux_lt_top</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicatorAux_closure_eq"><span class="name">thickenedIndicatorAux_closure_eq</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicatorAux_one"><span class="name">thickenedIndicatorAux_one</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicatorAux_one_of_mem_closure"><span class="name">thickenedIndicatorAux_one_of_mem_closure</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicatorAux_zero"><span class="name">thickenedIndicatorAux_zero</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicatorAux_mono"><span class="name">thickenedIndicatorAux_mono</span></a></div><div class="nav_link"><a class="break_within" href="#indicator_le_thickenedIndicatorAux"><span class="name">indicator_le_thickenedIndicatorAux</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicatorAux_subset"><span class="name">thickenedIndicatorAux_subset</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicatorAux_tendsto_indicator_closure"><span class="name">thickenedIndicatorAux_tendsto_indicator_closure</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicator"><span class="name">thickenedIndicator</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicator_apply"><span class="name">thickenedIndicator_apply</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicator_toFun"><span class="name">thickenedIndicator_toFun</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicator.coeFn_eq_comp"><span class="name">thickenedIndicator</span>.<span class="name">coeFn_eq_comp</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicator_le_one"><span class="name">thickenedIndicator_le_one</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicator_one_of_mem_closure"><span class="name">thickenedIndicator_one_of_mem_closure</span></a></div><div class="nav_link"><a class="break_within" href="#one_le_thickenedIndicator_apply'"><span class="name">one_le_thickenedIndicator_apply'</span></a></div><div class="nav_link"><a class="break_within" href="#one_le_thickenedIndicator_apply"><span class="name">one_le_thickenedIndicator_apply</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicator_one"><span class="name">thickenedIndicator_one</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicator_zero"><span class="name">thickenedIndicator_zero</span></a></div><div class="nav_link"><a class="break_within" href="#indicator_le_thickenedIndicator"><span class="name">indicator_le_thickenedIndicator</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicator_mono"><span class="name">thickenedIndicator_mono</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicator_subset"><span class="name">thickenedIndicator_subset</span></a></div><div class="nav_link"><a class="break_within" href="#thickenedIndicator_tendsto_indicator_closure"><span class="name">thickenedIndicator_tendsto_indicator_closure</span></a></div><div class="nav_link"><a class="break_within" href="#mulIndicator_thickening_eventually_eq_mulIndicator_closure"><span class="name">mulIndicator_thickening_eventually_eq_mulIndicator_closure</span></a></div><div class="nav_link"><a class="break_within" href="#indicator_thickening_eventually_eq_indicator_closure"><span class="name">indicator_thickening_eventually_eq_indicator_closure</span></a></div><div class="nav_link"><a class="break_within" href="#mulIndicator_cthickening_eventually_eq_mulIndicator_closure"><span class="name">mulIndicator_cthickening_eventually_eq_mulIndicator_closure</span></a></div><div class="nav_link"><a class="break_within" href="#indicator_cthickening_eventually_eq_indicator_closure"><span class="name">indicator_cthickening_eventually_eq_indicator_closure</span></a></div><div class="nav_link"><a class="break_within" href="#tendsto_mulIndicator_thickening_mulIndicator_closure"><span class="name">tendsto_mulIndicator_thickening_mulIndicator_closure</span></a></div><div class="nav_link"><a class="break_within" href="#tendsto_indicator_thickening_indicator_closure"><span class="name">tendsto_indicator_thickening_indicator_closure</span></a></div><div class="nav_link"><a class="break_within" href="#tendsto_mulIndicator_cthickening_mulIndicator_closure"><span class="name">tendsto_mulIndicator_cthickening_mulIndicator_closure</span></a></div><div class="nav_link"><a class="break_within" href="#tendsto_indicator_cthickening_indicator_closure"><span class="name">tendsto_indicator_cthickening_indicator_closure</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Thickened-indicators">Thickened indicators <a class="hover-link" href="#Thickened-indicators">#</a></h1><p>This file is about thickened indicators of sets in (pseudo e)metric spaces. For a decreasing
+sequence of thickening radii tending to 0, the thickened indicators of a closed set form a
+decreasing pointwise converging approximation of the indicator function of the set, where the
+members of the approximating sequence are nonnegative bounded continuous functions.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> δ E</code>: The <code>δ</code>-thickened indicator of a set <code>E</code> as an
+unbundled <code>ℝ≥0∞</code>-valued function.</li>
+<li><code><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> δ E</code>: The <code>δ</code>-thickened indicator of a set <code>E</code> as a bundled
+bounded continuous <code>ℝ≥0</code>-valued function.</li>
+</ul><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><ul>
+<li>For a sequence of thickening radii tending to 0, the <code>δ</code>-thickened indicators of a set <code>E</code> tend
+pointwise to the indicator of <code><a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> E</code>.<ul>
+<li><code><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux_tendsto_indicator_closure">thickenedIndicatorAux_tendsto_indicator_closure</a></code>: The version is for the
+unbundled <code>ℝ≥0∞</code>-valued functions.</li>
+<li><code><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator_tendsto_indicator_closure">thickenedIndicator_tendsto_indicator_closure</a></code>: The version is for the bundled <code>ℝ≥0</code>-valued
+bounded continuous functions.</li>
+</ul>
+</li>
+</ul></div><div class="decl" id="thickenedIndicatorAux"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L42-L49">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux"><span class="name">thickenedIndicatorAux</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal">ENNReal</a></span></div></div><p>The <code>δ</code>-thickened indicator of a set <code>E</code> is the function that equals <code>1</code> on <code>E</code>
+and <code>0</code> outside a <code>δ</code>-thickening of <code>E</code> and interpolates (continuously) between
+these values using <code>infEdist _ E</code>.</p><p><code><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a></code> is the unbundled <code>ℝ≥0∞</code>-valued function. See <code><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a></code>
+for the (bundled) bounded continuous function with <code>ℝ≥0</code>-values.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/HausdorffDistance.html#EMetric.infEdist">EMetric.infEdist</a> <span class="fn">x</span> <span class="fn">E</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><a href="../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal.ofReal">ENNReal.ofReal</a> <span class="fn">δ</span></span></span></span></span></li></ul></details><details id="instances-for-list-thickenedIndicatorAux" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="continuous_thickenedIndicatorAux"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L51-L59">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#continuous_thickenedIndicatorAux"><span class="name">continuous_thickenedIndicatorAux</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span>)</span></span></div></div></div></div><div class="decl" id="thickenedIndicatorAux_le_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L61-L63">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux_le_one"><span class="name">thickenedIndicatorAux_le_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="thickenedIndicatorAux_lt_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L65-L67">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux_lt_top"><span class="name">thickenedIndicatorAux_lt_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <a href="../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></div></div></div><div class="decl" id="thickenedIndicatorAux_closure_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L69-L71">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux_closure_eq"><span class="name">thickenedIndicatorAux_closure_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span></span></span></div></div></div></div><div class="decl" id="thickenedIndicatorAux_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L73-L75">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux_one"><span class="name">thickenedIndicatorAux_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x_in_E : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="thickenedIndicatorAux_one_of_mem_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L77-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux_one_of_mem_closure"><span class="name">thickenedIndicatorAux_one_of_mem_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x_mem : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="thickenedIndicatorAux_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L81-L89">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux_zero"><span class="name">thickenedIndicatorAux_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x_out : <span class="fn"><span class="fn">x</span> ∉ <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Thickening.html#Metric.thickening">Metric.thickening</a> <span class="fn">δ</span> <span class="fn">E</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="thickenedIndicatorAux_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L91-L93">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux_mono"><span class="name">thickenedIndicatorAux_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ₁ δ₂ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hle : <span class="fn"><span class="fn">δ₁</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">δ₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ₁</span> <span class="fn">E</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ₂</span> <span class="fn">E</span></span></span></div></div></div></div><div class="decl" id="indicator_le_thickenedIndicatorAux"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L95-L100">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#indicator_le_thickenedIndicatorAux"><span class="name">indicator_le_thickenedIndicatorAux</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">E</span>.indicator</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn">1</span></span>)</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span></span></span></div></div></div></div><div class="decl" id="thickenedIndicatorAux_subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L102-L104">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux_subset"><span class="name">thickenedIndicatorAux_subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E₁ E₂ : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(subset : <span class="fn"><span class="fn">E₁</span> <a href="../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">E₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E₁</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E₂</span></span></span></div></div></div></div><div class="decl" id="thickenedIndicatorAux_tendsto_indicator_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L106-L136">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux_tendsto_indicator_closure"><span class="name">thickenedIndicatorAux_tendsto_indicator_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δseq : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δseq_lim : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">δseq</span> <span class="fn">Filter.atTop</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) =&gt; <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">(<span class="fn">δseq</span> <span class="fn">n</span>)</span> <span class="fn">E</span></span>)</span> <span class="fn">Filter.atTop</span>
+  <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span>)</span>.indicator</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn">1</span></span>)</span>)</span></span></div></div><p>As the thickening radius δ tends to 0, the δ-thickened indicator of a set E (in α) tends
+pointwise (i.e., w.r.t. the product topology on <code>α → ℝ≥0∞</code>) to the indicator function of the
+closure of E.</p><p>This statement is for the unbundled <code>ℝ≥0∞</code>-valued functions <code><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> δ E</code>, see
+<code><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator_tendsto_indicator_closure">thickenedIndicator_tendsto_indicator_closure</a></code> for the version for bundled <code>ℝ≥0</code>-valued
+bounded continuous functions.</p></div></div><div class="decl" id="thickenedIndicator"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L138-L161">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator"><span class="name">thickenedIndicator</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/ContinuousMap/Bounded/Basic.html#BoundedContinuousFunction">BoundedContinuousFunction</a> <span class="fn">α</span> <a href="../../.././Mathlib/Data/NNReal/Defs.html#NNReal">NNReal</a></span></div></div><p>The <code>δ</code>-thickened indicator of a set <code>E</code> is the function that equals <code>1</code> on <code>E</code>
+and <code>0</code> outside a <code>δ</code>-thickening of <code>E</code> and interpolates (continuously) between
+these values using <code>infEdist _ E</code>.</p><p><code><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a></code> is the (bundled) bounded continuous function with <code>ℝ≥0</code>-values.
+See <code><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a></code> for the unbundled <code>ℝ≥0∞</code>-valued function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">E</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span> <span class="fn">x</span>)</span>.toNNReal</span></span>, <span class="fn">continuous_toFun</span> := <span class="fn">⋯</span>, <span class="fn">map_bounded'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-thickenedIndicator" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="thickenedIndicator_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L144-L144">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator_apply"><span class="name">thickenedIndicator_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">E</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span> <span class="fn">x</span>)</span>.toNNReal</span></span></div></div></div></div><div class="decl" id="thickenedIndicator_toFun"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L144-L144">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator_toFun"><span class="name">thickenedIndicator_toFun</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">E</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span> <span class="fn">x</span>)</span>.toNNReal</span></span></div></div></div></div><div class="decl" id="thickenedIndicator.coeFn_eq_comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L163-L165">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator.coeFn_eq_comp"><span class="name">thickenedIndicator</span>.<span class="name">coeFn_eq_comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">E</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/ENNReal/Basic.html#ENNReal.toNNReal">ENNReal.toNNReal</a> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicatorAux">thickenedIndicatorAux</a> <span class="fn">δ</span> <span class="fn">E</span></span></span></span></div></div></div></div><div class="decl" id="thickenedIndicator_le_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L167-L171">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator_le_one"><span class="name">thickenedIndicator_le_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">E</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="thickenedIndicator_one_of_mem_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L173-L175">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator_one_of_mem_closure"><span class="name">thickenedIndicator_one_of_mem_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x_mem : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">E</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="one_le_thickenedIndicator_apply'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L177-L180">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#one_le_thickenedIndicator_apply'"><span class="name">one_le_thickenedIndicator_apply'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">X</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hxF : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">F</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">F</span>)</span> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="one_le_thickenedIndicator_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L182-L185">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#one_le_thickenedIndicator_apply"><span class="name">one_le_thickenedIndicator_apply</span></a></span><span class="decl_args">
+<span class="fn">(X : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">X</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hxF : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">F</span>)</span> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="thickenedIndicator_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L187-L189">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator_one"><span class="name">thickenedIndicator_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x_in_E : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">E</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="thickenedIndicator_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L191-L193">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator_zero"><span class="name">thickenedIndicator_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x_out : <span class="fn"><span class="fn">x</span> ∉ <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Thickening.html#Metric.thickening">Metric.thickening</a> <span class="fn">δ</span> <span class="fn">E</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">E</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="indicator_le_thickenedIndicator"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L195-L200">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#indicator_le_thickenedIndicator"><span class="name">indicator_le_thickenedIndicator</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">E</span>.indicator</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn">1</span></span>)</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">E</span>)</span></span></span></div></div></div></div><div class="decl" id="thickenedIndicator_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L202-L206">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator_mono"><span class="name">thickenedIndicator_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ₁ δ₂ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ₁_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(δ₂_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hle : <span class="fn"><span class="fn">δ₁</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">δ₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ₁_pos</span> <span class="fn">E</span>)</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ₂_pos</span> <span class="fn">E</span>)</span></span></span></div></div></div></div><div class="decl" id="thickenedIndicator_subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L208-L211">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator_subset"><span class="name">thickenedIndicator_subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δ_pos : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">δ</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{E₁ E₂ : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(subset : <span class="fn"><span class="fn">E₁</span> <a href="../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">E₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">E₁</span>)</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">δ_pos</span> <span class="fn">E₂</span>)</span></span></span></div></div></div></div><div class="decl" id="thickenedIndicator_tendsto_indicator_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L213-L230">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator_tendsto_indicator_closure"><span class="name">thickenedIndicator_tendsto_indicator_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δseq : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(δseq_pos : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">δseq</span> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(δseq_lim : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">δseq</span> <span class="fn">Filter.atTop</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) =&gt; <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#thickenedIndicator">thickenedIndicator</a> <span class="fn">⋯</span> <span class="fn">E</span>)</span></span>)</span> <span class="fn">Filter.atTop</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span>)</span>.indicator</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn">1</span></span>)</span>)</span></span></div></div><p>As the thickening radius δ tends to 0, the δ-thickened indicator of a set E (in α) tends
+pointwise to the indicator function of the closure of E.</p><p>Note: This version is for the bundled bounded continuous functions, but the topology is not
+the topology on <code>α →ᵇ ℝ≥0</code>. Coercions to functions <code>α → ℝ≥0</code> are done first, so the topology
+instance is the product topology (the topology of pointwise convergence).</p></div></div><div class="decl" id="mulIndicator_thickening_eventually_eq_mulIndicator_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L238-L251">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#mulIndicator_thickening_eventually_eq_mulIndicator_closure"><span class="name">mulIndicator_thickening_eventually_eq_mulIndicator_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ᶠ (<span class="fn">δ</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>) in <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#nhdsWithin">nhdsWithin</a> <span class="fn">0</span> <span class="fn">(<a href="../../.././Mathlib/Order/Interval/Set/Defs.html#Set.Ioi">Set.Ioi</a> <span class="fn">0</span>)</span></span>, <span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/Thickening.html#Metric.thickening">Metric.thickening</a> <span class="fn">δ</span> <span class="fn">E</span>)</span>.mulIndicator</span> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span>)</span>.mulIndicator</span> <span class="fn">f</span> <span class="fn">x</span></span></span></span></div></div><p>Pointwise, the multiplicative indicators of δ-thickenings of a set eventually coincide
+with the multiplicative indicator of the set as δ&gt;0 tends to zero.</p></div></div><div class="decl" id="indicator_thickening_eventually_eq_indicator_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L240-L241">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#indicator_thickening_eventually_eq_indicator_closure"><span class="name">indicator_thickening_eventually_eq_indicator_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ᶠ (<span class="fn">δ</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>) in <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#nhdsWithin">nhdsWithin</a> <span class="fn">0</span> <span class="fn">(<a href="../../.././Mathlib/Order/Interval/Set/Defs.html#Set.Ioi">Set.Ioi</a> <span class="fn">0</span>)</span></span>, <span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/Thickening.html#Metric.thickening">Metric.thickening</a> <span class="fn">δ</span> <span class="fn">E</span>)</span>.indicator</span> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span>)</span>.indicator</span> <span class="fn">f</span> <span class="fn">x</span></span></span></span></div></div><p>Pointwise, the indicators of δ-thickenings of a set eventually coincide
+with the indicator of the set as δ&gt;0 tends to zero.</p></div></div><div class="decl" id="mulIndicator_cthickening_eventually_eq_mulIndicator_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L253-L265">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#mulIndicator_cthickening_eventually_eq_mulIndicator_closure"><span class="name">mulIndicator_cthickening_eventually_eq_mulIndicator_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ᶠ (<span class="fn">δ</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>) in <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span></span>, <span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/Thickening.html#Metric.cthickening">Metric.cthickening</a> <span class="fn">δ</span> <span class="fn">E</span>)</span>.mulIndicator</span> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span>)</span>.mulIndicator</span> <span class="fn">f</span> <span class="fn">x</span></span></span></span></div></div><p>Pointwise, the multiplicative indicators of closed δ-thickenings of a set eventually coincide
+with the multiplicative indicator of the set as δ tends to zero.</p></div></div><div class="decl" id="indicator_cthickening_eventually_eq_indicator_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L255-L256">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#indicator_cthickening_eventually_eq_indicator_closure"><span class="name">indicator_cthickening_eventually_eq_indicator_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ᶠ (<span class="fn">δ</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>) in <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span></span>, <span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/Thickening.html#Metric.cthickening">Metric.cthickening</a> <span class="fn">δ</span> <span class="fn">E</span>)</span>.indicator</span> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span>)</span>.indicator</span> <span class="fn">f</span> <span class="fn">x</span></span></span></span></div></div><p>Pointwise, the indicators of closed δ-thickenings of a set eventually coincide
+with the indicator of the set as δ tends to zero.</p></div></div><div class="decl" id="tendsto_mulIndicator_thickening_mulIndicator_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L269-L279">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#tendsto_mulIndicator_thickening_mulIndicator_closure"><span class="name">tendsto_mulIndicator_thickening_mulIndicator_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">δ</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>) =&gt; <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/Thickening.html#Metric.thickening">Metric.thickening</a> <span class="fn">δ</span> <span class="fn">E</span>)</span>.mulIndicator</span> <span class="fn">f</span></span>)</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhdsWithin">nhdsWithin</a> <span class="fn">0</span> <span class="fn">(<a href="../../.././Mathlib/Order/Interval/Set/Defs.html#Set.Ioi">Set.Ioi</a> <span class="fn">0</span>)</span>)</span>
+  <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span>)</span>.mulIndicator</span> <span class="fn">f</span>)</span>)</span></span></div></div><p>The multiplicative indicators of δ-thickenings of a set tend pointwise to the multiplicative
+indicator of the set, as δ&gt;0 tends to zero.</p></div></div><div class="decl" id="tendsto_indicator_thickening_indicator_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L271-L272">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#tendsto_indicator_thickening_indicator_closure"><span class="name">tendsto_indicator_thickening_indicator_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">δ</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>) =&gt; <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/Thickening.html#Metric.thickening">Metric.thickening</a> <span class="fn">δ</span> <span class="fn">E</span>)</span>.indicator</span> <span class="fn">f</span></span>)</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhdsWithin">nhdsWithin</a> <span class="fn">0</span> <span class="fn">(<a href="../../.././Mathlib/Order/Interval/Set/Defs.html#Set.Ioi">Set.Ioi</a> <span class="fn">0</span>)</span>)</span>
+  <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span>)</span>.indicator</span> <span class="fn">f</span>)</span>)</span></span></div></div><p>The indicators of δ-thickenings of a set tend pointwise to the indicator of the
+set, as δ&gt;0 tends to zero.</p></div></div><div class="decl" id="tendsto_mulIndicator_cthickening_mulIndicator_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L281-L291">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#tendsto_mulIndicator_cthickening_mulIndicator_closure"><span class="name">tendsto_mulIndicator_cthickening_mulIndicator_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/ZeroOne.html#One">One</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">δ</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>) =&gt; <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/Thickening.html#Metric.cthickening">Metric.cthickening</a> <span class="fn">δ</span> <span class="fn">E</span>)</span>.mulIndicator</span> <span class="fn">f</span></span>)</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span>)</span>.mulIndicator</span> <span class="fn">f</span>)</span>)</span></span></div></div><p>The multiplicative indicators of closed δ-thickenings of a set tend pointwise to the
+multiplicative indicator of the set, as δ tends to zero.</p></div></div><div class="decl" id="tendsto_indicator_cthickening_indicator_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/MetricSpace/ThickenedIndicator.lean#L283-L284">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/MetricSpace/ThickenedIndicator.html#tendsto_indicator_cthickening_indicator_closure"><span class="name">tendsto_indicator_cthickening_indicator_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/EMetricSpace/Defs.html#PseudoEMetricSpace">PseudoEMetricSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">δ</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>) =&gt; <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/MetricSpace/Thickening.html#Metric.cthickening">Metric.cthickening</a> <span class="fn">δ</span> <span class="fn">E</span>)</span>.indicator</span> <span class="fn">f</span></span>)</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">0</span>)</span> <span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/Topology/Defs/Basic.html#closure">closure</a> <span class="fn">E</span>)</span>.indicator</span> <span class="fn">f</span>)</span>)</span></span></div></div><p>The indicators of closed δ-thickenings of a set tend pointwise to the indicator
+of the set, as δ tends to zero.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

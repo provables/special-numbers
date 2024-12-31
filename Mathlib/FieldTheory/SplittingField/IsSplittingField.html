@@ -1,0 +1,267 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.FieldTheory.SplittingField.IsSplittingField</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.FieldTheory.SplittingField.IsSplittingField";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">FieldTheory</span>.<span class="name">SplittingField</span>.<span class="name">IsSplittingField</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/FieldTheory/IntermediateField/Basic.html">Mathlib.FieldTheory.IntermediateField.Basic</a></li><li><a href="../../.././Mathlib/RingTheory/Adjoin/Field.html">Mathlib.RingTheory.Adjoin.Field</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.FieldTheory.SplittingField.IsSplittingField" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Polynomial.IsSplittingField"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.IsSplittingField.splits"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">splits</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.IsSplittingField.adjoin_rootSet"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">adjoin_rootSet</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.IsSplittingField.map"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">map</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.IsSplittingField.splits_iff"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">splits_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.IsSplittingField.mul"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">mul</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.IsSplittingField.lift"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">lift</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.IsSplittingField.finiteDimensional"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">finiteDimensional</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.IsSplittingField.of_algEquiv"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">of_algEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.IsSplittingField.adjoin_rootSet_eq_range"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">adjoin_rootSet_eq_range</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.splits_of_splits"><span class="name">IntermediateField</span>.<span class="name">splits_of_splits</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.splits_iff_mem"><span class="name">IntermediateField</span>.<span class="name">splits_iff_mem</span></a></div><div class="nav_link"><a class="break_within" href="#IsIntegral.mem_intermediateField_of_minpoly_splits"><span class="name">IsIntegral</span>.<span class="name">mem_intermediateField_of_minpoly_splits</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Splitting-fields">Splitting fields <a class="hover-link" href="#Splitting-fields">#</a></h1><p>This file introduces the notion of a splitting field of a polynomial and provides an embedding from
+a splitting field to any field that splits the polynomial. A polynomial <code>f : K[X]</code> splits
+over a field extension <code>L</code> of <code>K</code> if it is zero or all of its irreducible factors over <code>L</code> have
+degree <code>1</code>. A field extension of <code>K</code> of a polynomial <code>f : K[X]</code> is called a splitting field
+if it is the smallest field extension of <code>K</code> such that <code>f</code> splits.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a></code>: A predicate on a field to be a splitting field of a polynomial
+<code>f</code>.</li>
+</ul><h2 class="markdown-heading" id="Main-statements">Main statements <a class="hover-link" href="#Main-statements">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField.lift">Polynomial.IsSplittingField.lift</a></code>: An embedding of a splitting field of the polynomial <code>f</code> into
+another field such that <code>f</code> splits.</li>
+</ul></div><div class="decl" id="Polynomial.IsSplittingField"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L40-L44">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span></a></span><span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>Typeclass characterising splitting fields.</p><p><a href="https://stacks.math.columbia.edu/tag/09HV">Stacks Tag 09HV</a> (Predicate version)</p><ul class="structure_fields" id="Polynomial.IsSplittingField.mk"><li id="Polynomial.IsSplittingField.splits'" class="structure_field"><div class="structure_field_info">splits' : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">L</span>)</span> <span class="fn">f</span></span></div></li><li id="Polynomial.IsSplittingField.adjoin_rootSet'" class="structure_field"><div class="structure_field_info">adjoin_rootSet' : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">K</span> <span class="fn">(<span class="fn"><span class="fn">f</span>.rootSet</span> <span class="fn">L</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-Polynomial.IsSplittingField" class="instances-list"></ul></details></div></div><div class="decl" id="Polynomial.IsSplittingField.splits"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L52-L53">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField.splits"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">splits</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">K</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">L</span>)</span> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Polynomial.IsSplittingField.adjoin_rootSet"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L57-L59">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField.adjoin_rootSet"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">adjoin_rootSet</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">K</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">K</span> <span class="fn">(<span class="fn"><span class="fn">f</span>.rootSet</span> <span class="fn">L</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></div></div></div><div class="decl" id="Polynomial.IsSplittingField.map"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L65-L70">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField.map"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.map">Polynomial.map</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">F</span> <span class="fn">K</span>)</span> <span class="fn">f</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Polynomial.IsSplittingField.splits_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L72-L86">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField.splits_iff"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">splits_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">K</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom.id">RingHom.id</a> <span class="fn">K</span>)</span> <span class="fn">f</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Order/Notation.html#Top.top">⊤</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/Notation.html#Bot.bot">⊥</a></span></span></div></div></div></div><div class="decl" id="Polynomial.IsSplittingField.mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L88-L100">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField.mul"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f g : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">f</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><span class="fn">g</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">F</span> <span class="fn">K</span> <span class="fn">f</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.map">Polynomial.map</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">F</span> <span class="fn">K</span>)</span> <span class="fn">g</span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">(<span class="fn">f</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">g</span>)</span></span></div></div></div></div><div class="decl" id="Polynomial.IsSplittingField.lift"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L105-L119">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField.lift"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">lift</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">K</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">F</span>)</span> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">K</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">F</span></span></div></div><p>Splitting field of <code>f</code> embeds into any field that splits <code>f</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField.lift">Polynomial.IsSplittingField.lift</a> <span class="fn">L</span> <span class="fn">f</span> <span class="fn">hf</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">if hf0 : <span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> then <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Hom.html#Algebra.ofId">Algebra.ofId</a> <span class="fn">K</span> <span class="fn">F</span>)</span>.comp</span> <span class="fn">(<span class="fn"><span class="fn">(↑<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.botEquiv">Algebra.botEquiv</a> <span class="fn">K</span> <span class="fn">L</span>)</span>)</span>.comp</span> <span class="fn">(<span class="fn"><span class="fn">⋯</span>.mpr</span> <span class="fn">Algebra.toTop</span>)</span>)</span></span>
+  else <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">⋯</span>.mpr</span> <span class="fn">(<a href="../../.././Init/Prelude.html#Classical.choice">Classical.choice</a> <span class="fn">⋯</span>)</span>)</span>.comp</span> <span class="fn">Algebra.toTop</span></span></span></span></li></ul></details><details id="instances-for-list-Polynomial.IsSplittingField.lift" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Polynomial.IsSplittingField.finiteDimensional"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L121-L126">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField.finiteDimensional"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">finiteDimensional</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">K</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/FiniteDimensional/Defs.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">K</span> <span class="fn">L</span></span></div></div></div></div><div class="decl" id="Polynomial.IsSplittingField.of_algEquiv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L128-L134">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField.of_algEquiv"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">of_algEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">≃ₐ[</a><span class="fn">K</span><a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">]</a> <span class="fn">L</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">K</span> <span class="fn">F</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">p</span></span></div></div></div></div><div class="decl" id="Polynomial.IsSplittingField.adjoin_rootSet_eq_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L136-L138">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField.adjoin_rootSet_eq_range"><span class="name">Polynomial</span>.<span class="name">IsSplittingField</span>.<span class="name">adjoin_rootSet_eq_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">K</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#Polynomial.IsSplittingField">Polynomial.IsSplittingField</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">K</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">K</span> <span class="fn">(<span class="fn"><span class="fn">f</span>.rootSet</span> <span class="fn">F</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">i</span>.range</span></span></div></div></div></div><div class="decl" id="IntermediateField.splits_of_splits"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L148-L152">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#IntermediateField.splits_of_splits"><span class="name">IntermediateField</span>.<span class="name">splits_of_splits</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">K</span> <span class="fn">L</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">L</span>)</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hF : <span class="fn">∀ <span class="fn">x</span> ∈ <span class="fn"><span class="fn"><span class="fn">p</span>.rootSet</span> <span class="fn">L</span></span>, <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">F</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">↥<span class="fn">F</span></span>)</span> <span class="fn">p</span></span></div></div></div></div><div class="decl" id="IntermediateField.splits_iff_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L154-L159">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#IntermediateField.splits_iff_mem"><span class="name">IntermediateField</span>.<span class="name">splits_iff_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">K</span> <span class="fn">L</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">L</span>)</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">↥<span class="fn">F</span></span>)</span> <span class="fn">p</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ <span class="fn">x</span> ∈ <span class="fn"><span class="fn"><span class="fn">p</span>.rootSet</span> <span class="fn">L</span></span>, <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">F</span></span></span></span></div></div></div></div><div class="decl" id="IsIntegral.mem_intermediateField_of_minpoly_splits"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/SplittingField/IsSplittingField.lean#L161-L163">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/SplittingField/IsSplittingField.html#IsIntegral.mem_intermediateField_of_minpoly_splits"><span class="name">IsIntegral</span>.<span class="name">mem_intermediateField_of_minpoly_splits</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">L</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(int : <span class="fn"><a href="../../.././Mathlib/RingTheory/IntegralClosure/IsIntegral/Defs.html#IsIntegral">IsIntegral</a> <span class="fn">K</span> <span class="fn">x</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">K</span> <span class="fn">L</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">↥<span class="fn">F</span></span>)</span> <span class="fn">(<a href="../../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">K</span> <span class="fn">x</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">F</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

@@ -1,0 +1,405 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Data.Finite.Prod</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Data.Finite.Prod";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Data</span>.<span class="name">Finite</span>.<span class="name">Prod</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Data/Fintype/Prod.html">Mathlib.Data.Fintype.Prod</a></li><li><a href="../../.././Mathlib/Data/Fintype/Vector.html">Mathlib.Data.Fintype.Vector</a></li><li><a href="../../.././Mathlib/Data/Set/Finite/Basic.html">Mathlib.Data.Set.Finite.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Data.Finite.Prod" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Finite.instProd"><span class="name">Finite</span>.<span class="name">instProd</span></a></div><div class="nav_link"><a class="break_within" href="#Finite.instPProd"><span class="name">Finite</span>.<span class="name">instPProd</span></a></div><div class="nav_link"><a class="break_within" href="#Finite.prod_left"><span class="name">Finite</span>.<span class="name">prod_left</span></a></div><div class="nav_link"><a class="break_within" href="#Finite.prod_right"><span class="name">Finite</span>.<span class="name">prod_right</span></a></div><div class="nav_link"><a class="break_within" href="#Pi.finite"><span class="name">Pi</span>.<span class="name">finite</span></a></div><div class="nav_link"><a class="break_within" href="#instFiniteSym"><span class="name">instFiniteSym</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Embedding.finite"><span class="name">Function</span>.<span class="name">Embedding</span>.<span class="name">finite</span></a></div><div class="nav_link"><a class="break_within" href="#Equiv.finite_right"><span class="name">Equiv</span>.<span class="name">finite_right</span></a></div><div class="nav_link"><a class="break_within" href="#Equiv.finite_left"><span class="name">Equiv</span>.<span class="name">finite_left</span></a></div><div class="nav_link"><a class="break_within" href="#MulEquiv.finite_left"><span class="name">MulEquiv</span>.<span class="name">finite_left</span></a></div><div class="nav_link"><a class="break_within" href="#AddEquiv.finite_left"><span class="name">AddEquiv</span>.<span class="name">finite_left</span></a></div><div class="nav_link"><a class="break_within" href="#MulEquiv.finite_right"><span class="name">MulEquiv</span>.<span class="name">finite_right</span></a></div><div class="nav_link"><a class="break_within" href="#AddEquiv.finite_right"><span class="name">AddEquiv</span>.<span class="name">finite_right</span></a></div><div class="nav_link"><a class="break_within" href="#Set.fintypeProd"><span class="name">Set</span>.<span class="name">fintypeProd</span></a></div><div class="nav_link"><a class="break_within" href="#Set.fintypeOffDiag"><span class="name">Set</span>.<span class="name">fintypeOffDiag</span></a></div><div class="nav_link"><a class="break_within" href="#Set.fintypeImage2"><span class="name">Set</span>.<span class="name">fintypeImage2</span></a></div><div class="nav_link"><a class="break_within" href="#Finite.Set.finite_prod"><span class="name">Finite</span>.<span class="name">Set</span>.<span class="name">finite_prod</span></a></div><div class="nav_link"><a class="break_within" href="#Finite.Set.finite_image2"><span class="name">Finite</span>.<span class="name">Set</span>.<span class="name">finite_image2</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Finite.prod"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">prod</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Finite.of_prod_left"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">of_prod_left</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Finite.of_prod_right"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">of_prod_right</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Infinite.prod_left"><span class="name">Set</span>.<span class="name">Infinite</span>.<span class="name">prod_left</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Infinite.prod_right"><span class="name">Set</span>.<span class="name">Infinite</span>.<span class="name">prod_right</span></a></div><div class="nav_link"><a class="break_within" href="#Set.infinite_prod"><span class="name">Set</span>.<span class="name">infinite_prod</span></a></div><div class="nav_link"><a class="break_within" href="#Set.finite_prod"><span class="name">Set</span>.<span class="name">finite_prod</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Finite.offDiag"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">offDiag</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Finite.image2"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">image2</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Finite.toFinset_prod"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">toFinset_prod</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Finite.toFinset_offDiag"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">toFinset_offDiag</span></a></div><div class="nav_link"><a class="break_within" href="#Set.finite_image_fst_and_snd_iff"><span class="name">Set</span>.<span class="name">finite_image_fst_and_snd_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Infinite.image2_left"><span class="name">Set</span>.<span class="name">Infinite</span>.<span class="name">image2_left</span></a></div><div class="nav_link"><a class="break_within" href="#Set.Infinite.image2_right"><span class="name">Set</span>.<span class="name">Infinite</span>.<span class="name">image2_right</span></a></div><div class="nav_link"><a class="break_within" href="#Set.infinite_image2"><span class="name">Set</span>.<span class="name">infinite_image2</span></a></div><div class="nav_link"><a class="break_within" href="#Set.finite_image2"><span class="name">Set</span>.<span class="name">finite_image2</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Finiteness-of-products">Finiteness of products <a class="hover-link" href="#Finiteness-of-products">#</a></h1></div><div class="decl" id="Finite.instProd"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L23-L26">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Finite.instProd"><span class="name">Finite</span>.<span class="name">instProd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<span class="fn">α</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Finite.instPProd"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L28-L29">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Finite.instPProd"><span class="name">Finite</span>.<span class="name">instPProd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Sort</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Sort</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<span class="fn">α</span> <a href="../../.././Init/Prelude.html#PProd">×'</a> <span class="fn">β</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Finite.prod_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L31-L32">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Finite.prod_left"><span class="name">Finite</span>.<span class="name">prod_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(β : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<span class="fn">α</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span></div></div></div></div><div class="decl" id="Finite.prod_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L34-L35">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Finite.prod_right"><span class="name">Finite</span>.<span class="name">prod_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<span class="fn">α</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">β</span></span></div></div></div></div><div class="decl" id="Pi.finite"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L39-L45">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Pi.finite"><span class="name">Pi</span>.<span class="name">finite</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Sort</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <span class="fn"><span class="fn">α</span> → <a href="../../.././foundational_types.html">Sort</a> u_4</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<span class="fn">β</span> <span class="fn">a</span>)</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">((<span class="fn">a</span> : <span class="fn">α</span>) → <span class="fn"><span class="fn">β</span> <span class="fn">a</span></span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="instFiniteSym"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L47-L49">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#instFiniteSym"><span class="name">instFiniteSym</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<a href="../../.././Mathlib/Data/Sym/Basic.html#Sym">Sym</a> <span class="fn">α</span> <span class="fn">n</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Function.Embedding.finite"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L51-L59">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Function.Embedding.finite"><span class="name">Function</span>.<span class="name">Embedding</span>.<span class="name">finite</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Sort</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Sort</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Logic/Embedding/Basic.html#Function.Embedding">↪</a> <span class="fn">β</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Equiv.finite_right"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L61-L63">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Equiv.finite_right"><span class="name">Equiv</span>.<span class="name">finite_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Sort</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Sort</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">β</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Equiv.finite_left"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L65-L66">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Equiv.finite_left"><span class="name">Equiv</span>.<span class="name">finite_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Sort</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Sort</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">β</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="MulEquiv.finite_left"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L68-L70">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#MulEquiv.finite_left"><span class="name">MulEquiv</span>.<span class="name">finite_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Algebra/Group/Equiv/Basic.html#MulEquiv">≃*</a> <span class="fn">β</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="AddEquiv.finite_left"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L68-L68">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#AddEquiv.finite_left"><span class="name">AddEquiv</span>.<span class="name">finite_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Algebra/Group/Equiv/Basic.html#AddEquiv">≃+</a> <span class="fn">β</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="MulEquiv.finite_right"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L72-L74">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#MulEquiv.finite_right"><span class="name">MulEquiv</span>.<span class="name">finite_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Algebra/Group/Equiv/Basic.html#MulEquiv">≃*</a> <span class="fn">β</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="AddEquiv.finite_right"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L72-L72">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#AddEquiv.finite_right"><span class="name">AddEquiv</span>.<span class="name">finite_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Algebra/Group/Equiv/Basic.html#AddEquiv">≃+</a> <span class="fn">β</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Fintype-instances">Fintype instances <a class="hover-link" href="#Fintype-instances">#</a></h3><p>Every instance here should have a corresponding <code><a href="../../.././Mathlib/Data/Finite/Defs.html#Set.Finite">Set.Finite</a></code> constructor in the next section.</p></div><div class="decl" id="Set.fintypeProd"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L89-L91">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.fintypeProd"><span class="name">Set</span>.<span class="name">fintypeProd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">↑<span class="fn">s</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">↑<span class="fn">t</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">↑<span class="fn">(<span class="fn">s</span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn">t</span>)</span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">s</span>.fintypeProd</span> <span class="fn">t</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype.ofFinset">Fintype.ofFinset</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.toFinset</span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn"><span class="fn">t</span>.toFinset</span>)</span> <span class="fn">⋯</span></span></span></li></ul></details></div></div><div class="decl" id="Set.fintypeOffDiag"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L93-L94">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.fintypeOffDiag"><span class="name">Set</span>.<span class="name">fintypeOffDiag</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">↑<span class="fn">s</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">↑<span class="fn"><span class="fn">s</span>.offDiag</span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">s</span>.fintypeOffDiag</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype.ofFinset">Fintype.ofFinset</a> <span class="fn"><span class="fn"><span class="fn">s</span>.toFinset</span>.offDiag</span> <span class="fn">⋯</span></span></span></li></ul></details></div></div><div class="decl" id="Set.fintypeImage2"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L96-L100">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.fintypeImage2"><span class="name">Set</span>.<span class="name">fintypeImage2</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">γ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hs : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">↑<span class="fn">s</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[ht : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">↑<span class="fn">t</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">↑<span class="fn">(<a href="../../.././Mathlib/Data/Set/Operations.html#Set.image2">Set.image2</a> <span class="fn">f</span> <span class="fn">s</span> <span class="fn">t</span>)</span></span></span></div></div><p><code><a href="../../.././Mathlib/Data/Finite/Prod.html#Set.Finite.image2">image2</a> f s t</code> is <code><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a></code> if <code>s</code> and <code>t</code> are.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Prod.html#Set.fintypeImage2">Set.fintypeImage2</a> <span class="fn">f</span> <span class="fn">s</span> <span class="fn">t</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">⋯</span>.mpr</span> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn">t</span>)</span>.fintypeImage</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>) =&gt; <span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">x</span>.1</span> <span class="fn"><span class="fn">x</span>.2</span></span></span>)</span></span></span></li></ul></details></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Finite-instances">Finite instances <a class="hover-link" href="#Finite-instances">#</a></h3><p>There is seemingly some overlap between the following instances and the <code><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a></code> instances
+in <code>Data.Set.<a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a></code>. While every <code><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a></code> instance gives a <code><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a></code> instance, those
+instances that depend on <code><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a></code> or <code><a href="../../.././Init/Prelude.html#Decidable">Decidable</a></code> instances need an additional <code><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a></code> instance
+to be able to generally apply.</p><p>Some set instances do not appear here since they are consequences of others, for example
+<code>Subtype.<a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a></code> for subsets of a finite type.</p></div><div class="decl" id="Finite.Set.finite_prod"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L122-L124">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Finite.Set.finite_prod"><span class="name">Finite</span>.<span class="name">Set</span>.<span class="name">finite_prod</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">↑<span class="fn">s</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">↑<span class="fn">t</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">↑<span class="fn">(<span class="fn">s</span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn">t</span>)</span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Finite.Set.finite_image2"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L126-L129">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Finite.Set.finite_image2"><span class="name">Finite</span>.<span class="name">Set</span>.<span class="name">finite_image2</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">↑<span class="fn">s</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">↑<span class="fn">t</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">↑<span class="fn">(<a href="../../.././Mathlib/Data/Set/Operations.html#Set.image2">Set.image2</a> <span class="fn">f</span> <span class="fn">s</span> <span class="fn">t</span>)</span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Constructors-for-Set-Finite">Constructors for <code><a href="../../.././Mathlib/Data/Finite/Defs.html#Set.Finite">Set.Finite</a></code> <a class="hover-link" href="#Constructors-for-Set-Finite">#</a></h3><p>Every constructor here should have a corresponding <code><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a></code> instance in the previous section
+(or in the <code><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a></code> module).</p><p>The implementation of these constructors ideally should be no more than <code><a href="../../.././Mathlib/Data/Finite/Defs.html#Set.toFinite">Set.toFinite</a></code>,
+after possibly setting up some <code><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a></code> and classical <code><a href="../../.././Init/Prelude.html#Decidable">Decidable</a></code> instances.</p></div><div class="decl" id="Set.Finite.prod"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L151-L154">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.Finite.prod"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">prod</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.Finite</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span>.Finite</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn">t</span>)</span>.Finite</span></div></div></div></div><div class="decl" id="Set.Finite.of_prod_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L156-L157">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.Finite.of_prod_left"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">of_prod_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn">t</span>)</span>.Finite</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">t</span>.Nonempty</span> → <span class="fn"><span class="fn">s</span>.Finite</span></span></div></div></div></div><div class="decl" id="Set.Finite.of_prod_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L159-L160">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.Finite.of_prod_right"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">of_prod_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn">t</span>)</span>.Finite</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">s</span>.Nonempty</span> → <span class="fn"><span class="fn">t</span>.Finite</span></span></div></div></div></div><div class="decl" id="Set.Infinite.prod_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L162-L163">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.Infinite.prod_left"><span class="name">Set</span>.<span class="name">Infinite</span>.<span class="name">prod_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.Infinite</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span>.Nonempty</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn">t</span>)</span>.Infinite</span></div></div></div></div><div class="decl" id="Set.Infinite.prod_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L165-L166">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.Infinite.prod_right"><span class="name">Set</span>.<span class="name">Infinite</span>.<span class="name">prod_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span>.Infinite</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.Nonempty</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn">t</span>)</span>.Infinite</span></div></div></div></div><div class="decl" id="Set.infinite_prod"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L168-L176">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.infinite_prod"><span class="name">Set</span>.<span class="name">infinite_prod</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn">t</span>)</span>.Infinite</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">s</span>.Infinite</span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">t</span>.Nonempty</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">t</span>.Infinite</span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">s</span>.Nonempty</span></span></span></span></div></div></div></div><div class="decl" id="Set.finite_prod"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L178-L179">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.finite_prod"><span class="name">Set</span>.<span class="name">finite_prod</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">s</span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn">t</span>)</span>.Finite</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">s</span>.Finite</span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">t</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span>)</span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn">(<span class="fn"><span class="fn">t</span>.Finite</span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">s</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span>)</span></span></span></div></div></div></div><div class="decl" id="Set.Finite.offDiag"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L181-L182">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.Finite.offDiag"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">offDiag</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.Finite</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">s</span>.offDiag</span>.Finite</span></div></div></div></div><div class="decl" id="Set.Finite.image2"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L184-L188">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.Finite.image2"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">image2</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.Finite</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span>.Finite</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Data/Set/Operations.html#Set.image2">Set.image2</a> <span class="fn">f</span> <span class="fn">s</span> <span class="fn">t</span>)</span>.Finite</span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Properties">Properties <a class="hover-link" href="#Properties">#</a></h3></div><div class="decl" id="Set.Finite.toFinset_prod"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L196-L198">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.Finite.toFinset_prod"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">toFinset_prod</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.Finite</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span>.Finite</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">hs</span>.toFinset</span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn"><span class="fn">ht</span>.toFinset</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">⋯</span>.toFinset</span></span></div></div></div></div><div class="decl" id="Set.Finite.toFinset_offDiag"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L200-L202">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.Finite.toFinset_offDiag"><span class="name">Set</span>.<span class="name">Finite</span>.<span class="name">toFinset_offDiag</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.Finite</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">⋯</span>.toFinset</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">hs</span>.toFinset</span>.offDiag</span></span></div></div></div></div><div class="decl" id="Set.finite_image_fst_and_snd_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L204-L207">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.finite_image_fst_and_snd_iff"><span class="name">Set</span>.<span class="name">finite_image_fst_and_snd_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">(<span class="fn">α</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span>)</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">Prod.fst</span> <a href="../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">s</span>)</span>.Finite</span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">(<span class="fn">Prod.snd</span> <a href="../../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">s</span>)</span>.Finite</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">s</span>.Finite</span></span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Infinite-sets">Infinite sets <a class="hover-link" href="#Infinite-sets">#</a></h3></div><div class="decl" id="Set.Infinite.image2_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L217-L219">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.Infinite.image2_left"><span class="name">Set</span>.<span class="name">Infinite</span>.<span class="name">image2_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">β</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s</span>.Infinite</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.InjOn">Set.InjOn</a> <span class="fn">(fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span>)</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Data/Set/Operations.html#Set.image2">Set.image2</a> <span class="fn">f</span> <span class="fn">s</span> <span class="fn">t</span>)</span>.Infinite</span></div></div></div></div><div class="decl" id="Set.Infinite.image2_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L221-L223">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.Infinite.image2_right"><span class="name">Set</span>.<span class="name">Infinite</span>.<span class="name">image2_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span>.Infinite</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.InjOn">Set.InjOn</a> <span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Data/Set/Operations.html#Set.image2">Set.image2</a> <span class="fn">f</span> <span class="fn">s</span> <span class="fn">t</span>)</span>.Infinite</span></div></div></div></div><div class="decl" id="Set.infinite_image2"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L225-L232">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.infinite_image2"><span class="name">Set</span>.<span class="name">infinite_image2</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfs : <span class="fn">∀ <span class="fn">b</span> ∈ <span class="fn">t</span>, <span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.InjOn">Set.InjOn</a> <span class="fn">(fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span>)</span> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hft : <span class="fn">∀ <span class="fn">a</span> ∈ <span class="fn">s</span>, <span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.InjOn">Set.InjOn</a> <span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Data/Set/Operations.html#Set.image2">Set.image2</a> <span class="fn">f</span> <span class="fn">s</span> <span class="fn">t</span>)</span>.Infinite</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">s</span>.Infinite</span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">t</span>.Nonempty</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">t</span>.Infinite</span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">s</span>.Nonempty</span></span></span></span></div></div></div></div><div class="decl" id="Set.finite_image2"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Finite/Prod.lean#L234-L238">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Finite/Prod.html#Set.finite_image2"><span class="name">Set</span>.<span class="name">finite_image2</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfs : <span class="fn">∀ <span class="fn">b</span> ∈ <span class="fn">t</span>, <span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.InjOn">Set.InjOn</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">f</span> <span class="fn">x</span> <span class="fn">b</span></span>)</span> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hft : <span class="fn">∀ <span class="fn">a</span> ∈ <span class="fn">s</span>, <span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.InjOn">Set.InjOn</a> <span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Data/Set/Operations.html#Set.image2">Set.image2</a> <span class="fn">f</span> <span class="fn">s</span> <span class="fn">t</span>)</span>.Finite</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">s</span>.Finite</span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">t</span>.Finite</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">s</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">t</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span></span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

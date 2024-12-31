@@ -1,0 +1,1078 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.FieldTheory.IsAlgClosed.Basic</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.FieldTheory.IsAlgClosed.Basic";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">FieldTheory</span>.<span class="name">IsAlgClosed</span>.<span class="name">Basic</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/FieldTheory/Normal.html">Mathlib.FieldTheory.Normal</a></li><li><a href="../../.././Mathlib/FieldTheory/Perfect.html">Mathlib.FieldTheory.Perfect</a></li><li><a href="../../.././Mathlib/RingTheory/Localization/Integral.html">Mathlib.RingTheory.Localization.Integral</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.FieldTheory.IsAlgClosed.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed"><span class="name">IsAlgClosed</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.splits_codomain"><span class="name">IsAlgClosed</span>.<span class="name">splits_codomain</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.splits_domain"><span class="name">IsAlgClosed</span>.<span class="name">splits_domain</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.exists_root"><span class="name">IsAlgClosed</span>.<span class="name">exists_root</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.exists_pow_nat_eq"><span class="name">IsAlgClosed</span>.<span class="name">exists_pow_nat_eq</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.exists_eq_mul_self"><span class="name">IsAlgClosed</span>.<span class="name">exists_eq_mul_self</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.roots_eq_zero_iff"><span class="name">IsAlgClosed</span>.<span class="name">roots_eq_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.exists_eval₂_eq_zero_of_injective"><span class="name">IsAlgClosed</span>.<span class="name">exists_eval₂_eq_zero_of_injective</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.exists_eval₂_eq_zero"><span class="name">IsAlgClosed</span>.<span class="name">exists_eval₂_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.exists_aeval_eq_zero_of_injective"><span class="name">IsAlgClosed</span>.<span class="name">exists_aeval_eq_zero_of_injective</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.exists_aeval_eq_zero"><span class="name">IsAlgClosed</span>.<span class="name">exists_aeval_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.of_exists_root"><span class="name">IsAlgClosed</span>.<span class="name">of_exists_root</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.of_ringEquiv"><span class="name">IsAlgClosed</span>.<span class="name">of_ringEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.degree_eq_one_of_irreducible"><span class="name">IsAlgClosed</span>.<span class="name">degree_eq_one_of_irreducible</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.algebraMap_surjective_of_isIntegral"><span class="name">IsAlgClosed</span>.<span class="name">algebraMap_surjective_of_isIntegral</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.algebraMap_surjective_of_isIntegral'"><span class="name">IsAlgClosed</span>.<span class="name">algebraMap_surjective_of_isIntegral'</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.algebraMap_surjective_of_isAlgebraic"><span class="name">IsAlgClosed</span>.<span class="name">algebraMap_surjective_of_isAlgebraic</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.eq_bot_of_isAlgClosed_of_isAlgebraic"><span class="name">IntermediateField</span>.<span class="name">eq_bot_of_isAlgClosed_of_isAlgebraic</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.isCoprime_iff_aeval_ne_zero_of_isAlgClosed"><span class="name">Polynomial</span>.<span class="name">isCoprime_iff_aeval_ne_zero_of_isAlgClosed</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure"><span class="name">IsAlgClosure</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.alg_closed"><span class="name">IsAlgClosure</span>.<span class="name">alg_closed</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.algebraic"><span class="name">IsAlgClosure</span>.<span class="name">algebraic</span></a></div><div class="nav_link"><a class="break_within" href="#isAlgClosure_iff"><span class="name">isAlgClosure_iff</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.normal"><span class="name">IsAlgClosure</span>.<span class="name">normal</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.separable"><span class="name">IsAlgClosure</span>.<span class="name">separable</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.instIsAlgClosure"><span class="name">IsAlgClosed</span>.<span class="name">instIsAlgClosure</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.of_splits"><span class="name">IsAlgClosure</span>.<span class="name">of_splits</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.surjective_restrictDomain_of_isAlgebraic"><span class="name">IsAlgClosed</span>.<span class="name">surjective_restrictDomain_of_isAlgebraic</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.surjective_comp_algebraMap_of_isAlgebraic"><span class="name">IsAlgClosed</span>.<span class="name">surjective_comp_algebraMap_of_isAlgebraic</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.lift"><span class="name">IsAlgClosed</span>.<span class="name">lift</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.lift_def"><span class="name">IsAlgClosed</span>.<span class="name">lift_def</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.perfectRing"><span class="name">IsAlgClosed</span>.<span class="name">perfectRing</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.perfectField"><span class="name">IsAlgClosed</span>.<span class="name">perfectField</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosed.instInfinite"><span class="name">IsAlgClosed</span>.<span class="name">instInfinite</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.equiv"><span class="name">IsAlgClosure</span>.<span class="name">equiv</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.ofAlgebraic"><span class="name">IsAlgClosure</span>.<span class="name">ofAlgebraic</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.equivOfAlgebraic'"><span class="name">IsAlgClosure</span>.<span class="name">equivOfAlgebraic'</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.equivOfAlgebraic"><span class="name">IsAlgClosure</span>.<span class="name">equivOfAlgebraic</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.equivOfEquivAux"><span class="name">IsAlgClosure</span>.<span class="name">equivOfEquivAux</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.equivOfEquiv"><span class="name">IsAlgClosure</span>.<span class="name">equivOfEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.equivOfEquiv_comp_algebraMap"><span class="name">IsAlgClosure</span>.<span class="name">equivOfEquiv_comp_algebraMap</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.equivOfEquiv_algebraMap"><span class="name">IsAlgClosure</span>.<span class="name">equivOfEquiv_algebraMap</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.equivOfEquiv_symm_algebraMap"><span class="name">IsAlgClosure</span>.<span class="name">equivOfEquiv_symm_algebraMap</span></a></div><div class="nav_link"><a class="break_within" href="#IsAlgClosure.equivOfEquiv_symm_comp_algebraMap"><span class="name">IsAlgClosure</span>.<span class="name">equivOfEquiv_symm_comp_algebraMap</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.IsAlgebraic.range_eval_eq_rootSet_minpoly"><span class="name">Algebra</span>.<span class="name">IsAlgebraic</span>.<span class="name">range_eval_eq_rootSet_minpoly</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.algHomEquivAlgHomOfSplits"><span class="name">IntermediateField</span>.<span class="name">algHomEquivAlgHomOfSplits</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.algHomEquivAlgHomOfSplits_apply"><span class="name">IntermediateField</span>.<span class="name">algHomEquivAlgHomOfSplits_apply</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.algHomEquivAlgHomOfSplits_symm_apply"><span class="name">IntermediateField</span>.<span class="name">algHomEquivAlgHomOfSplits_symm_apply</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.algHomEquivAlgHomOfSplits_apply_apply"><span class="name">IntermediateField</span>.<span class="name">algHomEquivAlgHomOfSplits_apply_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits"><span class="name">Algebra</span>.<span class="name">IsAlgebraic</span>.<span class="name">algHomEquivAlgHomOfSplits</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits_apply_apply"><span class="name">Algebra</span>.<span class="name">IsAlgebraic</span>.<span class="name">algHomEquivAlgHomOfSplits_apply_apply</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Algebraically-Closed-Field">Algebraically Closed Field <a class="hover-link" href="#Algebraically-Closed-Field">#</a></h1><p>In this file we define the typeclass for algebraically closed fields and algebraic closures,
+and prove some of their properties.</p><h2 class="markdown-heading" id="Main-Definitions">Main Definitions <a class="hover-link" href="#Main-Definitions">#</a></h2><ul>
+<li><p><code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> k</code> is the typeclass saying <code>k</code> is an algebraically closed field, i.e. every
+polynomial in <code>k</code> splits.</p>
+</li>
+<li><p><code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> R K</code> is the typeclass saying <code>K</code> is an algebraic closure of <code>R</code>, where <code>R</code> is a
+commutative ring. This means that the map from <code>R</code> to <code>K</code> is injective, and <code>K</code> is
+algebraically closed and algebraic over <code>R</code></p>
+</li>
+<li><p><code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.lift">IsAlgClosed.lift</a></code> is a map from an algebraic extension <code>L</code> of <code>R</code>, into any algebraically
+closed extension of <code>R</code>.</p>
+</li>
+<li><p><code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equiv">IsAlgClosure.equiv</a></code> is a proof that any two algebraic closures of the
+same field are isomorphic.</p>
+</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>algebraic closure, algebraically closed</p><h2 class="markdown-heading" id="Main-reults">Main reults <a class="hover-link" href="#Main-reults">#</a></h2><ul>
+<li><p><code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.of_splits">IsAlgClosure.of_splits</a></code>: if <code>K / k</code> is algebraic, and every monic irreducible polynomial over
+<code>k</code> splits in <code>K</code>, then <code>K</code> is algebraically closed (in fact an algebraic closure of <code>k</code>).
+For the stronger fact that only requires every such polynomial has a root in <code>K</code>,
+see <code>IsAlgClosure.of_exist_roots</code>.</p>
+<p>Reference: <a href="https://kconrad.math.uconn.edu/blurbs/galoistheory/algclosure.pdf">https://kconrad.math.uconn.edu/blurbs/galoistheory/algclosure.pdf</a>, Theorem 2</p>
+</li>
+</ul></div><div class="decl" id="IsAlgClosed"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L52-L59">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed"><span class="name">IsAlgClosed</span></a></span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>Typeclass for algebraically closed fields.</p><p>To show <code><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> p f</code> for an arbitrary ring homomorphism <code>f</code>,
+see <code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.splits_codomain">IsAlgClosed.splits_codomain</a></code> and <code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.splits_domain">IsAlgClosed.splits_domain</a></code>.</p><p><a href="https://stacks.math.columbia.edu/tag/09GR">Stacks Tag 09GR</a> (The definition of <code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a></code> in mathlib is 09GR (4))</p><ul class="structure_fields" id="IsAlgClosed.mk"><li id="IsAlgClosed.splits" class="structure_field"><div class="structure_field_info">splits : <span class="fn">∀ (<span class="fn">p</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">k</span></span>), <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom.id">RingHom.id</a> <span class="fn">k</span>)</span> <span class="fn">p</span></span></span></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-IsAlgClosed" class="instances-list"></ul></details></div></div><div class="decl" id="IsAlgClosed.splits_codomain"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L61-L66">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.splits_codomain"><span class="name">IsAlgClosed</span>.<span class="name">splits_codomain</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">K</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">k</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">f</span> <span class="fn">p</span></span></div></div><p>Every polynomial splits in the field extension <code>f : K →+* k</code> if <code>k</code> is algebraically closed.</p><p>See also <code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.splits_domain">IsAlgClosed.splits_domain</a></code> for the case where <code>K</code> is algebraically closed.</p></div></div><div class="decl" id="IsAlgClosed.splits_domain"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L68-L74">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.splits_domain"><span class="name">IsAlgClosed</span>.<span class="name">splits_domain</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">K</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">f</span> <span class="fn">p</span></span></div></div><p>Every polynomial splits in the field extension <code>f : K →+* k</code> if <code>K</code> is algebraically closed.</p><p>See also <code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.splits_codomain">IsAlgClosed.splits_codomain</a></code> for the case where <code>k</code> is algebraically closed.</p></div></div><div class="decl" id="IsAlgClosed.exists_root"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L80-L85">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.exists_root"><span class="name">IsAlgClosed</span>.<span class="name">exists_root</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn"><span class="fn">p</span>.degree</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">x</span> : <span class="fn">k</span>), <span class="fn"><span class="fn"><span class="fn">p</span>.IsRoot</span> <span class="fn">x</span></span></span></div></div><p>If <code>k</code> is algebraically closed, then every nonconstant polynomial has a root.</p><p><a href="https://stacks.math.columbia.edu/tag/09GR">Stacks Tag 09GR</a> ((4) ⟹ (3))</p></div></div><div class="decl" id="IsAlgClosed.exists_pow_nat_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L87-L94">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.exists_pow_nat_eq"><span class="name">IsAlgClosed</span>.<span class="name">exists_pow_nat_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">k</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">z</span> : <span class="fn">k</span>), <span class="fn"><span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="IsAlgClosed.exists_eq_mul_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L96-L98">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.exists_eq_mul_self"><span class="name">IsAlgClosed</span>.<span class="name">exists_eq_mul_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">k</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">z</span> : <span class="fn">k</span>), <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span></span></span></div></div></div></div><div class="decl" id="IsAlgClosed.roots_eq_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L100-L107">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.roots_eq_zero_iff"><span class="name">IsAlgClosed</span>.<span class="name">roots_eq_zero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">k</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">p</span>.roots</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">Polynomial.C</span> <span class="fn">(<span class="fn"><span class="fn">p</span>.coeff</span> <span class="fn">0</span>)</span></span></span></span></div></div></div></div><div class="decl" id="IsAlgClosed.exists_eval₂_eq_zero_of_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L109-L112">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.exists_eval₂_eq_zero_of_injective"><span class="name">IsAlgClosed</span>.<span class="name">exists_eval₂_eq_zero_of_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn"><span class="fn">p</span>.degree</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">x</span> : <span class="fn">k</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval₂">Polynomial.eval₂</a> <span class="fn">f</span> <span class="fn">x</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="IsAlgClosed.exists_eval₂_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L114-L116">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.exists_eval₂_eq_zero"><span class="name">IsAlgClosed</span>.<span class="name">exists_eval₂_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn"><span class="fn">p</span>.degree</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">x</span> : <span class="fn">k</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval₂">Polynomial.eval₂</a> <span class="fn">f</span> <span class="fn">x</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="IsAlgClosed.exists_aeval_eq_zero_of_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L120-L123">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.exists_aeval_eq_zero_of_injective"><span class="name">IsAlgClosed</span>.<span class="name">exists_aeval_eq_zero_of_injective</span></a></span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hinj : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">k</span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn"><span class="fn">p</span>.degree</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">x</span> : <span class="fn">k</span>), <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn">x</span>)</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="IsAlgClosed.exists_aeval_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L125-L127">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.exists_aeval_eq_zero"><span class="name">IsAlgClosed</span>.<span class="name">exists_aeval_eq_zero</span></a></span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn"><span class="fn">p</span>.degree</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">x</span> : <span class="fn">k</span>), <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn">x</span>)</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="IsAlgClosed.of_exists_root"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L130-L143">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.of_exists_root"><span class="name">IsAlgClosed</span>.<span class="name">of_exists_root</span></a></span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn">∀ (<span class="fn">p</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">k</span></span>), <span class="fn"><span class="fn"><span class="fn">p</span>.Monic</span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Prime/Defs.html#Irreducible">Irreducible</a> <span class="fn">p</span></span> → <span class="fn">∃ (<span class="fn">x</span> : <span class="fn">k</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Eval/Defs.html#Polynomial.eval">Polynomial.eval</a> <span class="fn">x</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span></div></div><p>If every nonconstant polynomial over <code>k</code> has a root, then <code>k</code> is algebraically closed.</p><p><a href="https://stacks.math.columbia.edu/tag/09GR">Stacks Tag 09GR</a> ((3) ⟹ (4))</p></div></div><div class="decl" id="IsAlgClosed.of_ringEquiv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L145-L158">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.of_ringEquiv"><span class="name">IsAlgClosed</span>.<span class="name">of_ringEquiv</span></a></span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(k' : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k'</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">k</span> <a href="../../.././Mathlib/Algebra/Ring/Equiv.html#RingEquiv">≃+*</a> <span class="fn">k'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k'</span></span></div></div></div></div><div class="decl" id="IsAlgClosed.degree_eq_one_of_irreducible"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L160-L166">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.degree_eq_one_of_irreducible"><span class="name">IsAlgClosed</span>.<span class="name">degree_eq_one_of_irreducible</span></a></span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">k</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Algebra/Prime/Defs.html#Irreducible">Irreducible</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span>.degree</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div><p>If <code>k</code> is algebraically closed, then every irreducible polynomial over <code>k</code> is linear.</p><p><a href="https://stacks.math.columbia.edu/tag/09GR">Stacks Tag 09GR</a> ((4) ⟹ (2))</p></div></div><div class="decl" id="IsAlgClosed.algebraMap_surjective_of_isIntegral"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L168-L178">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.algebraMap_surjective_of_isIntegral"><span class="name">IsAlgClosed</span>.<span class="name">algebraMap_surjective_of_isIntegral</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hk : <span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">k</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/IntegralClosure/Algebra/Defs.html#Algebra.IsIntegral">Algebra.IsIntegral</a> <span class="fn">k</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">k</span> <span class="fn">K</span>)</span></span></span></div></div></div></div><div class="decl" id="IsAlgClosed.algebraMap_surjective_of_isIntegral'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L180-L184">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.algebraMap_surjective_of_isIntegral'"><span class="name">IsAlgClosed</span>.<span class="name">algebraMap_surjective_of_isIntegral'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">k</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">f</span>.IsIntegral</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="IsAlgClosed.algebraMap_surjective_of_isAlgebraic"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L186-L194">source</a></div><div class="attributes">@[deprecated IsAlgClosed.algebraMap_surjective_of_isIntegral]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.algebraMap_surjective_of_isAlgebraic"><span class="name">IsAlgClosed</span>.<span class="name">algebraMap_surjective_of_isAlgebraic</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">k</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">k</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">k</span> <span class="fn">K</span>)</span></span></span></div></div><p>Deprecated: <code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.algebraMap_surjective_of_isIntegral">algebraMap_surjective_of_isIntegral</a></code> is identical apart from the <code><a href="../../.././Mathlib/RingTheory/IntegralClosure/IsIntegral/Defs.html#IsIntegral">IsIntegral</a></code> argument,
+which can be found by instance synthesis</p></div></div><div class="decl" id="IntermediateField.eq_bot_of_isAlgClosed_of_isAlgebraic"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L198-L207">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IntermediateField.eq_bot_of_isAlgClosed_of_isAlgebraic"><span class="name">IntermediateField</span>.<span class="name">eq_bot_of_isAlgClosed_of_isAlgebraic</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">k</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <span class="fn"><a href="../../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">k</span> <span class="fn">K</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">k</span> <span class="fn">↥<span class="fn">L</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/Notation.html#Bot.bot">⊥</a></span></div></div><p>If <code>k</code> is algebraically closed, <code>K / k</code> is a field extension, <code>L / k</code> is an intermediate field
+which is algebraic, then <code>L</code> is equal to <code>k</code>. A corollary of
+<code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.algebraMap_surjective_of_isAlgebraic">IsAlgClosed.algebraMap_surjective_of_isAlgebraic</a></code>.</p><p><a href="https://stacks.math.columbia.edu/tag/09GQ">Stacks Tag 09GQ</a> (The result is the definition of algebraically closedness in Stacks Project. This statement is 09GR (4) ⟹ (1).)</p></div></div><div class="decl" id="Polynomial.isCoprime_iff_aeval_ne_zero_of_isAlgClosed"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L209-L218">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#Polynomial.isCoprime_iff_aeval_ne_zero_of_isAlgClosed"><span class="name">Polynomial</span>.<span class="name">isCoprime_iff_aeval_ne_zero_of_isAlgClosed</span></a></span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">k</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p q : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/Coprime/Basic.html#IsCoprime">IsCoprime</a> <span class="fn">p</span> <span class="fn">q</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">K</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn">a</span>)</span> <span class="fn">p</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn">a</span>)</span> <span class="fn">q</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span></span></span></div></div></div></div><div class="decl" id="IsAlgClosure"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L220-L225">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure"><span class="name">IsAlgClosure</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>Typeclass for an extension being an algebraic closure.</p><p><a href="https://stacks.math.columbia.edu/tag/09GS">Stacks Tag 09GS</a></p><ul class="structure_fields" id="IsAlgClosure.mk"><li id="IsAlgClosure.isAlgClosed" class="structure_field"><div class="structure_field_info">isAlgClosed : <span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">K</span></span></div></li><li id="IsAlgClosure.isAlgebraic" class="structure_field"><div class="structure_field_info">isAlgebraic : <span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">R</span> <span class="fn">K</span></span></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-IsAlgClosure" class="instances-list"></ul></details></div></div><div class="decl" id="IsAlgClosure.alg_closed"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L227-L227">source</a></div><div class="attributes">@[deprecated IsAlgClosure.isAlgClosed]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.alg_closed"><span class="name">IsAlgClosure</span>.<span class="name">alg_closed</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{inst✝ : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{inst✝¹ : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{inst✝² : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{inst✝³ : <span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[self : <span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">K</span></span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.isAlgClosed">IsAlgClosure.isAlgClosed</a></code>.</p></div></div><div class="decl" id="IsAlgClosure.algebraic"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L228-L228">source</a></div><div class="attributes">@[deprecated IsAlgClosure.isAlgebraic]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.algebraic"><span class="name">IsAlgClosure</span>.<span class="name">algebraic</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{inst✝ : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{inst✝¹ : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{inst✝² : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{inst✝³ : <span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[self : <span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">R</span> <span class="fn">K</span></span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.isAlgebraic">IsAlgClosure.isAlgebraic</a></code>.</p></div></div><div class="decl" id="isAlgClosure_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L232-L234">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#isAlgClosure_iff"><span class="name">isAlgClosure_iff</span></a></span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">k</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">k</span> <span class="fn">K</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">k</span> <span class="fn">K</span></span></span></span></div></div></div></div><div class="decl" id="IsAlgClosure.normal"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L236-L239">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.normal"><span class="name">IsAlgClosure</span>.<span class="name">normal</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/Normal.html#Normal">Normal</a> <span class="fn">R</span> <span class="fn">K</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="IsAlgClosure.separable"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L241-L243">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.separable"><span class="name">IsAlgClosure</span>.<span class="name">separable</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/Separable.html#Algebra.IsSeparable">Algebra.IsSeparable</a> <span class="fn">R</span> <span class="fn">K</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="IsAlgClosed.instIsAlgClosure"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L245-L247">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.instIsAlgClosure"><span class="name">IsAlgClosed</span>.<span class="name">instIsAlgClosure</span></a></span><span class="decl_args">
+<span class="fn">(F : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">F</span> <span class="fn">F</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="IsAlgClosure.of_splits"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L249-L257">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.of_splits"><span class="name">IsAlgClosure</span>.<span class="name">of_splits</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/IntegralClosure/Algebra/Defs.html#Algebra.IsIntegral">Algebra.IsIntegral</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">p</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>), <span class="fn"><span class="fn"><span class="fn">p</span>.Monic</span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Prime/Defs.html#Irreducible">Irreducible</a> <span class="fn">p</span></span> → <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">K</span>)</span> <span class="fn">p</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">K</span></span></div></div></div></div><div class="decl" id="IsAlgClosed.surjective_restrictDomain_of_isAlgebraic"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L264-L271">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.surjective_restrictDomain_of_isAlgebraic"><span class="name">IsAlgClosed</span>.<span class="name">surjective_restrictDomain_of_isAlgebraic</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">fun (<span class="fn">φ</span> : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">K</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">M</span></span>) =&gt; <span class="fn"><a href="../../.././Mathlib/RingTheory/AlgebraTower.html#AlgHom.restrictDomain">AlgHom.restrictDomain</a> <span class="fn">L</span> <span class="fn">φ</span></span></span></span></div></div><p>If E/L/K is a tower of field extensions with E/L algebraic, and if M is an algebraically
+closed extension of K, then any embedding of L/K into M/K extends to an embedding of E/K.
+Known as the extension lemma in <a href="https://math.stackexchange.com/a/687914">https://math.stackexchange.com/a/687914</a>.</p></div></div><div class="decl" id="IsAlgClosed.surjective_comp_algebraMap_of_isAlgebraic"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L273-L274">source</a></div><div class="attributes">@[deprecated IsAlgClosed.surjective_restrictDomain_of_isAlgebraic]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.surjective_comp_algebraMap_of_isAlgebraic"><span class="name">IsAlgClosed</span>.<span class="name">surjective_comp_algebraMap_of_isAlgebraic</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">fun (<span class="fn">φ</span> : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">K</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">M</span></span>) =&gt; <span class="fn"><a href="../../.././Mathlib/RingTheory/AlgebraTower.html#AlgHom.restrictDomain">AlgHom.restrictDomain</a> <span class="fn">L</span> <span class="fn">φ</span></span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.surjective_restrictDomain_of_isAlgebraic">IsAlgClosed.surjective_restrictDomain_of_isAlgebraic</a></code>.</p><hr></hr><p>If E/L/K is a tower of field extensions with E/L algebraic, and if M is an algebraically
+closed extension of K, then any embedding of L/K into M/K extends to an embedding of E/K.
+Known as the extension lemma in <a href="https://math.stackexchange.com/a/687914">https://math.stackexchange.com/a/687914</a>.</p></div></div><div class="decl" id="IsAlgClosed.lift"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L303-L313">source</a></div><div class="attributes">@[irreducible]</div>
+<div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.lift"><span class="name">IsAlgClosed</span>.<span class="name">lift</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">S</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">M</span></span></div></div><p>A (random) homomorphism from an algebraic extension of R into an algebraically
+closed extension of R.</p><p><a href="https://stacks.math.columbia.edu/tag/09GU">Stacks Tag 09GU</a></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.lift">@<a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.lift">IsAlgClosed.lift</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.wrapped._@.Mathlib.FieldTheory.IsAlgClosed.Basic._hyg.3090">IsAlgClosed.wrapped✝</a>.1</span></span></li></ul></details><details id="instances-for-list-IsAlgClosed.lift" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsAlgClosed.lift_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L303-L313">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.lift_def"><span class="name">IsAlgClosed</span>.<span class="name">lift_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">IsAlgClosed.lift</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let_fun <span class="fn">this</span> := <span class="fn">⋯</span>;
+  <span class="fn">let_fun <span class="fn">this_1</span> := <span class="fn">⋯</span>;
+  <span class="fn">let <span class="fn">f</span> := <span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#_private.Mathlib.FieldTheory.IsAlgClosed.Basic.0.IsAlgClosed.lift_aux">IsAlgClosed.lift_aux</a> <span class="fn">(<a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#FractionRing">FractionRing</a> <span class="fn">R</span>)</span> <span class="fn">(<a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#FractionRing">FractionRing</a> <span class="fn">S</span>)</span> <span class="fn">M</span></span>;
+  <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Tower.html#AlgHom.restrictScalars">AlgHom.restrictScalars</a> <span class="fn">R</span> <span class="fn">f</span>)</span>.comp</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Tower.html#AlgHom.restrictScalars">AlgHom.restrictScalars</a> <span class="fn">R</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Hom.html#Algebra.ofId">Algebra.ofId</a> <span class="fn">S</span> <span class="fn">(<a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#FractionRing">FractionRing</a> <span class="fn">S</span>)</span>)</span>)</span></span></span></span></span></span></div></div></div></div><div class="decl" id="IsAlgClosed.perfectRing"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L315-L317">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.perfectRing"><span class="name">IsAlgClosed</span>.<span class="name">perfectRing</span></a></span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> <span class="fn">(<a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">p</span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">k</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/Perfect.html#PerfectRing">PerfectRing</a> <span class="fn">k</span> <span class="fn">p</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="IsAlgClosed.perfectField"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L319-L321">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.perfectField"><span class="name">IsAlgClosed</span>.<span class="name">perfectField</span></a></span><span class="decl_args">
+<span class="fn">(k : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/Perfect.html#PerfectField">PerfectField</a> <span class="fn">k</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="IsAlgClosed.instInfinite"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L323-L334">source</a></div><div class="attributes">@[instance 500]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed.instInfinite"><span class="name">IsAlgClosed</span>.<span class="name">instInfinite</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Infinite">Infinite</a> <span class="fn">K</span></span></div></div><p>Algebraically closed fields are infinite since <code>Xⁿ⁺¹ - 1</code> is separable when <code>#K = n</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="IsAlgClosure.equiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L351-L359">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equiv"><span class="name">IsAlgClosure</span>.<span class="name">equiv</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">≃ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">]</a> <span class="fn">M</span></span></div></div><p>A (random) isomorphism between two algebraic closures of <code>R</code>.</p><p><a href="https://stacks.math.columbia.edu/tag/09GV">Stacks Tag 09GV</a></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equiv">IsAlgClosure.equiv</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv.ofBijective">AlgEquiv.ofBijective</a> <span class="fn">IsAlgClosed.lift</span> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-IsAlgClosure.equiv" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsAlgClosure.ofAlgebraic"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L373-L376">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.ofAlgebraic"><span class="name">IsAlgClosure</span>.<span class="name">ofAlgebraic</span></a></span><span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(J : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">J</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">J</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">J</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">J</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">K</span> <span class="fn">J</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hKJ : <span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">K</span> <span class="fn">J</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">K</span> <span class="fn">L</span></span></div></div><p>If <code>J</code> is an algebraic extension of <code>K</code> and <code>L</code> is an algebraic closure of <code>J</code>, then it is
+also an algebraic closure of <code>K</code>.</p></div></div><div class="decl" id="IsAlgClosure.equivOfAlgebraic'"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L378-L389">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfAlgebraic'"><span class="name">IsAlgClosure</span>.<span class="name">equivOfAlgebraic'</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">≃ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">]</a> <span class="fn">M</span></span></div></div><p>A (random) isomorphism between an algebraic closure of <code>R</code> and an algebraic closure of
+an algebraic extension of <code>R</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfAlgebraic'">IsAlgClosure.equivOfAlgebraic'</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">L</span> <span class="fn">M</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equiv">IsAlgClosure.equiv</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span></span></li></ul></details><details id="instances-for-list-IsAlgClosure.equivOfAlgebraic'" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsAlgClosure.equivOfAlgebraic"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L391-L395">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfAlgebraic"><span class="name">IsAlgClosure</span>.<span class="name">equivOfAlgebraic</span></a></span><span class="decl_args">
+<span class="fn">(K : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(J : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">J</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">K</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">J</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">J</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">J</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">K</span> <span class="fn">J</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hKJ : <span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">K</span> <span class="fn">J</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">≃ₐ[</a><span class="fn">K</span><a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">]</a> <span class="fn">M</span></span></div></div><p>A (random) isomorphism between an algebraic closure of <code>K</code> and an algebraic closure
+of an algebraic extension of <code>K</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfAlgebraic">IsAlgClosure.equivOfAlgebraic</a> <span class="fn">K</span> <span class="fn">J</span> <span class="fn">L</span> <span class="fn">M</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfAlgebraic'">IsAlgClosure.equivOfAlgebraic'</a> <span class="fn">K</span> <span class="fn">J</span> <span class="fn">L</span> <span class="fn">M</span></span></span></li></ul></details><details id="instances-for-list-IsAlgClosure.equivOfAlgebraic" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsAlgClosure.equivOfEquivAux"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L403-L424">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquivAux"><span class="name">IsAlgClosure</span>.<span class="name">equivOfEquivAux</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hSR : <span class="fn"><span class="fn">S</span> <a href="../../.././Mathlib/Algebra/Ring/Equiv.html#RingEquiv">≃+*</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">{ <span class="fn">e</span> : <span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/Algebra/Ring/Equiv.html#RingEquiv">≃+*</a> <span class="fn">M</span></span> // <span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">e</span>.toRingHom</span>.comp</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">S</span> <span class="fn">L</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">M</span>)</span>.comp</span> <span class="fn"><span class="fn">hSR</span>.toRingHom</span></span></span> }</span></div></div><p>Used in the definition of <code><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquiv">equivOfEquiv</a></code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquivAux">IsAlgClosure.equivOfEquivAux</a> <span class="fn">L</span> <span class="fn">M</span> <span class="fn">hSR</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⟨<span class="fn">↑<span class="fn">(<a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfAlgebraic'">IsAlgClosure.equivOfAlgebraic'</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">L</span> <span class="fn">M</span>)</span></span>, <span class="fn">⋯</span>⟩</span></span></li></ul></details><details id="instances-for-list-IsAlgClosure.equivOfEquivAux" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsAlgClosure.equivOfEquiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L426-L428">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquiv"><span class="name">IsAlgClosure</span>.<span class="name">equivOfEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hSR : <span class="fn"><span class="fn">S</span> <a href="../../.././Mathlib/Algebra/Ring/Equiv.html#RingEquiv">≃+*</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/Algebra/Ring/Equiv.html#RingEquiv">≃+*</a> <span class="fn">M</span></span></div></div><p>Algebraic closure of isomorphic fields are isomorphic</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquiv">IsAlgClosure.equivOfEquiv</a> <span class="fn">L</span> <span class="fn">M</span> <span class="fn">hSR</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">(<a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquivAux">IsAlgClosure.equivOfEquivAux</a> <span class="fn">L</span> <span class="fn">M</span> <span class="fn">hSR</span>)</span></span></span></li></ul></details><details id="instances-for-list-IsAlgClosure.equivOfEquiv" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsAlgClosure.equivOfEquiv_comp_algebraMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L430-L433">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquiv_comp_algebraMap"><span class="name">IsAlgClosure</span>.<span class="name">equivOfEquiv_comp_algebraMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hSR : <span class="fn"><span class="fn">S</span> <a href="../../.././Mathlib/Algebra/Ring/Equiv.html#RingEquiv">≃+*</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(↑<span class="fn">(<a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquiv">IsAlgClosure.equivOfEquiv</a> <span class="fn">L</span> <span class="fn">M</span> <span class="fn">hSR</span>)</span>)</span>.comp</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">S</span> <span class="fn">L</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">M</span>)</span>.comp</span> <span class="fn">↑<span class="fn">hSR</span></span></span></span></div></div></div></div><div class="decl" id="IsAlgClosure.equivOfEquiv_algebraMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L435-L438">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquiv_algebraMap"><span class="name">IsAlgClosure</span>.<span class="name">equivOfEquiv_algebraMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hSR : <span class="fn"><span class="fn">S</span> <a href="../../.././Mathlib/Algebra/Ring/Equiv.html#RingEquiv">≃+*</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquiv">IsAlgClosure.equivOfEquiv</a> <span class="fn">L</span> <span class="fn">M</span> <span class="fn">hSR</span>)</span> <span class="fn">(<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">S</span> <span class="fn">L</span>)</span> <span class="fn">s</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">M</span>)</span> <span class="fn">(<span class="fn">hSR</span> <span class="fn">s</span>)</span></span></span></div></div></div></div><div class="decl" id="IsAlgClosure.equivOfEquiv_symm_algebraMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L440-L443">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquiv_symm_algebraMap"><span class="name">IsAlgClosure</span>.<span class="name">equivOfEquiv_symm_algebraMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hSR : <span class="fn"><span class="fn">S</span> <a href="../../.././Mathlib/Algebra/Ring/Equiv.html#RingEquiv">≃+*</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquiv">IsAlgClosure.equivOfEquiv</a> <span class="fn">L</span> <span class="fn">M</span> <span class="fn">hSR</span>)</span>.symm</span> <span class="fn">(<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">M</span>)</span> <span class="fn">r</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">S</span> <span class="fn">L</span>)</span> <span class="fn">(<span class="fn"><span class="fn">hSR</span>.symm</span> <span class="fn">r</span>)</span></span></span></div></div></div></div><div class="decl" id="IsAlgClosure.equivOfEquiv_symm_comp_algebraMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L445-L449">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquiv_symm_comp_algebraMap"><span class="name">IsAlgClosure</span>.<span class="name">equivOfEquiv_symm_comp_algebraMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure">IsAlgClosure</a> <span class="fn">S</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hSR : <span class="fn"><span class="fn">S</span> <a href="../../.././Mathlib/Algebra/Ring/Equiv.html#RingEquiv">≃+*</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(↑<span class="fn"><span class="fn">(<a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosure.equivOfEquiv">IsAlgClosure.equivOfEquiv</a> <span class="fn">L</span> <span class="fn">M</span> <span class="fn">hSR</span>)</span>.symm</span>)</span>.comp</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">S</span> <span class="fn">L</span>)</span>.comp</span> <span class="fn">↑<span class="fn"><span class="fn">hSR</span>.symm</span></span></span></span></div></div></div></div><div class="decl" id="Algebra.IsAlgebraic.range_eval_eq_rootSet_minpoly"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L460-L465">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#Algebra.IsAlgebraic.range_eval_eq_rootSet_minpoly"><span class="name">Algebra</span>.<span class="name">IsAlgebraic</span>.<span class="name">range_eval_eq_rootSet_minpoly</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">fun (<span class="fn">ψ</span> : <span class="fn"><span class="fn">K</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">F</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">A</span></span>) =&gt; <span class="fn"><span class="fn">ψ</span> <span class="fn">x</span></span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">F</span> <span class="fn">x</span>)</span>.rootSet</span> <span class="fn">A</span></span></span></div></div><p>Let <code>A</code> be an algebraically closed field and let <code>x ∈ K</code>, with <code>K/F</code> an algebraic extension
+of fields. Then the images of <code>x</code> by the <code>F</code>-algebra morphisms from <code>K</code> to <code>A</code> are exactly
+the roots in <code>A</code> of the minimal polynomial of <code>x</code> over <code>F</code>.</p></div></div><div class="decl" id="IntermediateField.algHomEquivAlgHomOfSplits"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L467-L478">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IntermediateField.algHomEquivAlgHomOfSplits"><span class="name">IntermediateField</span>.<span class="name">algHomEquivAlgHomOfSplits</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <span class="fn"><a href="../../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hL : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">K</span>), <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">L</span></span>)</span> <span class="fn">(<a href="../../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">F</span> <span class="fn">x</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">K</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">F</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">↥<span class="fn">L</span></span>)</span> <a href="../../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">(<span class="fn">K</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">F</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">A</span>)</span></span></div></div><p>All <code>F</code>-embeddings of a field <code>K</code> into another field <code>A</code> factor through any intermediate
+field of <code>A/F</code> in which the minimal polynomial of elements of <code>K</code> splits.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IntermediateField.algHomEquivAlgHomOfSplits">IntermediateField.algHomEquivAlgHomOfSplits</a> <span class="fn">A</span> <span class="fn">L</span> <span class="fn">hL</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">toFun</span> := <span class="fn"><span class="fn"><span class="fn">L</span>.val</span>.comp</span>, <span class="fn">invFun</span> := <span class="fn">fun (<span class="fn">f</span> : <span class="fn"><span class="fn">K</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">F</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">A</span></span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span>.codRestrict</span> <span class="fn"><span class="fn">L</span>.toSubalgebra</span> <span class="fn">⋯</span></span></span>, <span class="fn">left_inv</span> := <span class="fn">⋯</span>,
+    <span class="fn">right_inv</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-IntermediateField.algHomEquivAlgHomOfSplits" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IntermediateField.algHomEquivAlgHomOfSplits_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L469-L469">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IntermediateField.algHomEquivAlgHomOfSplits_apply"><span class="name">IntermediateField</span>.<span class="name">algHomEquivAlgHomOfSplits_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <span class="fn"><a href="../../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hL : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">K</span>), <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">L</span></span>)</span> <span class="fn">(<a href="../../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">F</span> <span class="fn">x</span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(φ₂ : <span class="fn"><span class="fn">K</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">F</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">↥<span class="fn">L</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IntermediateField.algHomEquivAlgHomOfSplits">IntermediateField.algHomEquivAlgHomOfSplits</a> <span class="fn">A</span> <span class="fn">L</span> <span class="fn">hL</span>)</span> <span class="fn">φ₂</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">L</span>.val</span>.comp</span> <span class="fn">φ₂</span></span></span></div></div></div></div><div class="decl" id="IntermediateField.algHomEquivAlgHomOfSplits_symm_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L469-L469">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IntermediateField.algHomEquivAlgHomOfSplits_symm_apply"><span class="name">IntermediateField</span>.<span class="name">algHomEquivAlgHomOfSplits_symm_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <span class="fn"><a href="../../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hL : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">K</span>), <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">L</span></span>)</span> <span class="fn">(<a href="../../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">F</span> <span class="fn">x</span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">K</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">F</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IntermediateField.algHomEquivAlgHomOfSplits">IntermediateField.algHomEquivAlgHomOfSplits</a> <span class="fn">A</span> <span class="fn">L</span> <span class="fn">hL</span>)</span>.symm</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span>.codRestrict</span> <span class="fn"><span class="fn">L</span>.toSubalgebra</span> <span class="fn">⋯</span></span></span></div></div></div></div><div class="decl" id="IntermediateField.algHomEquivAlgHomOfSplits_apply_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L480-L482">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IntermediateField.algHomEquivAlgHomOfSplits_apply_apply"><span class="name">IntermediateField</span>.<span class="name">algHomEquivAlgHomOfSplits_apply_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <span class="fn"><a href="../../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hL : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">K</span>), <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">L</span></span>)</span> <span class="fn">(<a href="../../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">F</span> <span class="fn">x</span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">K</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">F</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">↥<span class="fn">L</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">(<a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IntermediateField.algHomEquivAlgHomOfSplits">IntermediateField.algHomEquivAlgHomOfSplits</a> <span class="fn">A</span> <span class="fn">L</span> <span class="fn">hL</span>)</span> <span class="fn">f</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">(↥<span class="fn">L</span>)</span> <span class="fn">A</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span></span></span></div></div></div></div><div class="decl" id="Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L484-L492">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits"><span class="name">Algebra</span>.<span class="name">IsAlgebraic</span>.<span class="name">algHomEquivAlgHomOfSplits</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hL : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">K</span>), <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">F</span> <span class="fn">L</span>)</span> <span class="fn">(<a href="../../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">F</span> <span class="fn">x</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">K</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">F</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">L</span>)</span> <a href="../../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">(<span class="fn">K</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">F</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">A</span>)</span></span></div></div><p>All <code>F</code>-embeddings of a field <code>K</code> into another field <code>A</code> factor through any subextension
+of <code>A/F</code> in which the minimal polynomial of elements of <code>K</code> splits.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits_apply_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/FieldTheory/IsAlgClosed/Basic.lean#L494-L497">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits_apply_apply"><span class="name">Algebra</span>.<span class="name">IsAlgebraic</span>.<span class="name">algHomEquivAlgHomOfSplits_apply_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hL : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">K</span>), <span class="fn"><a href="../../.././Mathlib/Algebra/Polynomial/Splits.html#Polynomial.Splits">Polynomial.Splits</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">F</span> <span class="fn">L</span>)</span> <span class="fn">(<a href="../../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">F</span> <span class="fn">x</span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">K</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">F</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">(<a href="../../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits">Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits</a> <span class="fn">A</span> <span class="fn">L</span> <span class="fn">hL</span>)</span> <span class="fn">f</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">L</span> <span class="fn">A</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

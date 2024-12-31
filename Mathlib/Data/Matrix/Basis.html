@@ -1,0 +1,601 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Data.Matrix.Basis</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Data.Matrix.Basis";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Data</span>.<span class="name">Matrix</span>.<span class="name">Basis</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Data/Matrix/Basic.html">Mathlib.Data.Matrix.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Data.Matrix.Basis" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Matrix.stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">stdBasisMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.stdBasisMatrix_eq_of_single_single"><span class="name">Matrix</span>.<span class="name">stdBasisMatrix_eq_of_single_single</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.smul_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">smul_stdBasisMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.stdBasisMatrix_zero"><span class="name">Matrix</span>.<span class="name">stdBasisMatrix_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.stdBasisMatrix_add"><span class="name">Matrix</span>.<span class="name">stdBasisMatrix_add</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.mulVec_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">mulVec_stdBasisMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.matrix_eq_sum_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">matrix_eq_sum_stdBasisMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.matrix_eq_sum_std_basis"><span class="name">Matrix</span>.<span class="name">matrix_eq_sum_std_basis</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.stdBasisMatrix_eq_single_vecMulVec_single"><span class="name">Matrix</span>.<span class="name">stdBasisMatrix_eq_single_vecMulVec_single</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.std_basis_eq_basis_mul_basis"><span class="name">Matrix</span>.<span class="name">std_basis_eq_basis_mul_basis</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.induction_on'"><span class="name">Matrix</span>.<span class="name">induction_on'</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.induction_on"><span class="name">Matrix</span>.<span class="name">induction_on</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.StdBasisMatrix.apply_same"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">apply_same</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.StdBasisMatrix.apply_of_ne"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">apply_of_ne</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.StdBasisMatrix.apply_of_row_ne"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">apply_of_row_ne</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.StdBasisMatrix.apply_of_col_ne"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">apply_of_col_ne</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.StdBasisMatrix.diag_zero"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">diag_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.StdBasisMatrix.diag_same"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">diag_same</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.StdBasisMatrix.mul_left_apply_same"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">mul_left_apply_same</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.StdBasisMatrix.mul_right_apply_same"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">mul_right_apply_same</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.StdBasisMatrix.mul_left_apply_of_ne"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">mul_left_apply_of_ne</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.StdBasisMatrix.mul_right_apply_of_ne"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">mul_right_apply_of_ne</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.StdBasisMatrix.mul_same"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">mul_same</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.StdBasisMatrix.mul_of_ne"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">mul_of_ne</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.row_eq_zero_of_commute_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">row_eq_zero_of_commute_stdBasisMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.col_eq_zero_of_commute_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">col_eq_zero_of_commute_stdBasisMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.diag_eq_of_commute_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">diag_eq_of_commute_stdBasisMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.mem_range_scalar_of_commute_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">mem_range_scalar_of_commute_stdBasisMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.mem_range_scalar_iff_commute_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">mem_range_scalar_iff_commute_stdBasisMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.mem_range_scalar_iff_commute_stdBasisMatrix'"><span class="name">Matrix</span>.<span class="name">mem_range_scalar_iff_commute_stdBasisMatrix'</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Matrices-with-a-single-non-zero-element">Matrices with a single non-zero element. <a class="hover-link" href="#Matrices-with-a-single-non-zero-element">#</a></h1><p>This file provides <code><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a></code>. The matrix <code><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> i j c</code> has <code>c</code>
+at position <code>(i, j)</code>, and zeroes elsewhere.</p></div><div class="decl" id="Matrix.stdBasisMatrix"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L27-L31">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">stdBasisMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">m</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">α</span></span></div></div><p><code><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">stdBasisMatrix</a> i j a</code> is the matrix with <code>a</code> in the <code>i</code>-th row, <code>j</code>-th column,
+and zeroes elsewhere.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">Matrix.of</span> <span class="fn">fun (<span class="fn">i'</span> : <span class="fn">m</span>) (<span class="fn">j'</span> : <span class="fn">n</span>) =&gt; <span class="fn">if <span class="fn"><span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i'</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">j</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">j'</span></span></span> then <span class="fn">a</span> else <span class="fn">0</span></span></span></span></span></li></ul></details><details id="instances-for-list-Matrix.stdBasisMatrix" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Matrix.stdBasisMatrix_eq_of_single_single"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L33-L37">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix_eq_of_single_single"><span class="name">Matrix</span>.<span class="name">stdBasisMatrix_eq_of_single_single</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">m</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">Matrix.of</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Group/Pi/Basic.html#Pi.single">Pi.single</a> <span class="fn">i</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Group/Pi/Basic.html#Pi.single">Pi.single</a> <span class="fn">j</span> <span class="fn">a</span>)</span>)</span></span></span></div></div></div></div><div class="decl" id="Matrix.smul_stdBasisMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L39-L44">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.smul_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">smul_stdBasisMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Action/Defs.html#SMulZeroClass">SMulZeroClass</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">m</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">(<span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span>)</span></span></span></div></div></div></div><div class="decl" id="Matrix.stdBasisMatrix_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L46-L50">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix_zero"><span class="name">Matrix</span>.<span class="name">stdBasisMatrix_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">m</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">n</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Matrix.stdBasisMatrix_add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L54-L58">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix_add"><span class="name">Matrix</span>.<span class="name">stdBasisMatrix_add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">m</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">(<span class="fn">a</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">b</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.mulVec_stdBasisMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L60-L67">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.mulVec_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">mulVec_stdBasisMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalNonAssocSemiring">NonUnitalNonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">m</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">m</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">c</span>)</span>.mulVec</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Logic/Function/Basic.html#Function.update">Function.update</a> <span class="fn">0</span> <span class="fn">i</span> <span class="fn">(<span class="fn">c</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">x</span> <span class="fn">j</span></span>)</span></span></span></div></div></div></div><div class="decl" id="Matrix.matrix_eq_sum_stdBasisMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L69-L73">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.matrix_eq_sum_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">matrix_eq_sum_stdBasisMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∑ <span class="fn">i</span> : <span class="fn">m</span>, <span class="fn">∑ <span class="fn">j</span> : <span class="fn">n</span>, <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">(<span class="fn">x</span> <span class="fn">i</span> <span class="fn">j</span>)</span></span></span></span></span></div></div></div></div><div class="decl" id="Matrix.matrix_eq_sum_std_basis"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L75-L75">source</a></div><div class="attributes">@[deprecated Matrix.matrix_eq_sum_stdBasisMatrix]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.matrix_eq_sum_std_basis"><span class="name">Matrix</span>.<span class="name">matrix_eq_sum_std_basis</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∑ <span class="fn">i</span> : <span class="fn">m</span>, <span class="fn">∑ <span class="fn">j</span> : <span class="fn">n</span>, <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">(<span class="fn">x</span> <span class="fn">i</span> <span class="fn">j</span>)</span></span></span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.matrix_eq_sum_stdBasisMatrix">Matrix.matrix_eq_sum_stdBasisMatrix</a></code>.</p></div></div><div class="decl" id="Matrix.stdBasisMatrix_eq_single_vecMulVec_single"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L77-L81">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix_eq_single_vecMulVec_single"><span class="name">Matrix</span>.<span class="name">stdBasisMatrix_eq_single_vecMulVec_single</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">m</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">n</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Mul.html#Matrix.vecMulVec">Matrix.vecMulVec</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Group/Pi/Basic.html#Pi.single">Pi.single</a> <span class="fn">i</span> <span class="fn">1</span>)</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Group/Pi/Basic.html#Pi.single">Pi.single</a> <span class="fn">j</span> <span class="fn">1</span>)</span></span></span></div></div></div></div><div class="decl" id="Matrix.std_basis_eq_basis_mul_basis"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L85-L90">source</a></div><div class="attributes">@[deprecated Matrix.stdBasisMatrix_eq_single_vecMulVec_single]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.std_basis_eq_basis_mul_basis"><span class="name">Matrix</span>.<span class="name">std_basis_eq_basis_mul_basis</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">m</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">n</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Mul.html#Matrix.vecMulVec">Matrix.vecMulVec</a> <span class="fn">(fun (<span class="fn">i'</span> : <span class="fn">m</span>) =&gt; <span class="fn">if <span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i'</span></span> then <span class="fn">1</span> else <span class="fn">0</span></span>)</span> <span class="fn">fun (<span class="fn">j'</span> : <span class="fn">n</span>) =&gt; <span class="fn">if <span class="fn"><span class="fn">j</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">j'</span></span> then <span class="fn">1</span> else <span class="fn">0</span></span></span></span></span></div></div></div></div><div class="decl" id="Matrix.induction_on'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L93-L102">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.induction_on'"><span class="name">Matrix</span>.<span class="name">induction_on'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">α</span></span> → <a href="../../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_zero : <span class="fn"><span class="fn">P</span> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_add : <span class="fn">∀ (<span class="fn">p </span><span class="fn">q</span> : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">α</span></span>), <span class="fn"><span class="fn"><span class="fn">P</span> <span class="fn">p</span></span> → <span class="fn"><span class="fn"><span class="fn">P</span> <span class="fn">q</span></span> → <span class="fn"><span class="fn">P</span> <span class="fn">(<span class="fn">p</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">q</span>)</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_std_basis : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">m</span>) (<span class="fn">j</span> : <span class="fn">n</span>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn">P</span> <span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">x</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">P</span> <span class="fn">M</span></span></div></div></div></div><div class="decl" id="Matrix.induction_on"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L104-L114">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.induction_on"><span class="name">Matrix</span>.<span class="name">induction_on</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">α</span></span> → <a href="../../.././foundational_types.html">Prop</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_add : <span class="fn">∀ (<span class="fn">p </span><span class="fn">q</span> : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">m</span> <span class="fn">n</span> <span class="fn">α</span></span>), <span class="fn"><span class="fn"><span class="fn">P</span> <span class="fn">p</span></span> → <span class="fn"><span class="fn"><span class="fn">P</span> <span class="fn">q</span></span> → <span class="fn"><span class="fn">P</span> <span class="fn">(<span class="fn">p</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">q</span>)</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_std_basis : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">m</span>) (<span class="fn">j</span> : <span class="fn">n</span>) (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn">P</span> <span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">x</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">P</span> <span class="fn">M</span></span></div></div></div></div><div class="decl" id="Matrix.StdBasisMatrix.apply_same"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L122-L124">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.StdBasisMatrix.apply_same"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">apply_same</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">m</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">c</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span></div></div></div></div><div class="decl" id="Matrix.StdBasisMatrix.apply_of_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L126-L129">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.StdBasisMatrix.apply_of_ne"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">apply_of_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">m</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i' : <span class="fn">m</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j' : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn">(<span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i'</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">j</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">j'</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">c</span> <span class="fn">i'</span> <span class="fn">j'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Matrix.StdBasisMatrix.apply_of_row_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L131-L133">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.StdBasisMatrix.apply_of_row_ne"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">apply_of_row_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i i' : <span class="fn">m</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn">i</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">i'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j j' : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">a</span> <span class="fn">i'</span> <span class="fn">j'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Matrix.StdBasisMatrix.apply_of_col_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L135-L137">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.StdBasisMatrix.apply_of_col_ne"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">apply_of_col_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i i' : <span class="fn">m</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{j j' : <span class="fn">n</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hj : <span class="fn"><span class="fn">j</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">j'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">a</span> <span class="fn">i'</span> <span class="fn">j'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Matrix.StdBasisMatrix.diag_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L144-L146">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.StdBasisMatrix.diag_zero"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">diag_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">j</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">i</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">c</span>)</span>.diag</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Matrix.StdBasisMatrix.diag_same"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L148-L151">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.StdBasisMatrix.diag_same"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">diag_same</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">i</span> <span class="fn">c</span>)</span>.diag</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Pi/Basic.html#Pi.single">Pi.single</a> <span class="fn">i</span> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="Matrix.StdBasisMatrix.mul_left_apply_same"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L158-L160">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.StdBasisMatrix.mul_left_apply_same"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">mul_left_apply_same</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalNonAssocSemiring">NonUnitalNonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">n</span> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">M</span>)</span> <span class="fn">i</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">M</span> <span class="fn">j</span> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.StdBasisMatrix.mul_right_apply_same"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L162-L164">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.StdBasisMatrix.mul_right_apply_same"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">mul_right_apply_same</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalNonAssocSemiring">NonUnitalNonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">n</span> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">M</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">c</span></span>)</span> <span class="fn">a</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">M</span> <span class="fn">a</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="Matrix.StdBasisMatrix.mul_left_apply_of_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L166-L168">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.StdBasisMatrix.mul_left_apply_of_ne"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">mul_left_apply_of_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalNonAssocSemiring">NonUnitalNonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a b : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">i</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">n</span> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">M</span>)</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Matrix.StdBasisMatrix.mul_right_apply_of_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L170-L172">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.StdBasisMatrix.mul_right_apply_of_ne"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">mul_right_apply_of_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalNonAssocSemiring">NonUnitalNonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a b : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hbj : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">j</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">n</span> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">M</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">c</span></span>)</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Matrix.StdBasisMatrix.mul_same"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L174-L179">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.StdBasisMatrix.mul_same"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">mul_same</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalNonAssocSemiring">NonUnitalNonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(d : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">j</span> <span class="fn">k</span> <span class="fn">d</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">k</span> <span class="fn">(<span class="fn">c</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">d</span>)</span></span></span></div></div></div></div><div class="decl" id="Matrix.StdBasisMatrix.mul_of_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L181-L194">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.StdBasisMatrix.mul_of_ne"><span class="name">Matrix</span>.<span class="name">StdBasisMatrix</span>.<span class="name">mul_of_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalNonAssocSemiring">NonUnitalNonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i j : <span class="fn">n</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">α</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{k l : <span class="fn">n</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">j</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(d : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">k</span> <span class="fn">l</span> <span class="fn">d</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Matrix.row_eq_zero_of_commute_stdBasisMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L204-L207">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.row_eq_zero_of_commute_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">row_eq_zero_of_commute_stdBasisMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i j k : <span class="fn">n</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">n</span> <span class="fn">n</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hM : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">1</span>)</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hkj : <span class="fn"><span class="fn">k</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">j</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">M</span> <span class="fn">j</span> <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Matrix.col_eq_zero_of_commute_stdBasisMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L209-L212">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.col_eq_zero_of_commute_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">col_eq_zero_of_commute_stdBasisMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i j k : <span class="fn">n</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">n</span> <span class="fn">n</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hM : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">1</span>)</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hki : <span class="fn"><span class="fn">k</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">i</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">M</span> <span class="fn">k</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Matrix.diag_eq_of_commute_stdBasisMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L214-L217">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.diag_eq_of_commute_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">diag_eq_of_commute_stdBasisMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i j : <span class="fn">n</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">n</span> <span class="fn">n</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hM : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">1</span>)</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">M</span> <span class="fn">i</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">M</span> <span class="fn">j</span> <span class="fn">j</span></span></span></div></div></div></div><div class="decl" id="Matrix.mem_range_scalar_of_commute_stdBasisMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L219-L236">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.mem_range_scalar_of_commute_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">mem_range_scalar_of_commute_stdBasisMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">n</span> <span class="fn">n</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hM : <span class="fn"><a href="../../.././Mathlib/Logic/Pairwise.html#Pairwise">Pairwise</a> <span class="fn">fun (<span class="fn">i</span> <span class="fn">j</span> : <span class="fn">n</span>) =&gt; <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">1</span>)</span> <span class="fn">M</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">M</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.scalar">Matrix.scalar</a> <span class="fn">n</span>)</span></span></span></span></div></div><p><code>M</code> is a scalar matrix if it commutes with every non-diagonal <code><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">stdBasisMatrix</a></code>.</p></div></div><div class="decl" id="Matrix.mem_range_scalar_iff_commute_stdBasisMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L238-L242">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.mem_range_scalar_iff_commute_stdBasisMatrix"><span class="name">Matrix</span>.<span class="name">mem_range_scalar_iff_commute_stdBasisMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">n</span> <span class="fn">n</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">M</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.scalar">Matrix.scalar</a> <span class="fn">n</span>)</span></span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i </span><span class="fn">j</span> : <span class="fn">n</span>), <span class="fn"><span class="fn"><span class="fn">i</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">j</span></span> → <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">1</span>)</span> <span class="fn">M</span></span></span></span></span></div></div></div></div><div class="decl" id="Matrix.mem_range_scalar_iff_commute_stdBasisMatrix'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Data/Matrix/Basis.lean#L244-L250">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.mem_range_scalar_iff_commute_stdBasisMatrix'"><span class="name">Matrix</span>.<span class="name">mem_range_scalar_iff_commute_stdBasisMatrix'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">n</span> <span class="fn">n</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">M</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.scalar">Matrix.scalar</a> <span class="fn">n</span>)</span></span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i </span><span class="fn">j</span> : <span class="fn">n</span>), <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">(<a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">Matrix.stdBasisMatrix</a> <span class="fn">i</span> <span class="fn">j</span> <span class="fn">1</span>)</span> <span class="fn">M</span></span></span></span></div></div><p><code>M</code> is a scalar matrix if and only if it commutes with every <code><a href="../../.././Mathlib/Data/Matrix/Basis.html#Matrix.stdBasisMatrix">stdBasisMatrix</a></code>.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

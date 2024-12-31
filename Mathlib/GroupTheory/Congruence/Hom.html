@@ -1,0 +1,617 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.GroupTheory.Congruence.Hom</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.GroupTheory.Congruence.Hom";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">GroupTheory</span>.<span class="name">Congruence</span>.<span class="name">Hom</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html">Mathlib.GroupTheory.Congruence.Defs</a></li><li><a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html">Mathlib.Algebra.Group.Hom.Defs</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.GroupTheory.Congruence.Hom" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Con.ker"><span class="name">Con</span>.<span class="name">ker</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.ker"><span class="name">AddCon</span>.<span class="name">ker</span></a></div><div class="nav_link"><a class="break_within" href="#Con.ker_rel"><span class="name">Con</span>.<span class="name">ker_rel</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.ker_rel"><span class="name">AddCon</span>.<span class="name">ker_rel</span></a></div><div class="nav_link"><a class="break_within" href="#Con.mk'"><span class="name">Con</span>.<span class="name">mk'</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.mk'"><span class="name">AddCon</span>.<span class="name">mk'</span></a></div><div class="nav_link"><a class="break_within" href="#Con.mk'_ker"><span class="name">Con</span>.<span class="name">mk'_ker</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.mk'_ker"><span class="name">AddCon</span>.<span class="name">mk'_ker</span></a></div><div class="nav_link"><a class="break_within" href="#Con.mk'_surjective"><span class="name">Con</span>.<span class="name">mk'_surjective</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.mk'_surjective"><span class="name">AddCon</span>.<span class="name">mk'_surjective</span></a></div><div class="nav_link"><a class="break_within" href="#Con.coe_mk'"><span class="name">Con</span>.<span class="name">coe_mk'</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.coe_mk'"><span class="name">AddCon</span>.<span class="name">coe_mk'</span></a></div><div class="nav_link"><a class="break_within" href="#Con.ker_apply"><span class="name">Con</span>.<span class="name">ker_apply</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.ker_apply"><span class="name">AddCon</span>.<span class="name">ker_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Con.comap_eq"><span class="name">Con</span>.<span class="name">comap_eq</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.comap_eq"><span class="name">AddCon</span>.<span class="name">comap_eq</span></a></div><div class="nav_link"><a class="break_within" href="#Con.lift"><span class="name">Con</span>.<span class="name">lift</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.lift"><span class="name">AddCon</span>.<span class="name">lift</span></a></div><div class="nav_link"><a class="break_within" href="#Con.lift_mk'"><span class="name">Con</span>.<span class="name">lift_mk'</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.lift_mk'"><span class="name">AddCon</span>.<span class="name">lift_mk'</span></a></div><div class="nav_link"><a class="break_within" href="#Con.lift_coe"><span class="name">Con</span>.<span class="name">lift_coe</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.lift_coe"><span class="name">AddCon</span>.<span class="name">lift_coe</span></a></div><div class="nav_link"><a class="break_within" href="#Con.lift_comp_mk'"><span class="name">Con</span>.<span class="name">lift_comp_mk'</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.lift_comp_mk'"><span class="name">AddCon</span>.<span class="name">lift_comp_mk'</span></a></div><div class="nav_link"><a class="break_within" href="#Con.lift_apply_mk'"><span class="name">Con</span>.<span class="name">lift_apply_mk'</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.lift_apply_mk'"><span class="name">AddCon</span>.<span class="name">lift_apply_mk'</span></a></div><div class="nav_link"><a class="break_within" href="#Con.lift_funext"><span class="name">Con</span>.<span class="name">lift_funext</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.lift_funext"><span class="name">AddCon</span>.<span class="name">lift_funext</span></a></div><div class="nav_link"><a class="break_within" href="#Con.lift_unique"><span class="name">Con</span>.<span class="name">lift_unique</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.lift_unique"><span class="name">AddCon</span>.<span class="name">lift_unique</span></a></div><div class="nav_link"><a class="break_within" href="#Con.lift_surjective_of_surjective"><span class="name">Con</span>.<span class="name">lift_surjective_of_surjective</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.lift_surjective_of_surjective"><span class="name">AddCon</span>.<span class="name">lift_surjective_of_surjective</span></a></div><div class="nav_link"><a class="break_within" href="#Con.ker_eq_lift_of_injective"><span class="name">Con</span>.<span class="name">ker_eq_lift_of_injective</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.ker_eq_lift_of_injective"><span class="name">AddCon</span>.<span class="name">ker_eq_lift_of_injective</span></a></div><div class="nav_link"><a class="break_within" href="#Con.kerLift"><span class="name">Con</span>.<span class="name">kerLift</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.kerLift"><span class="name">AddCon</span>.<span class="name">kerLift</span></a></div><div class="nav_link"><a class="break_within" href="#Con.kerLift_mk"><span class="name">Con</span>.<span class="name">kerLift_mk</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.kerLift_mk"><span class="name">AddCon</span>.<span class="name">kerLift_mk</span></a></div><div class="nav_link"><a class="break_within" href="#Con.kerLift_injective"><span class="name">Con</span>.<span class="name">kerLift_injective</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.kerLift_injective"><span class="name">AddCon</span>.<span class="name">kerLift_injective</span></a></div><div class="nav_link"><a class="break_within" href="#Con.map"><span class="name">Con</span>.<span class="name">map</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.map"><span class="name">AddCon</span>.<span class="name">map</span></a></div><div class="nav_link"><a class="break_within" href="#Con.map_apply"><span class="name">Con</span>.<span class="name">map_apply</span></a></div><div class="nav_link"><a class="break_within" href="#AddCon.map_apply"><span class="name">AddCon</span>.<span class="name">map_apply</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Congruence-relations-and-homomorphisms">Congruence relations and homomorphisms <a class="hover-link" href="#Congruence-relations-and-homomorphisms">#</a></h1><p>This file contains elementary definitions involving congruence relations and morphisms.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a></code>: the kernel of a monoid homomorphism as a congruence relation</li>
+<li><code><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.mk'">Con.mk'</a></code>: the map from a monoid to its quotient by a congruence relation</li>
+<li><code><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.lift">Con.lift</a></code>: the homomorphism on the quotient given that the congruence is in the kernel</li>
+<li><code><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.map">Con.map</a></code>: homomorphism from a smaller to a larger quotient</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>congruence, congruence relation, quotient, quotient by congruence relation, monoid,
+quotient monoid</p></div><div class="decl" id="Con.ker"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L40-L43">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker"><span class="name">Con</span>.<span class="name">ker</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span></div></div><p>The kernel of a monoid homomorphism as a congruence relation.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con.mulKer">Con.mulKer</a> <span class="fn">⇑<span class="fn">f</span></span> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-Con.ker" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="AddCon.ker"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L41-L41">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker"><span class="name">AddCon</span>.<span class="name">ker</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span></div></div><p>The kernel of an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> homomorphism as an additive congruence relation.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon.addKer">AddCon.addKer</a> <span class="fn">⇑<span class="fn">f</span></span> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-AddCon.ker" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Con.ker_rel"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L45-L49">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker_rel"><span class="name">Con</span>.<span class="name">ker_rel</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span>)</span> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></div></div><p>The definition of the congruence relation defined by a monoid homomorphism's kernel.</p></div></div><div class="decl" id="AddCon.ker_rel"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L46-L47">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker_rel"><span class="name">AddCon</span>.<span class="name">ker_rel</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span>)</span> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></div></div><p>The definition of the additive congruence relation defined by an
+<code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> homomorphism's kernel.</p></div></div><div class="decl" id="Con.mk'"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L53-L59">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.mk'"><span class="name">Con</span>.<span class="name">mk'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn"><span class="fn">c</span>.Quotient</span></span></div></div><p>The natural homomorphism from a monoid to its quotient by a congruence relation.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">c</span>.mk'</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">Con.toQuotient</span>, <span class="fn">map_one'</span> := <span class="fn">⋯</span>, <span class="fn">map_mul'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Con.mk'" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="AddCon.mk'"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L54-L55">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.mk'"><span class="name">AddCon</span>.<span class="name">mk'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn"><span class="fn">c</span>.Quotient</span></span></div></div><p>The natural homomorphism from an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> to its quotient by an additive
+congruence relation.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">c</span>.mk'</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">AddCon.toQuotient</span>, <span class="fn">map_zero'</span> := <span class="fn">⋯</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-AddCon.mk'" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Con.mk'_ker"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L63-L68">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.mk'_ker"><span class="name">Con</span>.<span class="name">mk'_ker</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn"><span class="fn">c</span>.mk'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span></div></div><p>The kernel of the natural homomorphism from a monoid to its quotient by a congruence
+relation <code>c</code> equals <code>c</code>.</p></div></div><div class="decl" id="AddCon.mk'_ker"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L65-L66">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.mk'_ker"><span class="name">AddCon</span>.<span class="name">mk'_ker</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn"><span class="fn">c</span>.mk'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span></div></div><p>The kernel of the natural homomorphism from an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> to its
+quotient by an additive congruence relation <code>c</code> equals <code>c</code>.</p></div></div><div class="decl" id="Con.mk'_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L72-L77">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.mk'_surjective"><span class="name">Con</span>.<span class="name">mk'_surjective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn"><span class="fn">c</span>.mk'</span></span></span></div></div><p>The natural homomorphism from a monoid to its quotient by a congruence relation is
+surjective.</p></div></div><div class="decl" id="AddCon.mk'_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L74-L75">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.mk'_surjective"><span class="name">AddCon</span>.<span class="name">mk'_surjective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn"><span class="fn">c</span>.mk'</span></span></span></div></div><p>The natural homomorphism from an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> to its quotient by a congruence
+relation is surjective.</p></div></div><div class="decl" id="Con.coe_mk'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L79-L81">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.coe_mk'"><span class="name">Con</span>.<span class="name">coe_mk'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⇑<span class="fn"><span class="fn">c</span>.mk'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">Con.toQuotient</span></span></div></div></div></div><div class="decl" id="AddCon.coe_mk'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L79-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.coe_mk'"><span class="name">AddCon</span>.<span class="name">coe_mk'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⇑<span class="fn"><span class="fn">c</span>.mk'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">AddCon.toQuotient</span></span></div></div></div></div><div class="decl" id="Con.ker_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L84-L85">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker_apply"><span class="name">Con</span>.<span class="name">ker_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span>)</span> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="AddCon.ker_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L84-L84">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker_apply"><span class="name">AddCon</span>.<span class="name">ker_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span>)</span> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="Con.comap_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L87-L94">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.comap_eq"><span class="name">Con</span>.<span class="name">comap_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">N</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con.comap">Con.comap</a> <span class="fn">⇑<span class="fn">f</span></span> <span class="fn">⋯</span> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">c</span>.mk'</span>.comp</span> <span class="fn">f</span>)</span></span></span></div></div><p>Given a monoid homomorphism <code>f : N → M</code> and a congruence relation <code>c</code> on <code>M</code>, the congruence
+relation induced on <code>N</code> by <code>f</code> equals the kernel of <code>c</code>'s quotient homomorphism composed with
+<code>f</code>.</p></div></div><div class="decl" id="AddCon.comap_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L90-L92">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.comap_eq"><span class="name">AddCon</span>.<span class="name">comap_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">N</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon.comap">AddCon.comap</a> <span class="fn">⇑<span class="fn">f</span></span> <span class="fn">⋯</span> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">c</span>.mk'</span>.comp</span> <span class="fn">f</span>)</span></span></span></div></div><p>Given an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> homomorphism <code>f : N → M</code> and an additive congruence relation
+<code>c</code> on <code>M</code>, the additive congruence relation induced on <code>N</code> by <code>f</code> equals the kernel of <code>c</code>'s
+quotient homomorphism composed with <code>f</code>.</p></div></div><div class="decl" id="Con.lift"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L98-L107">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.lift"><span class="name">Con</span>.<span class="name">lift</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span>.Quotient</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span></div></div><p>The homomorphism on the quotient of a monoid by a congruence relation <code>c</code> induced by a
+homomorphism constant on <code>c</code>'s equivalence classes.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">H</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><span class="fn">c</span>.Quotient</span>) =&gt; <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con.liftOn">Con.liftOn</a> <span class="fn">x</span> <span class="fn">⇑<span class="fn">f</span></span> <span class="fn">⋯</span></span></span>, <span class="fn">map_one'</span> := <span class="fn">⋯</span>, <span class="fn">map_mul'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Con.lift" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="AddCon.lift"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L100-L101">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.lift"><span class="name">AddCon</span>.<span class="name">lift</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span>.Quotient</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span></div></div><p>The homomorphism on the quotient of an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> by an additive congruence
+relation <code>c</code> induced by a homomorphism constant on <code>c</code>'s equivalence classes.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">H</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><span class="fn">c</span>.Quotient</span>) =&gt; <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon.liftOn">AddCon.liftOn</a> <span class="fn">x</span> <span class="fn">⇑<span class="fn">f</span></span> <span class="fn">⋯</span></span></span>, <span class="fn">map_zero'</span> := <span class="fn">⋯</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-AddCon.lift" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Con.lift_mk'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L111-L115">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.lift_mk'"><span class="name">Con</span>.<span class="name">lift_mk'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">H</span>)</span> <span class="fn">(<span class="fn"><span class="fn">c</span>.mk'</span> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></div></div><p>The diagram describing the universal property for quotients of monoids commutes.</p></div></div><div class="decl" id="AddCon.lift_mk'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L112-L113">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.lift_mk'"><span class="name">AddCon</span>.<span class="name">lift_mk'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">H</span>)</span> <span class="fn">(<span class="fn"><span class="fn">c</span>.mk'</span> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></div></div><p>The diagram describing the universal property for quotients of <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code>s
+commutes.</p></div></div><div class="decl" id="Con.lift_coe"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L117-L121">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.lift_coe"><span class="name">Con</span>.<span class="name">lift_coe</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">H</span>)</span> <span class="fn">↑<span class="fn">x</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></div></div><p>The diagram describing the universal property for quotients of monoids commutes.</p></div></div><div class="decl" id="AddCon.lift_coe"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L118-L119">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.lift_coe"><span class="name">AddCon</span>.<span class="name">lift_coe</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">H</span>)</span> <span class="fn">↑<span class="fn">x</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></div></div><p>The diagram describing the universal property for quotients of
+<code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code>s commutes.</p></div></div><div class="decl" id="Con.lift_comp_mk'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L123-L126">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.lift_comp_mk'"><span class="name">Con</span>.<span class="name">lift_comp_mk'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">H</span>)</span>.comp</span> <span class="fn"><span class="fn">c</span>.mk'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div><p>The diagram describing the universal property for quotients of monoids commutes.</p></div></div><div class="decl" id="AddCon.lift_comp_mk'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L124-L125">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.lift_comp_mk'"><span class="name">AddCon</span>.<span class="name">lift_comp_mk'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">H</span>)</span>.comp</span> <span class="fn"><span class="fn">c</span>.mk'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div><p>The diagram describing the universal property for quotients of
+<code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code>s commutes.</p></div></div><div class="decl" id="Con.lift_apply_mk'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L128-L136">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.lift_apply_mk'"><span class="name">Con</span>.<span class="name">lift_apply_mk'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><span class="fn">c</span>.Quotient</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">(<span class="fn"><span class="fn">f</span>.comp</span> <span class="fn"><span class="fn">c</span>.mk'</span>)</span> <span class="fn">⋯</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div><p>Given a homomorphism <code>f</code> from the quotient of a monoid by a congruence relation, <code>f</code> equals the
+homomorphism on the quotient induced by <code>f</code> composed with the natural map from the monoid to
+the quotient.</p></div></div><div class="decl" id="AddCon.lift_apply_mk'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L131-L133">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.lift_apply_mk'"><span class="name">AddCon</span>.<span class="name">lift_apply_mk'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><span class="fn">c</span>.Quotient</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">(<span class="fn"><span class="fn">f</span>.comp</span> <span class="fn"><span class="fn">c</span>.mk'</span>)</span> <span class="fn">⋯</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div><p>Given a homomorphism <code>f</code> from the quotient of an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> by an
+additive congruence relation, <code>f</code> equals the homomorphism on the quotient induced by <code>f</code> composed
+with the natural map from the <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> to the quotient.</p></div></div><div class="decl" id="Con.lift_funext"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L138-L145">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.lift_funext"><span class="name">Con</span>.<span class="name">lift_funext</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f g : <span class="fn"><span class="fn"><span class="fn">c</span>.Quotient</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">M</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">↑<span class="fn">a</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></div></div><p>Homomorphisms on the quotient of a monoid by a congruence relation are equal if they
+are equal on elements that are coercions from the monoid.</p></div></div><div class="decl" id="AddCon.lift_funext"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L140-L141">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.lift_funext"><span class="name">AddCon</span>.<span class="name">lift_funext</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f g : <span class="fn"><span class="fn"><span class="fn">c</span>.Quotient</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">M</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">↑<span class="fn">a</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></div></div><p>Homomorphisms on the quotient of an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> by an additive congruence relation
+are equal if they are equal on elements that are coercions from the <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code>.</p></div></div><div class="decl" id="Con.lift_unique"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L147-L153">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.lift_unique"><span class="name">Con</span>.<span class="name">lift_unique</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn"><span class="fn">c</span>.Quotient</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(Hg : <span class="fn"><span class="fn"><span class="fn"><span class="fn">g</span>.comp</span> <span class="fn"><span class="fn">c</span>.mk'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">g</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">H</span></span></span></div></div><p>The uniqueness part of the universal property for quotients of monoids.</p></div></div><div class="decl" id="AddCon.lift_unique"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L148-L148">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.lift_unique"><span class="name">AddCon</span>.<span class="name">lift_unique</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn"><span class="fn">c</span>.Quotient</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(Hg : <span class="fn"><span class="fn"><span class="fn"><span class="fn">g</span>.comp</span> <span class="fn"><span class="fn">c</span>.mk'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">g</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">H</span></span></span></div></div><p>The uniqueness part of the universal property for quotients of <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code>s.</p></div></div><div class="decl" id="Con.lift_surjective_of_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L155-L161">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.lift_surjective_of_surjective"><span class="name">Con</span>.<span class="name">lift_surjective_of_surjective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">(<span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">h</span>)</span></span></span></div></div><p>Surjective monoid homomorphisms constant on a congruence relation <code>c</code>'s equivalence classes
+induce a surjective homomorphism on <code>c</code>'s quotient.</p></div></div><div class="decl" id="AddCon.lift_surjective_of_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L157-L158">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.lift_surjective_of_surjective"><span class="name">AddCon</span>.<span class="name">lift_surjective_of_surjective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">(<span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">h</span>)</span></span></span></div></div><p>Surjective <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> homomorphisms constant on an additive congruence
+relation <code>c</code>'s equivalence classes induce a surjective homomorphism on <code>c</code>'s quotient.</p></div></div><div class="decl" id="Con.ker_eq_lift_of_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L165-L171">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker_eq_lift_of_injective"><span class="name">Con</span>.<span class="name">ker_eq_lift_of_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">(<span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">H</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span></div></div><p>Given a monoid homomorphism <code>f</code> from <code>M</code> to <code>P</code>, the kernel of <code>f</code> is the unique congruence
+relation on <code>M</code> whose induced map from the quotient of <code>M</code> to <code>P</code> is injective.</p></div></div><div class="decl" id="AddCon.ker_eq_lift_of_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L167-L169">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker_eq_lift_of_injective"><span class="name">AddCon</span>.<span class="name">ker_eq_lift_of_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">(<span class="fn"><span class="fn">c</span>.lift</span> <span class="fn">f</span> <span class="fn">H</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span></div></div><p>Given an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> homomorphism <code>f</code> from <code>M</code> to <code>P</code>, the kernel of <code>f</code>
+is the unique additive congruence relation on <code>M</code> whose induced map from the quotient of <code>M</code>
+to <code>P</code> is injective.</p></div></div><div class="decl" id="Con.kerLift"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L175-L179">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.kerLift"><span class="name">Con</span>.<span class="name">kerLift</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span>)</span>.Quotient</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span></div></div><p>The homomorphism induced on the quotient of a monoid by the kernel of a monoid homomorphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.kerLift">Con.kerLift</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.ker">Con.ker</a> <span class="fn">f</span>)</span>.lift</span> <span class="fn">f</span> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-Con.kerLift" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="AddCon.kerLift"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L176-L177">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.kerLift"><span class="name">AddCon</span>.<span class="name">kerLift</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span>)</span>.Quotient</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span></div></div><p>The homomorphism induced on the quotient of an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> by the kernel
+of an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> homomorphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.kerLift">AddCon.kerLift</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.ker">AddCon.ker</a> <span class="fn">f</span>)</span>.lift</span> <span class="fn">f</span> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-AddCon.kerLift" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Con.kerLift_mk"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L183-L189">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.kerLift_mk"><span class="name">Con</span>.<span class="name">kerLift_mk</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.kerLift">Con.kerLift</a> <span class="fn">f</span>)</span> <span class="fn">↑<span class="fn">x</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></div></div><p>The diagram described by the universal property for quotients of monoids, when the congruence
+relation is the kernel of the homomorphism, commutes.</p></div></div><div class="decl" id="AddCon.kerLift_mk"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L185-L187">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.kerLift_mk"><span class="name">AddCon</span>.<span class="name">kerLift_mk</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.kerLift">AddCon.kerLift</a> <span class="fn">f</span>)</span> <span class="fn">↑<span class="fn">x</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></span></div></div><p>The diagram described by the universal property for quotients
+of <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code>s, when the additive congruence relation is the kernel of the homomorphism,
+commutes.</p></div></div><div class="decl" id="Con.kerLift_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L191-L195">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.kerLift_injective"><span class="name">Con</span>.<span class="name">kerLift_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.kerLift">Con.kerLift</a> <span class="fn">f</span>)</span></span></span></div></div><p>A monoid homomorphism <code>f</code> induces an injective homomorphism on the quotient by <code>f</code>'s kernel.</p></div></div><div class="decl" id="AddCon.kerLift_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L192-L193">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.kerLift_injective"><span class="name">AddCon</span>.<span class="name">kerLift_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.kerLift">AddCon.kerLift</a> <span class="fn">f</span>)</span></span></span></div></div><p>An <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> homomorphism <code>f</code> induces an injective homomorphism on the quotient
+by <code>f</code>'s kernel.</p></div></div><div class="decl" id="Con.map"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L197-L203">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.map"><span class="name">Con</span>.<span class="name">map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c d : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span>.Quotient</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn"><span class="fn">d</span>.Quotient</span></span></div></div><p>Given congruence relations <code>c, d</code> on a monoid such that <code>d</code> contains <code>c</code>, <code>d</code>'s quotient
+map induces a homomorphism from the quotient by <code>c</code> to the quotient by <code>d</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span>.map</span> <span class="fn">d</span> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">c</span>.lift</span> <span class="fn"><span class="fn">d</span>.mk'</span> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-Con.map" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="AddCon.map"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L199-L201">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.map"><span class="name">AddCon</span>.<span class="name">map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c d : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span>.Quotient</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn"><span class="fn">d</span>.Quotient</span></span></div></div><p>Given additive congruence relations <code>c, d</code> on an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> such that <code>d</code>
+contains <code>c</code>, <code>d</code>'s quotient map induces a homomorphism from the quotient by <code>c</code> to the quotient
+by <code>d</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span>.map</span> <span class="fn">d</span> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">c</span>.lift</span> <span class="fn"><span class="fn">d</span>.mk'</span> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-AddCon.map" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Con.map_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L205-L213">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#Con.map_apply"><span class="name">Con</span>.<span class="name">map_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c d : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#Con">Con</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">c</span>.Quotient</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">c</span>.map</span> <span class="fn">d</span> <span class="fn">h</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">c</span>.lift</span> <span class="fn"><span class="fn">d</span>.mk'</span> <span class="fn">⋯</span>)</span> <span class="fn">x</span></span></span></div></div><p>Given congruence relations <code>c, d</code> on a monoid such that <code>d</code> contains <code>c</code>, the definition of
+the homomorphism from the quotient by <code>c</code> to the quotient by <code>d</code> induced by <code>d</code>'s quotient
+map.</p></div></div><div class="decl" id="AddCon.map_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/GroupTheory/Congruence/Hom.lean#L208-L210">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/GroupTheory/Congruence/Hom.html#AddCon.map_apply"><span class="name">AddCon</span>.<span class="name">map_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c d : <span class="fn"><a href="../../.././Mathlib/GroupTheory/Congruence/Defs.html#AddCon">AddCon</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">c</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">c</span>.Quotient</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">c</span>.map</span> <span class="fn">d</span> <span class="fn">h</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">c</span>.lift</span> <span class="fn"><span class="fn">d</span>.mk'</span> <span class="fn">⋯</span>)</span> <span class="fn">x</span></span></span></div></div><p>Given additive congruence relations <code>c, d</code> on an <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a></code> such that <code>d</code>
+contains <code>c</code>, the definition of the homomorphism from the quotient by <code>c</code> to the quotient by <code>d</code>
+induced by <code>d</code>'s quotient map.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

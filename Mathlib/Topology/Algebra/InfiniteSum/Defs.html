@@ -1,0 +1,497 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Topology.Algebra.InfiniteSum.Defs</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Topology.Algebra.InfiniteSum.Defs";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Topology</span>.<span class="name">Algebra</span>.<span class="name">InfiniteSum</span>.<span class="name">Defs</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/BigOperators/Finprod.html">Mathlib.Algebra.BigOperators.Finprod</a></li><li><a href="../../../.././Mathlib/Topology/Separation/Basic.html">Mathlib.Topology.Separation.Basic</a></li><li><a href="../../../.././Mathlib/Order/Filter/AtTopBot/BigOperators.html">Mathlib.Order.Filter.AtTopBot.BigOperators</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Topology.Algebra.InfiniteSum.Defs" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#HasProd"><span class="name">HasProd</span></a></div><div class="nav_link"><a class="break_within" href="#HasSum"><span class="name">HasSum</span></a></div><div class="nav_link"><a class="break_within" href="#Multipliable"><span class="name">Multipliable</span></a></div><div class="nav_link"><a class="break_within" href="#Summable"><span class="name">Summable</span></a></div><div class="nav_link"><a class="break_within" href="#tprod_def"><span class="name">tprod_def</span></a></div><div class="nav_link"><a class="break_within" href="#tprod"><span class="name">tprod</span></a></div><div class="nav_link"><a class="break_within" href="#tsum_def"><span class="name">tsum_def</span></a></div><div class="nav_link"><a class="break_within" href="#tsum"><span class="name">tsum</span></a></div><div class="nav_link"><a class="break_within" href="#«term∏'_,_».delab"><span class="name">«term∏'_,_»</span>.<span class="name">delab</span></a></div><div class="nav_link"><a class="break_within" href="#«term∏'_,_»"><span class="name">«term∏'_,_»</span></a></div><div class="nav_link"><a class="break_within" href="#«term∑'_,_»"><span class="name">«term∑'_,_»</span></a></div><div class="nav_link"><a class="break_within" href="#«term∑'_,_».delab"><span class="name">«term∑'_,_»</span>.<span class="name">delab</span></a></div><div class="nav_link"><a class="break_within" href="#HasProd.multipliable"><span class="name">HasProd</span>.<span class="name">multipliable</span></a></div><div class="nav_link"><a class="break_within" href="#HasSum.summable"><span class="name">HasSum</span>.<span class="name">summable</span></a></div><div class="nav_link"><a class="break_within" href="#tprod_eq_one_of_not_multipliable"><span class="name">tprod_eq_one_of_not_multipliable</span></a></div><div class="nav_link"><a class="break_within" href="#tsum_eq_zero_of_not_summable"><span class="name">tsum_eq_zero_of_not_summable</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.hasProd_iff"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">hasProd_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Function.Injective.hasSum_iff"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">hasSum_iff</span></a></div><div class="nav_link"><a class="break_within" href="#hasProd_subtype_iff_of_mulSupport_subset"><span class="name">hasProd_subtype_iff_of_mulSupport_subset</span></a></div><div class="nav_link"><a class="break_within" href="#hasSum_subtype_iff_of_support_subset"><span class="name">hasSum_subtype_iff_of_support_subset</span></a></div><div class="nav_link"><a class="break_within" href="#hasProd_fintype"><span class="name">hasProd_fintype</span></a></div><div class="nav_link"><a class="break_within" href="#hasSum_fintype"><span class="name">hasSum_fintype</span></a></div><div class="nav_link"><a class="break_within" href="#Finset.hasProd"><span class="name">Finset</span>.<span class="name">hasProd</span></a></div><div class="nav_link"><a class="break_within" href="#Finset.hasSum"><span class="name">Finset</span>.<span class="name">hasSum</span></a></div><div class="nav_link"><a class="break_within" href="#hasProd_prod_of_ne_finset_one"><span class="name">hasProd_prod_of_ne_finset_one</span></a></div><div class="nav_link"><a class="break_within" href="#hasSum_sum_of_ne_finset_zero"><span class="name">hasSum_sum_of_ne_finset_zero</span></a></div><div class="nav_link"><a class="break_within" href="#multipliable_of_ne_finset_one"><span class="name">multipliable_of_ne_finset_one</span></a></div><div class="nav_link"><a class="break_within" href="#summable_of_ne_finset_zero"><span class="name">summable_of_ne_finset_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Multipliable.hasProd"><span class="name">Multipliable</span>.<span class="name">hasProd</span></a></div><div class="nav_link"><a class="break_within" href="#Summable.hasSum"><span class="name">Summable</span>.<span class="name">hasSum</span></a></div><div class="nav_link"><a class="break_within" href="#HasProd.unique"><span class="name">HasProd</span>.<span class="name">unique</span></a></div><div class="nav_link"><a class="break_within" href="#HasSum.unique"><span class="name">HasSum</span>.<span class="name">unique</span></a></div><div class="nav_link"><a class="break_within" href="#HasProd.tprod_eq"><span class="name">HasProd</span>.<span class="name">tprod_eq</span></a></div><div class="nav_link"><a class="break_within" href="#HasSum.tsum_eq"><span class="name">HasSum</span>.<span class="name">tsum_eq</span></a></div><div class="nav_link"><a class="break_within" href="#Multipliable.hasProd_iff"><span class="name">Multipliable</span>.<span class="name">hasProd_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Summable.hasSum_iff"><span class="name">Summable</span>.<span class="name">hasSum_iff</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Infinite-sum-and-product-over-a-topological-monoid">Infinite sum and product over a topological monoid <a class="hover-link" href="#Infinite-sum-and-product-over-a-topological-monoid">#</a></h1><p>This file defines unconditionally convergent sums over a commutative topological additive monoid.
+For Euclidean spaces (finite dimensional Banach spaces) this is equivalent to absolute
+convergence.</p><p>We also define unconditionally convergent products over a commutative topological multiplicative
+monoid.</p><p>Note: There are summable sequences which are not unconditionally convergent! The other way holds
+generally, see <code>HasSum.tendsto_sum_nat</code>.</p><h2 class="markdown-heading" id="Implementation-notes">Implementation notes <a class="hover-link" href="#Implementation-notes">#</a></h2><p>We say that a function <code>f : β → α</code> has an unconditional product of <code>a</code> if the function
+<code>fun s : <a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> β ↦ ∏ b ∈ s, f b</code> converges to <code>a</code> on the <code>atTop</code> filter on <code><a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> β</code>. In other
+words, for every neighborhood <code>U</code> of <code>a</code>, there exists a finite set <code>s : <a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> β</code> of indices such
+that <code>∏ b ∈ s', f b ∈ U</code> for any finite set <code>s'</code> which is a superset of <code>s</code>.</p><p>This may yield some unexpected results. For example, according to this definition, the product
+<code>∏' n : ℕ, (1 : ℝ) / 2</code> unconditionally exists and is equal to <code>0</code>. More strikingly,
+the product <code>∏' n : ℕ, (n : ℝ)</code> unconditionally exists and is equal to <code>0</code>, because one
+of its terms is <code>0</code> (even though the product of the remaining terms diverges). Users who would
+prefer that these products be considered not to exist can carry them out in the unit group <code>ℝˣ</code>
+rather than in <code>ℝ</code>.</p><h2 class="markdown-heading" id="References">References <a class="hover-link" href="#References">#</a></h2><ul>
+<li>Bourbaki: General Topology (1995), Chapter 3 §5 (Infinite sums in commutative groups)</li>
+</ul></div><div class="decl" id="HasProd"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L62-L86">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd"><span class="name">HasProd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Prop</a></div></div><p>Infinite product on a topological monoid</p><p>The <code>atTop</code> filter on <code><a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> β</code> is the limit of all finite sets towards the entire type. So we take
+the product over bigger and bigger sets. This product operation is invariant under reordering.</p><p>For the definition and many statements, <code>α</code> does not need to be a topological monoid. We only add
+this assumption later, for the lemmas where it is relevant.</p><p>These are defined in an identical way to infinite sums (<code><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a></code>). For example, we say that
+the function <code>ℕ → ℝ</code> sending <code>n</code> to <code>1 / 2</code> has a product of <code>0</code>, rather than saying that it does
+not converge as some authors would.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">s</span> : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">β</span></span>) =&gt; <span class="fn">∏ <span class="fn">b</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span>)</span> <span class="fn">Filter.atTop</span> <span class="fn">(<a href="../../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">a</span>)</span></span></span></li></ul></details><details id="instances-for-list-HasProd" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HasSum"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L73-L84">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum"><span class="name">HasSum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Prop</a></div></div><p>Infinite sum on a topological monoid</p><p>The <code>atTop</code> filter on <code><a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> β</code> is the limit of all finite sets towards the entire type. So we sum
+up bigger and bigger sets. This sum operation is invariant under reordering. In particular,
+the function <code>ℕ → ℝ</code> sending <code>n</code> to <code>(-1)^n / (n+1)</code> does not have a
+sum for this definition, but a series which is absolutely convergent will have the correct sum.</p><p>This is based on Mario Carneiro's
+<a href="http://us.metamath.org/mpeuni/df-tsms.html">infinite sum <code>df-tsms</code> in Metamath</a>.</p><p>For the definition and many statements, <code>α</code> does not need to be a topological monoid. We only add
+this assumption later, for the lemmas where it is relevant.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Defs.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">(fun (<span class="fn">s</span> : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">β</span></span>) =&gt; <span class="fn">∑ <span class="fn">b</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span>)</span> <span class="fn">Filter.atTop</span> <span class="fn">(<a href="../../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">a</span>)</span></span></span></li></ul></details><details id="instances-for-list-HasSum" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Multipliable"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L88-L91">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Multipliable"><span class="name">Multipliable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Prop</a></div></div><p><code><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Multipliable">Multipliable</a> f</code> means that <code>f</code> has some (infinite) product. Use <code><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tprod">tprod</a></code> to get the value.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Multipliable">Multipliable</a> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∃ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">f</span> <span class="fn">a</span></span></span></span></li></ul></details><details id="instances-for-list-Multipliable" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Summable"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L89-L89">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable"><span class="name">Summable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Prop</a></div></div><p><code><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable">Summable</a> f</code> means that <code>f</code> has some (infinite) sum. Use <code><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tsum">tsum</a></code> to get the value.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable">Summable</a> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∃ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">f</span> <span class="fn">a</span></span></span></span></li></ul></details><details id="instances-for-list-Summable" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="tprod_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L94-L106">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tprod_def"><span class="name">tprod_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tprod">tprod</a> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">if h : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Multipliable">Multipliable</a> <span class="fn">f</span></span> then <span class="fn">if <span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Group/Support.html#Function.mulSupport">Function.mulSupport</a> <span class="fn">f</span>)</span>.Finite</span> then <span class="fn"><a href="../../../.././Mathlib/Algebra/BigOperators/Finprod.html#finprod">finprod</a> <span class="fn">f</span></span> else <span class="fn"><a href="../../../.././Init/Classical.html#Exists.choose">Exists.choose</a> <span class="fn">h</span></span></span> else <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="tprod"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L94-L106">source</a></div><div class="attributes">@[irreducible]</div>
+<div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tprod"><span class="name">tprod</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">α</span></div></div><p><code>∏' i, f i</code> is the product of <code>f</code> if it exists and is unconditionally convergent,
+or 1 otherwise.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tprod">@<a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tprod">tprod</a></a> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#wrapped._@.Mathlib.Topology.Algebra.InfiniteSum.Defs._hyg.100">wrapped✝</a>.1</span></span></li></ul></details><details id="instances-for-list-tprod" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="tsum_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L96-L97">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tsum_def"><span class="name">tsum_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tsum">tsum</a> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">if h : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable">Summable</a> <span class="fn">f</span></span> then <span class="fn">if <span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Group/Support.html#Function.support">Function.support</a> <span class="fn">f</span>)</span>.Finite</span> then <span class="fn"><a href="../../../.././Mathlib/Algebra/BigOperators/Finprod.html#finsum">finsum</a> <span class="fn">f</span></span> else <span class="fn"><a href="../../../.././Init/Classical.html#Exists.choose">Exists.choose</a> <span class="fn">h</span></span></span> else <span class="fn">0</span></span></span></div></div><p><code>∑' i, f i</code> is the sum of <code>f</code> if it exists and is unconditionally convergent,
+or 0 otherwise.</p></div></div><div class="decl" id="tsum"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L96-L97">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tsum"><span class="name">tsum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">α</span></div></div><p><code>∑' i, f i</code> is the sum of <code>f</code> if it exists and is unconditionally convergent,
+or 0 otherwise.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tsum">@<a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tsum">tsum</a></a> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#wrapped._@.Mathlib.Topology.Algebra.InfiniteSum.Defs._hyg.279">wrapped✝</a>.1</span></span></li></ul></details><details id="instances-for-list-tsum" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="«term∏'_,_».delab"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L109-L110">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#«term∏'_,_».delab"><span class="name">«term∏'_,_»</span>.<span class="name">delab</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././Lean/PrettyPrinter/Delaborator/Basic.html#Lean.PrettyPrinter.Delaborator.Delab">Lean.PrettyPrinter.Delaborator.Delab</a></div></div><p>Pretty printer defined by <code>notation3</code> command.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-«term∏'_,_».delab" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="«term∏'_,_»"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L109-L110">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#«term∏'_,_»"><span class="name">«term∏'_,_»</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p><code>∏' i, f i</code> is the product of <code>f</code> if it exists and is unconditionally convergent,
+or 1 otherwise.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-«term∏'_,_»" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="«term∑'_,_»"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L111-L112">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#«term∑'_,_»"><span class="name">«term∑'_,_»</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p><code>∑' i, f i</code> is the sum of <code>f</code> if it exists and is unconditionally convergent,
+or 0 otherwise.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-«term∑'_,_»" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="«term∑'_,_».delab"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L111-L112">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#«term∑'_,_».delab"><span class="name">«term∑'_,_»</span>.<span class="name">delab</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././Lean/PrettyPrinter/Delaborator/Basic.html#Lean.PrettyPrinter.Delaborator.Delab">Lean.PrettyPrinter.Delaborator.Delab</a></div></div><p>Pretty printer defined by <code>notation3</code> command.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-«term∑'_,_».delab" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HasProd.multipliable"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L116-L118">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd.multipliable"><span class="name">HasProd</span>.<span class="name">multipliable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">f</span> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Multipliable">Multipliable</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="HasSum.summable"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L116-L116">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum.summable"><span class="name">HasSum</span>.<span class="name">summable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">f</span> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable">Summable</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="tprod_eq_one_of_not_multipliable"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L120-L122">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tprod_eq_one_of_not_multipliable"><span class="name">tprod_eq_one_of_not_multipliable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Multipliable">Multipliable</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∏' (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="tsum_eq_zero_of_not_summable"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L120-L120">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#tsum_eq_zero_of_not_summable"><span class="name">tsum_eq_zero_of_not_summable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable">Summable</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∑' (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Function.Injective.hasProd_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L124-L127">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Function.Injective.hasProd_iff"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">hasProd_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">γ</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ <span class="fn">x</span> ∉ <span class="fn"><a href="../../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">g</span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">(<span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">g</span>)</span> <span class="fn">a</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">f</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="Function.Injective.hasSum_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L124-L124">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Function.Injective.hasSum_iff"><span class="name">Function</span>.<span class="name">Injective</span>.<span class="name">hasSum_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">γ</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ <span class="fn">x</span> ∉ <span class="fn"><a href="../../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">g</span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">(<span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">g</span>)</span> <span class="fn">a</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">f</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="hasProd_subtype_iff_of_mulSupport_subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L129-L132">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#hasProd_subtype_iff_of_mulSupport_subset"><span class="name">hasProd_subtype_iff_of_mulSupport_subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Support.html#Function.mulSupport">Function.mulSupport</a> <span class="fn">f</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">(<span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Subtype.val</span>)</span> <span class="fn">a</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">f</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="hasSum_subtype_iff_of_support_subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L129-L129">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#hasSum_subtype_iff_of_support_subset"><span class="name">hasSum_subtype_iff_of_support_subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Support.html#Function.support">Function.support</a> <span class="fn">f</span></span> <a href="../../../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">(<span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Subtype.val</span>)</span> <span class="fn">a</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">f</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="hasProd_fintype"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L134-L136">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#hasProd_fintype"><span class="name">hasProd_fintype</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">f</span> <span class="fn">(∏ <span class="fn">b</span> : <span class="fn">β</span>, <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span></span></div></div></div></div><div class="decl" id="hasSum_fintype"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L134-L134">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#hasSum_fintype"><span class="name">hasSum_fintype</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">f</span> <span class="fn">(∑ <span class="fn">b</span> : <span class="fn">β</span>, <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span></span></div></div></div></div><div class="decl" id="Finset.hasProd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L138-L142">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Finset.hasProd"><span class="name">Finset</span>.<span class="name">hasProd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">(<span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Subtype.val</span>)</span> <span class="fn">(∏ <span class="fn">b</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span></span></div></div></div></div><div class="decl" id="Finset.hasSum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L138-L138">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Finset.hasSum"><span class="name">Finset</span>.<span class="name">hasSum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">(<span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">Subtype.val</span>)</span> <span class="fn">(∑ <span class="fn">b</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span></span></div></div></div></div><div class="decl" id="hasProd_prod_of_ne_finset_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L144-L149">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#hasProd_prod_of_ne_finset_one"><span class="name">hasProd_prod_of_ne_finset_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ <span class="fn">b</span> ∉ <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">f</span> <span class="fn">(∏ <span class="fn">b</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span></span></div></div><p>If a function <code>f</code> is <code>1</code> outside of a finite set <code>s</code>, then it <code><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a></code> <code>∏ b ∈ s, f b</code>.</p></div></div><div class="decl" id="hasSum_sum_of_ne_finset_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L145-L146">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#hasSum_sum_of_ne_finset_zero"><span class="name">hasSum_sum_of_ne_finset_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ <span class="fn">b</span> ∉ <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">f</span> <span class="fn">(∑ <span class="fn">b</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span></span></div></div><p>If a function <code>f</code> vanishes outside of a finite set <code>s</code>, then it <code><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a></code>
+<code>∑ b ∈ s, f b</code>.</p></div></div><div class="decl" id="multipliable_of_ne_finset_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L151-L153">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#multipliable_of_ne_finset_one"><span class="name">multipliable_of_ne_finset_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ <span class="fn">b</span> ∉ <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Multipliable">Multipliable</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="summable_of_ne_finset_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L151-L151">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#summable_of_ne_finset_zero"><span class="name">summable_of_ne_finset_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ <span class="fn">b</span> ∉ <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable">Summable</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Multipliable.hasProd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L155-L160">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Multipliable.hasProd"><span class="name">Multipliable</span>.<span class="name">hasProd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Multipliable">Multipliable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">f</span> <span class="fn">(∏' (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span></span></div></div></div></div><div class="decl" id="Summable.hasSum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L155-L155">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable.hasSum"><span class="name">Summable</span>.<span class="name">hasSum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable">Summable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">f</span> <span class="fn">(∑' (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span></span></div></div></div></div><div class="decl" id="HasProd.unique"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L162-L164">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd.unique"><span class="name">HasProd</span>.<span class="name">unique</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a₁ a₂ : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Separation/Basic.html#T2Space">T2Space</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">f</span> <span class="fn">a₁</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">f</span> <span class="fn">a₂</span></span> → <span class="fn"><span class="fn">a₁</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a₂</span></span></span></span></div></div></div></div><div class="decl" id="HasSum.unique"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L162-L162">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum.unique"><span class="name">HasSum</span>.<span class="name">unique</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a₁ a₂ : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Separation/Basic.html#T2Space">T2Space</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">f</span> <span class="fn">a₁</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">f</span> <span class="fn">a₂</span></span> → <span class="fn"><span class="fn">a₁</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a₂</span></span></span></span></div></div></div></div><div class="decl" id="HasProd.tprod_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L168-L170">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd.tprod_eq"><span class="name">HasProd</span>.<span class="name">tprod_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Separation/Basic.html#T2Space">T2Space</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">f</span> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∏' (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="HasSum.tsum_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L168-L168">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum.tsum_eq"><span class="name">HasSum</span>.<span class="name">tsum_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Separation/Basic.html#T2Space">T2Space</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">f</span> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∑' (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="Multipliable.hasProd_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L172-L174">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Multipliable.hasProd_iff"><span class="name">Multipliable</span>.<span class="name">hasProd_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Separation/Basic.html#T2Space">T2Space</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Multipliable">Multipliable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasProd">HasProd</a> <span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">∏' (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="Summable.hasSum_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Topology/Algebra/InfiniteSum/Defs.lean#L172-L172">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable.hasSum_iff"><span class="name">Summable</span>.<span class="name">hasSum_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Separation/Basic.html#T2Space">T2Space</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#Summable">Summable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/InfiniteSum/Defs.html#HasSum">HasSum</a> <span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">∑' (<span class="fn">b</span> : <span class="fn">β</span>), <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

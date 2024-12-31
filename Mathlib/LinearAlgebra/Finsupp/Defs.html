@@ -1,0 +1,758 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.LinearAlgebra.Finsupp.Defs</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.LinearAlgebra.Finsupp.Defs";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">LinearAlgebra</span>.<span class="name">Finsupp</span>.<span class="name">Defs</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Algebra/Module/Pi.html">Mathlib.Algebra.Module.Pi</a></li><li><a href="../../.././Mathlib/Data/Finsupp/Basic.html">Mathlib.Data.Finsupp.Basic</a></li><li><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html">Mathlib.Algebra.Module.Equiv.Defs</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.LinearAlgebra.Finsupp.Defs" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Finsupp.linearEquivFunOnFinite"><span class="name">Finsupp</span>.<span class="name">linearEquivFunOnFinite</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.linearEquivFunOnFinite_apply"><span class="name">Finsupp</span>.<span class="name">linearEquivFunOnFinite_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.linearEquivFunOnFinite_single"><span class="name">Finsupp</span>.<span class="name">linearEquivFunOnFinite_single</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.linearEquivFunOnFinite_symm_single"><span class="name">Finsupp</span>.<span class="name">linearEquivFunOnFinite_symm_single</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.linearEquivFunOnFinite_symm_coe"><span class="name">Finsupp</span>.<span class="name">linearEquivFunOnFinite_symm_coe</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lsingle"><span class="name">Finsupp</span>.<span class="name">lsingle</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lhom_ext"><span class="name">Finsupp</span>.<span class="name">lhom_ext</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lhom_ext'"><span class="name">Finsupp</span>.<span class="name">lhom_ext'</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lapply"><span class="name">Finsupp</span>.<span class="name">lapply</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lsubtypeDomain"><span class="name">Finsupp</span>.<span class="name">lsubtypeDomain</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lsubtypeDomain_apply"><span class="name">Finsupp</span>.<span class="name">lsubtypeDomain_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lsingle_apply"><span class="name">Finsupp</span>.<span class="name">lsingle_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lapply_apply"><span class="name">Finsupp</span>.<span class="name">lapply_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lapply_comp_lsingle_same"><span class="name">Finsupp</span>.<span class="name">lapply_comp_lsingle_same</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lapply_comp_lsingle_of_ne"><span class="name">Finsupp</span>.<span class="name">lapply_comp_lsingle_of_ne</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lmapDomain"><span class="name">Finsupp</span>.<span class="name">lmapDomain</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lmapDomain_apply"><span class="name">Finsupp</span>.<span class="name">lmapDomain_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lmapDomain_id"><span class="name">Finsupp</span>.<span class="name">lmapDomain_id</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lmapDomain_comp"><span class="name">Finsupp</span>.<span class="name">lmapDomain_comp</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.lcomapDomain"><span class="name">Finsupp</span>.<span class="name">lcomapDomain</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.mapRange.linearMap"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearMap</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.mapRange.linearMap_apply"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearMap_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.mapRange.linearMap_id"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearMap_id</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.mapRange.linearMap_comp"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearMap_comp</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.mapRange.linearMap_toAddMonoidHom"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearMap_toAddMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.mapRange.linearEquiv"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.mapRange.linearEquiv_apply"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.mapRange.linearEquiv_refl"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv_refl</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.mapRange.linearEquiv_trans"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv_trans</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.mapRange.linearEquiv_symm"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv_symm</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.mapRange.linearEquiv_toAddEquiv"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv_toAddEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.mapRange.linearEquiv_toLinearMap"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv_toLinearMap</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.finsuppProdLEquiv"><span class="name">Finsupp</span>.<span class="name">finsuppProdLEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.finsuppProdLEquiv_apply"><span class="name">Finsupp</span>.<span class="name">finsuppProdLEquiv_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Finsupp.finsuppProdLEquiv_symm_apply"><span class="name">Finsupp</span>.<span class="name">finsuppProdLEquiv_symm_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Module.subsingletonEquiv"><span class="name">Module</span>.<span class="name">subsingletonEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#Module.subsingletonEquiv_apply"><span class="name">Module</span>.<span class="name">subsingletonEquiv_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Module.subsingletonEquiv_symm_apply"><span class="name">Module</span>.<span class="name">subsingletonEquiv_symm_apply</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Properties-of-the-module-α-→₀-M">Properties of the module <code>α →₀ M</code> <a class="hover-link" href="#Properties-of-the-module-α-→₀-M">#</a></h1><p>Given an <code>R</code>-module <code>M</code>, the <code>R</code>-module structure on <code>α →₀ M</code> is defined in
+<code>Data.Finsupp.Basic</code>.</p><p>In this file we define <code><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">LinearMap</a></code> versions of various maps:</p><ul>
+<li><code><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsingle">Finsupp.lsingle</a> a : M →ₗ[R] ι →₀ M</code>: <code><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.single">Finsupp.single</a> a</code> as a linear map;</li>
+<li><code><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lapply">Finsupp.lapply</a> a : (ι →₀ M) →ₗ[R] M</code>: the map <code>fun f ↦ f a</code> as a linear map;</li>
+<li><code><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsubtypeDomain">Finsupp.lsubtypeDomain</a> (s : <a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> α) : (α →₀ M) →ₗ[R] (s →₀ M)</code>: restriction to a subtype as a
+linear map;</li>
+<li><code>Finsupp.restrictDom</code>: <code><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.filter">Finsupp.filter</a></code> as a linear map to <code>Finsupp.supported s</code>;</li>
+<li><code><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lmapDomain">Finsupp.lmapDomain</a></code>: a linear map version of <code><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.mapDomain">Finsupp.mapDomain</a></code>;</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>function with finite support, module, linear algebra</p></div><div class="decl" id="Finsupp.linearEquivFunOnFinite"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L48-L55">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.linearEquivFunOnFinite"><span class="name">Finsupp</span>.<span class="name">linearEquivFunOnFinite</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_7)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_9)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <a href="../../.././foundational_types.html">Type</a> u_10)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span>)</span> <a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn"><span class="fn">α</span> → <span class="fn">M</span></span></span></div></div><p>Given <code><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> α</code>, <code><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.linearEquivFunOnFinite">linearEquivFunOnFinite</a> R</code> is the natural <code>R</code>-linear equivalence between
+<code>α →₀ β</code> and <code>α → β</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.linearEquivFunOnFinite">Finsupp.linearEquivFunOnFinite</a> <span class="fn">R</span> <span class="fn">M</span> <span class="fn">α</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">DFunLike.coe</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span>, <span class="fn">invFun</span> := <span class="fn"><span class="fn">Finsupp.equivFunOnFinite</span>.invFun</span>, <span class="fn">left_inv</span> := <span class="fn">⋯</span>,
+    <span class="fn">right_inv</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Finsupp.linearEquivFunOnFinite" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Finsupp.linearEquivFunOnFinite_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L50-L50">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.linearEquivFunOnFinite_apply"><span class="name">Finsupp</span>.<span class="name">linearEquivFunOnFinite_apply</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_7)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_9)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <a href="../../.././foundational_types.html">Type</a> u_10)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a✝ : <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.linearEquivFunOnFinite">Finsupp.linearEquivFunOnFinite</a> <span class="fn">R</span> <span class="fn">M</span> <span class="fn">α</span>)</span> <span class="fn">a✝</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a✝</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="Finsupp.linearEquivFunOnFinite_single"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L57-L60">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.linearEquivFunOnFinite_single"><span class="name">Finsupp</span>.<span class="name">linearEquivFunOnFinite_single</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_7)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_9)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <a href="../../.././foundational_types.html">Type</a> u_10)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.linearEquivFunOnFinite">Finsupp.linearEquivFunOnFinite</a> <span class="fn">R</span> <span class="fn">M</span> <span class="fn">α</span>)</span> <span class="fn">(<a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.single">Finsupp.single</a> <span class="fn">x</span> <span class="fn">m</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Pi/Basic.html#Pi.single">Pi.single</a> <span class="fn">x</span> <span class="fn">m</span></span></span></div></div></div></div><div class="decl" id="Finsupp.linearEquivFunOnFinite_symm_single"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L62-L65">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.linearEquivFunOnFinite_symm_single"><span class="name">Finsupp</span>.<span class="name">linearEquivFunOnFinite_symm_single</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_7)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_9)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <a href="../../.././foundational_types.html">Type</a> u_10)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.linearEquivFunOnFinite">Finsupp.linearEquivFunOnFinite</a> <span class="fn">R</span> <span class="fn">M</span> <span class="fn">α</span>)</span>.symm</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Group/Pi/Basic.html#Pi.single">Pi.single</a> <span class="fn">x</span> <span class="fn">m</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.single">Finsupp.single</a> <span class="fn">x</span> <span class="fn">m</span></span></span></div></div></div></div><div class="decl" id="Finsupp.linearEquivFunOnFinite_symm_coe"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L67-L69">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.linearEquivFunOnFinite_symm_coe"><span class="name">Finsupp</span>.<span class="name">linearEquivFunOnFinite_symm_coe</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_7)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_9)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <a href="../../.././foundational_types.html">Type</a> u_10)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.linearEquivFunOnFinite">Finsupp.linearEquivFunOnFinite</a> <span class="fn">R</span> <span class="fn">M</span> <span class="fn">α</span>)</span>.symm</span> <span class="fn">⇑<span class="fn">f</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Finsupp.lsingle"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L73-L75">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsingle"><span class="name">Finsupp</span>.<span class="name">lsingle</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span></span></div></div><p>Interpret <code><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.single">Finsupp.single</a> a</code> as a linear map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsingle">Finsupp.lsingle</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn"><span class="fn">(↑<span class="fn">(<a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.singleAddHom">Finsupp.singleAddHom</a> <span class="fn">a</span>)</span>)</span>.toFun</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Finsupp.lsingle" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Finsupp.lhom_ext"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L77-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lhom_ext"><span class="name">Finsupp</span>.<span class="name">lhom_ext</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃φ ψ : <span class="fn"><span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span>)</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">N</span></span>⦄</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>) (<span class="fn">b</span> : <span class="fn">M</span>), <span class="fn"><span class="fn"><span class="fn">φ</span> <span class="fn">(<a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.single">Finsupp.single</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">ψ</span> <span class="fn">(<a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.single">Finsupp.single</a> <span class="fn">a</span> <span class="fn">b</span>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">φ</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">ψ</span></span></div></div><p>Two <code>R</code>-linear maps from <code><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">Finsupp</a> X M</code> which agree on each <code>single x y</code> agree everywhere.</p></div></div><div class="decl" id="Finsupp.lhom_ext'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L87-L87">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lhom_ext'"><span class="name">Finsupp</span>.<span class="name">lhom_ext'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃φ ψ : <span class="fn"><span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span>)</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">N</span></span>⦄</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">φ</span> ∘ₗ <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsingle">Finsupp.lsingle</a> <span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">ψ</span> ∘ₗ <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsingle">Finsupp.lsingle</a> <span class="fn">a</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">φ</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">ψ</span></span></div></div><p>Two <code>R</code>-linear maps from <code><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">Finsupp</a> X M</code> which agree on each <code>single x y</code> agree everywhere.</p><p>We formulate this fact using equality of linear maps <code>φ.comp (lsingle a)</code> and <code>ψ.comp (lsingle a)</code>
+so that the <code>ext</code> tactic can apply a type-specific extensionality lemma to prove equality of these
+maps. E.g., if <code>M = R</code>, then it suffices to verify <code>φ (single a 1) = ψ (single a 1)</code>.</p></div></div><div class="decl" id="Finsupp.lapply"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L92-L94">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lapply"><span class="name">Finsupp</span>.<span class="name">lapply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span>)</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">M</span></span></div></div><p>Interpret <code>fun f : α →₀ M ↦ f a</code> as a linear map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lapply">Finsupp.lapply</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn"><span class="fn">(↑<span class="fn">(<a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.applyAddHom">Finsupp.applyAddHom</a> <span class="fn">a</span>)</span>)</span>.toFun</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Finsupp.lapply" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Finsupp.lsubtypeDomain"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L100-L104">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsubtypeDomain"><span class="name">Finsupp</span>.<span class="name">lsubtypeDomain</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span>)</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn"><span class="fn">↑<span class="fn">s</span></span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span></span></div></div><p>Interpret <code><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.subtypeDomain">Finsupp.subtypeDomain</a> s</code> as a linear map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsubtypeDomain">Finsupp.lsubtypeDomain</a> <span class="fn">s</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.subtypeDomain">Finsupp.subtypeDomain</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span></span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Finsupp.lsubtypeDomain" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Finsupp.lsubtypeDomain_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L106-L108">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsubtypeDomain_apply"><span class="name">Finsupp</span>.<span class="name">lsubtypeDomain_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsubtypeDomain">Finsupp.lsubtypeDomain</a> <span class="fn">s</span>)</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.subtypeDomain">Finsupp.subtypeDomain</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="Finsupp.lsingle_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L112-L114">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsingle_apply"><span class="name">Finsupp</span>.<span class="name">lsingle_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsingle">Finsupp.lsingle</a> <span class="fn">a</span>)</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.single">Finsupp.single</a> <span class="fn">a</span> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="Finsupp.lapply_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L116-L118">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lapply_apply"><span class="name">Finsupp</span>.<span class="name">lapply_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lapply">Finsupp.lapply</a> <span class="fn">a</span>)</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="Finsupp.lapply_comp_lsingle_same"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L120-L121">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lapply_comp_lsingle_same"><span class="name">Finsupp</span>.<span class="name">lapply_comp_lsingle_same</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lapply">Finsupp.lapply</a> <span class="fn">a</span></span> ∘ₗ <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsingle">Finsupp.lsingle</a> <span class="fn">a</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">LinearMap.id</span></span></div></div></div></div><div class="decl" id="Finsupp.lapply_comp_lsingle_of_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L123-L125">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lapply_comp_lsingle_of_ne"><span class="name">Finsupp</span>.<span class="name">lapply_comp_lsingle_of_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a a' : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lapply">Finsupp.lapply</a> <span class="fn">a</span></span> ∘ₗ <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lsingle">Finsupp.lsingle</a> <span class="fn">a'</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Finsupp.lmapDomain"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L131-L135">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lmapDomain"><span class="name">Finsupp</span>.<span class="name">lmapDomain</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_5)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α' : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">α'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span>)</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn"><span class="fn">α'</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span></span></div></div><p>Interpret <code><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.mapDomain">Finsupp.mapDomain</a></code> as a linear map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lmapDomain">Finsupp.lmapDomain</a> <span class="fn">M</span> <span class="fn">R</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.mapDomain">Finsupp.mapDomain</a> <span class="fn">f</span></span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Finsupp.lmapDomain" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Finsupp.lmapDomain_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L137-L140">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lmapDomain_apply"><span class="name">Finsupp</span>.<span class="name">lmapDomain_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_5)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α' : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">α'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l : <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lmapDomain">Finsupp.lmapDomain</a> <span class="fn">M</span> <span class="fn">R</span> <span class="fn">f</span>)</span> <span class="fn">l</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.mapDomain">Finsupp.mapDomain</a> <span class="fn">f</span> <span class="fn">l</span></span></span></div></div></div></div><div class="decl" id="Finsupp.lmapDomain_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L142-L144">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lmapDomain_id"><span class="name">Finsupp</span>.<span class="name">lmapDomain_id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_5)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lmapDomain">Finsupp.lmapDomain</a> <span class="fn">M</span> <span class="fn">R</span> <span class="fn">id</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">LinearMap.id</span></span></div></div></div></div><div class="decl" id="Finsupp.lmapDomain_comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L146-L148">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lmapDomain_comp"><span class="name">Finsupp</span>.<span class="name">lmapDomain_comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_5)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α' : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α'' : <a href="../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">α'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">α'</span> → <span class="fn">α''</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lmapDomain">Finsupp.lmapDomain</a> <span class="fn">M</span> <span class="fn">R</span> <span class="fn">(<span class="fn">g</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lmapDomain">Finsupp.lmapDomain</a> <span class="fn">M</span> <span class="fn">R</span> <span class="fn">g</span></span> ∘ₗ <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lmapDomain">Finsupp.lmapDomain</a> <span class="fn">M</span> <span class="fn">R</span> <span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="Finsupp.lcomapDomain"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L156-L164">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lcomapDomain"><span class="name">Finsupp</span>.<span class="name">lcomapDomain</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">β</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span>)</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span></span></div></div><p>Given <code>f : α → β</code> and a proof <code>hf</code> that <code>f</code> is injective, <code><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lcomapDomain">lcomapDomain</a> f hf</code> is the linear map
+sending <code>l : β →₀ M</code> to the finitely supported function from <code>α</code> to <code>M</code> given by composing
+<code>l</code> with <code>f</code>.</p><p>This is the linear version of <code><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.comapDomain">Finsupp.comapDomain</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.lcomapDomain">Finsupp.lcomapDomain</a> <span class="fn">f</span> <span class="fn">hf</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">fun (<span class="fn">l</span> : <span class="fn"><span class="fn">β</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span>) =&gt; <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.comapDomain">Finsupp.comapDomain</a> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">⋯</span></span></span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Finsupp.lcomapDomain" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Finsupp.mapRange.linearMap"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L168-L173">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span>)</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">N</span></span></span></div></div><p><code><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.mapRange">Finsupp.mapRange</a></code> as a <code><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">LinearMap</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap">Finsupp.mapRange.linearMap</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.mapRange">Finsupp.mapRange</a> <span class="fn">⇑<span class="fn">f</span></span> <span class="fn">⋯</span></span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Finsupp.mapRange.linearMap" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Finsupp.mapRange.linearMap_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L176-L178">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap_apply"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearMap_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap">Finsupp.mapRange.linearMap</a> <span class="fn">f</span>)</span> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.mapRange">Finsupp.mapRange</a> <span class="fn">⇑<span class="fn">f</span></span> <span class="fn">⋯</span> <span class="fn">g</span></span></span></div></div></div></div><div class="decl" id="Finsupp.mapRange.linearMap_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L180-L183">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap_id"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearMap_id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap">Finsupp.mapRange.linearMap</a> <span class="fn">LinearMap.id</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">LinearMap.id</span></span></div></div></div></div><div class="decl" id="Finsupp.mapRange.linearMap_comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L185-L189">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap_comp"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearMap_comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">N</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f₂ : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap">Finsupp.mapRange.linearMap</a> <span class="fn">(<span class="fn">f</span> ∘ₗ <span class="fn">f₂</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap">Finsupp.mapRange.linearMap</a> <span class="fn">f</span></span> ∘ₗ <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap">Finsupp.mapRange.linearMap</a> <span class="fn">f₂</span></span></span></span></div></div></div></div><div class="decl" id="Finsupp.mapRange.linearMap_toAddMonoidHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L191-L195">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap_toAddMonoidHom"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearMap_toAddMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap">Finsupp.mapRange.linearMap</a> <span class="fn">f</span>)</span>.toAddMonoidHom</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.mapRange.addMonoidHom">Finsupp.mapRange.addMonoidHom</a> <span class="fn"><span class="fn">f</span>.toAddMonoidHom</span></span></span></div></div></div></div><div class="decl" id="Finsupp.mapRange.linearEquiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L197-L202">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span>)</span> <a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">N</span></span></span></div></div><p><code><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.mapRange">Finsupp.mapRange</a></code> as a <code><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">LinearEquiv</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv">Finsupp.mapRange.linearEquiv</a> <span class="fn">e</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">toFun</span> := <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.mapRange">Finsupp.mapRange</a> <span class="fn">⇑<span class="fn">e</span></span> <span class="fn">⋯</span></span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span>, <span class="fn">invFun</span> := <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.mapRange">Finsupp.mapRange</a> <span class="fn">⇑<span class="fn"><span class="fn">e</span>.symm</span></span> <span class="fn">⋯</span></span>, <span class="fn">left_inv</span> := <span class="fn">⋯</span>,
+    <span class="fn">right_inv</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Finsupp.mapRange.linearEquiv" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Finsupp.mapRange.linearEquiv_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L205-L207">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv_apply"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv">Finsupp.mapRange.linearEquiv</a> <span class="fn">e</span>)</span> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap">Finsupp.mapRange.linearMap</a> <span class="fn">↑<span class="fn">e</span></span>)</span> <span class="fn">g</span></span></span></div></div></div></div><div class="decl" id="Finsupp.mapRange.linearEquiv_refl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L209-L212">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv_refl"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv_refl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv">Finsupp.mapRange.linearEquiv</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv.refl">LinearEquiv.refl</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv.refl">LinearEquiv.refl</a> <span class="fn">R</span> <span class="fn">(<span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span>)</span></span></span></div></div></div></div><div class="decl" id="Finsupp.mapRange.linearEquiv_trans"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L214-L218">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv_trans"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv_trans</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f₂ : <span class="fn"><span class="fn">N</span> <a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv">Finsupp.mapRange.linearEquiv</a> <span class="fn">(<span class="fn">f</span> ≪≫ₗ <span class="fn">f₂</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv">Finsupp.mapRange.linearEquiv</a> <span class="fn">f</span></span> ≪≫ₗ <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv">Finsupp.mapRange.linearEquiv</a> <span class="fn">f₂</span></span></span></span></div></div></div></div><div class="decl" id="Finsupp.mapRange.linearEquiv_symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L220-L223">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv_symm"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv_symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv">Finsupp.mapRange.linearEquiv</a> <span class="fn">f</span>)</span>.symm</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv">Finsupp.mapRange.linearEquiv</a> <span class="fn"><span class="fn">f</span>.symm</span></span></span></div></div></div></div><div class="decl" id="Finsupp.mapRange.linearEquiv_toAddEquiv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L226-L229">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv_toAddEquiv"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv_toAddEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv">Finsupp.mapRange.linearEquiv</a> <span class="fn">f</span>)</span>.toAddEquiv</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.mapRange.addEquiv">Finsupp.mapRange.addEquiv</a> <span class="fn"><span class="fn">f</span>.toAddEquiv</span></span></span></div></div></div></div><div class="decl" id="Finsupp.mapRange.linearEquiv_toLinearMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L231-L234">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv_toLinearMap"><span class="name">Finsupp</span>.<span class="name">mapRange</span>.<span class="name">linearEquiv_toLinearMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearEquiv">Finsupp.mapRange.linearEquiv</a> <span class="fn">f</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.mapRange.linearMap">Finsupp.mapRange.linearMap</a> <span class="fn">↑<span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="Finsupp.finsuppProdLEquiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L238-L249">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.finsuppProdLEquiv"><span class="name">Finsupp</span>.<span class="name">finsuppProdLEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_9)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_10}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">α</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span>)</span> <a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn"><span class="fn">β</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span></span></span></div></div><p>The linear equivalence between <code>α × β →₀ M</code> and <code>α →₀ β →₀ M</code>.</p><p>This is the <code><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">LinearEquiv</a></code> version of <code><a href="../../.././Mathlib/Data/Finsupp/Basic.html#Finsupp.finsuppProdEquiv">Finsupp.finsuppProdEquiv</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.finsuppProdLEquiv">Finsupp.finsuppProdLEquiv</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">toFun</span> := <span class="fn"><span class="fn">Finsupp.finsuppProdEquiv</span>.toFun</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span>, <span class="fn">invFun</span> := <span class="fn"><span class="fn">Finsupp.finsuppProdEquiv</span>.invFun</span>,
+    <span class="fn">left_inv</span> := <span class="fn">⋯</span>, <span class="fn">right_inv</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Finsupp.finsuppProdLEquiv" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Finsupp.finsuppProdLEquiv_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L251-L254">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.finsuppProdLEquiv_apply"><span class="name">Finsupp</span>.<span class="name">finsuppProdLEquiv_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_9}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_10}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><span class="fn">α</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">β</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">(<span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.finsuppProdLEquiv">Finsupp.finsuppProdLEquiv</a> <span class="fn">R</span>)</span> <span class="fn">f</span>)</span> <span class="fn">x</span>)</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span>, <span class="fn">y</span>)</span></span></span></div></div></div></div><div class="decl" id="Finsupp.finsuppProdLEquiv_symm_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L256-L260">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.finsuppProdLEquiv_symm_apply"><span class="name">Finsupp</span>.<span class="name">finsuppProdLEquiv_symm_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_8}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_9}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_10}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn"><span class="fn">β</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">M</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(xy : <span class="fn"><span class="fn">α</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Finsupp.finsuppProdLEquiv">Finsupp.finsuppProdLEquiv</a> <span class="fn">R</span>)</span>.symm</span> <span class="fn">f</span>)</span> <span class="fn">xy</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn"><span class="fn">xy</span>.1</span>)</span> <span class="fn"><span class="fn">xy</span>.2</span></span></span></div></div></div></div><div class="decl" id="Module.subsingletonEquiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L275-L286">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Module.subsingletonEquiv"><span class="name">Module</span>.<span class="name">subsingletonEquiv</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_5)</span></span>
+<span class="decl_args">
+<span class="fn">(ι : <a href="../../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn"><span class="fn">ι</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">R</span></span></span></div></div><p>If <code><a href="../../.././Init/Core.html#Subsingleton">Subsingleton</a> R</code>, then <code>M ≃ₗ[R] ι →₀ R</code> for any type <code>ι</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Module.subsingletonEquiv">Module.subsingletonEquiv</a> <span class="fn">R</span> <span class="fn">M</span> <span class="fn">ι</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">fun (<span class="fn">x</span> : <span class="fn">M</span>) =&gt; <span class="fn">0</span></span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span>, <span class="fn">invFun</span> := <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><span class="fn">ι</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">R</span></span>) =&gt; <span class="fn">0</span></span>, <span class="fn">left_inv</span> := <span class="fn">⋯</span>,
+    <span class="fn">right_inv</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Module.subsingletonEquiv" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Module.subsingletonEquiv_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L276-L276">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Module.subsingletonEquiv_apply"><span class="name">Module</span>.<span class="name">subsingletonEquiv_apply</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_5)</span></span>
+<span class="decl_args">
+<span class="fn">(ι : <a href="../../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x✝ : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Module.subsingletonEquiv">Module.subsingletonEquiv</a> <span class="fn">R</span> <span class="fn">M</span> <span class="fn">ι</span>)</span> <span class="fn">x✝</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Module.subsingletonEquiv_symm_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/LinearAlgebra/Finsupp/Defs.lean#L276-L276">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Module.subsingletonEquiv_symm_apply"><span class="name">Module</span>.<span class="name">subsingletonEquiv_symm_apply</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_5)</span></span>
+<span class="decl_args">
+<span class="fn">(ι : <a href="../../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x✝ : <span class="fn"><span class="fn">ι</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Finsupp/Defs.html#Module.subsingletonEquiv">Module.subsingletonEquiv</a> <span class="fn">R</span> <span class="fn">M</span> <span class="fn">ι</span>)</span>.symm</span> <span class="fn">x✝</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

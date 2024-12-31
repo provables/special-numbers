@@ -1,0 +1,801 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Order.Star.Basic</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Order.Star.Basic";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Order</span>.<span class="name">Star</span>.<span class="name">Basic</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Tactic/ContinuousFunctionalCalculus.html">Mathlib.Tactic.ContinuousFunctionalCalculus</a></li><li><a href="../../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html">Mathlib.Algebra.NoZeroSMulDivisors.Defs</a></li><li><a href="../../../.././Mathlib/Algebra/Star/SelfAdjoint.html">Mathlib.Algebra.Star.SelfAdjoint</a></li><li><a href="../../../.././Mathlib/Algebra/Star/StarRingHom.html">Mathlib.Algebra.Star.StarRingHom</a></li><li><a href="../../../.././Mathlib/Algebra/Group/Submonoid/Operations.html">Mathlib.Algebra.Group.Submonoid.Operations</a></li><li><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html">Mathlib.Algebra.Order.Group.Defs</a></li><li><a href="../../../.././Mathlib/Algebra/Order/Group/Nat.html">Mathlib.Algebra.Order.Group.Nat</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Order.Star.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#StarOrderedRing"><span class="name">StarOrderedRing</span></a></div><div class="nav_link"><a class="break_within" href="#StarOrderedRing.toOrderedAddCommMonoid"><span class="name">StarOrderedRing</span>.<span class="name">toOrderedAddCommMonoid</span></a></div><div class="nav_link"><a class="break_within" href="#StarOrderedRing.toExistsAddOfLE"><span class="name">StarOrderedRing</span>.<span class="name">toExistsAddOfLE</span></a></div><div class="nav_link"><a class="break_within" href="#StarOrderedRing.toOrderedAddCommGroup"><span class="name">StarOrderedRing</span>.<span class="name">toOrderedAddCommGroup</span></a></div><div class="nav_link"><a class="break_within" href="#StarOrderedRing.of_le_iff"><span class="name">StarOrderedRing</span>.<span class="name">of_le_iff</span></a></div><div class="nav_link"><a class="break_within" href="#StarOrderedRing.of_nonneg_iff"><span class="name">StarOrderedRing</span>.<span class="name">of_nonneg_iff</span></a></div><div class="nav_link"><a class="break_within" href="#StarOrderedRing.of_nonneg_iff'"><span class="name">StarOrderedRing</span>.<span class="name">of_nonneg_iff'</span></a></div><div class="nav_link"><a class="break_within" href="#StarOrderedRing.nonneg_iff"><span class="name">StarOrderedRing</span>.<span class="name">nonneg_iff</span></a></div><div class="nav_link"><a class="break_within" href="#IsSelfAdjoint.mono"><span class="name">IsSelfAdjoint</span>.<span class="name">mono</span></a></div><div class="nav_link"><a class="break_within" href="#IsSelfAdjoint.of_nonneg"><span class="name">IsSelfAdjoint</span>.<span class="name">of_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#LE.le.isSelfAdjoint"><span class="name">LE</span>.<span class="name">le</span>.<span class="name">isSelfAdjoint</span></a></div><div class="nav_link"><a class="break_within" href="#LE.le.star_eq"><span class="name">LE</span>.<span class="name">le</span>.<span class="name">star_eq</span></a></div><div class="nav_link"><a class="break_within" href="#star_mul_self_nonneg"><span class="name">star_mul_self_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#mul_star_self_nonneg"><span class="name">mul_star_self_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#IsSelfAdjoint.mul_self_nonneg"><span class="name">IsSelfAdjoint</span>.<span class="name">mul_self_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#conjugate_nonneg"><span class="name">conjugate_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#conjugate_nonneg'"><span class="name">conjugate_nonneg'</span></a></div><div class="nav_link"><a class="break_within" href="#IsSelfAdjoint.conjugate_nonneg"><span class="name">IsSelfAdjoint</span>.<span class="name">conjugate_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#conjugate_nonneg_of_nonneg"><span class="name">conjugate_nonneg_of_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#conjugate_le_conjugate"><span class="name">conjugate_le_conjugate</span></a></div><div class="nav_link"><a class="break_within" href="#conjugate_le_conjugate'"><span class="name">conjugate_le_conjugate'</span></a></div><div class="nav_link"><a class="break_within" href="#IsSelfAdjoint.conjugate_le_conjugate"><span class="name">IsSelfAdjoint</span>.<span class="name">conjugate_le_conjugate</span></a></div><div class="nav_link"><a class="break_within" href="#conjugate_le_conjugate_of_nonneg"><span class="name">conjugate_le_conjugate_of_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#star_le_star_iff"><span class="name">star_le_star_iff</span></a></div><div class="nav_link"><a class="break_within" href="#star_lt_star_iff"><span class="name">star_lt_star_iff</span></a></div><div class="nav_link"><a class="break_within" href="#star_le_iff"><span class="name">star_le_iff</span></a></div><div class="nav_link"><a class="break_within" href="#star_lt_iff"><span class="name">star_lt_iff</span></a></div><div class="nav_link"><a class="break_within" href="#star_nonneg_iff"><span class="name">star_nonneg_iff</span></a></div><div class="nav_link"><a class="break_within" href="#star_nonpos_iff"><span class="name">star_nonpos_iff</span></a></div><div class="nav_link"><a class="break_within" href="#star_pos_iff"><span class="name">star_pos_iff</span></a></div><div class="nav_link"><a class="break_within" href="#star_neg_iff"><span class="name">star_neg_iff</span></a></div><div class="nav_link"><a class="break_within" href="#conjugate_lt_conjugate"><span class="name">conjugate_lt_conjugate</span></a></div><div class="nav_link"><a class="break_within" href="#conjugate_lt_conjugate'"><span class="name">conjugate_lt_conjugate'</span></a></div><div class="nav_link"><a class="break_within" href="#conjugate_pos"><span class="name">conjugate_pos</span></a></div><div class="nav_link"><a class="break_within" href="#conjugate_pos'"><span class="name">conjugate_pos'</span></a></div><div class="nav_link"><a class="break_within" href="#star_mul_self_pos"><span class="name">star_mul_self_pos</span></a></div><div class="nav_link"><a class="break_within" href="#mul_star_self_pos"><span class="name">mul_star_self_pos</span></a></div><div class="nav_link"><a class="break_within" href="#instZeroLEOneClass"><span class="name">instZeroLEOneClass</span></a></div><div class="nav_link"><a class="break_within" href="#one_le_star_iff"><span class="name">one_le_star_iff</span></a></div><div class="nav_link"><a class="break_within" href="#star_le_one_iff"><span class="name">star_le_one_iff</span></a></div><div class="nav_link"><a class="break_within" href="#one_lt_star_iff"><span class="name">one_lt_star_iff</span></a></div><div class="nav_link"><a class="break_within" href="#star_lt_one_iff"><span class="name">star_lt_one_iff</span></a></div><div class="nav_link"><a class="break_within" href="#IsSelfAdjoint.sq_nonneg"><span class="name">IsSelfAdjoint</span>.<span class="name">sq_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#StarModule.smul_lt_smul_of_pos"><span class="name">StarModule</span>.<span class="name">smul_lt_smul_of_pos</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalStarRingHom.map_le_map_of_map_star"><span class="name">NonUnitalStarRingHom</span>.<span class="name">map_le_map_of_map_star</span></a></div><div class="nav_link"><a class="break_within" href="#StarRingHomClass.instOrderHomClass"><span class="name">StarRingHomClass</span>.<span class="name">instOrderHomClass</span></a></div><div class="nav_link"><a class="break_within" href="#StarRingEquivClass.instOrderIsoClass"><span class="name">StarRingEquivClass</span>.<span class="name">instOrderIsoClass</span></a></div><div class="nav_link"><a class="break_within" href="#Nat.instStarOrderedRing"><span class="name">Nat</span>.<span class="name">instStarOrderedRing</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Star-ordered-rings">Star ordered rings <a class="hover-link" href="#Star-ordered-rings">#</a></h1><p>We define the class <code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> R</code>, which says that the order on <code>R</code> respects the
+star operation, i.e. an element <code>r</code> is nonnegative iff it is in the <code><a href="../../../.././Mathlib/Algebra/Group/Submonoid/Defs.html#AddSubmonoid">AddSubmonoid</a></code> generated by
+elements of the form <code>star s * s</code>. In many cases, including all C⋆-algebras, this can be reduced to
+<code>0 ≤ r ↔ ∃ s, r = star s * s</code>. However, this generality is slightly more convenient (e.g., it
+allows us to register a <code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a></code> instance for <code>ℚ</code>), and more closely resembles the
+literature (see the seminal paper [<em>The positive cone in Banach algebras</em>][kelleyVaught1953])</p><p>In order to accommodate <code><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> R</code>, we actually don't characterize nonnegativity, but
+rather the entire <code>≤</code> relation with <code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing.le_iff">StarOrderedRing.le_iff</a></code>. However, notice that when <code>R</code> is a
+<code><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a></code>, these are equivalent (see <code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing.nonneg_iff">StarOrderedRing.nonneg_iff</a></code> and
+<code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing.of_nonneg_iff">StarOrderedRing.of_nonneg_iff</a></code>).</p><p>It is important to note that while a <code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a></code> is an <code><a href="../../../.././Mathlib/Algebra/Order/Monoid/Defs.html#OrderedAddCommMonoid">OrderedAddCommMonoid</a></code> it is often
+<em>not</em> an <code>OrderedSemiring</code>.</p><h2 class="markdown-heading" id="TODO">TODO <a class="hover-link" href="#TODO">#</a></h2><ul>
+<li>In a Banach star algebra without a well-defined square root, the natural ordering is given by the
+positive cone which is the <em>closure</em> of the sums of elements <code>star r * r</code>. A weaker version of
+<code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a></code> could be defined for this case (again, see
+[<em>The positive cone in Banach algebras</em>][kelleyVaught1953]). Note that the current definition has
+the advantage of not requiring a topology.</li>
+</ul></div><div class="decl" id="StarOrderedRing"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L47-L59">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing"><span class="name">StarOrderedRing</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Prop</a></div></div><p>An ordered <code>*</code>-ring is a <code>*</code>ring with a partial order such that the nonnegative elements
+constitute precisely the <code><a href="../../../.././Mathlib/Algebra/Group/Submonoid/Defs.html#AddSubmonoid">AddSubmonoid</a></code> generated by elements of the form <code>star s * s</code>.</p><p>If you are working with a <code><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a></code> and not a <code><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a></code>, it may be more
+convenient to declare instances using <code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing.of_nonneg_iff">StarOrderedRing.of_nonneg_iff</a></code>.</p><p>Porting note: dropped an unneeded assumption
+<code><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/Basic.html#add_le_add_left">add_le_add_left</a> : ∀ {x y}, x ≤ y → ∀ z, z + x ≤ z + y</code></p><ul class="structure_fields" id="StarOrderedRing.mk"><li id="StarOrderedRing.le_iff" class="structure_field"><div class="structure_field_info">le_iff : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">R</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">p</span> ∈ <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Submonoid/Basic.html#AddSubmonoid.closure">AddSubmonoid.closure</a> <span class="fn">(<a href="../../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">fun (<span class="fn">s</span> : <span class="fn">R</span>) =&gt; <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">s</span></span></span>)</span></span>, <span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">p</span></span></span></span></span></span></div><div class="structure_field_doc"><p>characterization of the order in terms of the <code><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a></code> structure.</p></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-StarOrderedRing" class="instances-list"></ul></details></div></div><div class="decl" id="StarOrderedRing.toOrderedAddCommMonoid"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L64-L70">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing.toOrderedAddCommMonoid"><span class="name">StarOrderedRing</span>.<span class="name">toOrderedAddCommMonoid</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Defs.html#OrderedAddCommMonoid">OrderedAddCommMonoid</a> <span class="fn">R</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">StarOrderedRing.toOrderedAddCommMonoid</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Defs.html#OrderedAddCommMonoid.mk">OrderedAddCommMonoid.mk</a> <span class="fn">⋯</span></span></span></li></ul></details></div></div><div class="decl" id="StarOrderedRing.toExistsAddOfLE"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L73-L77">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing.toExistsAddOfLE"><span class="name">StarOrderedRing</span>.<span class="name">toExistsAddOfLE</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Monoid/Unbundled/ExistsOfLE.html#ExistsAddOfLE">ExistsAddOfLE</a> <span class="fn">R</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="StarOrderedRing.toOrderedAddCommGroup"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L80-L82">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing.toOrderedAddCommGroup"><span class="name">StarOrderedRing</span>.<span class="name">toOrderedAddCommGroup</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">R</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">StarOrderedRing.toOrderedAddCommGroup</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup.mk">OrderedAddCommGroup.mk</a> <span class="fn">⋯</span></span></span></li></ul></details></div></div><div class="decl" id="StarOrderedRing.of_le_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L84-L106">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing.of_le_iff"><span class="name">StarOrderedRing</span>.<span class="name">of_le_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h_le_iff : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">R</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">s</span> : <span class="fn">R</span>), <span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">s</span></span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span></div></div><p>To construct a <code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a></code> instance it suffices to show that <code>x ≤ y</code> if and only if
+<code>y = x + star s * s</code> for some <code>s : R</code>.</p><p>This is provided for convenience because it holds in some common scenarios (e.g.,<code>ℝ≥0</code>, <code>C(X, ℝ≥0)</code>)
+and obviates the hassle of <code><a href="../../../.././Mathlib/Algebra/Group/Submonoid/Basic.html#AddSubmonoid.closure_induction">AddSubmonoid.closure_induction</a></code> when creating those instances.</p><p>If you are working with a <code><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a></code> and not a <code><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a></code>, see
+<code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing.of_nonneg_iff">StarOrderedRing.of_nonneg_iff</a></code> for a more convenient version.</p></div></div><div class="decl" id="StarOrderedRing.of_nonneg_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L108-L117">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing.of_nonneg_iff"><span class="name">StarOrderedRing</span>.<span class="name">of_nonneg_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h_add : <span class="fn">∀ {<span class="fn">x </span><span class="fn">y</span> : <span class="fn">R</span>}, <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">y</span></span> → <span class="fn">∀ (<span class="fn">z</span> : <span class="fn">R</span>), <span class="fn"><span class="fn"><span class="fn">z</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">z</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span></span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_nonneg_iff : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">R</span>), <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Submonoid/Basic.html#AddSubmonoid.closure">AddSubmonoid.closure</a> <span class="fn">(<a href="../../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">fun (<span class="fn">s</span> : <span class="fn">R</span>) =&gt; <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">s</span></span></span>)</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span></div></div><p>When <code>R</code> is a non-unital ring, to construct a <code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a></code> instance it suffices to
+show that the nonnegative elements are precisely those elements in the <code><a href="../../../.././Mathlib/Algebra/Group/Submonoid/Defs.html#AddSubmonoid">AddSubmonoid</a></code> generated
+by <code>star s * s</code> for <code>s : R</code>.</p></div></div><div class="decl" id="StarOrderedRing.of_nonneg_iff'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L119-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing.of_nonneg_iff'"><span class="name">StarOrderedRing</span>.<span class="name">of_nonneg_iff'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h_add : <span class="fn">∀ {<span class="fn">x </span><span class="fn">y</span> : <span class="fn">R</span>}, <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">y</span></span> → <span class="fn">∀ (<span class="fn">z</span> : <span class="fn">R</span>), <span class="fn"><span class="fn"><span class="fn">z</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">z</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span></span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_nonneg_iff : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">R</span>), <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">s</span> : <span class="fn">R</span>), <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">s</span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span></div></div><p>When <code>R</code> is a non-unital ring, to construct a <code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a></code> instance it suffices to
+show that the nonnegative elements are precisely those elements of the form <code>star s * s</code>
+for <code>s : R</code>.</p><p>This is provided for convenience because it holds in many common scenarios (e.g.,<code>ℝ</code>, <code>ℂ</code>, or
+any C⋆-algebra), and obviates the hassle of <code><a href="../../../.././Mathlib/Algebra/Group/Submonoid/Basic.html#AddSubmonoid.closure_induction">AddSubmonoid.closure_induction</a></code> when creating those
+instances.</p></div></div><div class="decl" id="StarOrderedRing.nonneg_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L133-L135">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing.nonneg_iff"><span class="name">StarOrderedRing</span>.<span class="name">nonneg_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Submonoid/Basic.html#AddSubmonoid.closure">AddSubmonoid.closure</a> <span class="fn">(<a href="../../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">fun (<span class="fn">s</span> : <span class="fn">R</span>) =&gt; <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">s</span></span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="IsSelfAdjoint.mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L143-L150">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#IsSelfAdjoint.mono"><span class="name">IsSelfAdjoint</span>.<span class="name">mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/SelfAdjoint.html#IsSelfAdjoint">IsSelfAdjoint</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/SelfAdjoint.html#IsSelfAdjoint">IsSelfAdjoint</a> <span class="fn">y</span></span></div></div></div></div><div class="decl" id="IsSelfAdjoint.of_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L152-L154">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#IsSelfAdjoint.of_nonneg"><span class="name">IsSelfAdjoint</span>.<span class="name">of_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/SelfAdjoint.html#IsSelfAdjoint">IsSelfAdjoint</a> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="LE.le.isSelfAdjoint"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L156-L157">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#LE.le.isSelfAdjoint"><span class="name">LE</span>.<span class="name">le</span>.<span class="name">isSelfAdjoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/SelfAdjoint.html#IsSelfAdjoint">IsSelfAdjoint</a> <span class="fn">x</span></span></div></div><p>An alias of <code><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#IsSelfAdjoint.of_nonneg">IsSelfAdjoint.of_nonneg</a></code> for use with dot notation.</p></div></div><div class="decl" id="LE.le.star_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L159-L161">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#LE.le.star_eq"><span class="name">LE</span>.<span class="name">le</span>.<span class="name">star_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div><p>The combination <code>(IsSelfAdjoint.<a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#LE.le.star_eq">star_eq</a> &lt;| .<a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#IsSelfAdjoint.of_nonneg">of_nonneg</a> ·)</code> for use with dot notation.</p></div></div><div class="decl" id="star_mul_self_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L163-L165">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#star_mul_self_nonneg"><span class="name">star_mul_self_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">r</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span></span></div></div></div></div><div class="decl" id="mul_star_self_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L167-L169">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#mul_star_self_nonneg"><span class="name">mul_star_self_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">r</span></span></span></span></div></div></div></div><div class="decl" id="IsSelfAdjoint.mul_self_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L171-L173">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#IsSelfAdjoint.mul_self_nonneg"><span class="name">IsSelfAdjoint</span>.<span class="name">mul_self_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/SelfAdjoint.html#IsSelfAdjoint">IsSelfAdjoint</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="conjugate_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L175-L186">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#conjugate_nonneg"><span class="name">conjugate_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="conjugate_nonneg'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L188-L190">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#conjugate_nonneg'"><span class="name">conjugate_nonneg'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="IsSelfAdjoint.conjugate_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L192-L195">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#IsSelfAdjoint.conjugate_nonneg"><span class="name">IsSelfAdjoint</span>.<span class="name">conjugate_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/SelfAdjoint.html#IsSelfAdjoint">IsSelfAdjoint</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="conjugate_nonneg_of_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L197-L199">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#conjugate_nonneg_of_nonneg"><span class="name">conjugate_nonneg_of_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="conjugate_le_conjugate"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L201-L206">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#conjugate_le_conjugate"><span class="name">conjugate_le_conjugate</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="conjugate_le_conjugate'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L208-L210">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#conjugate_le_conjugate'"><span class="name">conjugate_le_conjugate'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="IsSelfAdjoint.conjugate_le_conjugate"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L212-L214">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#IsSelfAdjoint.conjugate_le_conjugate"><span class="name">IsSelfAdjoint</span>.<span class="name">conjugate_le_conjugate</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/SelfAdjoint.html#IsSelfAdjoint">IsSelfAdjoint</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="conjugate_le_conjugate_of_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L216-L218">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#conjugate_le_conjugate_of_nonneg"><span class="name">conjugate_le_conjugate_of_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="star_le_star_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L220-L230">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#star_le_star_iff"><span class="name">star_le_star_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">y</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">y</span></span></span></div></div></div></div><div class="decl" id="star_lt_star_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L232-L236">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#star_lt_star_iff"><span class="name">star_lt_star_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">y</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">y</span></span></span></div></div></div></div><div class="decl" id="star_le_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L238-L238">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#star_le_iff"><span class="name">star_le_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="star_lt_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L240-L240">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#star_lt_iff"><span class="name">star_lt_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="star_nonneg_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L242-L244">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#star_nonneg_iff"><span class="name">star_nonneg_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="star_nonpos_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L246-L248">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#star_nonpos_iff"><span class="name">star_nonpos_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">0</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="star_pos_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L250-L252">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#star_pos_iff"><span class="name">star_pos_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="star_neg_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L254-L256">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#star_neg_iff"><span class="name">star_neg_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="conjugate_lt_conjugate"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L258-L261">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#conjugate_lt_conjugate"><span class="name">conjugate_lt_conjugate</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../../.././Mathlib/Algebra/Regular/Basic.html#IsRegular">IsRegular</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="conjugate_lt_conjugate'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L263-L265">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#conjugate_lt_conjugate'"><span class="name">conjugate_lt_conjugate'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../../.././Mathlib/Algebra/Regular/Basic.html#IsRegular">IsRegular</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">c</span></span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="conjugate_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L267-L268">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#conjugate_pos"><span class="name">conjugate_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../../.././Mathlib/Algebra/Regular/Basic.html#IsRegular">IsRegular</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="conjugate_pos'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L270-L271">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#conjugate_pos'"><span class="name">conjugate_pos'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">a</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../../.././Mathlib/Algebra/Regular/Basic.html#IsRegular">IsRegular</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">c</span></span></span></span></div></div></div></div><div class="decl" id="star_mul_self_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L273-L275">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#star_mul_self_pos"><span class="name">star_mul_self_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><a href="../../../.././Mathlib/Algebra/Regular/Basic.html#IsRegular">IsRegular</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="mul_star_self_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L277-L278">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#mul_star_self_pos"><span class="name">mul_star_self_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><a href="../../../.././Mathlib/Algebra/Regular/Basic.html#IsRegular">IsRegular</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="instZeroLEOneClass"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L285-L286">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#instZeroLEOneClass"><span class="name">instZeroLEOneClass</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/ZeroLEOne.html#ZeroLEOneClass">ZeroLEOneClass</a> <span class="fn">R</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="one_le_star_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L288-L290">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#one_le_star_iff"><span class="name">one_le_star_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="star_le_one_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L292-L294">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#star_le_one_iff"><span class="name">star_le_one_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="one_lt_star_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L296-L298">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#one_lt_star_iff"><span class="name">one_lt_star_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="star_lt_one_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L300-L302">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#star_lt_one_iff"><span class="name">star_lt_one_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#Star.star">star</a> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">1</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="IsSelfAdjoint.sq_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L304-L306">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#IsSelfAdjoint.sq_nonneg"><span class="name">IsSelfAdjoint</span>.<span class="name">sq_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/SelfAdjoint.html#IsSelfAdjoint">IsSelfAdjoint</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">2</span></span></span></div></div></div></div><div class="decl" id="StarModule.smul_lt_smul_of_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L316-L344">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarModule.smul_lt_smul_of_pos"><span class="name">StarModule</span>.<span class="name">smul_lt_smul_of_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">c</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">c</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="NonUnitalStarRingHom.map_le_map_of_map_star"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L355-L362">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#NonUnitalStarRingHom.map_le_map_of_map_star"><span class="name">NonUnitalStarRingHom</span>.<span class="name">map_le_map_of_map_star</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../../../.././Mathlib/Algebra/Star/StarRingHom.html#NonUnitalStarRingHom">→⋆ₙ+*</a> <span class="fn">S</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x y : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hxy : <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></div></div></div></div><div class="decl" id="StarRingHomClass.instOrderHomClass"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L364-L368">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarRingHomClass.instOrderHomClass"><span class="name">StarRingHomClass</span>.<span class="name">instOrderHomClass</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#NonUnitalRingHomClass">NonUnitalRingHomClass</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/StarRingHom.html#NonUnitalStarRingHomClass">NonUnitalStarRingHomClass</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Hom/Basic.html#OrderHomClass">OrderHomClass</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">S</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="StarRingEquivClass.instOrderIsoClass"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L370-L377">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarRingEquivClass.instOrderIsoClass"><span class="name">StarRingEquivClass</span>.<span class="name">instOrderIsoClass</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs.html#PartialOrder">PartialOrder</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Equiv.html#EquivLike">EquivLike</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/StarRingHom.html#StarRingEquivClass">StarRingEquivClass</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Hom/Basic.html#OrderIsoClass">OrderIsoClass</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">S</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Nat.instStarOrderedRing"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Algebra/Order/Star/Basic.lean#L381-L387">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#Nat.instStarOrderedRing"><span class="name">Nat</span>.<span class="name">instStarOrderedRing</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#Nat.instStarOrderedRing">Nat.instStarOrderedRing</a> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

@@ -1,0 +1,935 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="icon" href="../.././favicon.svg"></link><link rel="mask-icon" href="../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.RingTheory.FiniteType</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.RingTheory.FiniteType";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">RingTheory</span>.<span class="name">FiniteType</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/Algebra/FreeAlgebra.html">Mathlib.Algebra.FreeAlgebra</a></li><li><a href="../.././Mathlib/RingTheory/Adjoin/Tower.html">Mathlib.RingTheory.Adjoin.Tower</a></li><li><a href="../.././Mathlib/RingTheory/Noetherian/Orzech.html">Mathlib.RingTheory.Noetherian.Orzech</a></li><li><a href="../.././Mathlib/RingTheory/Ideal/Quotient/Operations.html">Mathlib.RingTheory.Ideal.Quotient.Operations</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.RingTheory.FiniteType" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType"><span class="name">Algebra</span>.<span class="name">FiniteType</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Finite.finiteType"><span class="name">Module</span>.<span class="name">Finite</span>.<span class="name">finiteType</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.self"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">self</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.polynomial"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">polynomial</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.freeAlgebra"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">freeAlgebra</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.mvPolynomial"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">mvPolynomial</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.of_restrictScalars_finiteType"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">of_restrictScalars_finiteType</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.of_surjective"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">of_surjective</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.equiv"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">equiv</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.trans"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">trans</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.quotient"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">quotient</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.iff_quotient_freeAlgebra"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">iff_quotient_freeAlgebra</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.iff_quotient_mvPolynomial"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">iff_quotient_mvPolynomial</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.iff_quotient_freeAlgebra'"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">iff_quotient_freeAlgebra'</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.iff_quotient_mvPolynomial'"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">iff_quotient_mvPolynomial'</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.iff_quotient_mvPolynomial''"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">iff_quotient_mvPolynomial''</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.prod"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">prod</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.FiniteType.isNoetherianRing"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">isNoetherianRing</span></a></div><div class="nav_link"><a class="break_within" href="#Subalgebra.fg_iff_finiteType"><span class="name">Subalgebra</span>.<span class="name">fg_iff_finiteType</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.FiniteType"><span class="name">RingHom</span>.<span class="name">FiniteType</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.Finite.finiteType"><span class="name">RingHom</span>.<span class="name">Finite</span>.<span class="name">finiteType</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.FiniteType.id"><span class="name">RingHom</span>.<span class="name">FiniteType</span>.<span class="name">id</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.FiniteType.comp_surjective"><span class="name">RingHom</span>.<span class="name">FiniteType</span>.<span class="name">comp_surjective</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.FiniteType.of_surjective"><span class="name">RingHom</span>.<span class="name">FiniteType</span>.<span class="name">of_surjective</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.FiniteType.comp"><span class="name">RingHom</span>.<span class="name">FiniteType</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.FiniteType.of_finite"><span class="name">RingHom</span>.<span class="name">FiniteType</span>.<span class="name">of_finite</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.Finite.to_finiteType"><span class="name">RingHom</span>.<span class="name">Finite</span>.<span class="name">to_finiteType</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.FiniteType.of_comp_finiteType"><span class="name">RingHom</span>.<span class="name">FiniteType</span>.<span class="name">of_comp_finiteType</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.FiniteType"><span class="name">AlgHom</span>.<span class="name">FiniteType</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.Finite.finiteType"><span class="name">AlgHom</span>.<span class="name">Finite</span>.<span class="name">finiteType</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.FiniteType.id"><span class="name">AlgHom</span>.<span class="name">FiniteType</span>.<span class="name">id</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.FiniteType.comp"><span class="name">AlgHom</span>.<span class="name">FiniteType</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.FiniteType.comp_surjective"><span class="name">AlgHom</span>.<span class="name">FiniteType</span>.<span class="name">comp_surjective</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.FiniteType.of_surjective"><span class="name">AlgHom</span>.<span class="name">FiniteType</span>.<span class="name">of_surjective</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.FiniteType.of_comp_finiteType"><span class="name">AlgHom</span>.<span class="name">FiniteType</span>.<span class="name">of_comp_finiteType</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidAlgebra.mem_adjoin_support"><span class="name">AddMonoidAlgebra</span>.<span class="name">mem_adjoin_support</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidAlgebra.support_gen_of_gen"><span class="name">AddMonoidAlgebra</span>.<span class="name">support_gen_of_gen</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidAlgebra.support_gen_of_gen'"><span class="name">AddMonoidAlgebra</span>.<span class="name">support_gen_of_gen'</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidAlgebra.exists_finset_adjoin_eq_top"><span class="name">AddMonoidAlgebra</span>.<span class="name">exists_finset_adjoin_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidAlgebra.of'_mem_span"><span class="name">AddMonoidAlgebra</span>.<span class="name">of'_mem_span</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidAlgebra.mem_closure_of_mem_span_closure"><span class="name">AddMonoidAlgebra</span>.<span class="name">mem_closure_of_mem_span_closure</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidAlgebra.mvPolynomial_aeval_of_surjective_of_closure"><span class="name">AddMonoidAlgebra</span>.<span class="name">mvPolynomial_aeval_of_surjective_of_closure</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidAlgebra.freeAlgebra_lift_of_surjective_of_closure"><span class="name">AddMonoidAlgebra</span>.<span class="name">freeAlgebra_lift_of_surjective_of_closure</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidAlgebra.finiteType_of_fg"><span class="name">AddMonoidAlgebra</span>.<span class="name">finiteType_of_fg</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidAlgebra.finiteType_iff_fg"><span class="name">AddMonoidAlgebra</span>.<span class="name">finiteType_iff_fg</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidAlgebra.fg_of_finiteType"><span class="name">AddMonoidAlgebra</span>.<span class="name">fg_of_finiteType</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidAlgebra.finiteType_iff_group_fg"><span class="name">AddMonoidAlgebra</span>.<span class="name">finiteType_iff_group_fg</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.mem_adjoin_support"><span class="name">MonoidAlgebra</span>.<span class="name">mem_adjoin_support</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.support_gen_of_gen"><span class="name">MonoidAlgebra</span>.<span class="name">support_gen_of_gen</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.support_gen_of_gen'"><span class="name">MonoidAlgebra</span>.<span class="name">support_gen_of_gen'</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.exists_finset_adjoin_eq_top"><span class="name">MonoidAlgebra</span>.<span class="name">exists_finset_adjoin_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.of_mem_span_of_iff"><span class="name">MonoidAlgebra</span>.<span class="name">of_mem_span_of_iff</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.mem_closure_of_mem_span_closure"><span class="name">MonoidAlgebra</span>.<span class="name">mem_closure_of_mem_span_closure</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.mvPolynomial_aeval_of_surjective_of_closure"><span class="name">MonoidAlgebra</span>.<span class="name">mvPolynomial_aeval_of_surjective_of_closure</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.freeAlgebra_lift_of_surjective_of_closure"><span class="name">MonoidAlgebra</span>.<span class="name">freeAlgebra_lift_of_surjective_of_closure</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.finiteType_of_fg"><span class="name">MonoidAlgebra</span>.<span class="name">finiteType_of_fg</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.finiteType_iff_fg"><span class="name">MonoidAlgebra</span>.<span class="name">finiteType_iff_fg</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.fg_of_finiteType"><span class="name">MonoidAlgebra</span>.<span class="name">fg_of_finiteType</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.finiteType_iff_group_fg"><span class="name">MonoidAlgebra</span>.<span class="name">finiteType_iff_group_fg</span></a></div><div class="nav_link"><a class="break_within" href="#CommRing.orzechProperty"><span class="name">CommRing</span>.<span class="name">orzechProperty</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Finite.injective_of_surjective_endomorphism"><span class="name">Module</span>.<span class="name">Finite</span>.<span class="name">injective_of_surjective_endomorphism</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Finiteness-conditions-in-commutative-algebra">Finiteness conditions in commutative algebra <a class="hover-link" href="#Finiteness-conditions-in-commutative-algebra">#</a></h1><p>In this file we define a notion of finiteness that is common in commutative algebra.</p><h2 class="markdown-heading" id="Main-declarations">Main declarations <a class="hover-link" href="#Main-declarations">#</a></h2><ul>
+<li><code><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a></code>, <code><a href="../.././Mathlib/RingTheory/FiniteType.html#RingHom.FiniteType">RingHom.FiniteType</a></code>, <code><a href="../.././Mathlib/RingTheory/FiniteType.html#AlgHom.FiniteType">AlgHom.FiniteType</a></code>
+all of these express that some object is finitely generated <em>as algebra</em> over some base ring.</li>
+</ul></div><div class="decl" id="Algebra.FiniteType"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L32-L35">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType"><span class="name">Algebra</span>.<span class="name">FiniteType</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> uR)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../.././foundational_types.html">Type</a> uA)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>An algebra over a commutative semiring is of <code><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">FiniteType</a></code> if it is finitely generated
+over the base ring as algebra.</p><ul class="structure_fields" id="Algebra.FiniteType.mk"><li id="Algebra.FiniteType.out" class="structure_field"><div class="structure_field_info">out : <span class="fn"><a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a>.FG</span></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-Algebra.FiniteType" class="instances-list"></ul></details></div></div><div class="decl" id="Module.Finite.finiteType"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L50-L52">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Module.Finite.finiteType"><span class="name">Module</span>.<span class="name">Finite</span>.<span class="name">finiteType</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hRA : <span class="fn"><a href="../.././Mathlib/RingTheory/Finiteness/Defs.html#Module.Finite">Module.Finite</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">A</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Algebra.FiniteType.self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L69-L70">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.self"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">self</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> uR)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">R</span></span></div></div></div></div><div class="decl" id="Algebra.FiniteType.polynomial"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L72-L75">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.polynomial"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">polynomial</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> uR)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span>)</span></span></div></div></div></div><div class="decl" id="Algebra.FiniteType.freeAlgebra"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L79-L84">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.freeAlgebra"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">freeAlgebra</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> uR)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ι : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/FreeAlgebra.html#FreeAlgebra">FreeAlgebra</a> <span class="fn">R</span> <span class="fn">ι</span>)</span></span></div></div></div></div><div class="decl" id="Algebra.FiniteType.mvPolynomial"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L86-L91">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.mvPolynomial"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">mvPolynomial</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> uR)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ι : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">ι</span> <span class="fn">R</span>)</span></span></div></div></div></div><div class="decl" id="Algebra.FiniteType.of_restrictScalars_finiteType"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L93-L101">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.of_restrictScalars_finiteType"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">of_restrictScalars_finiteType</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> uR)</span></span>
+<span class="decl_args">
+<span class="fn">(S : <a href="../.././foundational_types.html">Type</a> uS)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../.././foundational_types.html">Type</a> uA)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hA : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">S</span> <span class="fn">A</span></span></div></div></div></div><div class="decl" id="Algebra.FiniteType.of_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L105-L108">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.of_surjective"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">of_surjective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> uR}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> uA}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> uB}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hRA : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">B</span></span></div></div></div></div><div class="decl" id="Algebra.FiniteType.equiv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L110-L111">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.equiv"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">equiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> uR}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> uA}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> uB}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hRA : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">≃ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">]</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">B</span></span></div></div></div></div><div class="decl" id="Algebra.FiniteType.trans"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L113-L115">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.trans"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">trans</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> uR}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> uS}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> uA}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hRS : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hSA : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">S</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">A</span></span></div></div></div></div><div class="decl" id="Algebra.FiniteType.quotient"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L117-L119">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.quotient"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">quotient</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(I : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Defs.html#Ideal">Ideal</a> <span class="fn">S</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<span class="fn">S</span> <a href="../.././Mathlib/Algebra/Quotient.html#HasQuotient.Quotient">⧸</a> <span class="fn">I</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Algebra.FiniteType.iff_quotient_freeAlgebra"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L121-L136">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.iff_quotient_freeAlgebra"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">iff_quotient_freeAlgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> uR}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> uA}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">A</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">s</span> : <span class="fn"><a href="../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">A</span></span>) (<span class="fn">f</span> : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/FreeAlgebra.html#FreeAlgebra">FreeAlgebra</a> <span class="fn">R</span> <span class="fn">{ <span class="fn">x</span> : <span class="fn">A</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> }</span></span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">A</span></span>), <span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">f</span></span></span></span></span></div></div><p>An algebra is finitely generated if and only if it is a quotient
+of a free algebra whose variables are indexed by a finset.</p></div></div><div class="decl" id="Algebra.FiniteType.iff_quotient_mvPolynomial"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L138-L152">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.iff_quotient_mvPolynomial"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">iff_quotient_mvPolynomial</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> uR}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> uS}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">S</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">s</span> : <span class="fn"><a href="../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">S</span></span>) (<span class="fn">f</span> : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">{ <span class="fn">x</span> : <span class="fn">S</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> }</span> <span class="fn">R</span></span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">S</span></span>), <span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">f</span></span></span></span></span></div></div><p>A commutative algebra is finitely generated if and only if it is a quotient
+of a polynomial ring whose variables are indexed by a finset.</p></div></div><div class="decl" id="Algebra.FiniteType.iff_quotient_freeAlgebra'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L154-L164">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.iff_quotient_freeAlgebra'"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">iff_quotient_freeAlgebra'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> uR}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> uA}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">A</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">ι</span> : <a href="../.././foundational_types.html">Type</a> uA) (<span class="fn">x</span> : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>) (<span class="fn">f</span> : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/FreeAlgebra.html#FreeAlgebra">FreeAlgebra</a> <span class="fn">R</span> <span class="fn">ι</span></span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">A</span></span>), <span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">f</span></span></span></span></span></div></div><p>An algebra is finitely generated if and only if it is a quotient
+of a polynomial ring whose variables are indexed by a fintype.</p></div></div><div class="decl" id="Algebra.FiniteType.iff_quotient_mvPolynomial'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L166-L176">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.iff_quotient_mvPolynomial'"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">iff_quotient_mvPolynomial'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> uR}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> uS}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">S</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">ι</span> : <a href="../.././foundational_types.html">Type</a> uS) (<span class="fn">x</span> : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>) (<span class="fn">f</span> : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">ι</span> <span class="fn">R</span></span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">S</span></span>), <span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">f</span></span></span></span></span></div></div><p>A commutative algebra is finitely generated if and only if it is a quotient
+of a polynomial ring whose variables are indexed by a fintype.</p></div></div><div class="decl" id="Algebra.FiniteType.iff_quotient_mvPolynomial''"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L178-L188">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.iff_quotient_mvPolynomial''"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">iff_quotient_mvPolynomial''</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> uR}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> uS}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">S</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">n</span> : <a href="../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">f</span> : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">(<a href="../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span>)</span> <span class="fn">R</span></span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">S</span></span>), <span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">f</span></span></span></span></span></div></div><p>A commutative algebra is finitely generated if and only if it is a quotient of a polynomial ring
+in <code>n</code> variables.</p></div></div><div class="decl" id="Algebra.FiniteType.prod"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L190-L191">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.prod"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">prod</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> uR}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> uA}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> uB}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hA : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hB : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<span class="fn">A</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">B</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Algebra.FiniteType.isNoetherianRing"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L193-L201">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType.isNoetherianRing"><span class="name">Algebra</span>.<span class="name">FiniteType</span>.<span class="name">isNoetherianRing</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(S : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/RingTheory/Noetherian/Defs.html#IsNoetherianRing">IsNoetherianRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/Noetherian/Defs.html#IsNoetherianRing">IsNoetherianRing</a> <span class="fn">S</span></span></div></div></div></div><div class="decl" id="Subalgebra.fg_iff_finiteType"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L203-L204">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Subalgebra.fg_iff_finiteType"><span class="name">Subalgebra</span>.<span class="name">fg_iff_finiteType</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> uR}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> uA}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">S</span>.FG</span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">S</span></span></span></span></div></div></div></div><div class="decl" id="RingHom.FiniteType"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L216-L219">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#RingHom.FiniteType"><span class="name">RingHom</span>.<span class="name">FiniteType</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>A ring morphism <code>A →+* B</code> is of <code><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">FiniteType</a></code> if <code>B</code> is finitely generated as <code>A</code>-algebra.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">f</span>.FiniteType</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">A</span> <span class="fn">B</span></span></span></li></ul></details><details id="instances-for-list-RingHom.FiniteType" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="RingHom.Finite.finiteType"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L223-L224">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#RingHom.Finite.finiteType"><span class="name">RingHom</span>.<span class="name">Finite</span>.<span class="name">finiteType</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">B</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">f</span>.Finite</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span>.FiniteType</span></div></div></div></div><div class="decl" id="RingHom.FiniteType.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L232-L233">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#RingHom.FiniteType.id"><span class="name">RingHom</span>.<span class="name">FiniteType</span>.<span class="name">id</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom.id">RingHom.id</a> <span class="fn">A</span>)</span>.FiniteType</span></div></div></div></div><div class="decl" id="RingHom.FiniteType.comp_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L237-L244">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#RingHom.FiniteType.comp_surjective"><span class="name">RingHom</span>.<span class="name">FiniteType</span>.<span class="name">comp_surjective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">B</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">B</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">f</span>.FiniteType</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">g</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">g</span>.comp</span> <span class="fn">f</span>)</span>.FiniteType</span></div></div></div></div><div class="decl" id="RingHom.FiniteType.of_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L246-L248">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#RingHom.FiniteType.of_surjective"><span class="name">RingHom</span>.<span class="name">FiniteType</span>.<span class="name">of_surjective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span>.FiniteType</span></div></div></div></div><div class="decl" id="RingHom.FiniteType.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L250-L253">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#RingHom.FiniteType.comp"><span class="name">RingHom</span>.<span class="name">FiniteType</span>.<span class="name">comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">B</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">C</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">B</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hg : <span class="fn"><span class="fn">g</span>.FiniteType</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">f</span>.FiniteType</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">g</span>.comp</span> <span class="fn">f</span>)</span>.FiniteType</span></div></div></div></div><div class="decl" id="RingHom.FiniteType.of_finite"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L255-L256">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#RingHom.FiniteType.of_finite"><span class="name">RingHom</span>.<span class="name">FiniteType</span>.<span class="name">of_finite</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">B</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">f</span>.Finite</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span>.FiniteType</span></div></div></div></div><div class="decl" id="RingHom.Finite.to_finiteType"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L258-L258">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#RingHom.Finite.to_finiteType"><span class="name">RingHom</span>.<span class="name">Finite</span>.<span class="name">to_finiteType</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">B</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">f</span>.Finite</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span>.FiniteType</span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/RingTheory/FiniteType.html#RingHom.FiniteType.of_finite">RingHom.FiniteType.of_finite</a></code>.</p></div></div><div class="decl" id="RingHom.FiniteType.of_comp_finiteType"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L260-L263">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#RingHom.FiniteType.of_comp_finiteType"><span class="name">RingHom</span>.<span class="name">FiniteType</span>.<span class="name">of_comp_finiteType</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">B</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">B</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">(<span class="fn"><span class="fn">g</span>.comp</span> <span class="fn">f</span>)</span>.FiniteType</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">g</span>.FiniteType</span></div></div></div></div><div class="decl" id="AlgHom.FiniteType"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L275-L278">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AlgHom.FiniteType"><span class="name">AlgHom</span>.<span class="name">FiniteType</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>An algebra morphism <code>A →ₐ[R] B</code> is of <code><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">FiniteType</a></code> if it is of finite type as ring morphism.
+In other words, if <code>B</code> is finitely generated as <code>A</code>-algebra.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">f</span>.FiniteType</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span>.FiniteType</span></span></li></ul></details><details id="instances-for-list-AlgHom.FiniteType" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="AlgHom.Finite.finiteType"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L282-L283">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AlgHom.Finite.finiteType"><span class="name">AlgHom</span>.<span class="name">Finite</span>.<span class="name">finiteType</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">f</span>.Finite</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span>.FiniteType</span></div></div></div></div><div class="decl" id="AlgHom.FiniteType.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L291-L292">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AlgHom.FiniteType.id"><span class="name">AlgHom</span>.<span class="name">FiniteType</span>.<span class="name">id</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(A : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom.id">AlgHom.id</a> <span class="fn">R</span> <span class="fn">A</span>)</span>.FiniteType</span></div></div></div></div><div class="decl" id="AlgHom.FiniteType.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L296-L298">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AlgHom.FiniteType.comp"><span class="name">AlgHom</span>.<span class="name">FiniteType</span>.<span class="name">comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">B</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">C</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hg : <span class="fn"><span class="fn">g</span>.FiniteType</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">f</span>.FiniteType</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">g</span>.comp</span> <span class="fn">f</span>)</span>.FiniteType</span></div></div></div></div><div class="decl" id="AlgHom.FiniteType.comp_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L300-L302">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AlgHom.FiniteType.comp_surjective"><span class="name">AlgHom</span>.<span class="name">FiniteType</span>.<span class="name">comp_surjective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">B</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">f</span>.FiniteType</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">g</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">g</span>.comp</span> <span class="fn">f</span>)</span>.FiniteType</span></div></div></div></div><div class="decl" id="AlgHom.FiniteType.of_surjective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L304-L305">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AlgHom.FiniteType.of_surjective"><span class="name">AlgHom</span>.<span class="name">FiniteType</span>.<span class="name">of_surjective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span>.FiniteType</span></div></div></div></div><div class="decl" id="AlgHom.FiniteType.of_comp_finiteType"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L307-L309">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AlgHom.FiniteType.of_comp_finiteType"><span class="name">AlgHom</span>.<span class="name">FiniteType</span>.<span class="name">of_comp_finiteType</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">B</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">(<span class="fn"><span class="fn">g</span>.comp</span> <span class="fn">f</span>)</span>.FiniteType</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">g</span>.FiniteType</span></div></div></div></div><div class="decl" id="AddMonoidAlgebra.mem_adjoin_support"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L329-L335">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AddMonoidAlgebra.mem_adjoin_support"><span class="name">AddMonoidAlgebra</span>.<span class="name">mem_adjoin_support</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra">AddMonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra.of'">AddMonoidAlgebra.of'</a> <span class="fn">R</span> <span class="fn">M</span></span> <a href="../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">↑<span class="fn"><span class="fn">f</span>.support</span></span>)</span></span></span></div></div><p>An element of <code>R[M]</code> is in the subalgebra generated by its support.</p></div></div><div class="decl" id="AddMonoidAlgebra.support_gen_of_gen"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L337-L348">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AddMonoidAlgebra.support_gen_of_gen"><span class="name">AddMonoidAlgebra</span>.<span class="name">support_gen_of_gen</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra">AddMonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">S</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">(⋃ <span class="fn">f</span> ∈ <span class="fn">S</span>, <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra.of'">AddMonoidAlgebra.of'</a> <span class="fn">R</span> <span class="fn">M</span></span> <a href="../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">↑<span class="fn"><span class="fn">f</span>.support</span></span></span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></div><p>If a set <code>S</code> generates, as algebra, <code>R[M]</code>, then the set of supports of
+elements of <code>S</code> generates <code>R[M]</code>.</p></div></div><div class="decl" id="AddMonoidAlgebra.support_gen_of_gen'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L350-L357">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AddMonoidAlgebra.support_gen_of_gen'"><span class="name">AddMonoidAlgebra</span>.<span class="name">support_gen_of_gen'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra">AddMonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">S</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra.of'">AddMonoidAlgebra.of'</a> <span class="fn">R</span> <span class="fn">M</span></span> <a href="../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">⋃ <span class="fn">f</span> ∈ <span class="fn">S</span>, <span class="fn">↑<span class="fn"><span class="fn">f</span>.support</span></span></span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></div><p>If a set <code>S</code> generates, as algebra, <code>R[M]</code>, then the image of the union of
+the supports of elements of <code>S</code> generates <code>R[M]</code>.</p></div></div><div class="decl" id="AddMonoidAlgebra.exists_finset_adjoin_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L365-L375">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AddMonoidAlgebra.exists_finset_adjoin_eq_top"><span class="name">AddMonoidAlgebra</span>.<span class="name">exists_finset_adjoin_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra">AddMonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">G</span> : <span class="fn"><a href="../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">M</span></span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra.of'">AddMonoidAlgebra.of'</a> <span class="fn">R</span> <span class="fn">M</span></span> <a href="../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">↑<span class="fn">G</span></span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></span></div></div><p>If <code>R[M]</code> is of finite type, then there is a <code>G : <a href="../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> M</code> such that its
+image generates, as algebra, <code>R[M]</code>.</p></div></div><div class="decl" id="AddMonoidAlgebra.of'_mem_span"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L377-L384">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AddMonoidAlgebra.of'_mem_span"><span class="name">AddMonoidAlgebra</span>.<span class="name">of'_mem_span</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra.of'">AddMonoidAlgebra.of'</a> <span class="fn">R</span> <span class="fn">M</span> <span class="fn">m</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Span/Defs.html#Submodule.span">Submodule.span</a> <span class="fn">R</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra.of'">AddMonoidAlgebra.of'</a> <span class="fn">R</span> <span class="fn">M</span></span> <a href="../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">S</span>)</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span></span></div></div><p>The image of an element <code>m : M</code> in <code>R[M]</code> belongs the submodule generated by
+<code>S : <a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> M</code> if and only if <code>m ∈ S</code>.</p></div></div><div class="decl" id="AddMonoidAlgebra.mem_closure_of_mem_span_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L386-L398">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AddMonoidAlgebra.mem_closure_of_mem_span_closure"><span class="name">AddMonoidAlgebra</span>.<span class="name">mem_closure_of_mem_span_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra.of'">AddMonoidAlgebra.of'</a> <span class="fn">R</span> <span class="fn">M</span> <span class="fn">m</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Span/Defs.html#Submodule.span">Submodule.span</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">(<a href="../.././Mathlib/Algebra/Group/Submonoid/Basic.html#Submonoid.closure">Submonoid.closure</a> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra.of'">AddMonoidAlgebra.of'</a> <span class="fn">R</span> <span class="fn">M</span></span> <a href="../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">S</span>)</span>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Group/Submonoid/Basic.html#AddSubmonoid.closure">AddSubmonoid.closure</a> <span class="fn">S</span></span></span></div></div><p>If the image of an element <code>m : M</code> in <code>R[M]</code> belongs the submodule generated by
+the closure of some <code>S : <a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> M</code> then <code>m ∈ closure S</code>.</p></div></div><div class="decl" id="AddMonoidAlgebra.mvPolynomial_aeval_of_surjective_of_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L404-L425">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AddMonoidAlgebra.mvPolynomial_aeval_of_surjective_of_closure"><span class="name">AddMonoidAlgebra</span>.<span class="name">mvPolynomial_aeval_of_surjective_of_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Group/Submonoid/Basic.html#AddSubmonoid.closure">AddSubmonoid.closure</a> <span class="fn">S</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Algebra/MvPolynomial/Basic.html#MvPolynomial.aeval">MvPolynomial.aeval</a> <span class="fn">fun (<span class="fn">s</span> : <span class="fn">↑<span class="fn">S</span></span>) =&gt; <span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra.of'">AddMonoidAlgebra.of'</a> <span class="fn">R</span> <span class="fn">M</span> <span class="fn">↑<span class="fn">s</span></span></span></span>)</span></span></span></div></div><p>If a set <code>S</code> generates an additive monoid <code>M</code>, then the image of <code>M</code> generates, as algebra,
+<code>R[M]</code>.</p></div></div><div class="decl" id="AddMonoidAlgebra.freeAlgebra_lift_of_surjective_of_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L429-L450">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AddMonoidAlgebra.freeAlgebra_lift_of_surjective_of_closure"><span class="name">AddMonoidAlgebra</span>.<span class="name">freeAlgebra_lift_of_surjective_of_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Group/Submonoid/Basic.html#AddSubmonoid.closure">AddSubmonoid.closure</a> <span class="fn">S</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">(<span class="fn">(<a href="../.././Mathlib/Algebra/FreeAlgebra.html#FreeAlgebra.lift">FreeAlgebra.lift</a> <span class="fn">R</span>)</span> <span class="fn">fun (<span class="fn">s</span> : <span class="fn">↑<span class="fn">S</span></span>) =&gt; <span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra.of'">AddMonoidAlgebra.of'</a> <span class="fn">R</span> <span class="fn">M</span> <span class="fn">↑<span class="fn">s</span></span></span></span>)</span></span></span></div></div><p>If a set <code>S</code> generates an additive monoid <code>M</code>, then the image of <code>M</code> generates, as algebra,
+<code>R[M]</code>.</p></div></div><div class="decl" id="AddMonoidAlgebra.finiteType_of_fg"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L454-L461">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AddMonoidAlgebra.finiteType_of_fg"><span class="name">AddMonoidAlgebra</span>.<span class="name">finiteType_of_fg</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../.././Mathlib/GroupTheory/Finiteness.html#AddMonoid.FG">AddMonoid.FG</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra">AddMonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span></div></div><p>If an additive monoid <code>M</code> is finitely generated then <code>R[M]</code> is of finite
+type.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="AddMonoidAlgebra.finiteType_iff_fg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L465-L475">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AddMonoidAlgebra.finiteType_iff_fg"><span class="name">AddMonoidAlgebra</span>.<span class="name">finiteType_iff_fg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra">AddMonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../.././Mathlib/GroupTheory/Finiteness.html#AddMonoid.FG">AddMonoid.FG</a> <span class="fn">M</span></span></span></div></div><p>An additive monoid <code>M</code> is finitely generated if and only if <code>R[M]</code> is of
+finite type.</p></div></div><div class="decl" id="AddMonoidAlgebra.fg_of_finiteType"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L477-L480">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AddMonoidAlgebra.fg_of_finiteType"><span class="name">AddMonoidAlgebra</span>.<span class="name">fg_of_finiteType</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddMonoid">AddMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra">AddMonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/GroupTheory/Finiteness.html#AddMonoid.FG">AddMonoid.FG</a> <span class="fn">M</span></span></div></div><p>If <code>R[M]</code> is of finite type then <code>M</code> is finitely generated.</p></div></div><div class="decl" id="AddMonoidAlgebra.finiteType_iff_group_fg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L482-L486">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#AddMonoidAlgebra.finiteType_iff_group_fg"><span class="name">AddMonoidAlgebra</span>.<span class="name">finiteType_iff_group_fg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#AddMonoidAlgebra">AddMonoidAlgebra</a> <span class="fn">R</span> <span class="fn">G</span>)</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../.././Mathlib/GroupTheory/Finiteness.html#AddGroup.FG">AddGroup.FG</a> <span class="fn">G</span></span></span></div></div><p>An additive group <code>G</code> is finitely generated if and only if <code>R[G]</code> is of
+finite type.</p></div></div><div class="decl" id="MonoidAlgebra.mem_adjoin_support"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L500-L505">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#MonoidAlgebra.mem_adjoin_support"><span class="name">MonoidAlgebra</span>.<span class="name">mem_adjoin_support</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">(<span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra.of">MonoidAlgebra.of</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span> <a href="../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">↑<span class="fn"><span class="fn">f</span>.support</span></span>)</span></span></span></div></div><p>An element of <code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code> is in the subalgebra generated by its support.</p></div></div><div class="decl" id="MonoidAlgebra.support_gen_of_gen"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L507-L521">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#MonoidAlgebra.support_gen_of_gen"><span class="name">MonoidAlgebra</span>.<span class="name">support_gen_of_gen</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">S</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">(⋃ <span class="fn">f</span> ∈ <span class="fn">S</span>, <span class="fn"><span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra.of">MonoidAlgebra.of</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span> <a href="../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">↑<span class="fn"><span class="fn">f</span>.support</span></span></span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></div><p>If a set <code>S</code> generates, as algebra, <code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code>, then the set of supports of elements
+of <code>S</code> generates <code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code>.</p></div></div><div class="decl" id="MonoidAlgebra.support_gen_of_gen'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L523-L530">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#MonoidAlgebra.support_gen_of_gen'"><span class="name">MonoidAlgebra</span>.<span class="name">support_gen_of_gen'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">S</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">(<span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra.of">MonoidAlgebra.of</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span> <a href="../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">⋃ <span class="fn">f</span> ∈ <span class="fn">S</span>, <span class="fn">↑<span class="fn"><span class="fn">f</span>.support</span></span></span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></div><p>If a set <code>S</code> generates, as algebra, <code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code>, then the image of the union of the
+supports of elements of <code>S</code> generates <code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code>.</p></div></div><div class="decl" id="MonoidAlgebra.exists_finset_adjoin_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L538-L548">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#MonoidAlgebra.exists_finset_adjoin_eq_top"><span class="name">MonoidAlgebra</span>.<span class="name">exists_finset_adjoin_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">G</span> : <span class="fn"><a href="../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> <span class="fn">M</span></span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">(<span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra.of">MonoidAlgebra.of</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span> <a href="../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">↑<span class="fn">G</span></span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></span></div></div><p>If <code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code> is of finite type, then there is a <code>G : <a href="../.././Mathlib/Data/Finset/Defs.html#Finset">Finset</a> M</code> such that its image
+generates, as algebra, <code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code>.</p></div></div><div class="decl" id="MonoidAlgebra.of_mem_span_of_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L550-L557">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#MonoidAlgebra.of_mem_span_of_iff"><span class="name">MonoidAlgebra</span>.<span class="name">of_mem_span_of_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra.of">MonoidAlgebra.of</a> <span class="fn">R</span> <span class="fn">M</span>)</span> <span class="fn">m</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Span/Defs.html#Submodule.span">Submodule.span</a> <span class="fn">R</span> <span class="fn">(<span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra.of">MonoidAlgebra.of</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span> <a href="../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">S</span>)</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">m</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span></span></div></div><p>The image of an element <code>m : M</code> in <code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code> belongs the submodule generated by
+<code>S : <a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> M</code> if and only if <code>m ∈ S</code>.</p></div></div><div class="decl" id="MonoidAlgebra.mem_closure_of_mem_span_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L559-L566">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#MonoidAlgebra.mem_closure_of_mem_span_closure"><span class="name">MonoidAlgebra</span>.<span class="name">mem_closure_of_mem_span_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra.of">MonoidAlgebra.of</a> <span class="fn">R</span> <span class="fn">M</span>)</span> <span class="fn">m</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Span/Defs.html#Submodule.span">Submodule.span</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">(<a href="../.././Mathlib/Algebra/Group/Submonoid/Basic.html#Submonoid.closure">Submonoid.closure</a> <span class="fn">(<span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra.of">MonoidAlgebra.of</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span> <a href="../.././Mathlib/Data/Set/Defs.html#Set.image">''</a> <span class="fn">S</span>)</span>)</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Group/Submonoid/Basic.html#Submonoid.closure">Submonoid.closure</a> <span class="fn">S</span></span></span></div></div><p>If the image of an element <code>m : M</code> in <code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code> belongs the submodule generated by the
+closure of some <code>S : <a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> M</code> then <code>m ∈ closure S</code>.</p></div></div><div class="decl" id="MonoidAlgebra.mvPolynomial_aeval_of_surjective_of_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L572-L591">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#MonoidAlgebra.mvPolynomial_aeval_of_surjective_of_closure"><span class="name">MonoidAlgebra</span>.<span class="name">mvPolynomial_aeval_of_surjective_of_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#CommMonoid">CommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Group/Submonoid/Basic.html#Submonoid.closure">Submonoid.closure</a> <span class="fn">S</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Algebra/MvPolynomial/Basic.html#MvPolynomial.aeval">MvPolynomial.aeval</a> <span class="fn">fun (<span class="fn">s</span> : <span class="fn">↑<span class="fn">S</span></span>) =&gt; <span class="fn"><span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra.of">MonoidAlgebra.of</a> <span class="fn">R</span> <span class="fn">M</span>)</span> <span class="fn">↑<span class="fn">s</span></span></span></span>)</span></span></span></div></div><p>If a set <code>S</code> generates a monoid <code>M</code>, then the image of <code>M</code> generates, as algebra,
+<code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code>.</p></div></div><div class="decl" id="MonoidAlgebra.freeAlgebra_lift_of_surjective_of_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L596-L616">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#MonoidAlgebra.freeAlgebra_lift_of_surjective_of_closure"><span class="name">MonoidAlgebra</span>.<span class="name">freeAlgebra_lift_of_surjective_of_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Group/Submonoid/Basic.html#Submonoid.closure">Submonoid.closure</a> <span class="fn">S</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">(<span class="fn">(<a href="../.././Mathlib/Algebra/FreeAlgebra.html#FreeAlgebra.lift">FreeAlgebra.lift</a> <span class="fn">R</span>)</span> <span class="fn">fun (<span class="fn">s</span> : <span class="fn">↑<span class="fn">S</span></span>) =&gt; <span class="fn"><span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra.of">MonoidAlgebra.of</a> <span class="fn">R</span> <span class="fn">M</span>)</span> <span class="fn">↑<span class="fn">s</span></span></span></span>)</span></span></span></div></div><p>If a set <code>S</code> generates an additive monoid <code>M</code>, then the image of <code>M</code> generates, as algebra,
+<code>R[M]</code>.</p></div></div><div class="decl" id="MonoidAlgebra.finiteType_of_fg"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L618-L620">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#MonoidAlgebra.finiteType_of_fg"><span class="name">MonoidAlgebra</span>.<span class="name">finiteType_of_fg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/GroupTheory/Finiteness.html#Monoid.FG">Monoid.FG</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span></div></div><p>If a monoid <code>M</code> is finitely generated then <code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code> is of finite type.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="MonoidAlgebra.finiteType_iff_fg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L622-L628">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#MonoidAlgebra.finiteType_iff_fg"><span class="name">MonoidAlgebra</span>.<span class="name">finiteType_iff_fg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../.././Mathlib/GroupTheory/Finiteness.html#Monoid.FG">Monoid.FG</a> <span class="fn">M</span></span></span></div></div><p>A monoid <code>M</code> is finitely generated if and only if <code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code> is of finite type.</p></div></div><div class="decl" id="MonoidAlgebra.fg_of_finiteType"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L630-L633">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#MonoidAlgebra.fg_of_finiteType"><span class="name">MonoidAlgebra</span>.<span class="name">fg_of_finiteType</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">R</span> <span class="fn">M</span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/GroupTheory/Finiteness.html#Monoid.FG">Monoid.FG</a> <span class="fn">M</span></span></div></div><p>If <code><a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> R M</code> is of finite type then <code>M</code> is finitely generated.</p></div></div><div class="decl" id="MonoidAlgebra.finiteType_iff_group_fg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L635-L638">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#MonoidAlgebra.finiteType_iff_group_fg"><span class="name">MonoidAlgebra</span>.<span class="name">finiteType_iff_group_fg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/FiniteType.html#Algebra.FiniteType">Algebra.FiniteType</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Algebra/MonoidAlgebra/Defs.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">R</span> <span class="fn">G</span>)</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../.././Mathlib/GroupTheory/Finiteness.html#Group.FG">Group.FG</a> <span class="fn">G</span></span></span></div></div><p>A group <code>G</code> is finitely generated if and only if <code>R[G]</code> is of finite type.</p></div></div><div class="decl" id="CommRing.orzechProperty"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L647-L730">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#CommRing.orzechProperty"><span class="name">CommRing</span>.<span class="name">orzechProperty</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/OrzechProperty.html#OrzechProperty">OrzechProperty</a> <span class="fn">R</span></span></div></div><p>Any commutative ring <code>R</code> satisfies the <code><a href="../.././Mathlib/RingTheory/OrzechProperty.html#OrzechProperty">OrzechProperty</a></code>, that is, for any finitely generated
+<code>R</code>-module <code>M</code>, any surjective homomorphism <code>f : N →ₗ[R] M</code> from a submodule <code>N</code> of <code>M</code> to <code>M</code>
+is injective.</p><p>This is a consequence of Noetherian case
+(<code><a href="../.././Mathlib/RingTheory/Noetherian/Orzech.html#IsNoetherian.injective_of_surjective_of_injective">IsNoetherian.injective_of_surjective_of_injective</a></code>), which requires that <code>M</code> is a
+Noetherian module, but allows <code>R</code> to be non-commutative. The reduction of this result to
+Noetherian case is adapted from <a href="https://math.stackexchange.com/a/1066110">https://math.stackexchange.com/a/1066110</a>:
+suppose <code>{ m_j }</code> is a finite set of generator of <code>M</code>, for any <code>n : N</code> one can write
+<code>i n = ∑ j, b_j * m_j</code> for <code>{ b_j }</code> in <code>R</code>, here <code>i : N →ₗ[R] M</code> is the standard inclusion.
+We can choose <code>{ n_j }</code> which are preimages of <code>{ m_j }</code> under <code>f</code>, and can choose
+<code>{ c_jl }</code> in <code>R</code> such that <code>i n_j = ∑ l, c_jl * m_l</code> for each <code>j</code>.
+Now let <code>A</code> be the subring of <code>R</code> generated by <code>{ b_j }</code> and <code>{ c_jl }</code>, then it is
+Noetherian. Let <code>N'</code> be the <code>A</code>-submodule of <code>N</code> generated by <code>n</code> and <code>{ n_j }</code>,
+<code>M'</code> be the <code>A</code>-submodule of <code>M</code> generated by <code>{ m_j }</code>,
+then it's easy to see that <code>i</code> and <code>f</code> restrict to <code>N' →ₗ[A] M'</code>,
+and the restricted version of <code>f</code> is surjective, hence by Noetherian case,
+it is also injective, in particular, if <code>f n = 0</code>, then <code>n = 0</code>.</p><p>See also Orzech's original paper: <em>Onto endomorphisms are isomorphisms</em> [orzech1971].</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Module.Finite.injective_of_surjective_endomorphism"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/RingTheory/FiniteType.lean#L736-L747">source</a></div><div class="attributes">@[deprecated OrzechProperty.injective_of_surjective_endomorphism]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/FiniteType.html#Module.Finite.injective_of_surjective_endomorphism"><span class="name">Module</span>.<span class="name">Finite</span>.<span class="name">injective_of_surjective_endomorphism</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/RingTheory/Finiteness/Defs.html#Module.Finite">Module.Finite</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f_surj : <span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Surjective">Function.Surjective</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div><p>A theorem by Vasconcelos, given a finite module <code>M</code> over a commutative ring, any
+surjective endomorphism of <code>M</code> is also injective.
+It is a consequence of the fact <code><a href="../.././Mathlib/RingTheory/FiniteType.html#CommRing.orzechProperty">CommRing.orzechProperty</a></code>
+that any commutative ring <code>R</code> satisfies the <code><a href="../.././Mathlib/RingTheory/OrzechProperty.html#OrzechProperty">OrzechProperty</a></code>;
+please use <code><a href="../.././Mathlib/RingTheory/OrzechProperty.html#OrzechProperty.injective_of_surjective_endomorphism">OrzechProperty.injective_of_surjective_endomorphism</a></code> instead.
+This is similar to <code><a href="../.././Mathlib/RingTheory/Noetherian/Orzech.html#IsNoetherian.injective_of_surjective_endomorphism">IsNoetherian.injective_of_surjective_endomorphism</a></code> but only applies in the
+commutative case, but does not use a Noetherian hypothesis.</p></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

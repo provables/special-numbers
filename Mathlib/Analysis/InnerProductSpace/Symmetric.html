@@ -1,0 +1,326 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.InnerProductSpace.Symmetric</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.InnerProductSpace.Symmetric";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">InnerProductSpace</span>.<span class="name">Symmetric</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/LinearAlgebra/SesquilinearForm.html">Mathlib.LinearAlgebra.SesquilinearForm</a></li><li><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html">Mathlib.Analysis.InnerProductSpace.Basic</a></li><li><a href="../../.././Mathlib/Analysis/Normed/Operator/Banach.html">Mathlib.Analysis.Normed.Operator.Banach</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.InnerProductSpace.Symmetric" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.isSymmetric_iff_sesqForm"><span class="name">LinearMap</span>.<span class="name">isSymmetric_iff_sesqForm</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.conj_inner_sym"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">conj_inner_sym</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.apply_clm"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">apply_clm</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.zero"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">zero</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.isSymmetric_zero"><span class="name">LinearMap</span>.<span class="name">isSymmetric_zero</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.id"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">id</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.isSymmetric_id"><span class="name">LinearMap</span>.<span class="name">isSymmetric_id</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.add"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">add</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.sub"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">sub</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.smul"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">smul</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.mul_of_commute"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">mul_of_commute</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.pow"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">pow</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.coe_reApplyInnerSelf_apply"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">coe_reApplyInnerSelf_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.restrict_invariant"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">restrict_invariant</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.restrictScalars"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">restrictScalars</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.isSymmetric_iff_inner_map_self_real"><span class="name">LinearMap</span>.<span class="name">isSymmetric_iff_inner_map_self_real</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.inner_map_polarization"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">inner_map_polarization</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.continuous"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">continuous</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.IsSymmetric.inner_map_self_eq_zero"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">inner_map_self_eq_zero</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Symmetric-linear-maps-in-an-inner-product-space">Symmetric linear maps in an inner product space <a class="hover-link" href="#Symmetric-linear-maps-in-an-inner-product-space">#</a></h1><p>This file defines and proves basic theorems about symmetric <strong>not necessarily bounded</strong> operators
+on an inner product space, i.e linear maps <code>T : E → E</code> such that <code>∀ x y, ⟪T x, y⟫ = ⟪x, T y⟫</code>.</p><p>In comparison to <code><a href="../../.././Mathlib/Algebra/Star/SelfAdjoint.html#IsSelfAdjoint">IsSelfAdjoint</a></code>, this definition works for non-continuous linear maps, and
+doesn't rely on the definition of the adjoint, which allows it to be stated in non-complete space.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric">LinearMap.IsSymmetric</a></code>: a (not necessarily bounded) operator on an inner product space is
+symmetric, if for all <code>x</code>, <code>y</code>, we have <code>⟪T x, y⟫ = ⟪x, T y⟫</code></li>
+</ul><h2 class="markdown-heading" id="Main-statements">Main statements <a class="hover-link" href="#Main-statements">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.continuous">IsSymmetric.continuous</a></code>: if a symmetric operator is defined on a complete space, then
+it is automatically continuous.</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>self-adjoint, symmetric</p></div><div class="mod_doc"><h3 class="markdown-heading" id="Symmetric-operators">Symmetric operators <a class="hover-link" href="#Symmetric-operators">#</a></h3></div><div class="decl" id="LinearMap.IsSymmetric"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L51-L54">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A (not necessarily bounded) operator on an inner product space is symmetric, if for all
+<code>x</code>, <code>y</code>, we have <code>⟪T x, y⟫ = ⟪x, T y⟫</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">T</span>.IsSymmetric</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">x</span>)</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">x</span> <span class="fn">(<span class="fn">T</span> <span class="fn">y</span>)</span></span></span></span></span></li></ul></details><details id="instances-for-list-LinearMap.IsSymmetric" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="LinearMap.isSymmetric_iff_sesqForm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L58-L62">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.isSymmetric_iff_sesqForm"><span class="name">LinearMap</span>.<span class="name">isSymmetric_iff_sesqForm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">T</span>.IsSymmetric</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">sesqFormOfInner</span>.IsSelfAdjoint</span> <span class="fn">T</span></span></span></div></div><p>An operator <code>T</code> on an inner product space is symmetric if and only if it is
+<code><a href="../../.././Mathlib/LinearAlgebra/SesquilinearForm.html#LinearMap.IsSelfAdjoint">LinearMap.IsSelfAdjoint</a></code> with respect to the sesquilinear form given by the inner product.</p></div></div><div class="decl" id="LinearMap.IsSymmetric.conj_inner_sym"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L66-L67">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.conj_inner_sym"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">conj_inner_sym</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">T</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x y : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Star/Basic.html#starRingEnd">starRingEnd</a> <span class="fn">𝕜</span>)</span> <span class="fn">(<a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">x</span>)</span> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">y</span>)</span> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="LinearMap.IsSymmetric.apply_clm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L69-L72">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.apply_clm"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">apply_clm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">(↑<span class="fn">T</span>)</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x y : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">x</span>)</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">x</span> <span class="fn">(<span class="fn">T</span> <span class="fn">y</span>)</span></span></span></div></div></div></div><div class="decl" id="LinearMap.IsSymmetric.zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L74-L76">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.zero"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric">LinearMap.IsSymmetric</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="LinearMap.isSymmetric_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L78-L78">source</a></div><div class="attributes">@[deprecated LinearMap.IsSymmetric.zero]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.isSymmetric_zero"><span class="name">LinearMap</span>.<span class="name">isSymmetric_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric">LinearMap.IsSymmetric</a> <span class="fn">0</span></span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.zero">LinearMap.IsSymmetric.zero</a></code>.</p></div></div><div class="decl" id="LinearMap.IsSymmetric.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L80-L81">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.id"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">LinearMap.id</span>.IsSymmetric</span></div></div></div></div><div class="decl" id="LinearMap.isSymmetric_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L83-L83">source</a></div><div class="attributes">@[deprecated LinearMap.IsSymmetric.id]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.isSymmetric_id"><span class="name">LinearMap</span>.<span class="name">isSymmetric_id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">LinearMap.id</span>.IsSymmetric</span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.id">LinearMap.IsSymmetric.id</a></code>.</p></div></div><div class="decl" id="LinearMap.IsSymmetric.add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L85-L90">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.add"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T S : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">T</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn">S</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">T</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">S</span>)</span>.IsSymmetric</span></div></div></div></div><div class="decl" id="LinearMap.IsSymmetric.sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L92-L97">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.sub"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T S : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">T</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn">S</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">T</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">S</span>)</span>.IsSymmetric</span></div></div></div></div><div class="decl" id="LinearMap.IsSymmetric.smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L99-L103">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.smul"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Star/Basic.html#starRingEnd">starRingEnd</a> <span class="fn">𝕜</span>)</span> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">T</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">T</span>)</span>.IsSymmetric</span></div></div></div></div><div class="decl" id="LinearMap.IsSymmetric.mul_of_commute"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L105-L108">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.mul_of_commute"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">mul_of_commute</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><span class="fn">S</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">T</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hST : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">S</span> <span class="fn">T</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">S</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">T</span>)</span>.IsSymmetric</span></div></div></div></div><div class="decl" id="LinearMap.IsSymmetric.pow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L110-L114">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.pow"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">pow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">T</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">T</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span>.IsSymmetric</span></div></div></div></div><div class="decl" id="LinearMap.IsSymmetric.coe_reApplyInnerSelf_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L116-L123">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.coe_reApplyInnerSelf_apply"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">coe_reApplyInnerSelf_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">(↑<span class="fn">T</span>)</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn"><span class="fn">T</span>.reApplyInnerSelf</span> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">x</span>)</span> <span class="fn">x</span></span></span></div></div><p>For a symmetric operator <code>T</code>, the function <code>fun x ↦ ⟪T x, x⟫</code> is real-valued.</p></div></div><div class="decl" id="LinearMap.IsSymmetric.restrict_invariant"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L125-L128">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.restrict_invariant"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">restrict_invariant</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">T</span>.IsSymmetric</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Defs.html#Submodule">Submodule</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hV : <span class="fn">∀ <span class="fn">v</span> ∈ <span class="fn">V</span>, <span class="fn"><span class="fn"><span class="fn">T</span> <span class="fn">v</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">V</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">T</span>.restrict</span> <span class="fn">hV</span>)</span>.IsSymmetric</span></div></div><p>If a symmetric operator preserves a submodule, its restriction to that submodule is
+symmetric.</p></div></div><div class="decl" id="LinearMap.IsSymmetric.restrictScalars"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L130-L134">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.restrictScalars"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">restrictScalars</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">T</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">↑<a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span> <span class="fn">T</span>)</span>.IsSymmetric</span></div></div></div></div><div class="decl" id="LinearMap.isSymmetric_iff_inner_map_self_real"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L142-L158">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.isSymmetric_iff_inner_map_self_real"><span class="name">LinearMap</span>.<span class="name">isSymmetric_iff_inner_map_self_real</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(T : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">T</span>.IsSymmetric</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">v</span> : <span class="fn">V</span>), <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Star/Basic.html#starRingEnd">starRingEnd</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a>)</span> <span class="fn">(<a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">v</span>)</span> <span class="fn">v</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">v</span>)</span> <span class="fn">v</span></span></span></span></span></div></div><p>A linear operator on a complex inner product space is symmetric precisely when
+<code>⟪T v, v⟫_ℂ</code> is real for all v.</p></div></div><div class="decl" id="LinearMap.IsSymmetric.inner_map_polarization"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L162-L181">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.inner_map_polarization"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">inner_map_polarization</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">T</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x y : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">x</span>)</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span>)</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span>)</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">RCLike.I</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">RCLike.I</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span>)</span>)</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">RCLike.I</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span>)</span></span></span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a>       <span class="fn"><span class="fn">RCLike.I</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">RCLike.I</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span>)</span>)</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">RCLike.I</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span>)</span></span></span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a>     <span class="fn">4</span></span></span></div></div><p>Polarization identity for symmetric linear maps.
+See <code><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#inner_map_polarization">inner_map_polarization</a></code> for the complex version without the symmetric assumption.</p></div></div><div class="decl" id="LinearMap.IsSymmetric.continuous"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L196-L211">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.continuous"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">continuous</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">T</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">⇑<span class="fn">T</span></span></span></div></div><p>The <strong>Hellinger--Toeplitz theorem</strong>: if a symmetric operator is defined on a complete space,
+then it is automatically continuous.</p></div></div><div class="decl" id="LinearMap.IsSymmetric.inner_map_self_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/04044ff3f96e5c4a520922b00450ef0dbef6e4e8/Mathlib/Analysis/InnerProductSpace/Symmetric.lean#L213-L221">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/InnerProductSpace/Symmetric.html#LinearMap.IsSymmetric.inner_map_self_eq_zero"><span class="name">LinearMap</span>.<span class="name">IsSymmetric</span>.<span class="name">inner_map_self_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hT : <span class="fn"><span class="fn">T</span>.IsSymmetric</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(∀ (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> <span class="fn">(<span class="fn">T</span> <span class="fn">x</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">T</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div><p>A symmetric linear map <code>T</code> is zero if and only if <code>⟪T x, x⟫_ℝ = 0</code> for all <code>x</code>.
+See <code><a href="../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#inner_map_self_eq_zero">inner_map_self_eq_zero</a></code> for the complex version without the symmetric assumption.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
