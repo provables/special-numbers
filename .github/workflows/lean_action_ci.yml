@@ -28,6 +28,14 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v30
 
+      - name: Cache build outputs
+        uses: actions/cache@v3
+        with:
+          path: docbuild/.lake/build/doc
+          key: ${{ runner.os }}-website-cache-${{ hashFiles('flake.nix', 'flake.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-website-cache-
+
       # Build the static website using the Nix flake
       - name: Build docs
         run: nix develop -c task build-docs
