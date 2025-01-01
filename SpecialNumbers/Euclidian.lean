@@ -14,6 +14,9 @@ This file introduces the Euclid numbers as defined in [knuth1989concrete].
 - Co-primality of Euclid numbers.
 - Explicit formula.
 
+## References
+
+* [Concrete Mathematics][knuth1989concrete]
 -/
 
 /--
