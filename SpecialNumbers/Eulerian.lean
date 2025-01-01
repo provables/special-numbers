@@ -61,13 +61,13 @@ theorem eulerian_of_succ_n_n (n : ℕ) : eulerian (n + 1) n = 1 := by
       apply eulerian_of_n_succ_n
       repeat omega
 
-lemma bar [NonAssocRing S] (r s : S) (a : ℕ) : (a • r) * s = r * (a • s) := by
+lemma smul_mul_eq [NonAssocRing S] (r s : S) (a : ℕ) : (a • r) * s = r * (a • s) := by
   rw [mul_smul_comm]
   exact smul_mul_assoc a r s
 
 variable [NonAssocRing R] [Pow R ℕ] [BinomialRing R] [NatPowAssoc R]
 
-lemma foo (r : R) (n : ℕ) :
+lemma succ_mul_choose_eq (r : R) (n : ℕ) :
     (n + 1) • choose (r + 1) (n + 1) = (r + 1) * choose r n := by
   suffices h : (n + 1).factorial • choose (r + 1) (n + 1) = n.factorial • (r + 1) * choose r n by
     rw [Nat.factorial] at h
@@ -78,5 +78,5 @@ lemma foo (r : R) (n : ℕ) :
     exact Nat.factorial_ne_zero n
   rw [<- descPochhammer_eq_factorial_smul_choose]
   simp only [descPochhammer]
-  rw [smeval_mul, smeval_X, smeval_comp, bar]
-  simp [descPochhammer_eq_factorial_smul_choose]
+  rw [smeval_mul, smeval_X, smeval_comp, smul_mul_eq]
+  simp [mul_smul_comm, descPochhammer_eq_factorial_smul_choose]
