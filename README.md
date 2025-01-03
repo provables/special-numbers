@@ -2,6 +2,8 @@
 
 Formalization of Chapter 6, Special Numbers, of Concrete Mathematics.
 
+See the [auto-generated documentation](https://provables.github.io/special-numbers/).
+
 ## Usage
 
 The package includes a Nix flake that provides a development environment with all

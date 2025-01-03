@@ -7,6 +7,14 @@ import Mathlib.Order.Bounds.Basic
 # Euclid Numbers
 
 This file introduces the Euclid numbers as defined in [knuth1989concrete].
+This is sequence [A129871](https://oeis.org/A129871) in [oeis]
+
+## Implementation notes
+
+The reference [knuth1989concrete] names the sequence $(e_n)_{n\ge 1}$ as
+*Euclid numbers*, while [oeis] names it
+$(e_n)_{n\ge 0}$ as *Sylvester's sequence*. We chose to follow
+the notation from [knuth1989concrete].
 
 ## Main results
 
@@ -17,6 +25,7 @@ This file introduces the Euclid numbers as defined in [knuth1989concrete].
 ## References
 
 * [Concrete Mathematics][knuth1989concrete]
+* [The On-Line Encyclopedia of Integer Sequences][oeis]
 -/
 
 /--
