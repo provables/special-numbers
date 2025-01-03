@@ -5,4 +5,4 @@
   {"message":
    "stdout:\nWARNING: Failed to calculate equational lemmata for Mathlib.Tactic.ComputeDegree.getCongrLemma: (deterministic) timeout at `whnf`, maximum number of heartbeats (5000) has been reached\nUse `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)\nWARNING: Failed to calculate equational lemmata for Mathlib.Tactic.ComputeDegree.dispatchLemma: tactic 'simp' failed, nested error:\n(deterministic) timeout at `whnf`, maximum number of heartbeats (5000) has been reached\nUse `set_option maxHeartbeats <num>` to set the limit.\nAdditional diagnostic information may be available using the `set_option diagnostics true` command.\n",
    "level": "info"}],
- "depHash": "2152881214931346936"}
+ "depHash": "5597177296203392482"}

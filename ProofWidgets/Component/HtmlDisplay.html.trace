@@ -5,4 +5,4 @@
   {"message":
    "stdout:\nWARNING: Failed to calculate equational lemmata for ProofWidgets.HtmlCommand.evalCommandMHtmlUnsafe: (kernel) invalid declaration, it uses unsafe declaration 'ProofWidgets.HtmlCommand.evalCommandMHtmlUnsafe'\n",
    "level": "info"}],
- "depHash": "6614114084599028036"}
+ "depHash": "4549180151493317150"}

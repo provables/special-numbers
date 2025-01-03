@@ -5,4 +5,4 @@
   {"message":
    "stdout:\nWARNING: Failed to calculate equational lemmata for ProofWidgets.Penrose.Diagram: (deterministic) timeout at `delab`, maximum number of heartbeats (5000) has been reached\nUse `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)\n",
    "level": "info"}],
- "depHash": "16099429537506329362"}
+ "depHash": "5815907552403459784"}

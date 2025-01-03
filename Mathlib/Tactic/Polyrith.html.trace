@@ -5,4 +5,4 @@
   {"message":
    "stdout:\nWARNING: Failed to calculate equational lemmata for Mathlib.Tactic.Polyrith.Poly.mul': (deterministic) timeout at `isDefEq`, maximum number of heartbeats (5000) has been reached\nUse `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)\nWARNING: Failed to calculate equational lemmata for Mathlib.Tactic.Polyrith.Poly.add': (deterministic) timeout at `whnf`, maximum number of heartbeats (5000) has been reached\nUse `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)\n",
    "level": "info"}],
- "depHash": "13752303774311616852"}
+ "depHash": "6126331423543462846"}

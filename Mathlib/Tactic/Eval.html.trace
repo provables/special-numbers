@@ -5,4 +5,4 @@
   {"message":
    "stdout:\nWARNING: Failed to calculate equational lemmata for Mathlib.Meta.elabEvalExpr: (kernel) invalid declaration, it uses unsafe declaration 'Mathlib.Meta.elabEvalExpr'\n",
    "level": "info"}],
- "depHash": "3564849366530113249"}
+ "depHash": "2406395844516399563"}

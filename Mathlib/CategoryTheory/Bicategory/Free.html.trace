@@ -5,4 +5,4 @@
   {"message":
    "stdout:\nWARNING: Failed to calculate equational lemmata for CategoryTheory.FreeBicategory.liftHom₂: (deterministic) timeout at `whnf`, maximum number of heartbeats (5000) has been reached\nUse `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)\n",
    "level": "info"}],
- "depHash": "1116841584339355526"}
+ "depHash": "5440809979136236940"}

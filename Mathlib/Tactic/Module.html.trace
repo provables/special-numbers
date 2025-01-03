@@ -5,4 +5,4 @@
   {"message":
    "stdout:\nWARNING: Failed to calculate equational lemmata for Mathlib.Tactic.Module.qNF.mkAddProof: tactic 'simp' failed, nested error:\n(deterministic) timeout at `isDefEq`, maximum number of heartbeats (5000) has been reached\nUse `set_option maxHeartbeats <num>` to set the limit.\nAdditional diagnostic information may be available using the `set_option diagnostics true` command.\nWARNING: Failed to calculate equational lemmata for Mathlib.Tactic.Module.qNF.mkSubProof: tactic 'simp' failed, nested error:\n(deterministic) timeout at `isDefEq`, maximum number of heartbeats (5000) has been reached\nUse `set_option maxHeartbeats <num>` to set the limit.\nAdditional diagnostic information may be available using the `set_option diagnostics true` command.\n",
    "level": "info"}],
- "depHash": "10634570293858131204"}
+ "depHash": "5306691362123947758"}

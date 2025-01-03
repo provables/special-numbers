@@ -5,4 +5,4 @@
   {"message":
    "stdout:\nWARNING: Failed to calculate equational lemmata for ToAdditive.nameDict: (deterministic) timeout at `whnf`, maximum number of heartbeats (5000) has been reached\nUse `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)\nWARNING: Failed to calculate equational lemmata for ToAdditive.additiveTestUnsafe: (kernel) invalid declaration, it uses unsafe declaration 'ToAdditive.additiveTestUnsafe'\nWARNING: Failed to calculate equational lemmata for ToAdditive.additiveTestUnsafe.visit: (kernel) invalid declaration, it uses unsafe declaration 'Lean.PtrSet'\nWARNING: Failed to calculate equational lemmata for ToAdditive.fixAbbreviation: (deterministic) timeout at `whnf`, maximum number of heartbeats (5000) has been reached\nUse `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)\n",
    "level": "info"}],
- "depHash": "1981825339970504045"}
+ "depHash": "428425771927095607"}
