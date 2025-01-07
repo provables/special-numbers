@@ -124,12 +124,6 @@ theorem euclid_increasing : StrictMono euclid := by
       _ > euclid n := by linarith
 
 /--
-Euclid numbers form a `Monotone` sequence.
--/
-theorem euclid_monotone : Monotone euclid :=
-  monotone_nat_of_le_succ (fun _ => Nat.le_of_succ_le euclid_increasing)
-
-/--
 $e_n \equiv 1\ (\mathrm{mod}~e_m)$, when $0 < m < n$.
 -/
 theorem euclid_m_n_mod_one {m n : ℕ} (h1 : m < n) (h2 : 0 < m) :
