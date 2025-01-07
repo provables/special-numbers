@@ -145,11 +145,12 @@ theorem euclid_m_n_mod_one {m n : ℕ} (h1 : m < n) (h2 : 0 < m) :
       exact Nat.mod_eq_of_lt (euclid_gt_one (by linarith))
     · linarith
 
-private lemma euclid_rel_prime_lt {m n : ℕ} (h : m < n) :
-    (euclid m).gcd (euclid n) = 1 := by
+private lemma euclid_coprime_lt {m n : ℕ} (h : m < n) :
+    Nat.Coprime (euclid m) (euclid n) := by
   by_cases c : m = 0
   · simp [c]
-  · rw [Nat.gcd_rec, euclid_m_n_mod_one]
+  · simp [Nat.Coprime]
+    rw [Nat.gcd_rec, euclid_m_n_mod_one]
     · simp
     · linarith
     · omega
@@ -157,12 +158,10 @@ private lemma euclid_rel_prime_lt {m n : ℕ} (h : m < n) :
 /--
 The Euclid numbers are co-prime: $\gcd(e_n, e_m) = 1$, for $n\neq m$.
 -/
-theorem euclid_rel_prime {m n : ℕ} (h : m ≠ n) :
-    (euclid m).gcd (euclid n) = 1 := by
+theorem euclid_rel_prime {m n : ℕ} (h : m ≠ n) : Nat.Coprime (euclid m) (euclid n) := by
   by_cases c : m < n
-  · exact euclid_rel_prime_lt c
-  · rw [Nat.gcd_comm]
-    exact euclid_rel_prime_lt (by omega)
+  · exact euclid_coprime_lt c
+  · exact Nat.coprime_comm.mp <| euclid_coprime_lt <| by omega
 
 /--
 The constant in the explicit formula for the Euclid numbers comes from
