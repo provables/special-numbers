@@ -112,14 +112,15 @@ theorem euclid_gt_one {n : ℕ} (h : n ≥ 1) : 1 < euclid n := by
 /--
 The Euclid numbers are strictly increasing: $e_n < e_{n+1}$, for all $n\in\mathbb{N}$.
 -/
-theorem euclid_increasing {n : ℕ} : euclid n < euclid (n + 1) := by
+theorem euclid_increasing : StrictMono euclid := by
+  apply strictMono_nat_of_lt_succ
+  intro n
   by_cases c : n = 0
   · simp [c, euclid]
-  · have h2 : euclid n - 1 ≥ 1 := Nat.le_sub_one_of_lt (euclid_gt_one (by omega))
+  · have h : euclid n - 1 ≥ 1 := Nat.le_sub_one_of_lt <| euclid_gt_one <| by omega
     calc
-      euclid (n + 1) = (euclid n) * (euclid n) - euclid n + 1 := by simp [euclid, pow_two]
-      _ = (euclid n) * (euclid n - 1) + 1 := by rw [Nat.mul_sub_one]
-      _ ≥ (euclid n) * 1 + 1 := Nat.add_le_add_right (Nat.mul_le_mul_left _ h2) 1
+      euclid (n + 1) = (euclid n) * (euclid n - 1) + 1 := by simp [euclid, pow_two, Nat.mul_sub_one]
+      _ ≥ (euclid n) * 1 + 1 := Nat.add_le_add_right (Nat.mul_le_mul_left _ h) _
       _ > euclid n := by linarith
 
 /--
