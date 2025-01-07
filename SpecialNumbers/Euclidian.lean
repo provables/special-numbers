@@ -92,6 +92,8 @@ theorem euclid_gt_zero {n : ℕ} : 0 < euclid n := by
   · linarith
   · simp [Nat.pow_two]
 
+theorem euclid_ne_zero {n : ℕ} : NeZero (euclid n) := NeZero.of_pos euclid_gt_zero
+
 /--
 Euclid numbers are $\ge 1$.
 -/
