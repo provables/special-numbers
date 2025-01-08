@@ -28,6 +28,8 @@ the notation from [knuth1989concrete].
 * [The On-Line Encyclopedia of Integer Sequences][oeis]
 -/
 
+namespace Euclid
+
 /--
 The sequence of Euclid numbers $(e_n)_{n\ge 0}$.
 
@@ -58,7 +60,7 @@ $$
 e_{n+1} = \prod_{i=1}^n e_i + 1.
 $$
 -/
-theorem euclid_eq_prod_euclid {n : ℕ} :
+theorem euclid_prod_finset_add_one {n : ℕ} :
     euclid (n + 1) = ∏ x ∈ Finset.Icc 1 n, euclid x + 1 := by
   induction' n with n ih
   · simp
@@ -76,10 +78,10 @@ $$
 e_n = \prod_{i=1}^{n-1} e_i + 1.
 $$
 -/
-theorem euclid_of_n_eq_prod_euclid {n : ℕ} (h : n ≥ 1) :
+theorem euclid_prod_finset_add_one_of_pos {n : ℕ} (h : n ≥ 1) :
     euclid n = ∏ x∈Finset.Icc 1 (n - 1), euclid x + 1 := by
   have c : n = (n - 1) + 1 := by omega
-  rw [c, euclid_eq_prod_euclid]
+  rw [c, euclid_prod_finset_add_one]
   simp
 
 /--
@@ -104,20 +106,20 @@ theorem euclid_ge_one {n : ℕ} : 1 ≤ euclid n := by
 /--
 Only $e_0 = 1$.
 -/
-theorem euclid_gt_one {n : ℕ} (h : n ≥ 1) : 1 < euclid n := by
+theorem euclid_gt_one_of_pos {n : ℕ} (h : n ≥ 1) : 1 < euclid n := by
   cases n
   · contradiction
-  · simp [euclid_eq_prod_euclid, euclid_gt_zero]
+  · simp [euclid_prod_finset_add_one, euclid_gt_zero]
 
 /--
 The Euclid numbers are strictly increasing: $e_n < e_{n+1}$, for all $n\in\mathbb{N}$.
 -/
-theorem euclid_increasing : StrictMono euclid := by
+theorem euclid_strictMono : StrictMono euclid := by
   apply strictMono_nat_of_lt_succ
   intro n
   by_cases c : n = 0
   · simp [c, euclid]
-  · have h : euclid n - 1 ≥ 1 := Nat.le_sub_one_of_lt <| euclid_gt_one <| by omega
+  · have h : euclid n - 1 ≥ 1 := Nat.le_sub_one_of_lt <| euclid_gt_one_of_pos <| by omega
     calc
       euclid (n + 1) = (euclid n) * (euclid n - 1) + 1 := by simp [euclid, pow_two, Nat.mul_sub_one]
       _ ≥ (euclid n) * 1 + 1 := Nat.add_le_add_right (Nat.mul_le_mul_left _ h) _
@@ -126,25 +128,25 @@ theorem euclid_increasing : StrictMono euclid := by
 /--
 $e_n \equiv 1\ (\mathrm{mod}~e_m)$, when $0 < m < n$.
 -/
-theorem euclid_m_n_mod_one {m n : ℕ} (h1 : m < n) (h2 : 0 < m) :
+theorem euclid_mod_eq_one {m n : ℕ} (h1 : m < n) (h2 : 0 < m) :
     euclid n % euclid m = 1 := by
   by_cases c : n=0
   · omega
-  · rw [euclid_of_n_eq_prod_euclid]
+  · rw [euclid_prod_finset_add_one_of_pos]
     · have d : (euclid m) ∣  ∏ x ∈ Finset.Icc 1 (n-1), euclid x := by
         apply Finset.dvd_prod_of_mem
         exact Finset.mem_Icc.mpr (by omega)
       rw [Nat.add_mod]
       simp [Nat.dvd_iff_mod_eq_zero.mp d]
-      exact Nat.mod_eq_of_lt (euclid_gt_one (by linarith))
+      exact Nat.mod_eq_of_lt (euclid_gt_one_of_pos (by linarith))
     · linarith
 
-private lemma euclid_coprime_lt {m n : ℕ} (h : m < n) :
+private lemma euclid_coprime_of_lt {m n : ℕ} (h : m < n) :
     Nat.Coprime (euclid m) (euclid n) := by
   by_cases c : m = 0
   · simp [c]
   · simp [Nat.Coprime]
-    rw [Nat.gcd_rec, euclid_m_n_mod_one]
+    rw [Nat.gcd_rec, euclid_mod_eq_one]
     · simp
     · linarith
     · omega
@@ -152,22 +154,20 @@ private lemma euclid_coprime_lt {m n : ℕ} (h : m < n) :
 /--
 The Euclid numbers are co-prime: $\gcd(e_n, e_m) = 1$, for $n\neq m$.
 -/
-theorem euclid_rel_prime {m n : ℕ} (h : m ≠ n) : Nat.Coprime (euclid m) (euclid n) := by
+theorem euclid_coprime {m n : ℕ} (h : m ≠ n) : Nat.Coprime (euclid m) (euclid n) := by
   by_cases c : m < n
-  · exact euclid_coprime_lt c
-  · exact Nat.coprime_comm.mp <| euclid_coprime_lt <| by omega
+  · exact euclid_coprime_of_lt c
+  · exact Nat.coprime_comm.mp <| euclid_coprime_of_lt <| by omega
 
-/--
-The constant in the explicit formula for the Euclid numbers comes from
-the limit of the sequence $\frac{1}{2^n}\log(e_n - \frac{1}{2})$.
--/
-noncomputable def pl_euc_m (n : ℕ) : ℝ := 1 / 2 ^ n * Real.log (euclid n - 1 / 2)
+-- An auxiliary sequence that converges to the constant in the explicit formula for
+-- the Euclid numbers.
+private noncomputable def logEuclidSubHalf (n : ℕ) : ℝ := 1 / 2 ^ n * Real.log (euclid n - 1 / 2)
 
-theorem pl_euc_m_monotone : Monotone pl_euc_m := by
+private theorem logEuclidSubHalf_monotone : Monotone logEuclidSubHalf := by
   have euclid_ge_real_one (m : ℕ) : (1 : ℝ) ≤ euclid m := Nat.one_le_cast.mpr euclid_ge_one
   refine monotone_nat_of_le_succ ?ha
   intro m
-  simp [pl_euc_m]
+  simp [logEuclidSubHalf]
   refine le_of_mul_le_mul_left ?h1 ((by simp) : (0 : ℝ)<(2 ^ (m + 1)))
   simp
   rw [← mul_assoc, ← pow_sub₀ 2 (by linarith) (by linarith), Nat.add_sub_self_left m 1,
@@ -189,15 +189,17 @@ theorem pl_euc_m_monotone : Monotone pl_euc_m := by
           _ ≤ ((euclid (m + 1 + 1)) : ℝ) - 2⁻¹ := by linarith
   · linarith [euclid_ge_real_one m]
 
-private noncomputable def pl_euc_p : ℕ → ℝ
+-- An auxiliary sequence that bounds `logEuclidSubHalf` from above and helps proving
+-- its convergence.
+private noncomputable def logEuclidAddHalf : ℕ → ℝ
   | 0 => 1
   | n => 1 / 2 ^ n * Real.log (euclid n + 1 / 2)
 
-private theorem pl_euc_p_antitone : StrictAnti pl_euc_p := by
+private theorem logEuclidAddHalf_strictAnti : StrictAnti logEuclidAddHalf := by
   have euclid_ge_real_one (m : ℕ) : (1 : ℝ) ≤ euclid m := Nat.one_le_cast.mpr euclid_ge_one
   refine strictAnti_nat_of_succ_lt ?ha
   intro m
-  simp [pl_euc_p]
+  simp [logEuclidAddHalf]
   split
   · simp
     rw [<- Real.log_rpow]
@@ -237,8 +239,9 @@ private theorem pl_euc_p_antitone : StrictAnti pl_euc_p := by
               linarith [euclid_ge_real_one m]
     · linarith [euclid_ge_real_one m]
 
-private theorem pl_euc_m_lt_pl_euc_p {n : ℕ} : pl_euc_m n < pl_euc_p n := by
-  simp [pl_euc_m, pl_euc_p]
+private theorem logEuclidSubHalf_lt_logEuclidAddHalf {n : ℕ} :
+    logEuclidSubHalf n < logEuclidAddHalf n := by
+  simp [logEuclidSubHalf, logEuclidAddHalf]
   cases n
   case zero =>
     norm_num
@@ -253,14 +256,14 @@ private theorem pl_euc_m_lt_pl_euc_p {n : ℕ} : pl_euc_m n < pl_euc_p n := by
     · exact add_pos_of_nonneg_of_pos (by linarith) (by norm_num)
     · exact (add_lt_add_iff_left ((euclid (m + 1)) : ℝ)).mpr (by norm_num)
 
-private theorem pl_euc_m_bounded_above : BddAbove (Set.range pl_euc_m) := by
+private theorem bddAbove_logEuclidSubHalf : BddAbove (Set.range logEuclidSubHalf) := by
   refine bddAbove_def.mpr ?_
-  use pl_euc_p 0
+  use logEuclidAddHalf 0
   intro y h
   obtain ⟨ z, hz ⟩ := h
   rw [<- hz]
-  have d : pl_euc_p z ≤ pl_euc_p 0 := StrictAnti.antitone pl_euc_p_antitone (by linarith)
-  linarith [@pl_euc_m_lt_pl_euc_p z]
+  have d : logEuclidAddHalf z ≤ logEuclidAddHalf 0 := StrictAnti.antitone logEuclidAddHalf_strictAnti (by linarith)
+  linarith [@logEuclidSubHalf_lt_logEuclidAddHalf z]
 
 open Filter
 
@@ -268,37 +271,29 @@ open Filter
 The sequence `pl_euc_m` converges to $\log E$, where $E$ is the contant in the
 explicit `euclid_formula`.
 -/
-theorem pl_euc_m_converges : ∃ l, Tendsto pl_euc_m atTop (nhds l) := by
-  have h2 : ¬Tendsto pl_euc_m atTop atTop := by
+private theorem logEuclidSubHalf_tendsto : ∃ l, Tendsto logEuclidSubHalf atTop (nhds l) := by
+  have h2 : ¬Tendsto logEuclidSubHalf atTop atTop := by
     by_contra h
     let c := unbounded_of_tendsto_atTop h
-    let d := pl_euc_m_bounded_above
+    let d := bddAbove_logEuclidSubHalf
     contradiction
-  exact Or.resolve_left (tendsto_of_monotone pl_euc_m_monotone) h2
+  exact Or.resolve_left (tendsto_of_monotone logEuclidSubHalf_monotone) h2
 
 
 /--
 The constant $\log E$ in the explicit formula for the Euclid numbers
 `euclid_formula`.
 -/
-noncomputable def euclid_log_constant : ℝ := Exists.choose pl_euc_m_converges
+private noncomputable def euclidLogConstant : ℝ := Exists.choose logEuclidSubHalf_tendsto
 
 /--
 Constant $E$ in the explicit `euclid_formula`.
 -/
-noncomputable def euclid_constant : ℝ := Real.exp euclid_log_constant
+noncomputable def euclidConstant : ℝ := Real.exp euclidLogConstant
 
-@[simp]
-theorem exp_of_log_const_eq_const : Real.exp euclid_log_constant = euclid_constant := by
-  simp [euclid_log_constant, euclid_constant]
-
-@[simp]
-theorem log_of_const_eq_log_const : Real.log euclid_constant = euclid_log_constant := by
-  simp [euclid_log_constant, euclid_constant]
-
-theorem pl_euc_m_tendsto_euclid_log_constant : Tendsto pl_euc_m atTop (nhds euclid_log_constant) := by
-  simp [euclid_log_constant]
-  apply Exists.choose_spec pl_euc_m_converges
+private theorem logEuclidSubHalf_tendsto_euclidLogConstant : Tendsto logEuclidSubHalf atTop (nhds euclidLogConstant) := by
+  simp [euclidLogConstant]
+  apply Exists.choose_spec logEuclidSubHalf_tendsto
 
 /--
 The sequence `pl_euc_m` is bounded above by `euclid_log_constant`:
@@ -307,69 +302,68 @@ $$
 $$
 for all $n\in\mathbb{N}$.
 -/
-theorem pl_euc_m_le_euclid_log_constant {n : ℕ} : pl_euc_m n ≤ euclid_log_constant := by
-  exact Monotone.ge_of_tendsto pl_euc_m_monotone pl_euc_m_tendsto_euclid_log_constant n
+private theorem logEuclidSubHalf_le_euclidLogConstant {n : ℕ} : logEuclidSubHalf n ≤ euclidLogConstant := by
+  exact Monotone.ge_of_tendsto logEuclidSubHalf_monotone logEuclidSubHalf_tendsto_euclidLogConstant n
 
-private theorem euclid_log_constant_le_pl_euc_p {n : ℕ} : euclid_log_constant < pl_euc_p n := by
-  have h : pl_euc_p (n + 1) ∈ upperBounds (Set.range pl_euc_m) := by
+private theorem euclidLogConstant_lt_logEuclidAddHalf {n : ℕ} : euclidLogConstant < logEuclidAddHalf n := by
+  have h : logEuclidAddHalf (n + 1) ∈ upperBounds (Set.range logEuclidSubHalf) := by
     refine mem_upperBounds.mpr ?h
     intros x h
     obtain ⟨ m, h2 ⟩ := h
     rw [<- h2]
     let z := max m (n + 1)
-    have a1 : pl_euc_m m ≤ pl_euc_m z := pl_euc_m_monotone (by omega)
-    have a2 : pl_euc_p z ≤ pl_euc_p (n + 1) := StrictAnti.antitone pl_euc_p_antitone (by omega)
-    have a3 : pl_euc_m z < pl_euc_p z := pl_euc_m_lt_pl_euc_p
+    have a1 : logEuclidSubHalf m ≤ logEuclidSubHalf z := logEuclidSubHalf_monotone (by omega)
+    have a2 : logEuclidAddHalf z ≤ logEuclidAddHalf (n + 1) := StrictAnti.antitone logEuclidAddHalf_strictAnti (by omega)
+    have a3 : logEuclidSubHalf z < logEuclidAddHalf z := logEuclidSubHalf_lt_logEuclidAddHalf
     linarith
-  have c : euclid_log_constant ≤ pl_euc_p (n + 1) := (isLUB_le_iff
-    (isLUB_of_tendsto_atTop pl_euc_m_monotone pl_euc_m_tendsto_euclid_log_constant)).mpr h
-  have d : pl_euc_p (n + 1) < pl_euc_p n := pl_euc_p_antitone (by linarith)
+  have c : euclidLogConstant ≤ logEuclidAddHalf (n + 1) := (isLUB_le_iff
+    (isLUB_of_tendsto_atTop logEuclidSubHalf_monotone logEuclidSubHalf_tendsto_euclidLogConstant)).mpr h
+  have d : logEuclidAddHalf (n + 1) < logEuclidAddHalf n := logEuclidAddHalf_strictAnti (by linarith)
   linarith
 
 /--
 $0 < E$.
 -/
-theorem euclid_constant_pos : 0 < euclid_constant := Real.exp_pos euclid_log_constant
+theorem euclidConstant_pos : 0 < euclidConstant := Real.exp_pos euclidLogConstant
 
 /--
 $e_n \le E^{2^n} + \frac{1}{2}$ for all $n\in\mathbb{N}$.
 -/
-theorem euc_le_euclid_constant {n : ℕ} : euclid n ≤ euclid_constant ^ (2 ^ n) + 1 / 2 := by
+theorem euclid_le_constant_pow {n : ℕ} : euclid n ≤ euclidConstant ^ (2 ^ n) + 1 / 2 := by
   have euclid_ge_real_one (m : ℕ) : (1 : ℝ) ≤ euclid m := Nat.one_le_cast.mpr euclid_ge_one
   apply tsub_le_iff_right.mp
   refine (Real.log_le_log_iff ?ha ?hb).mp ?h
   · linarith [euclid_ge_real_one n]
-  · exact pow_pos euclid_constant_pos (2 ^ n)
+  · exact pow_pos euclidConstant_pos (2 ^ n)
   · rw [Real.log_pow]
     refine (div_le_iff₀' (by positivity)).mp ?h2
-    rw [log_of_const_eq_log_const]
-    push_cast
-    have c : pl_euc_m n ≤ euclid_log_constant := by
-      exact pl_euc_m_le_euclid_log_constant
+    simp [euclidConstant]
+    have c : logEuclidSubHalf n ≤ euclidLogConstant := by
+      exact logEuclidSubHalf_le_euclidLogConstant
     rw [div_eq_inv_mul]
-    simp [pl_euc_m] at *
+    simp [logEuclidSubHalf] at *
     exact c
 
 /--
 $E^{2^n} + \frac{1}{2} < e_n + 1$ for all $n\in\mathbb{N}$.
 -/
-theorem euclid_constant_lt_euc {n : ℕ} : euclid_constant ^ (2 ^ n) + 1 / 2 < euclid n + 1 := by
+theorem constant_pow_lt_euclid_add_one {n : ℕ} : euclidConstant ^ (2 ^ n) + 1 / 2 < euclid n + 1 := by
   have euclid_ge_real_one (m : ℕ) : (1 : ℝ) ≤ euclid m := Nat.one_le_cast.mpr euclid_ge_one
   apply lt_tsub_iff_right.mp
   rw [add_sub_assoc]
   norm_num
   refine (Real.log_lt_log_iff ?ha ?hb).mp ?h
-  · exact pow_pos euclid_constant_pos (2 ^ n)
+  · exact pow_pos euclidConstant_pos (2 ^ n)
   · linarith [euclid_ge_real_one n]
   · norm_num
     refine (lt_div_iff₀' (by positivity)).mp ?he
     rw [div_eq_inv_mul]
-    simp
-    let c := @euclid_log_constant_le_pl_euc_p n
-    simp [pl_euc_p] at c
+    simp [euclidConstant]
+    let c := @euclidLogConstant_lt_logEuclidAddHalf n
+    simp [logEuclidAddHalf] at c
     split at c
-    · let d := @euclid_log_constant_le_pl_euc_p 2
-      simp [pl_euc_p] at d
+    · let d := @euclidLogConstant_lt_logEuclidAddHalf 2
+      simp [logEuclidAddHalf] at d
       norm_num at *
       have e : (1 / 4) * Real.log (7 / 2) < Real.log (3 / 2) := by
         rw [<- Real.log_rpow]
@@ -384,8 +378,10 @@ theorem euclid_constant_lt_euc {n : ℕ} : euclid_constant ^ (2 ^ n) + 1 / 2 < e
 /--
 $e_n = \lfloor E^{2^n} + \frac{1}{2}\rfloor$ for all $n\in\mathbb{N}$.
 -/
-theorem euclid_formula {n : ℕ} : euclid n = ⌊euclid_constant ^ (2 ^ n) + 1 / 2⌋₊ := by
+theorem euclid_eq_floor_constant_pow {n : ℕ} : euclid n = ⌊euclidConstant ^ (2 ^ n) + 1 / 2⌋₊ := by
   symm
   refine (Nat.floor_eq_iff ?h).mpr ?hb
-  · linarith [pow_pos euclid_constant_pos (2 ^ n)]
-  · exact ⟨ euc_le_euclid_constant, euclid_constant_lt_euc ⟩
+  · linarith [pow_pos euclidConstant_pos (2 ^ n)]
+  · exact ⟨ euclid_le_constant_pow, constant_pow_lt_euclid_add_one ⟩
+
+end Euclid
