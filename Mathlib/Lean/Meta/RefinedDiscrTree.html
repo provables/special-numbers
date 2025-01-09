@@ -1,0 +1,195 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Lean.Meta.RefinedDiscrTree</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Lean.Meta.RefinedDiscrTree";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span></h2><form id="search_form"><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/9837ca9d65d9de6fad1ef4381750ca688774e608/Mathlib/Lean/Meta/RefinedDiscrTree.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html">Mathlib.Lean.Meta.RefinedDiscrTree.Basic</a></li><li><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Encode.html">Mathlib.Lean.Meta.RefinedDiscrTree.Encode</a></li><li><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Pi.html">Mathlib.Lean.Meta.RefinedDiscrTree.Pi</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Lean.Meta.RefinedDiscrTree" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Lean.Meta.RefinedDiscrTree.insertInTrie"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">insertInTrie</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Meta.RefinedDiscrTree.insertInRefinedDiscrTree"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">insertInRefinedDiscrTree</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Meta.RefinedDiscrTree.insertDTExpr"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">insertDTExpr</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Meta.RefinedDiscrTree.insert"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">insert</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Meta.RefinedDiscrTree.insertEqn"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">insertEqn</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Meta.RefinedDiscrTree.Trie.mapArraysM"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">Trie</span>.<span class="name">mapArraysM</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Meta.RefinedDiscrTree.mapArraysM"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">mapArraysM</span></a></div><div class="nav_link"><a class="break_within" href="#Lean.Meta.RefinedDiscrTree.mapArrays"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">mapArrays</span></a></div></nav><main>
+<div class="mod_doc"><p>We define discrimination trees for the purpose of unifying local expressions with library results.</p><p>This structure is based on <code><a href="../../.././Lean/Meta/DiscrTreeTypes.html#Lean.Meta.DiscrTree">Lean.Meta.DiscrTree</a></code>.
+I document here what features are not in the original:</p><ul>
+<li><p>The keys <code>Key.lam</code>, <code>Key.forall</code> and <code>Key.bvar</code> have been introduced in order to allow for
+matching under lambda and forall binders. <code>Key.lam</code> has arity 1 and indexes the body.
+<code>Key.forall</code> has arity 2 and indexes the domain and the body. The reason for not indexing the
+domain of a lambda expression is that it is usually already determined, for example in
+<code>∃ a : α, p</code>, which is <code>@Exists α fun a : α =&gt; p</code>, we don't want to index the domain <code>α</code> twice.
+In a forall expression it is necessary to index the domain, because in an implication <code>p → q</code>
+we need to index both <code>p</code> and <code>q</code>. <code>Key.bvar</code> works the same as <code>Key.fvar</code>, but stores the
+De Bruijn index to identify it.</p>
+<p>For example, this allows for more specific matching with the left hand side of
+<code>∑ i ∈ range n, i = n * (n - 1) / 2</code>, which is indexed by
+<code>[⟨Finset.sum, 5⟩, ⟨Nat, 0⟩, ⟨Nat, 0⟩, *0, ⟨Finset.Range, 1⟩, *1, λ, ⟨#0, 0⟩]</code>.</p>
+</li>
+<li><p>The key <code>Key.star</code> takes a <code><a href="../../.././Init/Prelude.html#Nat">Nat</a></code> identifier as an argument. For example,
+the library pattern <code>?a + ?a</code> is encoded as <code>[⟨HAdd.hAdd, 6⟩, *0, *0, *0, *1, *2, *2]</code>.
+<code>*0</code> corresponds to the type of <code>a</code>, <code>*1</code> to the <code><a href="../../.././Init/Prelude.html#HAdd">HAdd</a></code> instance, and <code>*2</code> to <code>a</code>.
+This means that it will only match an expression <code>x + y</code> if <code>x</code> is definitionally equal to <code>y</code>.
+The matching algorithm requires that the same stars from the discrimination tree match with
+the same patterns in the lookup expression, and similarly requires that the same metavariables
+form the lookup expression match with the same pattern in the discrimination tree.</p>
+</li>
+<li><p>The key <code>Key.opaque</code> has been introduced in order to index existential variables
+in lemmas like <code>Nat.exists_prime_and_dvd {n : ℕ} (hn : n ≠ 1) : ∃ p, Prime p ∧ p ∣ n</code>,
+where the part <code>Prime p</code> gets the pattern <code>[⟨Nat.Prime, 1⟩, ◾]</code>. (◾ represents <code>Key.opaque</code>)
+When matching, <code>Key.opaque</code> can only be matched by <code>Key.star</code>.</p>
+<p>Using the <code>WhnfCoreConfig</code> argument, it is possible to disable β-reduction and ζ-reduction.
+As a result, we may get a lambda expression applied to an argument or a let-expression.
+Since there is no support for indexing these, they will be indexed by <code>Key.opaque</code>.</p>
+</li>
+<li><p>We keep track of the matching score of a unification.
+This score represents the number of keys that had to be the same for the unification to succeed.
+For example, matching <code>(1 + 2) + 3</code> with <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#add_comm">add_comm</a></code> gives a score of 2,
+since the pattern of commutativity is [⟨HAdd.hAdd, 6⟩, *0, *0, *0, *1, *2, *3],
+so matching <code>⟨HAdd.hAdd, 6⟩</code> gives 1 point,
+and matching <code>*0</code> after its first appearance gives another point, but the third argument is an
+outParam, so this gets ignored. Similarly, matching it with <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#add_assoc">add_assoc</a></code> gives a score of 5.</p>
+</li>
+<li><p>Patterns that have the potential to be η-reduced are put into the <code>RefinedDiscrTree</code> under all
+possible reduced key sequences. This is for terms of the form <code>fun x =&gt; f (?m x₁ .. xₙ)</code>, where
+<code>?m</code> is a metavariable, and one of <code>x₁, .., xₙ</code> in <code>x</code>.
+For example, the pattern <code>Continuous fun y =&gt; Real.exp (f y)])</code> is indexed by
+both <code>[⟨Continuous, 5⟩, *0, ⟨Real, 0⟩, *1, *2, λ, ⟨Real.exp⟩, *3]</code>
+and  <code>[⟨Continuous, 5⟩, *0, ⟨Real, 0⟩, *1, *2, ⟨Real.exp⟩]</code>
+so that it also comes up if you search with <code>Continuous Real.exp</code>.
+Similarly, <code>Continuous fun x =&gt; f x + g x</code> is indexed by
+both <code>[⟨Continuous, 1⟩, λ, ⟨HAdd.hAdd, 6⟩, *0, *0, *0, *1, *2, *3]</code>
+and  <code>[⟨Continuous, 1⟩, ⟨HAdd.hAdd, 5⟩, *0, *0, *0, *1, *2]</code>.</p>
+</li>
+<li><p>For sub-expressions not at the root of the original expression we have some additional reductions:</p>
+<ul>
+<li>Any combination of <code>ofNat</code>, <code><a href="../../.././Init/Prelude.html#Nat.zero">Nat.zero</a></code>, <code><a href="../../.././Init/Prelude.html#Nat.succ">Nat.succ</a></code> and number literals
+is stored as just a number literal.</li>
+<li>The expression <code>fun a : α =&gt; a</code> is stored as <code>@id α</code>.<ul>
+<li>This makes lemmata such as <code>continuous_id'</code> redundant, which is the same as <code>continuous_id</code>,
+with <code><a href="../../.././Init/Prelude.html#id">id</a></code> replaced by <code>fun x =&gt; x</code>.</li>
+</ul>
+</li>
+<li>Any expressions involving <code>+</code>, <code>*</code>, <code>-</code>, <code>/</code> or <code>⁻¹</code> is normalized to not have a lambda
+in front and to always have the default amount of arguments.
+e.g. <code>(f + g) a</code> is stored as <code>f a + g a</code> and <code>fun x =&gt; f x + g x</code> is stored as <code>f + g</code>.<ul>
+<li>This makes lemmata such as <code>MeasureTheory.integral_integral_add'</code> redundant, which is the
+same as <code>MeasureTheory.integral_integral_add</code>, with <code>f a + g a</code> replaced by <code>(f + g) a</code></li>
+<li>it also means that a lemma like <code>Continuous.mul</code> can be stated as talking about <code>f * g</code>
+instead of <code>fun x =&gt; f x + g x</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><p>I have also made some changes in the implementation:</p><ul>
+<li>Instead of directly converting from <code>Expr</code> to <code><a href="../../.././Init/Prelude.html#Array">Array</a> Key</code> during insertion, and directly
+looking up from an <code>Expr</code> during lookup, I defined the intermediate structure <code>DTExpr</code>,
+which is a form of <code>Expr</code> that only contains information relevant for the discrimination tree.
+Each <code>Expr</code> is transformed into a <code>DTExpr</code> before insertion or lookup. For insertion there
+could be multiple <code>DTExpr</code> representations due to potential η-reductions as mentioned above.</li>
+</ul><p>TODO:</p><ul>
+<li><p>More thought could be put into the matching algorithm for non-trivial unifications.
+For example, when looking up the expression <code>?a + ?a</code> (for rewriting), there will only be
+results like <code>n + n = 2 * n</code> or <code>a + b = b + a</code>, but not like <code>n + 1 = n.succ</code>,
+even though this would still unify.</p>
+</li>
+<li><p>The reason why implicit arguments are not ignored by the discrimination tree is that they provide
+important type information. Because of this it seems more natural to index the types of
+expressions instead of indexing the implicit type arguments. Then each key would additionally
+index the type of that expression. So instead of indexing <code>?a + ?b</code> as
+<code>[⟨HAdd.hAdd, 6⟩, *0, *0, *0, *1, *2, *3]</code>, it would be indexed by something like
+<code>[(*0, ⟨HAdd.hAdd, 6⟩), _, _, _, _, (*0, *1), (*0, *2)]</code>.
+The advantage of this would be that there will be less duplicate indexing of types,
+because many functions index the types of their arguments and their return type
+with implicit arguments, meaning that types unnecessarily get indexed multiple times.
+This modification can be explored, but it could very well not be an improvement.</p>
+</li>
+</ul></div><div class="mod_doc"><h2 class="markdown-heading" id="Inserting-intro-a-RefinedDiscrTree">Inserting intro a RefinedDiscrTree <a class="hover-link" href="#Inserting-intro-a-RefinedDiscrTree">#</a></h2></div><div class="decl" id="Lean.Meta.RefinedDiscrTree.insertInTrie"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/9837ca9d65d9de6fad1ef4381750ca688774e608/Mathlib/Lean/Meta/RefinedDiscrTree.lean#L131-L151">source</a></div><div class="decl_header"><span class="decl_kind">partial def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree.html#Lean.Meta.RefinedDiscrTree.insertInTrie"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">insertInTrie</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(keys : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree.Key">Lean.Meta.RefinedDiscrTree.Key</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree.Trie">Lean.Meta.RefinedDiscrTree.Trie</a> <span class="fn">α</span></span> → <span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree.Trie">Lean.Meta.RefinedDiscrTree.Trie</a> <span class="fn">α</span></span></span></div></div><p>Insert the value <code>v</code> at index <code>keys : <a href="../../.././Init/Prelude.html#Array">Array</a> Key</code> in a <code>Trie</code>.</p></div></div><div class="decl" id="Lean.Meta.RefinedDiscrTree.insertInRefinedDiscrTree"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/9837ca9d65d9de6fad1ef4381750ca688774e608/Mathlib/Lean/Meta/RefinedDiscrTree.lean#L153-L166">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree.html#Lean.Meta.RefinedDiscrTree.insertInRefinedDiscrTree"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">insertInRefinedDiscrTree</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(d : <span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree">Lean.Meta.RefinedDiscrTree</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(keys : <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree.Key">Lean.Meta.RefinedDiscrTree.Key</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree">Lean.Meta.RefinedDiscrTree</a> <span class="fn">α</span></span></div></div><p>Insert the value <code>v</code> at index <code>keys : <a href="../../.././Init/Prelude.html#Array">Array</a> Key</code> in a <code>RefinedDiscrTree</code>.</p><p>Warning: to account for η-reduction, an entry may need to be added at multiple indexes,
+so it is recommended to use <code><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree.html#Lean.Meta.RefinedDiscrTree.insert">RefinedDiscrTree.insert</a></code> for insertion.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Meta.RefinedDiscrTree.insertInRefinedDiscrTree" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Meta.RefinedDiscrTree.insertDTExpr"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/9837ca9d65d9de6fad1ef4381750ca688774e608/Mathlib/Lean/Meta/RefinedDiscrTree.lean#L168-L173">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree.html#Lean.Meta.RefinedDiscrTree.insertDTExpr"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">insertDTExpr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(d : <span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree">Lean.Meta.RefinedDiscrTree</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Encode.html#Lean.Meta.RefinedDiscrTree.DTExpr">Lean.Meta.RefinedDiscrTree.DTExpr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree">Lean.Meta.RefinedDiscrTree</a> <span class="fn">α</span></span></div></div><p>Insert the value <code>v</code> at index <code>e : DTExpr</code> in a <code>RefinedDiscrTree</code>.</p><p>Warning: to account for η-reduction, an entry may need to be added at multiple indexes,
+so it is recommended to use <code><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree.html#Lean.Meta.RefinedDiscrTree.insert">RefinedDiscrTree.insert</a></code> for insertion.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">d</span>.insertDTExpr</span> <span class="fn">e</span> <span class="fn">v</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">d</span>.insertInRefinedDiscrTree</span> <span class="fn"><span class="fn">e</span>.flatten</span> <span class="fn">v</span></span></span></li></ul></details><details id="instances-for-list-Lean.Meta.RefinedDiscrTree.insertDTExpr" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Meta.RefinedDiscrTree.insert"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/9837ca9d65d9de6fad1ef4381750ca688774e608/Mathlib/Lean/Meta/RefinedDiscrTree.lean#L175-L185">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree.html#Lean.Meta.RefinedDiscrTree.insert"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">insert</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(d : <span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree">Lean.Meta.RefinedDiscrTree</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(onlySpecific : <a href="../../.././Init/Prelude.html#Bool">Bool</a> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(fvarInContext : <span class="fn"><a href="../../.././Lean/Expr.html#Lean.FVarId">Lean.FVarId</a> → <a href="../../.././Init/Prelude.html#Bool">Bool</a></span> := <span class="fn">fun (<span class="fn">x</span> : <a href="../../.././Lean/Expr.html#Lean.FVarId">Lean.FVarId</a>) =&gt; <a href="../../.././Init/Prelude.html#Bool.false">false</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree">Lean.Meta.RefinedDiscrTree</a> <span class="fn">α</span>)</span></span></div></div><p>Insert the value <code>v</code> at index <code>e : Expr</code> in a <code>RefinedDiscrTree</code>.
+The argument <code>fvarInContext</code> allows you to specify which free variables in <code>e</code> will still be
+in the context when the <code>RefinedDiscrTree</code> is being used for lookup.
+It should return true only if the <code>RefinedDiscrTree</code> is built and used locally.</p><p>if <code>onlySpecific := true</code>, then we filter out the patterns <code>*</code> and <code><a href="../../.././Init/Prelude.html#Eq">Eq</a> * * *</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Meta.RefinedDiscrTree.insert" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Meta.RefinedDiscrTree.insertEqn"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/9837ca9d65d9de6fad1ef4381750ca688774e608/Mathlib/Lean/Meta/RefinedDiscrTree.lean#L187-L198">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree.html#Lean.Meta.RefinedDiscrTree.insertEqn"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">insertEqn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#BEq">BEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(d : <span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree">Lean.Meta.RefinedDiscrTree</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(lhs rhs : <a href="../../.././Lean/Expr.html#Lean.Expr">Lean.Expr</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(vLhs vRhs : <span class="fn">α</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(onlySpecific : <a href="../../.././Init/Prelude.html#Bool">Bool</a> := <a href="../../.././Init/Prelude.html#Bool.true">true</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(fvarInContext : <span class="fn"><a href="../../.././Lean/Expr.html#Lean.FVarId">Lean.FVarId</a> → <a href="../../.././Init/Prelude.html#Bool">Bool</a></span> := <span class="fn">fun (<span class="fn">x</span> : <a href="../../.././Lean/Expr.html#Lean.FVarId">Lean.FVarId</a>) =&gt; <a href="../../.././Init/Prelude.html#Bool.false">false</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Lean/Meta/Basic.html#Lean.Meta.MetaM">Lean.MetaM</a> <span class="fn">(<a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree">Lean.Meta.RefinedDiscrTree</a> <span class="fn">α</span>)</span></span></div></div><p>Insert the value <code>vLhs</code> at index <code>lhs</code>, and if <code>rhs</code> is indexed differently, then also
+insert the value <code>vRhs</code> at index <code>rhs</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Lean.Meta.RefinedDiscrTree.insertEqn" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Meta.RefinedDiscrTree.Trie.mapArraysM"><div class="opaque"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/9837ca9d65d9de6fad1ef4381750ca688774e608/Mathlib/Lean/Meta/RefinedDiscrTree.lean#L204-L213">source</a></div><div class="decl_header"><span class="decl_kind">partial def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree.html#Lean.Meta.RefinedDiscrTree.Trie.mapArraysM"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">Trie</span>.<span class="name">mapArraysM</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α β : <a href="../../.././foundational_types.html">Type</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././foundational_types.html">Type</a> → <a href="../../.././foundational_types.html">Type</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree.Trie">Lean.Meta.RefinedDiscrTree.Trie</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">m</span> <span class="fn">(<a href="../../.././Init/Prelude.html#Array">Array</a> <span class="fn">β</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">(<a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree.Trie">Lean.Meta.RefinedDiscrTree.Trie</a> <span class="fn">β</span>)</span></span></div></div><p>Apply a monadic function to the array of values at each node in a <code>RefinedDiscrTree</code>.</p></div></div><div class="decl" id="Lean.Meta.RefinedDiscrTree.mapArraysM"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/9837ca9d65d9de6fad1ef4381750ca688774e608/Mathlib/Lean/Meta/RefinedDiscrTree.lean#L215-L217">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree.html#Lean.Meta.RefinedDiscrTree.mapArraysM"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">mapArraysM</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α β : <a href="../../.././foundational_types.html">Type</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././foundational_types.html">Type</a> → <a href="../../.././foundational_types.html">Type</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#Monad">Monad</a> <span class="fn">m</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(d : <span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree">Lean.Meta.RefinedDiscrTree</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <span class="fn">α</span></span> → <span class="fn"><span class="fn">m</span> <span class="fn">(<a href="../../.././Init/Prelude.html#Array">Array</a> <span class="fn">β</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> <span class="fn">(<a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree">Lean.Meta.RefinedDiscrTree</a> <span class="fn">β</span>)</span></span></div></div><p>Apply a monadic function to the array of values at each node in a <code>RefinedDiscrTree</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">d</span>.mapArraysM</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">do
+  let <span class="fn">__do_lift</span> ← <span class="fn"><span class="fn"><span class="fn"><span class="fn">d</span>.root</span>.mapM</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree.Trie">Lean.Meta.RefinedDiscrTree.Trie</a> <span class="fn">α</span></span>) =&gt; <span class="fn"><span class="fn"><span class="fn">x</span>.mapArraysM</span> <span class="fn">f</span></span></span></span>
+  <span class="fn"><a href="../../.././Init/Prelude.html#Pure.pure">pure</a> <span class="fn">{ <span class="fn">root</span> := <span class="fn">__do_lift</span> }</span></span></span></span></li></ul></details><details id="instances-for-list-Lean.Meta.RefinedDiscrTree.mapArraysM" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Lean.Meta.RefinedDiscrTree.mapArrays"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/9837ca9d65d9de6fad1ef4381750ca688774e608/Mathlib/Lean/Meta/RefinedDiscrTree.lean#L219-L221">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree.html#Lean.Meta.RefinedDiscrTree.mapArrays"><span class="name">Lean</span>.<span class="name">Meta</span>.<span class="name">RefinedDiscrTree</span>.<span class="name">mapArrays</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α β : <a href="../../.././foundational_types.html">Type</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(d : <span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree">Lean.Meta.RefinedDiscrTree</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <span class="fn">α</span></span> → <span class="fn"><a href="../../.././Init/Prelude.html#Array">Array</a> <span class="fn">β</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Lean/Meta/RefinedDiscrTree/Basic.html#Lean.Meta.RefinedDiscrTree">Lean.Meta.RefinedDiscrTree</a> <span class="fn">β</span></span></div></div><p>Apply a function to the array of values at each node in a <code>RefinedDiscrTree</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">d</span>.mapArrays</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">d</span>.mapArraysM</span> <span class="fn">f</span></span></span></li></ul></details><details id="instances-for-list-Lean.Meta.RefinedDiscrTree.mapArrays" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
