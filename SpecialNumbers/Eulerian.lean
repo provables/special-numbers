@@ -74,8 +74,7 @@ lemma succ_mul_choose_eq (r : R) (n : ℕ) :
     nth_rw 1 [Nat.mul_comm] at h
     rw [mul_smul] at h
     rw [smul_mul_assoc] at h
-    refine nsmul_right_injective n.factorial ?_ h
-    exact Nat.factorial_ne_zero n
+    exact nsmul_right_injective (by positivity) h
   rw [<- descPochhammer_eq_factorial_smul_choose]
   simp only [descPochhammer]
   rw [smeval_mul, smeval_X, smeval_comp, smul_mul_eq]

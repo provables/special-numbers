@@ -42,11 +42,7 @@ tasks:
     cmds:
       - lake exe cache get
     status:
-      - test -d .lake/packages/mathlib/.lake/build/lib/Mathlib
-      - |
-        NUM_SOURCES=$(find .lake/packages/mathlib/Mathlib -name '*.lean' | wc -l)
-        NUM_OLEAN=$(find .lake/packages/mathlib/.lake/build/lib/Mathlib -name '*.olean' | wc -l)
-        test $NUM_SOURCES -eq $NUM_OLEAN
+      - test -f .lake/packages/mathlib/.lake/build/lib/Mathlib.olean
   
   get-cache:
     desc: Ensure Mathlib cache is available
