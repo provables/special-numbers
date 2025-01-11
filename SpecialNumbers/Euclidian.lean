@@ -35,7 +35,7 @@ namespace Euclid
 The sequence of Euclid numbers $(e_n)_{n\ge 0}$.
 
 Definition by a simple recurrence. The more explicit recurrence is proved in
-Theorem `euclid_eq_prod_euclid`.
+Theorem `euclid_prod_finset_add_one`.
 -/
 def euclid : ℕ → ℕ
   | 0 => 1
@@ -73,7 +73,7 @@ theorem euclid_prod_finset_add_one {n : ℕ} :
     · simp
 
 /--
-Another expression of `euclid_eq_prod_euclid` for easier application when $n\ge 1$:
+Another expression of `euclid_prod_finset_add_one` for easier application when $n\ge 1$:
 $$
 e_n = \prod_{i=1}^{n-1} e_i + 1.
 $$
@@ -109,20 +109,6 @@ theorem euclid_gt_one_of_pos {n : ℕ} (h : n ≥ 1) : 1 < euclid n := by
   · simp [euclid_prod_finset_add_one, euclid_gt_zero]
 
 /--
-The Euclid numbers are strictly increasing: $e_n < e_{n+1}$, for all $n\in\mathbb{N}$.
--/
-theorem euclid_strictMono : StrictMono euclid := by
-  apply strictMono_nat_of_lt_succ
-  intro n
-  by_cases c : n = 0
-  · simp [c, euclid]
-  · have h : euclid n - 1 ≥ 1 := Nat.le_sub_one_of_lt <| euclid_gt_one_of_pos <| by omega
-    calc
-      euclid (n + 1) = (euclid n) * (euclid n - 1) + 1 := by simp [euclid, pow_two, Nat.mul_sub_one]
-      _ ≥ (euclid n) * 1 + 1 := Nat.add_le_add_right (Nat.mul_le_mul_left _ h) _
-      _ > euclid n := by linarith
-
-/--
 $e_n \equiv 1\ (\mathrm{mod}~e_m)$, when $0 < m < n$.
 -/
 theorem euclid_mod_eq_one {m n : ℕ} (h1 : m < n) (h2 : 0 < m) :
@@ -150,6 +136,20 @@ theorem euclid_coprime {m n : ℕ} (h : m ≠ n) : Nat.Coprime (euclid m) (eucli
   by_cases c : m < n
   · exact euclid_coprime_of_lt c
   · exact Nat.coprime_comm.mp <| euclid_coprime_of_lt <| by omega
+
+/--
+The Euclid numbers are strictly increasing: $e_n < e_{n+1}$, for all $n\in\mathbb{N}$.
+-/
+theorem euclid_strictMono : StrictMono euclid := by
+  apply strictMono_nat_of_lt_succ
+  intro n
+  by_cases c : n = 0
+  · simp [c, euclid]
+  · have h : euclid n - 1 ≥ 1 := Nat.le_sub_one_of_lt <| euclid_gt_one_of_pos <| by omega
+    calc
+      euclid (n + 1) = (euclid n) * (euclid n - 1) + 1 := by simp [euclid, pow_two, Nat.mul_sub_one]
+      _ ≥ (euclid n) * 1 + 1 := Nat.add_le_add_right (Nat.mul_le_mul_left _ h) _
+      _ > euclid n := by linarith
 
 -- An auxiliary sequence that converges to the constant in the explicit formula for
 -- the Euclid numbers.
@@ -224,7 +224,8 @@ private theorem bddAbove_logEuclidSub : BddAbove (Set.range logEuclidSub) := by
   rw [<- hz]
   trans logEuclidAdd z
   · linarith [@logEuclidSub_lt_logEuclidAdd z]
-  · have : logEuclidAdd z ≤ logEuclidAdd 0 := StrictAnti.antitone logEuclidAdd_strictAnti (by linarith)
+  · have : logEuclidAdd z ≤ logEuclidAdd 0 :=
+      StrictAnti.antitone logEuclidAdd_strictAnti (by linarith)
     linarith
 
 open Filter
@@ -232,23 +233,22 @@ open Filter
 private noncomputable def euclidLogConstant : ℝ := ⨆ i, logEuclidSub i
 
 /--
-The sequence `pl_euc_m` converges to $\log E$, where $E$ is the contant in the
-explicit `euclid_formula`.
-
-The constant $\log E$ in the explicit formula for the Euclid numbers
-`euclid_formula`.
-
-private noncomputable def euclidLogConstant : ℝ := Exists.choose logEuclidSub_tendsto
-
-Constant $E$ in the explicit `euclid_formula`.
+The sequence
+$$
+\frac{1}{2^n}\log\left(e_n - \frac{1}{2}\right)
+$$
+converges to $\log E$, where $E$ is the contant in the
+explicit formula for the Euclid numbers `euclid_eq_floor_constant_pow`.
 -/
 noncomputable def euclidConstant : ℝ := Real.exp euclidLogConstant
 
 @[simp]
-private theorem log_euclidConstant_eq_euclidLogConstant : Real.log euclidConstant = euclidLogConstant := by
+private theorem log_euclidConstant_eq_euclidLogConstant :
+    Real.log euclidConstant = euclidLogConstant := by
   simp [euclidConstant]
 
-private theorem logEuclidSub_tendsto_euclidLogConstant : Tendsto logEuclidSub atTop (nhds euclidLogConstant) := by
+private theorem logEuclidSub_tendsto_euclidLogConstant :
+    Tendsto logEuclidSub atTop (nhds euclidLogConstant) := by
   exact tendsto_atTop_ciSup logEuclidSub_monotone bddAbove_logEuclidSub
 
 /--
@@ -269,7 +269,8 @@ private theorem euclidLogConstant_lt_logEuclidAdd {n : ℕ} : euclidLogConstant 
     rw [<- h2]
     let z := max m (n + 1)
     have : logEuclidSub m ≤ logEuclidSub z := logEuclidSub_monotone (by omega)
-    have : logEuclidAdd z ≤ logEuclidAdd (n + 1) := StrictAnti.antitone logEuclidAdd_strictAnti (by omega)
+    have : logEuclidAdd z ≤ logEuclidAdd (n + 1) :=
+      StrictAnti.antitone logEuclidAdd_strictAnti (by omega)
     have : logEuclidSub z < logEuclidAdd z := logEuclidSub_lt_logEuclidAdd
     linarith
   have c : euclidLogConstant ≤ logEuclidAdd (n + 1) := (isLUB_le_iff
@@ -299,7 +300,8 @@ theorem euclid_le_constant_pow {n : ℕ} : euclid n ≤ euclidConstant ^ (2 ^ n)
 /--
 $E^{2^n} + \frac{1}{2} < e_n + 1$ for all $n\in\mathbb{N}$.
 -/
-theorem constant_pow_lt_euclid_add_one {n : ℕ} : euclidConstant ^ (2 ^ n) + 1 / 2 < euclid n + 1 := by
+theorem constant_pow_lt_euclid_add_one {n : ℕ} :
+    euclidConstant ^ (2 ^ n) + 1 / 2 < euclid n + 1 := by
   apply lt_tsub_iff_right.mp
   rw [add_sub_assoc]
   norm_num
