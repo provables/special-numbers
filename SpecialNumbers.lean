@@ -8,3 +8,4 @@ Released under MIT license as described in the file LICENSE.
 import SpecialNumbers.Basic
 import SpecialNumbers.Eulerian
 import SpecialNumbers.Euclidian
+import SpecialNumbers.Sylvester
