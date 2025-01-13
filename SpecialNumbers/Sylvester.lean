@@ -4,6 +4,30 @@ import Mathlib.Order.Filter.Basic
 import Mathlib.Order.Bounds.Basic
 import Mathlib.Data.Complex.ExponentialBounds
 
+/-!
+# Sylvester sequence
+
+This file introduces the Sylvester sequence.
+This is sequence [A000058](https://oeis.org/A000058) in [oeis]
+
+## Implementation notes
+
+We follow the presentantion from https://en.wikipedia.org/wiki/Sylvester%27s_sequence.
+
+## Main results
+
+- Basic facts.
+- Sylvester sequence is strictly monotonic.
+- Recurrence formula.
+- Pairwise co-primality.
+- Explicit formula.
+
+## References
+
+* https://en.wikipedia.org/wiki/Sylvester%27s_sequence
+* [The On-Line Encyclopedia of Integer Sequences][oeis]
+-/
+
 open Nat
 
 def sylvester : ℕ -> ℕ
