@@ -72,14 +72,18 @@ theorem sylvester_strictMono : StrictMono sylvester := by
 
 -- Coprimality
 
+-- TODO: translate the proof from `Euclid.euclid_mod_eq_one` here
 theorem sylvester_mod_eq_one {m n : ℕ} (h1 : m < n) (h2 : 0 < m) :
     sylvester n % sylvester m = 1 := by sorry
 
+-- TODO: translate the proof from `Euclid.euclid_coprime_of_lt` here
 private theorem sylvester_coprime_of_lt {m n : ℕ} (h : m < n) :
     Coprime (sylvester m) (sylvester n) := by sorry
 
 theorem sylvester_coprime {m n : ℕ} (h : m ≠ n) : Coprime (sylvester m) (sylvester n) := by
-  sorry
+  by_cases c : m < n
+  · exact sylvester_coprime_of_lt c
+  · exact coprime_comm.mp <| sylvester_coprime_of_lt <| by omega
 
 -- Explicit formula
 
