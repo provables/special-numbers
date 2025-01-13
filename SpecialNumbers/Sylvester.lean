@@ -106,7 +106,7 @@ private theorem logSylvesterBelow_monotone : Monotone logSylvesterBelow := by
   rw [cast_sub]
   ring_nf
   gcongr
-  any_goals try linarith [rsylvester_gt_one m, sylvester_gt_one m]
+  all_goals linarith [sylvester_gt_one m]
 
 noncomputable def sylvesterConstant : ℝ := sorry
 
