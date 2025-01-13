@@ -87,6 +87,27 @@ theorem sylvester_coprime {m n : ℕ} (h : m ≠ n) : Coprime (sylvester m) (syl
 
 -- Explicit formula
 
+private noncomputable def logSylvesterBelow (n : ℕ) : ℝ := (2 ^ n)⁻¹ * Real.log (sylvester n - 2⁻¹)
+private noncomputable def logSylvesterAbove (n : ℕ) : ℝ := (2 ^ n)⁻¹ * Real.log (sylvester n + 2⁻¹)
+
+private theorem rsylvester_gt_one (n : ℕ) : (1 : ℝ) < sylvester n :=
+  Nat.one_lt_cast.mpr <| sylvester_gt_one n
+
+private theorem logSylvesterBelow_monotone : Monotone logSylvesterBelow := by
+  refine monotone_nat_of_le_succ ?h
+  intro m
+  simp [logSylvesterBelow]
+  refine le_of_mul_le_mul_left ?h1 ((by simp) : (0 : ℝ) < (2 ^ (m + 1)))
+  rw [<- mul_assoc, <- mul_assoc, <- pow_sub₀]
+  simp
+  refine (Real.rpow_le_iff_le_log ?_ ?_).mp ?_
+  any_goals try linarith [rsylvester_gt_one m, rsylvester_gt_one (m + 1)]
+  simp [sylvester]
+  rw [cast_sub]
+  ring_nf
+  gcongr
+  any_goals try linarith [rsylvester_gt_one m, sylvester_gt_one m]
+
 noncomputable def sylvesterConstant : ℝ := sorry
 
 theorem sylvesterConstant_pos : 0 < sylvesterConstant := by sorry
