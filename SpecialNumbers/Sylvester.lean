@@ -112,7 +112,21 @@ private theorem logSylvesterBelow_monotone : Monotone logSylvesterBelow := by
   linarith
 
 private theorem logSylvesterAbove_strictAnti : StrictAnti logSylvesterAbove := by
-  sorry
+  refine strictAnti_nat_of_succ_lt ?h
+  intro m
+  simp only [logSylvesterAbove]
+  refine lt_of_mul_lt_mul_left ?h1 ((by simp) : (0 : ℝ) ≤ (2 ^ (m + 1)))
+  move_mul [<- 2 ^ _]
+  rw [mul_inv_cancel_of_invertible, <- pow_sub₀, one_mul, Nat.add_sub_cancel_left, pow_one]
+    <;> try linarith
+  refine (Real.lt_pow_iff_log_lt ?_ ?_).mp ?_
+  any_goals try linarith
+  simp only [sylvester]
+  push_cast [sylvester_gt_one]
+  rw [add_sq]
+  ring_nf
+  gcongr
+  linarith [rsylvester_gt_one m]
 
 noncomputable def sylvesterConstant : ℝ := sorry
 
