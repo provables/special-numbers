@@ -30,6 +30,8 @@ We follow the presentantion from https://en.wikipedia.org/wiki/Sylvester%27s_seq
 
 open Nat
 
+--set_option linter.all true
+
 def sylvester : ℕ -> ℕ
   | 0 => 2
   | n + 1 => (sylvester n) * (sylvester n - 1) + 1
@@ -49,7 +51,7 @@ theorem sylvester_three : sylvester 3 = 43 := by rfl
 theorem sylvester_ge_two (n : ℕ) : 2 ≤ sylvester n := by
   induction' n with n ih
   · simp
-  · simp [sylvester]
+  · simp only [sylvester, reduceLeDiff]
     exact one_le_mul_of_one_le_of_one_le (by linarith) (by omega)
 
 theorem sylvester_gt_one (n : ℕ) : 1 < sylvester n := sylvester_ge_two _
@@ -58,14 +60,13 @@ theorem sylvester_ne_one (n : ℕ) : sylvester n ≠ 1 := by linarith [sylvester
 
 theorem sylvester_prod_finset_add_one {n : ℕ} :
     sylvester n = ∏ i ∈ Finset.range n, sylvester i + 1 := by
-  rw [Finset.prod_range_induction _ (fun n => sylvester n - 1)]
-  any_goals try simp [sylvester_ge_one]
+  rw [Finset.prod_range_induction _ (fun n => sylvester n - 1)] <;> try simp [sylvester_ge_one]
   simp [sylvester, mul_comm]
 
 theorem sylvester_strictMono : StrictMono sylvester := by
   apply strictMono_nat_of_lt_succ
   intro n
-  simp [sylvester]
+  simp only [sylvester]
   calc
     sylvester n * (sylvester n - 1) + 1 > sylvester n * (sylvester n - 1) := by linarith
     _ ≥ sylvester n := Nat.le_mul_of_pos_right _ <| le_sub_one_of_lt <| sylvester_gt_one n
@@ -96,17 +97,22 @@ private theorem rsylvester_gt_one (n : ℕ) : (1 : ℝ) < sylvester n :=
 private theorem logSylvesterBelow_monotone : Monotone logSylvesterBelow := by
   refine monotone_nat_of_le_succ ?h
   intro m
-  simp [logSylvesterBelow]
+  simp only [logSylvesterBelow]
   refine le_of_mul_le_mul_left ?h1 ((by simp) : (0 : ℝ) < (2 ^ (m + 1)))
-  rw [<- mul_assoc, <- mul_assoc, <- pow_sub₀]
-  simp
-  refine (Real.rpow_le_iff_le_log ?_ ?_).mp ?_
+  move_mul [<- 2 ^ _]
+  rw [mul_inv_cancel_of_invertible, <- pow_sub₀, one_mul, Nat.add_sub_cancel_left, pow_one]
+    <;> try linarith
+  refine (Real.pow_le_iff_le_log ?_ ?_).mp ?_
   any_goals try linarith [rsylvester_gt_one m, rsylvester_gt_one (m + 1)]
-  simp [sylvester]
-  rw [cast_sub]
+  simp only [sylvester]
+  push_cast [sylvester_gt_one]
+  rw [sub_sq]
   ring_nf
   gcongr
-  all_goals linarith [sylvester_gt_one m]
+  linarith
+
+private theorem logSylvesterAbove_strictAnti : StrictAnti logSylvesterAbove := by
+  sorry
 
 noncomputable def sylvesterConstant : ℝ := sorry
 
