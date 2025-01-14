@@ -30,7 +30,7 @@ We follow the presentantion from https://en.wikipedia.org/wiki/Sylvester%27s_seq
 
 open Nat
 
---set_option linter.all true
+-- set_option linter.all true
 
 def sylvester : ℕ -> ℕ
   | 0 => 2
@@ -128,7 +128,26 @@ private theorem logSylvesterAbove_strictAnti : StrictAnti logSylvesterAbove := b
   gcongr
   linarith [rsylvester_gt_one m]
 
-noncomputable def sylvesterConstant : ℝ := sorry
+private theorem logSylvesterBelow_lt_logSylvesterAbove {n : ℕ} :
+    logSylvesterBelow n < logSylvesterAbove n := by
+  dsimp only [logSylvesterBelow, logSylvesterAbove]
+  gcongr
+  all_goals linarith [rsylvester_gt_one n]
+
+private theorem bddAbove_logSylvesterBelow : BddAbove (Set.range logSylvesterBelow) := by
+  use logSylvesterAbove 0
+  intro y h
+  obtain ⟨z, hz⟩ := h
+  trans logSylvesterAbove z
+  · linarith [@logSylvesterBelow_lt_logSylvesterAbove z]
+  · linarith [(StrictAnti.antitone logSylvesterAbove_strictAnti) (by linarith : 0 ≤ z)]
+
+private noncomputable def sylvesterLogConstant : ℝ := ⨆ i, logSylvesterBelow i
+noncomputable def sylvesterConstant : ℝ := Real.exp sylvesterLogConstant
+
+private theorem log_sylvesterConstant_eq_sylvesterConstant :
+    Real.log sylvesterConstant = sylvesterLogConstant := by
+  simp [sylvesterConstant]
 
 theorem sylvesterConstant_pos : 0 < sylvesterConstant := by sorry
 
