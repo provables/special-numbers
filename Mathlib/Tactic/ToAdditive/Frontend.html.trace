@@ -5,4 +5,4 @@
   {"message":
    "stdout:\nWARNING: Failed to calculate equational lemmata for ToAdditive.nameDict: (deterministic) timeout at `whnf`, maximum number of heartbeats (5000) has been reached\nUse `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)\nWARNING: Failed to calculate equational lemmata for ToAdditive.fixAbbreviation: (deterministic) timeout at `whnf`, maximum number of heartbeats (5000) has been reached\nUse `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)",
    "level": "info"}],
- "depHash": "5540018648742589524"}
+ "depHash": "3256434419421686247"}
