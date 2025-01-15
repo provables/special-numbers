@@ -134,20 +134,46 @@ private theorem logSylvesterBelow_lt_logSylvesterAbove {n : ℕ} :
   gcongr
   all_goals linarith [rsylvester_gt_one n]
 
-private theorem bddAbove_logSylvesterBelow : BddAbove (Set.range logSylvesterBelow) := by
-  use logSylvesterAbove 0
+private theorem logSylvesterAbove_mem_upperBounds {n : ℕ} :
+    logSylvesterAbove n ∈ upperBounds (Set.range logSylvesterBelow) := by
   intro y h
   obtain ⟨z, hz⟩ := h
-  trans logSylvesterAbove z
-  · linarith [@logSylvesterBelow_lt_logSylvesterAbove z]
-  · linarith [(StrictAnti.antitone logSylvesterAbove_strictAnti) (by linarith : 0 ≤ z)]
+  trans logSylvesterAbove (z ⊔ n)
+  · trans logSylvesterBelow (z ⊔ n)
+    · linarith [logSylvesterBelow_monotone <| Nat.le_max_left z n]
+    · exact le_of_lt logSylvesterBelow_lt_logSylvesterAbove
+  · linarith [(StrictAnti.antitone logSylvesterAbove_strictAnti) <| Nat.le_max_right z n]
+
+private theorem bddAbove_logSylvesterBelow : BddAbove (Set.range logSylvesterBelow) := by
+  use logSylvesterAbove 0
+  exact logSylvesterAbove_mem_upperBounds
 
 private noncomputable def sylvesterLogConstant : ℝ := ⨆ i, logSylvesterBelow i
 noncomputable def sylvesterConstant : ℝ := Real.exp sylvesterLogConstant
 
+@[simp]
 private theorem log_sylvesterConstant_eq_sylvesterConstant :
     Real.log sylvesterConstant = sylvesterLogConstant := by
   simp [sylvesterConstant]
+
+open Filter
+
+private theorem logSylvesterBelow_tendsto_sylvesterLogConstant :
+    Tendsto logSylvesterBelow atTop (nhds sylvesterLogConstant) :=
+  tendsto_atTop_ciSup logSylvesterBelow_monotone bddAbove_logSylvesterBelow
+
+private theorem logSylvesterBelow_le_sylvesterLogConstant {n : ℕ} :
+    logSylvesterBelow n ≤ sylvesterLogConstant :=
+  Monotone.ge_of_tendsto logSylvesterBelow_monotone logSylvesterBelow_tendsto_sylvesterLogConstant n
+
+private theorem sylvesterLogConstant_lt_logSylvesterAbove {n : ℕ} :
+    sylvesterLogConstant < logSylvesterAbove n := by
+  have h : sylvesterLogConstant ≤ logSylvesterAbove (n + 1) :=
+    (isLUB_le_iff <| isLUB_of_tendsto_atTop logSylvesterBelow_monotone
+      logSylvesterBelow_tendsto_sylvesterLogConstant).mpr <| logSylvesterAbove_mem_upperBounds
+  have h2 : logSylvesterAbove (n + 1) < logSylvesterAbove n :=
+    logSylvesterAbove_strictAnti (by linarith)
+  linarith
 
 theorem sylvesterConstant_pos : 0 < sylvesterConstant := by sorry
 
