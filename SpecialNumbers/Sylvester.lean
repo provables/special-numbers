@@ -88,102 +88,90 @@ theorem sylvester_coprime {m n : ℕ} (h : m ≠ n) : Coprime (sylvester m) (syl
 
 -- Explicit formula
 
-private noncomputable def logSylvesterBelow (n : ℕ) : ℝ := (2 ^ n)⁻¹ * Real.log (sylvester n - 2⁻¹)
-private noncomputable def logSylvesterAbove (n : ℕ) : ℝ := (2 ^ n)⁻¹ * Real.log (sylvester n + 2⁻¹)
+private noncomputable def sylvesterBelow (n : ℕ) : ℝ :=
+  (sylvester n - 2⁻¹) ^ (((2 : ℝ) ^ (n + 1))⁻¹)
+private noncomputable def sylvesterAbove (n : ℕ) : ℝ :=
+  (sylvester n + 2⁻¹) ^ (((2 : ℝ) ^ (n + 1))⁻¹)
 
 private theorem rsylvester_gt_one (n : ℕ) : (1 : ℝ) < sylvester n :=
   Nat.one_lt_cast.mpr <| sylvester_gt_one n
 
-private theorem logSylvesterBelow_monotone : Monotone logSylvesterBelow := by
+private theorem sylvesterBelow_pos (n : ℕ): 0 < sylvesterBelow n :=
+  Real.rpow_pos_of_pos (by linarith [rsylvester_gt_one n]) _
+
+private theorem sylvesterBelow_monotone : Monotone sylvesterBelow := by
   refine monotone_nat_of_le_succ ?h
   intro m
-  simp only [logSylvesterBelow]
-  refine le_of_mul_le_mul_left ?h1 ((by simp) : (0 : ℝ) < (2 ^ (m + 1)))
-  move_mul [<- 2 ^ _]
-  rw [mul_inv_cancel_of_invertible, <- pow_sub₀, one_mul, Nat.add_sub_cancel_left, pow_one]
-    <;> try linarith
-  refine (Real.pow_le_iff_le_log ?_ ?_).mp ?_
-  any_goals try linarith [rsylvester_gt_one m, rsylvester_gt_one (m + 1)]
-  simp only [sylvester]
-  push_cast [sylvester_gt_one]
-  rw [sub_sq]
-  ring_nf
-  gcongr
-  linarith
+  let ha := rsylvester_gt_one m
+  let hb := rsylvester_gt_one (m + 1)
+  simp only [sylvesterBelow]
+  refine le_of_pow_le_pow_left₀ ((by simp) : 2 ^ (m + 1 + 1) ≠ 0) ?_ ?_
+  · exact Real.rpow_nonneg (by linarith) _
+  · repeat rw [<- Real.rpow_mul_natCast (by linarith) _]
+    push_cast
+    rw [inv_mul_cancel_of_invertible, mul_comm, <- pow_sub₀, Nat.add_sub_cancel_left,
+      pow_one, Real.rpow_one, Real.rpow_two, sylvester] <;> try linarith
+    push_cast [sylvester_gt_one]
+    rw [sub_sq]
+    ring_nf
+    linarith
 
-private theorem logSylvesterAbove_strictAnti : StrictAnti logSylvesterAbove := by
+private theorem sylvesterAbove_strictAnti : StrictAnti sylvesterAbove := by
   refine strictAnti_nat_of_succ_lt ?h
   intro m
-  simp only [logSylvesterAbove]
-  refine lt_of_mul_lt_mul_left ?h1 ((by simp) : (0 : ℝ) ≤ (2 ^ (m + 1)))
-  move_mul [<- 2 ^ _]
-  rw [mul_inv_cancel_of_invertible, <- pow_sub₀, one_mul, Nat.add_sub_cancel_left, pow_one]
-    <;> try linarith
-  refine (Real.lt_pow_iff_log_lt ?_ ?_).mp ?_
-  any_goals try linarith
-  simp only [sylvester]
-  push_cast [sylvester_gt_one]
-  rw [add_sq]
-  ring_nf
-  gcongr
-  linarith [rsylvester_gt_one m]
+  let ha := rsylvester_gt_one m
+  let hb := rsylvester_gt_one (m + 1)
+  simp only [sylvesterAbove]
+  refine lt_of_pow_lt_pow_left₀ (2 ^ (m + 1 + 1)) ?_ ?_
+  · positivity
+  · repeat rw [<- Real.rpow_mul_natCast (by linarith) _]
+    push_cast
+    rw [inv_mul_cancel_of_invertible, mul_comm, <- pow_sub₀, Nat.add_sub_cancel_left,
+      pow_one, Real.rpow_one, Real.rpow_two, sylvester] <;> try linarith
+    push_cast [sylvester_gt_one]
+    rw [add_sq]
+    ring_nf
+    linarith
 
-private theorem logSylvesterBelow_lt_logSylvesterAbove {n : ℕ} :
-    logSylvesterBelow n < logSylvesterAbove n := by
-  dsimp only [logSylvesterBelow, logSylvesterAbove]
-  gcongr
-  all_goals linarith [rsylvester_gt_one n]
+private theorem sylvesterBelow_le_sylvesterAbove (n m : ℕ) :
+    sylvesterBelow n ≤ sylvesterAbove m := by
+  trans sylvesterBelow (n ⊔ m)
+  · exact sylvesterBelow_monotone <| Nat.le_max_left n m
+  · trans sylvesterAbove (n ⊔ m)
+    · rw [sylvesterBelow, sylvesterAbove]
+      gcongr
+      all_goals linarith [rsylvester_gt_one (n ⊔ m)]
+    · exact StrictAnti.antitone sylvesterAbove_strictAnti <| Nat.le_max_right n m
 
-private theorem logSylvesterAbove_mem_upperBounds {n : ℕ} :
-    logSylvesterAbove n ∈ upperBounds (Set.range logSylvesterBelow) := by
-  intro y h
+noncomputable def sylvesterConstant : ℝ := ⨆ i, sylvesterBelow i
+
+private theorem sylvesterBelow_bddAbove : BddAbove (Set.range sylvesterBelow) := by
+  use sylvesterAbove 0
+  intro _ h
   obtain ⟨z, hz⟩ := h
-  trans logSylvesterAbove (z ⊔ n)
-  · trans logSylvesterBelow (z ⊔ n)
-    · linarith [logSylvesterBelow_monotone <| Nat.le_max_left z n]
-    · exact le_of_lt logSylvesterBelow_lt_logSylvesterAbove
-  · linarith [(StrictAnti.antitone logSylvesterAbove_strictAnti) <| Nat.le_max_right z n]
+  linarith [sylvesterBelow_le_sylvesterAbove z 0]
 
-private theorem bddAbove_logSylvesterBelow : BddAbove (Set.range logSylvesterBelow) := by
-  use logSylvesterAbove 0
-  exact logSylvesterAbove_mem_upperBounds
+theorem sylvesterConstant_pos : 0 < sylvesterConstant := by
+  suffices h : sylvesterBelow 0 ≤ sylvesterConstant by linarith [sylvesterBelow_pos 0]
+  exact le_ciSup sylvesterBelow_bddAbove 0
 
-private noncomputable def sylvesterLogConstant : ℝ := ⨆ i, logSylvesterBelow i
-noncomputable def sylvesterConstant : ℝ := Real.exp sylvesterLogConstant
-
-@[simp]
-private theorem log_sylvesterConstant_eq_sylvesterConstant :
-    Real.log sylvesterConstant = sylvesterLogConstant := by
-  simp [sylvesterConstant]
-
-open Filter
-
-private theorem logSylvesterBelow_tendsto_sylvesterLogConstant :
-    Tendsto logSylvesterBelow atTop (nhds sylvesterLogConstant) :=
-  tendsto_atTop_ciSup logSylvesterBelow_monotone bddAbove_logSylvesterBelow
-
-private theorem logSylvesterBelow_le_sylvesterLogConstant {n : ℕ} :
-    logSylvesterBelow n ≤ sylvesterLogConstant :=
-  Monotone.ge_of_tendsto logSylvesterBelow_monotone logSylvesterBelow_tendsto_sylvesterLogConstant n
-
-private theorem sylvesterLogConstant_lt_logSylvesterAbove {n : ℕ} :
-    sylvesterLogConstant < logSylvesterAbove n := by
-  have h : sylvesterLogConstant ≤ logSylvesterAbove (n + 1) :=
-    (isLUB_le_iff <| isLUB_of_tendsto_atTop logSylvesterBelow_monotone
-      logSylvesterBelow_tendsto_sylvesterLogConstant).mpr <| logSylvesterAbove_mem_upperBounds
-  have h2 : logSylvesterAbove (n + 1) < logSylvesterAbove n :=
-    logSylvesterAbove_strictAnti (by linarith)
-  linarith
-
-theorem sylvesterConstant_pos : 0 < sylvesterConstant := by sorry
-
-theorem sylvester_le_const_pow {n : ℕ} :
+private theorem sylvester_le_const_pow {n : ℕ} :
     sylvester n ≤ sylvesterConstant ^ (2 ^ (n + 1)) + 1 / 2 := by
-  sorry
+  suffices h : sylvesterBelow n ≤ sylvesterConstant by
+    rw [<- tsub_le_iff_right, one_div]
+    exact_mod_cast (Real.rpow_inv_le_iff_of_pos (by linarith [rsylvester_gt_one n])
+      (by linarith [sylvesterConstant_pos]) (by positivity)).mp h
+  exact le_ciSup sylvesterBelow_bddAbove _
 
-theorem const_pow_lt_sylvester_add_one {n : ℕ} :
+private theorem const_pow_lt_sylvester_add_one {n : ℕ} :
     sylvesterConstant ^ (2 ^ (n + 1)) + 1 / 2 < sylvester n + 1 := by
-  sorry
+  suffices h : sylvesterConstant < sylvesterAbove n by
+    rw [<- lt_tsub_iff_right, add_sub_assoc, sub_self_div_two, one_div]
+    exact_mod_cast (Real.lt_rpow_inv_iff_of_pos (by linarith [sylvesterConstant_pos])
+      (by positivity) (by positivity)).mp h
+  suffices h : sylvesterConstant ≤ sylvesterAbove (n + 1) by
+    linarith [sylvesterAbove_strictAnti ((by linarith) : n < n + 1)]
+  exact ciSup_le <| fun _ => sylvesterBelow_le_sylvesterAbove _ _
 
 theorem sylvester_eq_floor_constant_pow {n : ℕ} :
     sylvester n = ⌊sylvesterConstant ^ (2 ^ (n + 1)) + 1 / 2⌋₊ := by
