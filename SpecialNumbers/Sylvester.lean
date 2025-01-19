@@ -7,24 +7,24 @@ import Mathlib.Data.Complex.ExponentialBounds
 /-!
 # Sylvester sequence
 
-This file introduces the Sylvester sequence.
-This is sequence [A000058](https://oeis.org/A000058) in [oeis]
+This file introduces the Sylvester's sequence.
+This is sequence [A000058](https://oeis.org/A000058) in [oeis].
 
 ## Implementation notes
 
-We follow the presentantion from https://en.wikipedia.org/wiki/Sylvester%27s_sequence.
+We follow the presentantion from [Wikipedia](https://en.wikipedia.org/wiki/Sylvester%27s_sequence).
 
 ## Main results
 
 - Basic facts.
-- Sylvester sequence is strictly monotonic.
 - Recurrence formula.
+- Sylvester sequence is strictly monotonic.
 - Pairwise co-primality.
 - Explicit formula.
 
 ## References
 
-* https://en.wikipedia.org/wiki/Sylvester%27s_sequence
+* <https://en.wikipedia.org/wiki/Sylvester%27s_sequence>
 * [The On-Line Encyclopedia of Integer Sequences][oeis]
 -/
 
@@ -32,6 +32,9 @@ open Nat
 
 -- set_option linter.all true
 
+/--
+Sylvester sequence: https://oeis.org/A000058.
+-/
 def sylvester : ℕ -> ℕ
   | 0 => 2
   | n + 1 => (sylvester n) * (sylvester n - 1) + 1
@@ -54,14 +57,19 @@ theorem sylvester_ge_two (n : ℕ) : 2 ≤ sylvester n := by
   · simp only [sylvester, reduceLeDiff]
     exact one_le_mul_of_one_le_of_one_le (by linarith) (by omega)
 
-theorem sylvester_gt_one (n : ℕ) : 1 < sylvester n := sylvester_ge_two _
-theorem sylvester_ge_one (n : ℕ) : 1 ≤ sylvester n := by linarith [sylvester_gt_one n]
-theorem sylvester_ne_one (n : ℕ) : sylvester n ≠ 1 := by linarith [sylvester_gt_one n]
-
+/--
+This recurrence motivates the alternative name of **Euclid numbers**:
+$$
+\mathrm{sylvester}~n = 1 + \prod_{i=0}^{n-1} \mathrm{sylvester}~i,
+$$
+assuming the product over the empty set to be 1.
+-/
 theorem sylvester_prod_finset_add_one {n : ℕ} :
     sylvester n = ∏ i ∈ Finset.range n, sylvester i + 1 := by
-  rw [Finset.prod_range_induction _ (fun n => sylvester n - 1)] <;> try simp [sylvester_ge_one]
-  simp [sylvester, mul_comm]
+  rw [Finset.prod_range_induction _ (fun n => sylvester n - 1)]
+  · exact (Nat.sub_one_add_one (by linarith [sylvester_ge_two n])).symm
+  · norm_num
+  · simp [sylvester, mul_comm]
 
 theorem sylvester_strictMono : StrictMono sylvester := by
   apply strictMono_nat_of_lt_succ
@@ -69,7 +77,7 @@ theorem sylvester_strictMono : StrictMono sylvester := by
   simp only [sylvester]
   calc
     sylvester n * (sylvester n - 1) + 1 > sylvester n * (sylvester n - 1) := by linarith
-    _ ≥ sylvester n := Nat.le_mul_of_pos_right _ <| le_sub_one_of_lt <| sylvester_gt_one n
+    _ ≥ sylvester n := Nat.le_mul_of_pos_right _ <| le_sub_one_of_lt <| sylvester_ge_two n
 
 -- Coprimality
 
@@ -88,15 +96,19 @@ theorem sylvester_coprime {m n : ℕ} (h : m ≠ n) : Coprime (sylvester m) (syl
 
 -- Explicit formula
 
+/-
+These two auxiliary sequences converge (from below and from above, respectively) to the constant
+that appears in the explicit formula for the Sylvester sequence.
+-/
 private noncomputable def sylvesterBelow (n : ℕ) : ℝ :=
   (sylvester n - 2⁻¹) ^ (((2 : ℝ) ^ (n + 1))⁻¹)
 private noncomputable def sylvesterAbove (n : ℕ) : ℝ :=
   (sylvester n + 2⁻¹) ^ (((2 : ℝ) ^ (n + 1))⁻¹)
 
 private theorem rsylvester_gt_one (n : ℕ) : (1 : ℝ) < sylvester n :=
-  Nat.one_lt_cast.mpr <| sylvester_gt_one n
+  Nat.one_lt_cast.mpr <| sylvester_ge_two n
 
-private theorem sylvesterBelow_pos (n : ℕ): 0 < sylvesterBelow n :=
+private theorem sylvesterBelow_pos (n : ℕ) : 0 < sylvesterBelow n :=
   Real.rpow_pos_of_pos (by linarith [rsylvester_gt_one n]) _
 
 private theorem sylvesterBelow_monotone : Monotone sylvesterBelow := by
@@ -111,7 +123,8 @@ private theorem sylvesterBelow_monotone : Monotone sylvesterBelow := by
     push_cast
     rw [inv_mul_cancel_of_invertible, mul_comm, <- pow_sub₀, Nat.add_sub_cancel_left,
       pow_one, Real.rpow_one, Real.rpow_two, sylvester] <;> try linarith
-    push_cast [sylvester_gt_one]
+    have h : 1 < sylvester m := sylvester_ge_two _
+    push_cast [h]
     rw [sub_sq]
     ring_nf
     linarith
@@ -128,7 +141,8 @@ private theorem sylvesterAbove_strictAnti : StrictAnti sylvesterAbove := by
     push_cast
     rw [inv_mul_cancel_of_invertible, mul_comm, <- pow_sub₀, Nat.add_sub_cancel_left,
       pow_one, Real.rpow_one, Real.rpow_two, sylvester] <;> try linarith
-    push_cast [sylvester_gt_one]
+    have h : 1 < sylvester m := sylvester_ge_two _
+    push_cast [h]
     rw [add_sq]
     ring_nf
     linarith
@@ -143,6 +157,14 @@ private theorem sylvesterBelow_le_sylvesterAbove (n m : ℕ) :
       all_goals linarith [rsylvester_gt_one (n ⊔ m)]
     · exact StrictAnti.antitone sylvesterAbove_strictAnti <| Nat.le_max_right n m
 
+/--
+The constant that gives an explicit formula for the Sylvester sequence:
+$$
+\mathrm{sylvester}~n = \left\lfloor\mathrm{sylvesterConstant}^{2^{n+1}} +
+  \frac{1}{2}\right\rfloor,
+$$
+for all natural $n$. The constant is approximately $1.2640847\ldots$.
+-/
 noncomputable def sylvesterConstant : ℝ := ⨆ i, sylvesterBelow i
 
 private theorem sylvesterBelow_bddAbove : BddAbove (Set.range sylvesterBelow) := by
@@ -173,6 +195,14 @@ private theorem const_pow_lt_sylvester_add_one {n : ℕ} :
     linarith [sylvesterAbove_strictAnti ((by linarith) : n < n + 1)]
   exact ciSup_le <| fun _ => sylvesterBelow_le_sylvesterAbove _ _
 
+/--
+Explicit formula for the Sylvester sequence:
+$$
+\mathrm{sylvester}~n = \left\lfloor\mathrm{sylvesterConstant}^{2^{n+1}} +
+  \frac{1}{2}\right\rfloor,
+$$
+for all natural $n$.
+-/
 theorem sylvester_eq_floor_constant_pow {n : ℕ} :
     sylvester n = ⌊sylvesterConstant ^ (2 ^ (n + 1)) + 1 / 2⌋₊ := by
   refine ((Nat.floor_eq_iff ?h).mpr ?hb).symm
