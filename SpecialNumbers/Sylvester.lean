@@ -1,8 +1,5 @@
-import Mathlib.Tactic
-import Mathlib.Order.Monotone.Basic
-import Mathlib.Order.Filter.Basic
-import Mathlib.Order.Bounds.Basic
-import Mathlib.Data.Complex.ExponentialBounds
+import Init.Data.List.Nat.Pairwise
+import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # Sylvester sequence
@@ -80,14 +77,22 @@ theorem sylvester_strictMono : StrictMono sylvester := by
     _ ≥ sylvester n := Nat.le_mul_of_pos_right _ <| le_sub_one_of_lt <| sylvester_ge_two n
 
 -- Coprimality
+theorem sylvester_mod_eq_one {m n : ℕ} (h1 : m < n) :
+    sylvester n % sylvester m = 1 := by
+  rw [sylvester_prod_finset_add_one]
+  have d : sylvester m ∣ ∏ i ∈ Finset.range n, sylvester i := by
+    apply Finset.dvd_prod_of_mem
+    exact Finset.mem_range.mpr h1
+  rw [Nat.add_mod]
+  simp only [add_mod_mod, mod_add_mod, Nat.dvd_iff_mod_eq_zero.mp d]
+  have s1 : sylvester m > 1 := by linarith [sylvester_ge_two m]
+  exact Nat.mod_eq_of_lt s1
 
--- TODO: translate the proof from `Euclid.euclid_mod_eq_one` here
-theorem sylvester_mod_eq_one {m n : ℕ} (h1 : m < n) (h2 : 0 < m) :
-    sylvester n % sylvester m = 1 := by sorry
-
--- TODO: translate the proof from `Euclid.euclid_coprime_of_lt` here
 private theorem sylvester_coprime_of_lt {m n : ℕ} (h : m < n) :
-    Coprime (sylvester m) (sylvester n) := by sorry
+    Coprime (sylvester m) (sylvester n) := by
+  rw [Nat.Coprime, Nat.gcd_rec, sylvester_mod_eq_one]
+  · exact Nat.gcd_one_left (sylvester m)
+  · omega
 
 theorem sylvester_coprime {m n : ℕ} (h : m ≠ n) : Coprime (sylvester m) (sylvester n) := by
   by_cases c : m < n
